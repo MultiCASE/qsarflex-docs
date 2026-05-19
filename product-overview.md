@@ -12,7 +12,7 @@ QSAR Flex is available in three forms. All three share the same interface and fe
 |---|---|
 | 🌐 **Web App** | Browser-based, hosted at [qsarflex.com](https://qsarflex.com). No installation required. Compound data is processed on MultiCASE servers over HTTPS. |
 | 💻 **Desktop — Local** | Windows app with a bundled SQLite database. QSAR model inference runs entirely on your device — compound data is never sent to MultiCASE servers for evaluation. Requires internet for license verification and authentication. |
-| ☁️ **Desktop — Cloud** | Windows app that connects to MultiCASE's cloud database. Suited for enterprise deployments where a shared compound database is needed. |
+| ☁️ **Desktop — Cloud** | Windows app with on-device QSAR inference. Filter models run locally — only the reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried from MultiCASE's cloud. Requires internet for license verification, authentication, and database access. |
 
 > All variants require a valid license — either **individual** or **enterprise**. See [Access & Licensing](fundamentals/access-and-licensing.md) for details.
 
@@ -62,7 +62,7 @@ QSAR model inference runs on-device — compound structures are not sent to Mult
 
 ### ☁️ Desktop — Cloud
 
-Connects to MultiCASE's cloud infrastructure for evaluation. Requires an active individual or enterprise license and internet connection.
+Filter models are installed locally and QSAR inference runs on-device — compound data is not sent to MultiCASE servers for evaluation. The reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried from MultiCASE's cloud. Requires an active individual or enterprise license and internet connection.
 
 [Download QSARFlex Cloud Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe)
 

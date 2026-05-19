@@ -19,7 +19,11 @@ This flexibility is useful for:
 
 ## Viewing Your License
 
-Go to **Profile → License Information** to see your active license, assigned users, and available seats.
+Go to your **profile avatar** in the top-right corner to open the Profile panel.
+
+![](.gitbook/assets/profile-light.png)
+
+Select the **License Information** tab to see your active license, assigned users, and available seats.
 
 ![](.gitbook/assets/profile-license-light.png)
 
@@ -65,6 +69,8 @@ Adding a new person to your organization requires two steps: first invite them t
 ![](.gitbook/assets/profile-invite-user-light.png)
 
 3. Enter the user's email address and click **Send Invitation**.
+
+![](.gitbook/assets/profile-users-invite-dialog-light.png)
 
 The user receives an automated setup email with a link to create their MultiCASE account. Once they complete registration, their account appears in your organization's user list.
 

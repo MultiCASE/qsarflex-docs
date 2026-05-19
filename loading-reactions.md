@@ -48,9 +48,11 @@ Multi-step synthesis sequences can be uploaded as individual RXN files — load 
 
 ## 📚 Reactions in the Library
 
-Reactions appear in the Library list alongside compounds. You can freely mix compounds and reactions in the same library — they show up as separate cards.
+Once submitted, the reaction appears in the Library alongside your compounds as its own card.
 
-Loaded reactions display:
+![](.gitbook/assets/library-with-reaction-light.png)
+
+You can freely mix compounds and reactions in the same library — they show up as separate cards. Loaded reaction cards display:
 - The reaction diagram with all structures
 - Arrow notation for reaction direction
 - Any evaluation results if the reaction was run through a compatible module

@@ -27,6 +27,16 @@ Licenses can be structured in different ways depending on your workflow:
 | **Pay-per-test** | Purchase evaluation tests in blocks. Pay only for what you use. Remaining tests roll over. |
 | **On-demand** | Pay-as-you-go with no upfront commitment. Ideal for occasional users. |
 
+### 🔢 How Tests Are Counted
+
+For **pay-per-test** and **on-demand** licenses, tests are consumed each time you run an evaluation:
+
+> **1 test = 1 compound × 1 module**
+
+So if you evaluate **10 compounds** with **3 modules** selected, that evaluation consumes **30 tests**.
+
+Usage is recorded automatically after each evaluation run and deducted from your remaining balance. Your current remaining tests are always visible on the **Profile → License Information** page. Subscription licenses have unlimited evaluations and are not affected by this calculation.
+
 ---
 
 ## Module Bundles
@@ -87,6 +97,6 @@ QSAR model inference runs on-device — compound structures are not sent to Mult
 
 ### ☁️ QSARFlex Cloud
 
-Connects to MultiCASE's cloud infrastructure for evaluation. Requires an active individual or enterprise license and internet connection.
+Filter models are installed locally and QSAR inference runs on-device. The reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried from MultiCASE's cloud. Compound structures are not sent to MultiCASE servers for evaluation. Requires an active individual or enterprise license and internet connection throughout use.
 
 - [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe)

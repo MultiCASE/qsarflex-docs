@@ -26,12 +26,15 @@ Available as a **web application** and a **Windows desktop application**. All va
 | **DataKurator** | ✓ | ✓ | ✓ |
 | **Evaluation** | ✓ | ✓ | ✓ |
 | **Reaction loading** | ✓ | ✓ | ✓ |
-| **Model inference** | MultiCASE servers | On-device | MultiCASE cloud |
+| **Model inference** | MultiCASE servers | On-device | On-device |
+| **Reference database** | MultiCASE servers | Local SQLite | MultiCASE cloud (PostgreSQL) — used by N-Nitrosation & Oral Bioavailability |
 | **Internet required** | Always | License/auth only | Always |
 | **Surrogate Search** | — | ✓ | ✓ |
 | **Cross Similarity** | — | ✓ | ✓ |
 
-> **Desktop — Local** runs QSAR model inference on-device — compound structures are never sent to MultiCASE servers for evaluation. Internet is still required for license verification and authentication.
+> **Desktop — Local** runs QSAR model inference on-device with a local SQLite database — compound structures are never sent to MultiCASE servers for evaluation. Internet is still required for license verification and authentication.
+
+> **Desktop — Cloud** also runs QSAR model inference on-device. The only remote component is the reference database (queried for N-Nitrosation and Oral Bioavailability modules) hosted on MultiCASE's cloud.
 
 ---
 

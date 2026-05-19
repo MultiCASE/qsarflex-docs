@@ -152,15 +152,38 @@ You can also run **PubChem lookup** on a single row via the ⋮ row menu — thi
 
 ## Step 3 — 📤 Export
 
-Once your dataset is clean, click **Proceed to Export** to move to the export step.
+Once your dataset is ready, click **Proceed to Export** to see a full curation summary and send your compounds to QSARFlex.
 
 ![](.gitbook/assets/datakurator-export-light.png)
 
-Choose your output format:
-- **SMILES file** (`.smi`) — one compound per line with name and CAS
-- **SDF file** (`.sdf`) — standard structure-data format with all fields
+The export page shows:
+- **Total compounds** — how many are in the curated dataset (may differ from upload count if you split mixtures)
+- **Clean** — compounds with no structural errors, ready for evaluation
+- **With unresolved issues** — compounds that still have errors after curation
+- **Split from mixtures** — fragments extracted during curation (shown when applicable)
+- **Curation quality bar** — percentage of the dataset that is clean
+- **Issue breakdown** — badge counts for each error type still present
 
-Click **Download** to save the curated file. Import it directly into the Library for evaluation.
+### 🚀 Load to QSARFlex (primary action)
+
+The green **"Load N compounds to QSARFlex"** button in the bottom-right is the primary export path. Clicking it:
+1. Adds all **clean compounds** directly to your QSARFlex Library in one click
+2. Navigates you back to the Library, ready to evaluate
+
+> 💡 This is the fastest path — no file download needed. Only clean (error-free) compounds are added. Compounds with unresolved issues are excluded.
+
+### 📥 Download files (secondary)
+
+If you need the curated data as a file (for archiving, sharing, or importing into other tools), use the download options:
+
+| Option | Format | Includes |
+|---|---|---|
+| Clean SMILES | `.smi` | Error-free compounds only |
+| Clean SDF | `.sdf` | Error-free compounds only |
+| All SMILES | `.smi` | All compounds, including those with issues |
+| All SDF | `.sdf` | All compounds, including those with issues |
+
+Downloaded files can be imported back into QSARFlex via **+ Compounds → Batch Upload**.
 
 ---
 
@@ -169,3 +192,4 @@ Click **Download** to save the curated file. Import it directly into the Library
 - **Re-analyze after manual edits** — any time you edit SMILES, split mixtures, or rename compounds, click **Re-analyze** to refresh error badges. Errors like CasMismatch and Duplicate are recalculated on re-analysis.
 - **Use One Step Cure first** — run OSC to handle the bulk of issues automatically, then use PubChem Batch Correct and manual editing for edge cases.
 - **DataKurator vs direct import** — when you upload a file directly to the Library, structural issues trigger a prompt offering to send the file to DataKurator. Take that path to curate before importing.
+- **Mixture splits increase compound count** — if you split a mixture into two fragments, the export shows both as separate compounds. The total on the export page may be higher than your original upload count.

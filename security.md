@@ -19,7 +19,7 @@ QSAR model inference runs entirely on your device. Compound structures are not s
 
 **☁️ Desktop — Cloud**
 
-Compound data is transmitted over HTTPS to MultiCASE's cloud infrastructure for evaluation. Requires internet throughout use.
+Filter models are installed locally and QSAR inference runs entirely on your device — compound structures are not sent to MultiCASE servers for evaluation. The reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried over HTTPS from MultiCASE's cloud database. Internet is required throughout use for license verification, authentication, and database access.
 
 ---
 

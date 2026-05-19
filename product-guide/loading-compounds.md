@@ -62,6 +62,8 @@ Each card shows:
 - A 2D structure preview
 - Evaluation results (if the compound has been evaluated) — one row per module
 
+![](.gitbook/assets/library-with-results-light.png)
+
 Click any evaluation result value to generate and view the full HTML report for that compound and module.
 
 Click the **trash icon** on a card to remove a compound. Use **Clear Library** (the trash button in the toolbar, visible when the library has items) to remove all entries at once.

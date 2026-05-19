@@ -52,7 +52,15 @@ fs.mkdirSync(OUT, { recursive: true });
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
+const HIDE_DEV_OVERLAY = `
+  nextjs-portal, [data-nextjs-dialog], [data-nextjs-toast],
+  #__next-build-indicator, .__next-build-watcher,
+  [class*="nextjs__container"], [id*="__next-build"],
+  nextjs-portal { display: none !important; }
+`;
+
 async function shot(page, name) {
+  await page.addStyleTag({ content: HIDE_DEV_OVERLAY }).catch(() => {});
   await page.waitForTimeout(800);
   await page.screenshot({ path: path.join(OUT, name), fullPage: false });
   console.log('  📸', name);
