@@ -21,11 +21,11 @@ This flexibility is useful for:
 
 Go to your **profile avatar** in the top-right corner to open the Profile panel.
 
-![](.../.gitbook/assets/profile-light.png)
+![](../.gitbook/assets/profile-light.png)
 
 Select the **License Information** tab to see your active license, assigned users, and available seats.
 
-![](.../.gitbook/assets/profile-license-light.png)
+![](../.gitbook/assets/profile-license-light.png)
 
 The license card shows:
 - License name and software (e.g., QSARFlex)
@@ -45,7 +45,7 @@ Only users with the **Company Admin** role can modify seat assignments.
 1. Go to **Profile → License Information**.
 2. In the **Active License** section, click **Update users**.
 
-![](.../.gitbook/assets/profile-license-assign-users-light.png)
+![](../.gitbook/assets/profile-license-assign-users-light.png)
 
 3. The dialog shows all platform users in your organization and which ones are currently assigned.
 4. Add or remove users from the license as needed.
@@ -66,11 +66,11 @@ Adding a new person to your organization requires two steps: first invite them t
 1. Go to **Profile → License Information**.
 2. Click **Invite user**.
 
-![](.../.gitbook/assets/profile-invite-user-light.png)
+![](../.gitbook/assets/profile-invite-user-light.png)
 
 3. Enter the user's email address and click **Send Invitation**.
 
-![](.../.gitbook/assets/profile-users-invite-dialog-light.png)
+![](../.gitbook/assets/profile-users-invite-dialog-light.png)
 
 The user receives an automated setup email with a link to create their MultiCASE account. Once they complete registration, their account appears in your organization's user list.
 
@@ -89,7 +89,7 @@ The user now has access to all modules included in that license.
 
 Go to **Profile → Users** to see all users in your organization.
 
-![](.../.gitbook/assets/profile-users-light.png)
+![](../.gitbook/assets/profile-users-light.png)
 
 The Users tab shows:
 - Each user's name and email
@@ -106,4 +106,4 @@ From this tab, admins can also invite new users directly using the **Invite user
 - A user must accept their invitation and create an account before they can be assigned to a license.
 - Each license seat can be assigned to one user at a time, but you can freely swap who occupies each seat.
 - To change your license capacity (add or remove seats), contact [support@multicase.com](mailto:support@multicase.com).
-- To promote a user to Company Admin or change roles, contact [support@multicase.com](mailto:support@multicase.com).
+- Any **Company Admin** can promote other users to Company Admin or change their role from the **Profile → Users** tab.

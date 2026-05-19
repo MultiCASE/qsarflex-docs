@@ -1,5 +1,9 @@
 /**
  * Targeted: re-capture reaction screenshots with all 5 Lisinopril RXN files.
+ *
+ * reactions-rxn-visualized = Visualise clicked inside dialog (renders all 5 steps inline)
+ * library-with-reaction    = library showing 1 compound card + 1 reaction card (mixed)
+ *
  * Run: node capture-reactions.js
  */
 
@@ -11,7 +15,6 @@ const EMAIL = 'shrihegde@multicase.com';
 const PASS  = 'C7EQbTd6ju6kB2d@1';
 const BASE  = 'http://localhost:3000';
 const OUT   = path.resolve(__dirname, '../images');
-
 const VIEWPORT = { width: 1440, height: 900 };
 
 const RXN_FILES = [
@@ -52,85 +55,104 @@ async function login(page) {
   console.log('  ✓ Logged in');
 }
 
-const SAMPLE_COMPOUNDS = [
-  { id: 1, name: "Aspirin",     smiles: "CC(=O)Oc1ccccc1C(=O)O",        cas: "50-78-2",    type: "compound" },
-  { id: 2, name: "Caffeine",    smiles: "CN1C=NC2=C1C(=O)N(C(=O)N2C)C", cas: "58-08-2",    type: "compound" },
-  { id: 3, name: "Ibuprofen",   smiles: "CC(C)Cc1ccc(cc1)C(C)C(=O)O",   cas: "15687-27-1", type: "compound" },
-];
+async function openReactionDialog(page) {
+  const btn = page.locator('button').filter({ hasText: /reaction/i }).first();
+  await btn.waitFor({ state: 'visible', timeout: 6000 });
+  await btn.click();
+  await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
+  await page.waitForTimeout(400);
+  return btn;
+}
+
+async function goToFilesTab(page) {
+  const tab = page.locator('[role="dialog"] [role="tab"]').filter({ hasText: /file/i }).first();
+  await tab.waitFor({ state: 'visible', timeout: 4000 });
+  await tab.click();
+  await page.waitForTimeout(400);
+}
+
+async function uploadRxnFiles(page) {
+  const fileInput = page.locator('[role="dialog"] input[type="file"]').first();
+  await fileInput.waitFor({ timeout: 4000 });
+  await fileInput.setInputFiles(RXN_FILES);
+  await page.waitForTimeout(1200);
+}
 
 async function screenshotReactions(page, theme) {
   console.log(`\n  ⚗️  Reactions (${theme})`);
 
-  // Inject sample library and navigate home
-  await page.evaluate((c) => {
-    localStorage.setItem('library-storage', JSON.stringify({ state: { library: c }, version: 0 }));
+  // ── SMILES tab screenshots ─────────────────────────────────────────────────
+  await page.evaluate(() => {
+    localStorage.setItem('library-storage', JSON.stringify({ state: { library: [] }, version: 0 }));
     localStorage.removeItem('evaluation-result-storage');
-  }, SAMPLE_COMPOUNDS);
+  });
   await page.goto(BASE, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(400);
 
-  // Open "+ Reaction" dialog
-  const reactionBtn = page.locator('button').filter({ hasText: /reaction/i }).first();
-  if (!await reactionBtn.isVisible({ timeout: 4000 }).catch(() => false)) {
-    console.warn('  ⚠ Reaction button not found'); return;
-  }
-  await reactionBtn.click();
-  await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
-  await page.waitForTimeout(500);
+  let reactionBtn = await openReactionDialog(page);
   await shot(page, `reactions-smiles-tab-${theme}.png`);
 
-  // Enter a SMILES and visualize (not submit — click Visualise button first)
-  try {
-    const textarea = page.locator('[role="dialog"] textarea').first();
-    if (await textarea.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await textarea.fill('CC(=O)Cl.OCC>>CC(=O)OCC.Cl');
-      // Click the Visualise button (type="button")
-      const visualiseBtn = page.locator('[role="dialog"] button[type="button"]').filter({ hasText: /visuali/i }).first();
-      if (await visualiseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await visualiseBtn.click();
-        await page.waitForTimeout(2500);
-        await shot(page, `reactions-smiles-result-${theme}.png`);
-      }
-    }
-  } catch {}
-
-  // Close and re-open cleanly for Files tab
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(400);
-  await reactionBtn.click();
-  await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
-  await page.waitForTimeout(400);
-
-  // Reaction Files tab
-  try {
-    const filesTab = page.locator('[role="dialog"] [role="tab"]').filter({ hasText: /file/i }).first();
-    if (await filesTab.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await filesTab.click();
-      await page.waitForTimeout(400);
-      await shot(page, `reactions-files-tab-${theme}.png`);
-
-      // Upload all 5 Lisinopril steps at once
-      const fileInput = page.locator('[role="dialog"] input[type="file"]').first();
-      if (await fileInput.count() > 0) {
-        await fileInput.setInputFiles(RXN_FILES);
-        await page.waitForTimeout(1200);
-        await shot(page, `reactions-rxn-uploaded-${theme}.png`);
-
-        // Submit to visualize all steps
-        const submitBtn = page.locator('[role="dialog"] button[type="submit"]').first();
-        if (await submitBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-          await submitBtn.click();
-          await page.waitForTimeout(4000); // allow all 5 steps to render
-          await shot(page, `reactions-rxn-visualized-${theme}.png`);
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('  ⚠ Files tab issue:', e.message?.split('\n')[0]);
+  // Fill SMILES + click Visualise to show inline preview
+  const textarea = page.locator('[role="dialog"] textarea').first();
+  await textarea.fill('CC(=O)Cl.OCC>>CC(=O)OCC.Cl');
+  const visualiseBtn = page.locator('[role="dialog"] button').filter({ hasText: /visuali/i }).first();
+  if (await visualiseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await visualiseBtn.click();
+    await page.waitForTimeout(3000);
+    await shot(page, `reactions-smiles-result-${theme}.png`);
   }
 
+  // ── Files tab screenshots ──────────────────────────────────────────────────
   await page.keyboard.press('Escape');
   await page.waitForTimeout(400);
+
+  reactionBtn = await openReactionDialog(page);
+  await goToFilesTab(page);
+  await shot(page, `reactions-files-tab-${theme}.png`);
+
+  // Upload all 5 RXN files
+  await uploadRxnFiles(page);
+  await shot(page, `reactions-rxn-uploaded-${theme}.png`);
+
+  // Click Visualise — renders full 5-step Lisinopril synthesis inside the dialog
+  const filesVisualiseBtn = page.locator('[role="dialog"] button').filter({ hasText: /visuali/i }).first();
+  if (await filesVisualiseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await filesVisualiseBtn.click();
+    // Wait for backend render (5 steps may take a moment)
+    await page.waitForTimeout(5000);
+    await shot(page, `reactions-rxn-visualized-${theme}.png`);
+  }
+
+  // Submit → reaction added to library (dialog closes automatically)
+  const submitBtn = page.locator('[role="dialog"] button[type="submit"]').first();
+  if (await submitBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await submitBtn.click();
+    await page.waitForTimeout(3000);
+  } else {
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(400);
+  }
+
+  // ── Library with reaction card ─────────────────────────────────────────────
+  // Library now has 1 reaction card (from the submit above). Add 1 compound alongside it.
+  const currentLib = await page.evaluate(() => {
+    const raw = localStorage.getItem('library-storage');
+    if (!raw) return [];
+    try { return JSON.parse(raw).state.library || []; } catch { return []; }
+  });
+
+  // Prepend Aspirin so the library shows compound + reaction together
+  const withCompound = [
+    { id: 0, name: 'Aspirin', smiles: 'CC(=O)Oc1ccccc1C(=O)O', cas: '50-78-2', type: 'compound' },
+    ...currentLib.map(item => ({ ...item, id: item.id + 1 })),
+  ];
+  await page.evaluate((lib) => {
+    localStorage.setItem('library-storage', JSON.stringify({ state: { library: lib }, version: 0 }));
+  }, withCompound);
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(3000); // wait for reaction to render from API
+
+  await shot(page, `library-with-reaction-${theme}.png`);
 }
 
 (async () => {
