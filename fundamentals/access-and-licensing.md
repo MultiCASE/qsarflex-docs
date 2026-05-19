@@ -67,7 +67,7 @@ See the full [Model Catalog](model-catalog.md) for detailed descriptions of each
 
 After signing in, click your **profile avatar** (top right) and go to **Profile → License Information** to see:
 
-![](.gitbook/assets/profile-license-light.png)
+![](.../.gitbook/assets/profile-license-light.png)
 
 - Your active license type, coverage, and status
 - The module bundles included in your license

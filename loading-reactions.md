@@ -33,16 +33,16 @@ Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the
 
 ![](.gitbook/assets/reactions-files-tab-light.png)
 
-1. Drag & drop one or more `.rxn` files into the upload area, or click to browse.
-2. The file name appears once uploaded.
+1. Drag & drop one or more `.rxn` files into the upload area, or click to browse. You can select **multiple files at once** for a multi-step synthesis.
+2. The file names appear once uploaded.
 
 ![](.gitbook/assets/reactions-rxn-uploaded-light.png)
 
-3. Submit to visualize the reaction steps.
+3. Submit to visualize all reaction steps together.
 
 ![](.gitbook/assets/reactions-rxn-visualized-light.png)
 
-Multi-step synthesis sequences can be uploaded as individual RXN files — load them one at a time and they accumulate in the Library.
+Multi-step synthesis sequences are loaded by selecting all step files together in a single upload — QSARFlex renders them as a connected sequence.
 
 ---
 

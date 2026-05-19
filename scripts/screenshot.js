@@ -15,7 +15,13 @@ const OUT   = path.resolve(__dirname, '../images');
 
 // Files for realistic demos
 const DK_FILE  = path.resolve(__dirname, 'samples/dk_demo.smi');
-const RXN_FILE = '/Users/multicase/Downloads/Lisininopril_step_1.RXN';
+const RXN_FILES = [
+  '/Users/multicase/Downloads/Lisininopril_step_1.RXN',
+  '/Users/multicase/Downloads/Lisininopril_step_2.RXN',
+  '/Users/multicase/Downloads/Lisininopril_step_3.RXN',
+  '/Users/multicase/Downloads/Lisininopril_step_4.RXN',
+  '/Users/multicase/Downloads/Lisininopril_step_5.RXN',
+];
 
 const VIEWPORT = { width: 1440, height: 900 };
 
@@ -261,10 +267,10 @@ async function screenshotReactions(page, theme) {
       await page.waitForTimeout(400);
       await shot(page, `reactions-files-tab-${theme}.png`);
 
-      // Upload RXN file
+      // Upload all 5 Lisinopril RXN files at once (multi-step synthesis)
       const fileInput = page.locator('[role="dialog"] input[type="file"]').first();
       if (await fileInput.count() > 0) {
-        await fileInput.setInputFiles(RXN_FILE);
+        await fileInput.setInputFiles(RXN_FILES);
         await page.waitForTimeout(1000);
         await shot(page, `reactions-rxn-uploaded-${theme}.png`);
 

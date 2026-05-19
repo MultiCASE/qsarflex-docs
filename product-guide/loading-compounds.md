@@ -2,7 +2,7 @@
 
 Compounds are managed in the **Library** on the main screen. Click **+ Compounds** to open the compound input dialog.
 
-![](.gitbook/assets/library-empty-light.png)
+![](.../.gitbook/assets/library-empty-light.png)
 
 ---
 
@@ -10,14 +10,14 @@ Compounds are managed in the **Library** on the main screen. Click **+ Compounds
 
 The **Single Compound** tab is active by default.
 
-![](.gitbook/assets/add-compound-light.png)
+![](.../.gitbook/assets/add-compound-light.png)
 
 1. Enter a **compound name**, **CAS number**, or **SMILES** — any one field is enough to start.
 2. Click **Auto Fill** to have QSARFlex fetch missing details (name, CAS, SMILES) from PubChem automatically.
 3. Review the populated fields and the structure preview.
 4. Click **Add to Library**.
 
-![](.gitbook/assets/add-compound-autofill-light.png)
+![](.../.gitbook/assets/add-compound-autofill-light.png)
 
 **Auto Fill** uses the value you typed to search PubChem. It works best with an exact compound name, CAS number, or valid SMILES string. After Auto Fill completes, review the results — PubChem data is generally reliable but you can edit any field before adding.
 
@@ -29,7 +29,7 @@ The **Single Compound** tab is active by default.
 
 Switch to the **Batch** tab to upload a file containing multiple compounds.
 
-![](.gitbook/assets/batch-upload-light.png)
+![](.../.gitbook/assets/batch-upload-light.png)
 
 **Supported formats:**
 
@@ -41,7 +41,7 @@ Switch to the **Batch** tab to upload a file containing multiple compounds.
 
 Drag & drop the file into the upload area or click to browse. A preview of the detected compounds is shown before import.
 
-![](.gitbook/assets/batch-upload-with-file-light.png)
+![](.../.gitbook/assets/batch-upload-with-file-light.png)
 
 Click **Add to Library** to import all compounds.
 
@@ -55,14 +55,14 @@ Click **Add to Library** to import all compounds.
 
 All compounds appear in the Library as cards — one card per compound.
 
-![](.gitbook/assets/library-compounds-light.png)
+![](.../.gitbook/assets/library-compounds-light.png)
 
 Each card shows:
 - Compound name, CAS number, and SMILES
 - A 2D structure preview
 - Evaluation results (if the compound has been evaluated) — one row per module
 
-![](.gitbook/assets/library-with-results-light.png)
+![](.../.gitbook/assets/library-with-results-light.png)
 
 Click any evaluation result value to generate and view the full HTML report for that compound and module.
 
