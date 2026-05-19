@@ -20,7 +20,7 @@ Available as a **web application** and a **Windows desktop application**. All va
 
 | | 🌐 Web App | 💻 Desktop — Local | ☁️ Desktop — Cloud |
 |---|---|---|---|
-| **Access** | [qsarflex.com](https://qsarflex.com) | Windows installer | Windows installer |
+| **Access** | [qsarflex.com](https://qsarflex.com) | [Download installer](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe) | [Download installer](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe) |
 | **Compound loading** | ✓ | ✓ | ✓ |
 | **Batch upload** | ✓ | ✓ | ✓ |
 | **DataKurator** | ✓ | ✓ | ✓ |
