@@ -1,63 +1,59 @@
 # Loading Compounds
 
-![]()
+Compounds are managed in the **Library** on the main screen. Click **+ Compound** to open the compound input dialog.
 
-## **Individual Compound Loading**
+![](.gitbook/assets/library-empty-light.png)
 
-**Access the Compound Input Screen**
+---
 
-1. Click on the "+ Compounds" option from the home screen.
-2. Go to the "Single Compound" tab, which is active by default.
+## Single Compound
 
-**Enter Compound Information**
+The **Single** tab is active by default.
 
-- ).
-- ).
-- ).
+1. Enter a **compound name**, **CAS number**, or **SMILES** — any one field is enough to start.
+2. Click **Autofill** to have QSARFlex fetch missing details (name, CAS, SMILES) from PubChem automatically.
+3. Review the populated fields and the structure preview.
+4. Click **Add to Library**.
 
-**Utilize the Autofill Feature**
+![](.gitbook/assets/add-compound-light.png)
 
-- : Enter a SMILES, name, or registry number if you lack complete information about a compound, and we'll MultiCASE magic the missing details for you.
+**Autofill** uses the value you typed to search PubChem. It works best with an exact compound name, CAS number, or valid SMILES string.
 
-![]()
+---
 
-- : Edit any autofilled fields if needed.
+## Batch Upload
 
-![]()
+Switch to the **Batch** tab to upload a file containing multiple compounds.
 
-**View the Structure**
+![](.gitbook/assets/batch-upload-light.png)
 
-- Click the "Visualize" button to see the compound structure before adding to the library.
+**Supported formats:**
 
-![]()
+| Format | Extension | Notes |
+|---|---|---|
+| SMILES | `.smi`, `.smiles`, `.txt` | One compound per line; optional name column |
+| SDF / MOL | `.sdf`, `.mol` | Standard structure-data file |
+| CSV | `.csv` | Must include a SMILES column |
 
-## **Batch Compound Loading**
+Drag & drop the file into the upload area or click to browse. Click **Add to Library** to import all compounds.
 
-**Accessing the Batch Input Screen**
+> If structural issues are detected during import, you can choose to **Add Anyway** or **Fix in DataKurator** to clean the data first.
 
-1. Click on "+ Compounds" in the main menu.
-2. Select "Batch" to open the batch compound input dialog.
+---
 
-**Uploading a File**
+## Library View
 
--  Drag and drop a file into the designated area or click to choose a file from your device.
-  - `.mol`
-  -  Only one file can be uploaded at a time, and all compounds within it will be processed.
+All compounds appear in the Library table with their name, CAS, SMILES, and any evaluation results.
 
-![]()
+![](.gitbook/assets/library-compounds-light.png)
 
-**Resetting if Needed**
+- Click the **eye icon** on any row to preview the 2D structure.
+- Click **Delete** (trash icon) to remove a compound.
+- Use the **Clear Library** button to remove all entries.
 
-- In both cases, click "Reset" to clear the current input and start over if necessary.
+---
 
-**Add to Library**
+## Next Steps
 
-- In both cases, click the "+ Add to Library" button to add the compound(s) to your library.
-- Verify the compound(s) appears in your library list.
-
-![]()
-
-# **Next Steps**
-
-- After adding compounds, click "Evaluate" to analyze your compounds.
-- Or, do you want to Load reactions into your Library?
+- [DataKurator](../datakurator.md) — validate and clean your compounds before evaluation
+- [Evaluation](../evaluation.md) — run prediction modules on your library

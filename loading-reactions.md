@@ -1,40 +1,29 @@
 # Loading Reactions
 
-**Access the Reaction Input Screen**
+QSAR Flex can load and visualize chemical reactions. Click **+ Reaction** in the Library toolbar to open the reaction input dialog.
 
-1. Click on the "+ Reaction" option from the main menu.
-2. Select either the "Reaction SMILES" tab or the "Reaction Files" tab to open the reaction input dialog.
+---
 
-**Enter Reaction Information**
+## Reaction SMILES
 
-- :
-  - Choose the "Reaction SMILES" tab.
-  - ).
+1. Select the **Reaction SMILES** tab.
+2. Enter a reaction SMILES string in the format `reactants>>products` (e.g., `[Na+].[Cl-]>>[NaCl]`).
+3. Click **Visualize** to preview the reaction diagram.
+4. Click **Add to Library** to submit.
 
-![]()
+---
 
-- :
-  - Choose the "Reaction Files" tab.
-  -  file from your device.
+## RXN Files
 
-![]()
+1. Select the **Reaction Files** tab.
+2. Drag & drop or click to upload one or more `.rxn` files (MDL RXN format).
+3. Click **Visualize** to preview the reaction steps and structures.
+4. Click **Add to Library** to submit.
 
-**Visualize the Reaction**
+Reactions appear in the Library list alongside compounds. You can mix compounds and reactions in the same library.
 
-- Click the "Visualise" button to preview the reaction steps and chemical structures.
-- Review the displayed reaction diagram to ensure accuracy (e.g., step-by-step transformations like Lisinopril synthesis).
+---
 
-**Reset if Needed**
+## Next Steps
 
-- If you need to start over, click the "Reset" button to clear the current input and begin again.
-
-**Submit the Reaction**
-
-- Click the "Submit" button to add the reaction to your library.
-- Verify that the reaction appears in your library.
-
-![]()
-
-# **Next Steps**
-
-- After adding compounds, click "Evaluate" to analyze your compounds.
+With reactions in your library, click **Evaluate** to run analysis modules that support reaction input.

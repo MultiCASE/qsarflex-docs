@@ -7,6 +7,7 @@
 ## Product Guide
 * [Loading Compounds](product-guide/loading-compounds.md)
 * [Loading Reactions](loading-reactions.md)
+* [DataKurator](datakurator.md)
 * [Evaluation](evaluation.md)
 
 ## Fundamentals

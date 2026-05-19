@@ -1,37 +1,34 @@
 # Enterprise User Management
 
-# User Management Guide
+Enterprise licenses support multiple users under a single organization. Company admins can invite users and assign them to active licenses. Non-admin users have read-only access to license information.
 
-This guide provides instructions for managing users within the application, specifically for "Company Admin" roles. Non-admin users have read-only access.
+---
 
-## Adding a New User to an Active License
+## Inviting a New User
 
-To add a new user to your license:
+1. Click your profile icon (top right) and go to **Profile**.
+2. Open the **Users** tab.
+3. Click **Invite New User**.
+4. Enter the user's email address — they receive an automated setup email.
 
-- Navigate to your "Profile" by clicking the icon in the top right corner.
+After the user accepts the invitation and creates their account, add them to a license (see below).
 
-![]()
+---
 
-- Click on the "License Information" tab.
+## Adding a User to a License
 
-![]()
+1. Click your profile icon and go to **Profile**.
+2. Open the **License Information** tab.
+3. In the **Active License Information** section, click **Update Users**.
+4. Select the user from the dropdown and click **Save**.
 
-- In the "Active License Information" section, click on "Update Users".
-- Select the user you wish to add from the dropdown menu, then click "Save".
+The user now has access to all modules included in that license.
 
-![]()
+---
 
- If the user is not listed, invite them to QSAR Flex first.
+## Notes
 
-## Inviting a New User to QSAR Flex
-
-To invite a new user:
-
-- Navigate to your "Profile" by clicking the icon in the top right corner.
-- Click on the "Users" tab.
-- Click the "Invite New User" button.
-- Enter the new user's email address for the automated setup email.
-
-![]()
-
- After inviting, add the user to an active license for access to QSAR Flex.
+- Only users with the **Company Admin** role can manage users and license assignments.
+- A user must be invited and have an active account before they can be assigned to a license.
+- Each user can be assigned to one license at a time.
+- Contact [support@multicase.com](mailto:support@multicase.com) to change license capacity or add seats.

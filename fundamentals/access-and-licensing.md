@@ -1,19 +1,53 @@
 # Access & Licensing
 
-. Our committed team is eager to assist you at every step, ensuring your account request is handled with care, processed smoothly, and tailored to your needs.
+To access QSAR Flex, contact [support@multicase.com](mailto:support@multicase.com) to request an account. MultiCASE will set up your account and configure the modules that match your needs.
 
-We understand that starting a new account can come with questions or unique requirements. We provide personalized guidance to make the process seamless and efficient. Contact us for inquiries about your account setup, usage, or any aspect of the QSAR Flex Web App. Our goal is to deliver exceptional customer service and support to enhance your experience with our platform.
+---
 
-# **Licensing Options**
+## Licensing Models
 
-We offer flexible licensing models to suit various needs:
+| Model | Description |
+|---|---|
+| **Subscription** | Unlimited evaluations for a fixed period. Ideal for ongoing research workflows. |
+| **Credits** | Purchase evaluation tests in blocks of 20 or more. Pay only for what you use. |
+| **Enterprise** | Multi-user licensing for teams. Centralized user management and module access control. |
+| **Module-Specific** | License only the endpoints relevant to your work — no need to purchase the full catalog. |
 
-: Access the platform with an unlimited number of tests within a specified period, offering the flexibility to scale usage as needed.
+---
 
-: For a usage-based approach, purchase tests in groups of 20 or more, providing a cost-effective solution for occasional or limited use.
+## Getting Access
 
-: Tailored enterprise licensing accommodates multiple users and extensive testing needs, ensuring comprehensive support for larger organizations.
+1. Email [support@multicase.com](mailto:support@multicase.com) describing your use case and the modules you need.
+2. MultiCASE will provision your account and send login credentials.
+3. Log in at [qsarflex.com](https://qsarflex.com) using the **Sign in with Cognito** button, or open the Desktop app.
 
- Licenses can be customized to include only the specific modules you require, allowing you to purchase access to selected functionalities without the need to acquire all available modules.
+---
 
-needs.
+## Checking Your License
+
+After signing in, click your profile icon (top right) and open the **License Information** tab to see:
+- Your active license type and expiration date
+- The modules included in your license
+- Remaining credits (for credit-based licenses)
+
+---
+
+## Enterprise User Management
+
+Enterprise license holders can invite team members and assign module access. See [Enterprise User Management](../license-management/enterprise-user-management.md) for instructions.
+
+---
+
+## Desktop Downloads
+
+### QSARFlex Local (offline)
+Works without internet after installation. All models run on-device.
+
+- [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe)
+- [Portable (.zip)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Portable.zip)
+
+### QSARFlex Cloud (enterprise)
+Connects to MultiCASE's cloud infrastructure. Requires an active enterprise license.
+
+- [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe)
+- [Portable (.zip)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Portable.zip)

@@ -1,40 +1,52 @@
 # Getting Started
 
-## Accessing QSAR Flex Platform
+QSAR Flex is available as a **web application** and a **Windows desktop application**. Both share the same interface and features.
 
-### Log In
+---
 
-- Check the [Access and Licensing](fundamentals/access-and-licensing.md) page for more information on creating an account
-- Go to [qsarflex.com](https://qsarflex.com) or [qsarflex.multicase.com](https://qsarflex.multicase.com) to log in.
+## 1. Log In
 
-### Add Compounds
+**Web:** Go to [qsarflex.com](https://qsarflex.com) and click **Sign in with Cognito** to authenticate with your MultiCASE account.
 
-- Click on "+ Compounds" to begin adding new compounds.
-- Provide the necessary details or use the autofill feature with the compound name, SMILES notation, or registry number.
+**Desktop:** Open the installed app — it opens with the same interface and works fully offline.
 
-![]()
+![](.gitbook/assets/signin-light.png)
 
-- Add the compound to your library.
+> Don't have an account? See [Access & Licensing](fundamentals/access-and-licensing.md) or email [support@multicase.com](mailto:support@multicase.com).
 
-![]()
+---
 
-### Evaluate Compounds
+## 2. Add Compounds
 
-- Click on the green "Evaluate" button to start the analysis.
-- Select the desired modules for evaluation and click on "Evaluate."
+Click **+ Compound** in the Library toolbar to open the compound dialog.
 
-![]()
+**Single compound** — enter a name, CAS number, or SMILES. Use **Autofill** to look up missing details automatically.
 
-### Review Outcome
+**Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (.smi), CSV, or TXT file to load multiple compounds at once.
 
-- After evaluation, review the analysis results.
+![](.gitbook/assets/add-compound-light.png)
 
-![]()
+Compounds appear in your Library. Add as many as you need before evaluating.
 
-- Click the button next to the outcome to generate a module report, which will open in a new tab.
+---
 
-You can see a sample report [here](https://d35fy2f4trk71w.cloudfront.net/sample-report.html).
+## 3. Evaluate
 
-# Next Steps
+Click the green **Evaluate** button in the Library toolbar. A dialog opens to select the prediction modules licensed to you.
 
-See what else you can do with QSAR Flex:
+![](.gitbook/assets/evaluate-dialog-light.png)
+
+Click **Evaluate** — results appear in the Library table for each compound, one column per module.
+
+![](.gitbook/assets/eval-results-light.png)
+
+Click any result cell to generate and view a full HTML report for that compound and module.
+
+---
+
+## What's Next
+
+- [Loading Compounds](product-guide/loading-compounds.md) — all supported file formats and autofill details
+- [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
+- [Evaluation](evaluation.md) — module selection, results, and report generation
+- [Loading Reactions](loading-reactions.md) — submit reaction files for analysis

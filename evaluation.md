@@ -1,34 +1,61 @@
 # Evaluation
 
-**Initiate Evaluation**
+Run licensed prediction modules against all compounds in your library with one click.
 
-- : Ensure compounds or reactions are loaded.
-- : From the home screen, press the green "Evaluate" button.
+---
 
-![]()
+## Starting an Evaluation
 
-**Select Evaluation Modules**
+With at least one compound in the Library, click the green **Evaluate** button in the toolbar (or press **⌘K** / **Ctrl+K**).
 
-- : A "Select Modules to Evaluate" dialog appears.
-- : Select from available modules, limited by your license (e.g., Soil Adsorption, Tetrahymena 48h GC50, Water Solubility, CPCA Prediction, N-Nitroso).
+The module selection dialog opens and lists all modules available under your license.
 
-![]()
+![](.gitbook/assets/evaluate-dialog-light.png)
 
-**Confirm Evaluation**
+Select one or more modules and click **Evaluate**. QSARFlex evaluates every compound in the library against every selected module simultaneously.
 
-- : In the dialog box, click "Evaluate" to proceed.
-- : Click "Cancel" to modify your selection or exit.
+---
 
-**Review Outcome**
+## Results
 
-- : After evaluation, review the results in the "Results" panel for the selected modules.
+After evaluation, results appear in the Library table — one column per selected module.
 
-![]()
+![](.gitbook/assets/eval-results-light.png)
 
-- Click the button next to the outcome to generate a module report, which will open in a new tab.
+Each cell shows the outcome for that compound and module. Possible values depend on the module (e.g., Active/Inactive, a numeric prediction, or a category label).
 
-You can see a sample report [here](https://d35fy2f4trk71w.cloudfront.net/sample-report.html).
+---
 
-# Next Steps
+## Module Reports
 
-For issues regarding Access and Licensing, proceed to the next section.
+Click any result cell to generate a detailed HTML report for that compound and module. The report opens in-app and includes:
+
+- Prediction outcome and confidence
+- Structural alerts and contributing fragments
+- Supporting evidence and model metadata
+
+---
+
+## Supported Modules
+
+Available modules depend on your license. Common examples:
+
+| Module | Endpoint |
+|---|---|
+| Ames Mutagenicity | Genotoxicity (Ames test) |
+| CPCA Prediction | N-nitrosamine carcinogenic potency (NDSRIs) |
+| Surrogate Search | N-nitrosamine surrogate lookup |
+| Cross Similarity | Structural similarity matrix across the library |
+| Water Solubility | Aqueous solubility prediction |
+| Tetrahymena 48h GC50 | Aquatic ecotoxicity |
+| Soil Adsorption | Environmental persistence |
+
+See the full [Model Catalog](fundamentals/model-catalog.md) for all available endpoints.
+
+---
+
+## Tips
+
+- Run evaluation multiple times with different module selections — results accumulate in the table.
+- On the Desktop app, evaluation runs fully offline — no internet connection required.
+- **Cross Similarity** generates an NxN similarity matrix and is best used with ≥2 compounds.
