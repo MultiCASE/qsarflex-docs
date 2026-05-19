@@ -1,0 +1,12 @@
+CC(=O)Oc1ccccc1C(=O)O	50-78-2	Aspirin
+CN1C=NC2=C1C(=O)N(C(=O)N2C)C	58-08-2	Caffeine
+CC(C)Cc1ccc(cc1)C(C)C(=O)O	15687-27-1	Ibuprofen
+CC(C)Cc1ccc(cc1)C(C)C(=O)O	15687-27-1	Ibuprofen-Duplicate
+CCO.c1ccccc1	64-17-5	Ethanol-Benzene-Mixture
+C1=CC=CC=C1	71-43-2	Benzene-Kekule
+c1ccccc1	71-43-2	Benzene
+O=[c]1ccccc1		Oxobenzene-AromaticityError
+[nH]1ccccc1		InvalidPyridine-AromaticityError
+CCCO	64-17-5	Propanol-WrongCAS
+CC12CCC3C(C1CCC2O)CCC4=CC(=O)CCC34C	58-22-0	Testosterone
+CCN(CC)CCCC(C)Nc1ccnc2cc(Cl)ccc12	54-05-7	Chloroquine

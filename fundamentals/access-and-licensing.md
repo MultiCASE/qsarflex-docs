@@ -1,53 +1,92 @@
 # Access & Licensing
 
-To access QSAR Flex, contact [support@multicase.com](mailto:support@multicase.com) to request an account. MultiCASE will set up your account and configure the modules that match your needs.
+To access QSAR Flex, contact [support@multicase.com](mailto:support@multicase.com) to request an account. MultiCASE will set up your account and configure the module bundles that match your needs.
 
 ---
 
-## Licensing Models
+## License Coverage
 
-| Model | Description |
+Every QSAR Flex account requires an active license — either **individual** or **enterprise**:
+
+| Coverage | Who it's for |
 |---|---|
-| **Subscription** | Unlimited evaluations for a fixed period. Ideal for ongoing research workflows. |
-| **Credits** | Purchase evaluation tests in blocks of 20 or more. Pay only for what you use. |
-| **Enterprise** | Multi-user licensing for teams. Centralized user management and module access control. |
-| **Module-Specific** | License only the endpoints relevant to your work — no need to purchase the full catalog. |
+| **Individual** | Single-user access on either the Web App or Desktop (Local or Cloud) |
+| **Enterprise** | Multi-user access under a shared organization, with admin-controlled seat assignments |
+
+Both coverage types give access to the same platform variants and module bundles. The difference is the number of users and whether the organization admin can reassign seats.
+
+---
+
+## Billing Models
+
+Licenses can be structured in different ways depending on your workflow:
+
+| Billing Type | How it works |
+|---|---|
+| **Subscription** | Unlimited evaluations for a fixed period (monthly or annual). Best for ongoing research workflows. |
+| **Pay-per-test** | Purchase evaluation tests in blocks. Pay only for what you use. Remaining tests roll over. |
+| **On-demand** | Pay-as-you-go with no upfront commitment. Ideal for occasional users. |
+
+---
+
+## Module Bundles
+
+Modules are sold in bundles — purchasing a bundle unlocks all endpoints within it. Available bundles:
+
+| Bundle | Includes |
+|---|---|
+| 🔴 **Nitrosamine** | N-Nitrosation, CPCA Prediction, Surrogate Search, Cross Similarity |
+| 🌿 **Ecotoxicity** | Bio Concentration Factor, Daphnia 48h LC50, Algae 72h EC50, Fathead Minnow 96h LC50, Ready Biodegradability, Tetrahymena 48h GC50, Soil Adsorption |
+| 💧 **Physicochemical** | Boiling Point, Vapor Pressure, LogP, Water Solubility |
+| 🧬 **Genotoxicity** | Ames Mutagenicity |
+| 💊 **ADME** | Oral Bioavailability |
+
+See the full [Model Catalog](model-catalog.md) for detailed descriptions of each endpoint.
 
 ---
 
 ## Getting Access
 
-1. Email [support@multicase.com](mailto:support@multicase.com) describing your use case and the modules you need.
-2. MultiCASE will provision your account and send login credentials.
-3. Log in at [qsarflex.com](https://qsarflex.com) using the **Sign in with Cognito** button, or open the Desktop app.
+1. Email [support@multicase.com](mailto:support@multicase.com) with your use case and the bundles you need.
+2. MultiCASE will provision your account and send you login credentials via email.
+3. Log in at [qsarflex.com](https://qsarflex.com) using **Sign in with Cognito**, or open the Desktop app.
 
 ---
 
-## Checking Your License
+## Viewing Your License
 
-After signing in, click your profile icon (top right) and open the **License Information** tab to see:
-- Your active license type and expiration date
-- The modules included in your license
-- Remaining credits (for credit-based licenses)
+After signing in, click your **profile avatar** (top right) and go to **Profile → License Information** to see:
+
+![](.gitbook/assets/profile-license-light.png)
+
+- Your active license type, coverage, and status
+- The module bundles included in your license
+- Remaining tests or subscription period
+- Users currently assigned to this license (enterprise only)
 
 ---
 
 ## Enterprise User Management
 
-Enterprise license holders can invite team members and assign module access. See [Enterprise User Management](../license-management/enterprise-user-management.md) for instructions.
+Enterprise license holders can:
+- **Invite new users** to the platform
+- **Assign users to a license** — control which team members have access
+- **Reassign seats** — if you have 5 users but a 3-seat license, you can swap who occupies those seats at any time without losing data
+
+See [Enterprise User Management](../license-management/enterprise-user-management.md) for full instructions.
 
 ---
 
 ## Desktop Downloads
 
-### QSARFlex Local (offline)
-Works without internet after installation. All models run on-device.
+### 💻 QSARFlex Local
+
+QSAR model inference runs on-device — compound structures are not sent to MultiCASE servers for evaluation. Requires internet for license verification, authentication, and optional PubChem lookups.
 
 - [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe)
-- [Portable (.zip)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Portable.zip)
 
-### QSARFlex Cloud (enterprise)
-Connects to MultiCASE's cloud infrastructure. Requires an active enterprise license.
+### ☁️ QSARFlex Cloud
+
+Connects to MultiCASE's cloud infrastructure for evaluation. Requires an active individual or enterprise license and internet connection.
 
 - [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe)
-- [Portable (.zip)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Portable.zip)

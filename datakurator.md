@@ -1,84 +1,171 @@
 # DataKurator
 
-DataKurator is a built-in curation tool that validates and standardizes your compound dataset before running predictions. It detects structural problems, verifies identifiers against PubChem, and lets you clean SMILES in bulk — all before evaluation.
+🧪 DataKurator is a built-in curation tool that validates and standardizes your compound dataset before running predictions. It detects structural problems, verifies identifiers against PubChem, and lets you clean SMILES in bulk — all before evaluation sends data to any model.
+
+Navigate to **DataKurator** from the top navigation bar.
 
 ---
 
-## Workflow
+## Workflow Overview
 
 DataKurator is a three-step process: **Upload → Curate → Export**.
 
-![](.gitbook/assets/datakurator-upload-light.png)
-
 ---
 
-## Step 1 — Upload
+## Step 1 — 📂 Upload
 
-Navigate to **DataKurator** from the left navigation bar.
+![](.gitbook/assets/datakurator-upload-light.png)
 
-Drag & drop or click to select your compound file. Supported formats:
-- SMILES (`.smi`, `.smiles`, `.txt`)
-- SDF (`.sdf`)
-- CSV (`.csv`)
+Drag & drop or click to select your compound file. **Supported formats:**
+- SMILES (`.smi`, `.smiles`, `.txt`) — one compound per line; optional name and CAS columns
+- SDF (`.sdf`) — standard structure-data file
+- CSV (`.csv`) — must include a SMILES column
 
-You can upload multiple files — compounds will be merged into one list.
-
-Click **Run Analysis** to parse the file and run structural analysis. QSARFlex checks each compound for common issues without contacting any external service at this stage.
+Once a file is selected, it is shown in the upload zone before analysis begins.
 
 ![](.gitbook/assets/datakurator-file-selected-light.png)
 
+Click **Run Analysis** to parse the file and run structural analysis. This step runs entirely on your device — no data is sent to any server at this point.
+
 ---
 
-## Step 2 — Curate
+## Step 2 — 🔍 Curate
 
-After upload, results appear in a table with one row per compound.
+After analysis, results appear in a table with one row per compound. Each row shows the compound's name, CAS number, SMILES string, a colored status badge, and an error detail.
 
 ![](.gitbook/assets/datakurator-results-light.png)
 
-**Error types detected:**
+### Error Types
 
-| Error | Meaning |
+Each compound is tagged with its highest-severity issue:
+
+| Badge | Meaning |
 |---|---|
-| **None** | Compound passed all checks |
-| **Mixture** | SMILES contains multiple components (dot notation) |
-| **Duplicate** | Same structure found more than once in the dataset |
-| **Atom Type** | Contains unsupported or unusual atom types |
-| **Aromaticity** | Aromaticity perception failed |
-| **CAS Mismatch** | CAS number does not match the SMILES structure |
-| **Name Mismatch** | Compound name does not match the SMILES structure |
-| **Fatal** | Structure could not be parsed at all |
+| 🟢 **Clean** | Compound passed all structural checks |
+| 🟡 **Mixture** | SMILES contains multiple components separated by `.` |
+| 🔵 **Duplicate** | Same structure found more than once in the dataset |
+| 🟠 **AtomType** | Contains unsupported or unusual atom types |
+| 🟣 **Aromaticity** | Aromaticity perception failed — structure may be drawn in Kekulé form |
+| 🟤 **CasMismatch** | CAS number does not match the SMILES structure per PubChem |
+| 🩵 **NameMismatch** | Compound name does not match the SMILES structure per PubChem |
+| 🔴 **Fatal** | Structure could not be parsed at all |
 
-### PubChem Lookup
-
-Click **PubChem Lookup** to verify names and CAS numbers against [PubChem's REST API](https://pubchem.ncbi.nlm.nih.gov/rest/pug/). For each compound, QSARFlex fetches the canonical SMILES, preferred name, and CAS number from PubChem and flags any mismatches.
-
-> PubChem Lookup sends compound SMILES to the PubChem REST API (`https://pubchem.ncbi.nlm.nih.gov/rest/pug/`). Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before use.
-
-### SMILES Transforms
-
-Click **Transform SMILES** to apply bulk standardization:
-
-- **Remove chiral tags** — strips `@` and `@@` stereocenters and cis/trans bond markers
-- **Neutralize negative charges** — protonates negatively charged atoms (e.g., carboxylates)
-- **Neutralize positive nitrogen** — removes formal charge on quaternary nitrogens
-
-After applying transforms, a summary shows which compounds were changed.
-
-### Manual Corrections
-
-Click the **edit icon** on any row to manually correct the SMILES, name, or CAS for a single compound.
+A compound can have multiple secondary issues in addition to its primary badge — hover the detail column to see the full list.
 
 ---
 
-## Step 3 — Export
+### 🔬 Structure Viewer
 
-Once curation is complete, proceed to the Export step.
+Hover over any row to reveal the **👁 View Structure** button on the right side of the SMILES column. Click it to open a 2D structure depiction of the compound.
+
+![](.gitbook/assets/datakurator-structure-hover-light.png)
+![](.gitbook/assets/datakurator-structure-viewer-light.png)
+
+---
+
+### ⋮ Row Actions Menu
+
+Every row has a **⋮ Actions** button on the far right. Click it to open a dropdown with per-compound actions:
+
+![](.gitbook/assets/datakurator-row-menu-light.png)
+
+| Action | What it does |
+|---|---|
+| **Pick components (N)** | Expand the mixture fragment picker for this compound (Mixture rows only) |
+| **PubChem lookup** | Look up this single compound in PubChem and apply corrections |
+| **Rename** | Edit the compound name inline |
+| **Edit SMILES** | Edit the SMILES string directly in the row |
+| **Delete** | Remove this compound from the dataset |
+
+---
+
+### ✂️ Mixture Fragment Picker
+
+For rows tagged as **Mixture**, clicking **Pick components (N)** in the row menu expands a fragment picker sub-row below the compound. It lists all fragments found in the SMILES string (split on `.`).
+
+![](.gitbook/assets/datakurator-fragment-picker-light.png)
+
+- Click individual fragments to select them, or click **Select all** to select every fragment.
+- Click **Split into N compounds** to split the mixture into separate rows — one per selected fragment.
+
+![](.gitbook/assets/datakurator-fragments-selected-light.png)
+![](.gitbook/assets/datakurator-after-split-light.png)
+
+After splitting, the resulting rows appear in-place with a "└" indent marker showing their ancestry. You can re-pick components at any time via the row menu.
+
+---
+
+### ✏️ Inline SMILES Editing
+
+Click **Edit SMILES** in a row's Actions menu to edit the SMILES string directly inline. A text input replaces the SMILES cell.
+
+![](.gitbook/assets/datakurator-edit-smiles-light.png)
+
+- Press **Enter** or click the green ✓ to commit your change.
+- Press **Escape** or click the red ✗ to cancel.
+
+After editing, the row shows "Edited — re-analyze to validate". Click **Re-analyze** at the top to re-run structural checks on the modified dataset.
+
+---
+
+### ⚡ One Step Cure
+
+The **One Step Cure** button runs an automated batch fix across your entire dataset. Clicking it opens a dialog where you choose how to handle each error type:
+
+![](.gitbook/assets/datakurator-osc-dialog-light.png)
+
+**Configurable options:**
+- **Mixtures** — remove all mixtures, keep the largest fragment, separate into individual compounds, or leave as-is
+- **Duplicates** — remove duplicates or leave them
+- **Atom type errors** — remove or leave
+- **Other errors** (aromaticity, fatal, misc) — remove or leave
+- **SMILES transforms** — optionally apply: remove chiral tags, neutralize negative charges, neutralize positive nitrogen
+
+After running, a **Change Summary** dialog lists every action taken — removed compounds, kept components, and transforms applied.
+
+![](.gitbook/assets/datakurator-osc-summary-light.png)
+
+---
+
+### 🔍 PubChem Batch Correct
+
+Click **PubChem Batch Correct** to look up every compound in [PubChem's REST API](https://pubchem.ncbi.nlm.nih.gov/rest/pug/) and apply automatic corrections. Before running, a confirmation dialog explains what data is sent:
+
+![](.gitbook/assets/datakurator-pubchem-warning-light.png)
+
+> ⚠️ **Privacy note:** PubChem Batch Correct sends each compound's SMILES to the PubChem REST API (`pubchem.ncbi.nlm.nih.gov`). MultiCASE does **not** store or log the data sent to PubChem. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before use.
+
+After running, a **PubChem Results** summary dialog shows what was corrected for each compound:
+
+![](.gitbook/assets/datakurator-pubchem-results-light.png)
+
+For each compound, PubChem Batch Correct can:
+- Correct the SMILES to the canonical PubChem structure
+- Fill in a missing or update a mismatched CAS number
+- Fill in or correct the compound name
+
+After corrections are applied, the dataset is automatically re-analyzed so duplicate and mismatch errors are re-evaluated.
+
+You can also run **PubChem lookup** on a single row via the ⋮ row menu — this performs the same lookup for just that one compound.
+
+---
+
+## Step 3 — 📤 Export
+
+Once your dataset is clean, click **Proceed to Export** to move to the export step.
 
 ![](.gitbook/assets/datakurator-export-light.png)
 
 Choose your output format:
-
-- **SMILES file** (`.smi`) — one compound per line with name
+- **SMILES file** (`.smi`) — one compound per line with name and CAS
 - **SDF file** (`.sdf`) — standard structure-data format with all fields
 
-Click **Download** to save the curated file. You can then import it directly into the Library for evaluation.
+Click **Download** to save the curated file. Import it directly into the Library for evaluation.
+
+---
+
+## Tips
+
+- **Re-analyze after manual edits** — any time you edit SMILES, split mixtures, or rename compounds, click **Re-analyze** to refresh error badges. Errors like CasMismatch and Duplicate are recalculated on re-analysis.
+- **Use One Step Cure first** — run OSC to handle the bulk of issues automatically, then use PubChem Batch Correct and manual editing for edge cases.
+- **DataKurator vs direct import** — when you upload a file directly to the Library, structural issues trigger a prompt offering to send the file to DataKurator. Take that path to curate before importing.
