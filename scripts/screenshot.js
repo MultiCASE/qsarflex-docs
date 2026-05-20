@@ -65,10 +65,113 @@ const HIDE_DEV_OVERLAY = `
   nextjs-portal { display: none !important; }
 `;
 
-async function shot(page, name) {
+/** Replace all visible email addresses in the DOM with a generic placeholder. */
+async function maskEmails(page) {
+  await page.evaluate(() => {
+    const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
+    const walk = (node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (EMAIL_RE.test(node.textContent)) {
+          node.textContent = node.textContent.replace(EMAIL_RE, 'user@example.com');
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // also mask value attributes (inputs)
+        if (node.tagName === 'INPUT' && EMAIL_RE.test(node.value || '')) {
+          node.value = node.value.replace(EMAIL_RE, 'user@example.com');
+        }
+        for (const child of node.childNodes) walk(child);
+      }
+    };
+    EMAIL_RE.lastIndex = 0;
+    walk(document.body);
+  });
+}
+
+/**
+ * Add a visual annotation marker pointing at the first element matching `selector`.
+ * `side` can be 'right', 'left', 'top', 'bottom' (default 'right').
+ * Returns false if the element isn't found.
+ */
+async function addMarker(page, selector, label = '', side = 'right') {
+  return page.evaluate(({ selector, label, side }) => {
+    const el = document.querySelector(selector);
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+
+    const wrapper = document.createElement('div');
+    wrapper.className = '__qf_marker';
+    wrapper.style.cssText = `
+      position: fixed; z-index: 2147483647; pointer-events: none;
+      display: flex; align-items: center; gap: 6px;
+      font-family: -apple-system, sans-serif; font-size: 13px; font-weight: 600;
+    `;
+
+    // Arrow SVG (points right by default; rotated per side)
+    const arrowRotation = { right: 0, left: 180, top: 270, bottom: 90 }[side] ?? 0;
+    const arrow = document.createElement('div');
+    arrow.innerHTML = `<svg width="32" height="18" viewBox="0 0 32 18" fill="none">
+      <path d="M0 9 L22 9 M18 3 L28 9 L18 15" stroke="#FF4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+    arrow.style.transform = `rotate(${arrowRotation}deg)`;
+    arrow.style.display = 'flex';
+
+    const badge = document.createElement('span');
+    badge.textContent = label;
+    badge.style.cssText = `
+      background: #FF4444; color: #fff; border-radius: 4px;
+      padding: 2px 8px; white-space: nowrap; font-size: 12px;
+    `;
+
+    const GAP = 8;
+    let top, left;
+    if (side === 'right') {
+      top  = rect.top + rect.height / 2 - 9;
+      left = rect.right + GAP;
+      wrapper.append(arrow, badge);
+    } else if (side === 'left') {
+      top  = rect.top + rect.height / 2 - 9;
+      left = rect.left - GAP - 120;
+      wrapper.append(badge, arrow);
+    } else if (side === 'top') {
+      top  = rect.top - GAP - 30;
+      left = rect.left + rect.width / 2 - 16;
+      wrapper.style.flexDirection = 'column';
+      wrapper.append(badge, arrow);
+    } else {
+      top  = rect.bottom + GAP;
+      left = rect.left + rect.width / 2 - 16;
+      wrapper.style.flexDirection = 'column';
+      wrapper.append(arrow, badge);
+    }
+
+    wrapper.style.top  = `${top}px`;
+    wrapper.style.left = `${left}px`;
+    document.body.appendChild(wrapper);
+    return true;
+  }, { selector, label, side });
+}
+
+/** Remove all injected markers. */
+async function removeMarkers(page) {
+  await page.evaluate(() => {
+    document.querySelectorAll('.__qf_marker').forEach(el => el.remove());
+  });
+}
+
+/**
+ * Take a screenshot, optionally with markers defined as:
+ *   markers = [{ selector, label, side }]
+ * Markers are injected, screenshot taken, then cleaned up.
+ */
+async function shot(page, name, { markers = [] } = {}) {
   await page.addStyleTag({ content: HIDE_DEV_OVERLAY }).catch(() => {});
-  await page.waitForTimeout(800);
+  await maskEmails(page);
+  for (const m of markers) {
+    await addMarker(page, m.selector, m.label || '', m.side || 'right');
+  }
+  await page.waitForTimeout(markers.length > 0 ? 300 : 800);
   await page.screenshot({ path: path.join(OUT, name), fullPage: false });
+  await removeMarkers(page);
   console.log('  📸', name);
 }
 

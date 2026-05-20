@@ -31,8 +31,29 @@ const HIDE_DEV = `
   [class*="nextjs__container"] { display: none !important; }
 `;
 
+async function maskEmails(page) {
+  await page.evaluate(() => {
+    const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
+    const walk = (node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (EMAIL_RE.test(node.textContent)) {
+          node.textContent = node.textContent.replace(EMAIL_RE, 'user@example.com');
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'INPUT' && EMAIL_RE.test(node.value || '')) {
+          node.value = node.value.replace(EMAIL_RE, 'user@example.com');
+        }
+        for (const child of node.childNodes) walk(child);
+      }
+    };
+    EMAIL_RE.lastIndex = 0;
+    walk(document.body);
+  });
+}
+
 async function shot(page, name) {
   await page.addStyleTag({ content: HIDE_DEV }).catch(() => {});
+  await maskEmails(page);
   await page.waitForTimeout(800);
   await page.screenshot({ path: path.join(OUT, name), fullPage: false });
   console.log(`  📸 ${name}`);

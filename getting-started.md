@@ -35,7 +35,7 @@ Click **+ Compounds** in the Library toolbar to open the compound input dialog.
 ![](.gitbook/assets/add-compound-light.png)
 ![](.gitbook/assets/add-compound-autofill-light.png)
 
-**Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (`.smi`), CSV, or TXT file to load multiple compounds at once.
+**Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (`.smi`), or TXT file to load multiple compounds at once.
 
 ![](.gitbook/assets/batch-upload-light.png)
 ![](.gitbook/assets/batch-upload-with-file-light.png)

@@ -23,7 +23,7 @@ QSAR Flex is available in three forms. All three share the same interface and fe
 ### 🧪 Compound Library
 Load compounds from any source and manage them in a searchable library before evaluation.
 - Enter individual compounds by name, CAS number, or SMILES
-- Batch upload via SDF, SMILES (`.smi`), CSV, or TXT files
+- Batch upload via SDF, SMILES (`.smi`), or TXT files
 - Autofill missing names and CAS numbers from PubChem
 
 ### ✅ DataKurator

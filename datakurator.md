@@ -19,7 +19,6 @@ DataKurator is a three-step process: **Upload → Curate → Export**.
 Drag & drop or click to select your compound file. **Supported formats:**
 - SMILES (`.smi`, `.smiles`, `.txt`) — one compound per line; optional name and CAS columns
 - SDF (`.sdf`) — standard structure-data file
-- CSV (`.csv`) — must include a SMILES column
 
 Once a file is selected, it is shown in the upload zone before analysis begins.
 

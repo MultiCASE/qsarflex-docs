@@ -9,7 +9,7 @@ Available as a **web application** and a **Windows desktop application**. All va
 ## 🚀 What Can QSAR Flex Do?
 
 - **🔬 Predict toxicological endpoints** — Ames mutagenicity, N-nitrosamine CPCA, ecotoxicity, physicochemical properties, ADME, and more
-- **📂 Load and curate compounds** — Enter SMILES, names, or CAS numbers; upload batch files (SDF, SMI, CSV, TXT)
+- **📂 Load and curate compounds** — Enter SMILES, names, or CAS numbers; upload batch files (SDF, SMI, TXT)
 - **✅ Curate your dataset** — Use [DataKurator](datakurator.md) to detect and fix structural issues before evaluation
 - **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
 - **📄 Generate reports** — One-click detailed HTML reports per compound per module

@@ -35,9 +35,8 @@ Switch to the **Batch** tab to upload a file containing multiple compounds.
 
 | Format | Extension | Notes |
 |---|---|---|
-| SMILES | `.smi`, `.smiles`, `.txt` | One compound per line; optional name and CAS columns |
+| SMILES | `.smi`, `.txt` | One compound per line; optional name and CAS columns |
 | SDF / MOL | `.sdf`, `.mol` | Standard structure-data file |
-| CSV | `.csv` | Must include a SMILES column |
 
 Drag & drop the file into the upload area or click to browse. A preview of the detected compounds is shown before import.
 
