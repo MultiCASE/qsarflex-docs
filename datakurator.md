@@ -14,7 +14,10 @@ DataKurator is a three-step process: **Upload → Curate → Export**.
 
 ## Step 1 — 📂 Upload
 
-![](.gitbook/assets/datakurator-upload-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-upload-dark.png">
+  <img src=".gitbook/assets/datakurator-upload-light.png" alt="">
+</picture>
 
 Drag & drop or click to select your compound file. **Supported formats:**
 - SMILES (`.smi`, `.smiles`, `.txt`) — one compound per line; optional name and CAS columns
@@ -22,7 +25,10 @@ Drag & drop or click to select your compound file. **Supported formats:**
 
 Once a file is selected, it is shown in the upload zone before analysis begins.
 
-![](.gitbook/assets/datakurator-file-selected-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-file-selected-dark.png">
+  <img src=".gitbook/assets/datakurator-file-selected-light.png" alt="">
+</picture>
 
 Click **Run Analysis** to parse the file and run structural analysis. This step runs entirely on your device — no data is sent to any server at this point.
 
@@ -32,7 +38,10 @@ Click **Run Analysis** to parse the file and run structural analysis. This step 
 
 After analysis, results appear in a table with one row per compound. Each row shows the compound's name, CAS number, SMILES string, a colored status badge, and an error detail.
 
-![](.gitbook/assets/datakurator-results-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-results-dark.png">
+  <img src=".gitbook/assets/datakurator-results-light.png" alt="">
+</picture>
 
 ### Error Types
 
@@ -57,8 +66,14 @@ A compound can have multiple secondary issues in addition to its primary badge �
 
 Hover over any row to reveal the **👁 View Structure** button on the right side of the SMILES column. Click it to open a 2D structure depiction of the compound.
 
-![](.gitbook/assets/datakurator-structure-hover-light.png)
-![](.gitbook/assets/datakurator-structure-viewer-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-structure-hover-dark.png">
+  <img src=".gitbook/assets/datakurator-structure-hover-light.png" alt="">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-structure-viewer-dark.png">
+  <img src=".gitbook/assets/datakurator-structure-viewer-light.png" alt="">
+</picture>
 
 ---
 
@@ -66,7 +81,10 @@ Hover over any row to reveal the **👁 View Structure** button on the right sid
 
 Every row has a **⋮ Actions** button on the far right. Click it to open a dropdown with per-compound actions:
 
-![](.gitbook/assets/datakurator-row-menu-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-row-menu-dark.png">
+  <img src=".gitbook/assets/datakurator-row-menu-light.png" alt="">
+</picture>
 
 | Action | What it does |
 |---|---|
@@ -82,13 +100,22 @@ Every row has a **⋮ Actions** button on the far right. Click it to open a drop
 
 For rows tagged as **Mixture**, clicking **Pick components (N)** in the row menu expands a fragment picker sub-row below the compound. It lists all fragments found in the SMILES string (split on `.`).
 
-![](.gitbook/assets/datakurator-fragment-picker-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-fragment-picker-dark.png">
+  <img src=".gitbook/assets/datakurator-fragment-picker-light.png" alt="">
+</picture>
 
 - Click individual fragments to select them, or click **Select all** to select every fragment.
 - Click **Split into N compounds** to split the mixture into separate rows — one per selected fragment.
 
-![](.gitbook/assets/datakurator-fragments-selected-light.png)
-![](.gitbook/assets/datakurator-after-split-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-fragments-selected-dark.png">
+  <img src=".gitbook/assets/datakurator-fragments-selected-light.png" alt="">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-after-split-dark.png">
+  <img src=".gitbook/assets/datakurator-after-split-light.png" alt="">
+</picture>
 
 After splitting, the resulting rows appear in-place with a "└" indent marker showing their ancestry. You can re-pick components at any time via the row menu.
 
@@ -98,7 +125,10 @@ After splitting, the resulting rows appear in-place with a "└" indent marker s
 
 Click **Edit SMILES** in a row's Actions menu to edit the SMILES string directly inline. A text input replaces the SMILES cell.
 
-![](.gitbook/assets/datakurator-edit-smiles-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-edit-smiles-dark.png">
+  <img src=".gitbook/assets/datakurator-edit-smiles-light.png" alt="">
+</picture>
 
 - Press **Enter** or click the green ✓ to commit your change.
 - Press **Escape** or click the red ✗ to cancel.
@@ -111,7 +141,10 @@ After editing, the row shows "Edited — re-analyze to validate". Click **Re-ana
 
 The **One Step Cure** button runs an automated batch fix across your entire dataset. Clicking it opens a dialog where you choose how to handle each error type:
 
-![](.gitbook/assets/datakurator-osc-dialog-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-osc-dialog-dark.png">
+  <img src=".gitbook/assets/datakurator-osc-dialog-light.png" alt="">
+</picture>
 
 **Configurable options:**
 - **Mixtures** — remove all mixtures, keep the largest fragment, separate into individual compounds, or leave as-is
@@ -122,7 +155,10 @@ The **One Step Cure** button runs an automated batch fix across your entire data
 
 After running, a **Change Summary** dialog lists every action taken — removed compounds, kept components, and transforms applied.
 
-![](.gitbook/assets/datakurator-osc-summary-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-osc-summary-dark.png">
+  <img src=".gitbook/assets/datakurator-osc-summary-light.png" alt="">
+</picture>
 
 ---
 
@@ -130,13 +166,19 @@ After running, a **Change Summary** dialog lists every action taken — removed 
 
 Click **PubChem Batch Correct** to look up every compound in [PubChem's REST API](https://pubchem.ncbi.nlm.nih.gov/rest/pug/) and apply automatic corrections. Before running, a confirmation dialog explains what data is sent:
 
-![](.gitbook/assets/datakurator-pubchem-warning-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-warning-dark.png">
+  <img src=".gitbook/assets/datakurator-pubchem-warning-light.png" alt="">
+</picture>
 
 > ⚠️ **Privacy note:** PubChem Batch Correct sends each compound's SMILES to the PubChem REST API (`pubchem.ncbi.nlm.nih.gov`). MultiCASE does **not** store or log the data sent to PubChem. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before use.
 
 After running, a **PubChem Results** summary dialog shows what was corrected for each compound:
 
-![](.gitbook/assets/datakurator-pubchem-results-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-results-dark.png">
+  <img src=".gitbook/assets/datakurator-pubchem-results-light.png" alt="">
+</picture>
 
 For each compound, PubChem Batch Correct can:
 - Correct the SMILES to the canonical PubChem structure
@@ -153,7 +195,10 @@ You can also run **PubChem lookup** on a single row via the ⋮ row menu — thi
 
 Once your dataset is ready, click **Proceed to Export** to see a full curation summary and send your compounds to QSARFlex.
 
-![](.gitbook/assets/datakurator-export-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-export-dark.png">
+  <img src=".gitbook/assets/datakurator-export-light.png" alt="">
+</picture>
 
 The export page shows:
 - **Total compounds** — how many are in the curated dataset (may differ from upload count if you split mixtures)

@@ -10,7 +10,10 @@ With at least one compound in the Library, click the green **Evaluate** button i
 
 The **Select Modules to Evaluate** dialog opens, listing every module available under your license grouped by bundle.
 
-![](.gitbook/assets/evaluate-dialog-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
+  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
+</picture>
 
 Modules are shown grouped by their license bundle — for example, **Physicochemical**, **Nitrosamine**, **Ecotoxicity**, and **ADME**. Modules you are not licensed for appear grayed out and cannot be selected. Contact [support@multicase.com](mailto:support@multicase.com) to add bundles.
 
@@ -24,7 +27,10 @@ Select one or more modules and click **Evaluate**. QSARFlex runs every selected 
 
 After evaluation completes, results appear in each compound's card in the Library.
 
-![](.gitbook/assets/eval-results-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
+  <img src=".gitbook/assets/eval-results-light.png" alt="">
+</picture>
 
 Each compound card shows a table with:
 - **Module** — the prediction endpoint that was run
@@ -42,7 +48,10 @@ Possible result formats depend on the module:
 
 Click any result value in a compound's card to generate a full HTML report for that compound and module. The report opens as a slide-in panel on the right.
 
-![](.gitbook/assets/eval-report-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
+  <img src=".gitbook/assets/eval-report-light.png" alt="">
+</picture>
 
 Reports include:
 - **Prediction outcome** and confidence level

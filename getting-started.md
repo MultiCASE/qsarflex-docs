@@ -8,7 +8,10 @@ QSAR Flex is available as a **web application** and a **Windows desktop applicat
 
 **Web:** Go to [qsarflex.com](https://qsarflex.com) and click **Sign in with Cognito** to authenticate with your MultiCASE account.
 
-![](.gitbook/assets/signin-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/signin-dark.png">
+  <img src=".gitbook/assets/signin-light.png" alt="">
+</picture>
 
 Clicking the button redirects you to the MultiCASE Cognito-hosted login page. Enter your email address first, then your password on the next screen.
 
@@ -32,17 +35,32 @@ Click **+ Compounds** in the Library toolbar to open the compound input dialog.
 
 **Single compound** — enter a name, CAS number, or SMILES. Use **Auto Fill** to look up missing details from PubChem automatically.
 
-![](.gitbook/assets/add-compound-light.png)
-![](.gitbook/assets/add-compound-autofill-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-dark.png">
+  <img src=".gitbook/assets/add-compound-light.png" alt="">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-autofill-dark.png">
+  <img src=".gitbook/assets/add-compound-autofill-light.png" alt="">
+</picture>
 
 **Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (`.smi`), or TXT file to load multiple compounds at once.
 
-![](.gitbook/assets/batch-upload-light.png)
-![](.gitbook/assets/batch-upload-with-file-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-dark.png">
+  <img src=".gitbook/assets/batch-upload-light.png" alt="">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-with-file-dark.png">
+  <img src=".gitbook/assets/batch-upload-with-file-light.png" alt="">
+</picture>
 
 Compounds appear in your Library. Add as many as you need before evaluating.
 
-![](.gitbook/assets/library-compounds-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/library-compounds-dark.png">
+  <img src=".gitbook/assets/library-compounds-light.png" alt="">
+</picture>
 
 ---
 
@@ -50,15 +68,24 @@ Compounds appear in your Library. Add as many as you need before evaluating.
 
 Click the green **Evaluate** button in the Library toolbar. A dialog opens to select the prediction modules licensed to you.
 
-![](.gitbook/assets/evaluate-dialog-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
+  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
+</picture>
 
 Check the modules you want to run and click **Evaluate**. Results appear in the Library for each compound.
 
-![](.gitbook/assets/eval-results-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
+  <img src=".gitbook/assets/eval-results-light.png" alt="">
+</picture>
 
 Click any result value to generate and view a full HTML report for that compound and module.
 
-![](.gitbook/assets/eval-report-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
+  <img src=".gitbook/assets/eval-report-light.png" alt="">
+</picture>
 
 ---
 

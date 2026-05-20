@@ -2,7 +2,10 @@
 
 Compounds are managed in the **Library** on the main screen. Click **+ Compounds** to open the compound input dialog.
 
-![](../.gitbook/assets/library-empty-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-empty-dark.png">
+  <img src="../.gitbook/assets/library-empty-light.png" alt="">
+</picture>
 
 ---
 
@@ -10,14 +13,20 @@ Compounds are managed in the **Library** on the main screen. Click **+ Compounds
 
 The **Single Compound** tab is active by default.
 
-![](../.gitbook/assets/add-compound-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-dark.png">
+  <img src="../.gitbook/assets/add-compound-light.png" alt="">
+</picture>
 
 1. Enter a **compound name**, **CAS number**, or **SMILES** — any one field is enough to start.
 2. Click **Auto Fill** to have QSARFlex fetch missing details (name, CAS, SMILES) from PubChem automatically.
 3. Review the populated fields and the structure preview.
 4. Click **Add to Library**.
 
-![](../.gitbook/assets/add-compound-autofill-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-autofill-dark.png">
+  <img src="../.gitbook/assets/add-compound-autofill-light.png" alt="">
+</picture>
 
 **Auto Fill** uses the value you typed to search PubChem. It works best with an exact compound name, CAS number, or valid SMILES string. After Auto Fill completes, review the results — PubChem data is generally reliable but you can edit any field before adding.
 
@@ -29,7 +38,10 @@ The **Single Compound** tab is active by default.
 
 Switch to the **Batch** tab to upload a file containing multiple compounds.
 
-![](../.gitbook/assets/batch-upload-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-dark.png">
+  <img src="../.gitbook/assets/batch-upload-light.png" alt="">
+</picture>
 
 **Supported formats:**
 
@@ -40,7 +52,10 @@ Switch to the **Batch** tab to upload a file containing multiple compounds.
 
 Drag & drop the file into the upload area or click to browse. A preview of the detected compounds is shown before import.
 
-![](../.gitbook/assets/batch-upload-with-file-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-with-file-dark.png">
+  <img src="../.gitbook/assets/batch-upload-with-file-light.png" alt="">
+</picture>
 
 Click **Add to Library** to import all compounds.
 
@@ -54,14 +69,20 @@ Click **Add to Library** to import all compounds.
 
 All compounds appear in the Library as cards — one card per compound.
 
-![](../.gitbook/assets/library-compounds-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-compounds-dark.png">
+  <img src="../.gitbook/assets/library-compounds-light.png" alt="">
+</picture>
 
 Each card shows:
 - Compound name, CAS number, and SMILES
 - A 2D structure preview
 - Evaluation results (if the compound has been evaluated) — one row per module
 
-![](../.gitbook/assets/library-with-results-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-with-results-dark.png">
+  <img src="../.gitbook/assets/library-with-results-light.png" alt="">
+</picture>
 
 Click any evaluation result value to generate and view the full HTML report for that compound and module.
 

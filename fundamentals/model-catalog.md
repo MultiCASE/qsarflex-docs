@@ -2,7 +2,10 @@
 
 The QSAR Flex model catalog lists all available prediction endpoints organized by license bundle. Modules are licensed in bundles — purchasing a bundle unlocks all endpoints within it. Contact [support@multicase.com](mailto:support@multicase.com) to add bundles to your account.
 
-![](../.gitbook/assets/evaluate-dialog-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/evaluate-dialog-dark.png">
+  <img src="../.gitbook/assets/evaluate-dialog-light.png" alt="">
+</picture>
 
 ---
 
