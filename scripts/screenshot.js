@@ -472,7 +472,11 @@ async function screenshotEvaluation(page, theme) {
         ).catch(() => {});
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
-        await shot(page, `eval-results-${theme}.png`);
+        await shot(page, `eval-results-${theme}.png`, {
+          markers: [
+            { selector: 'button.cursor-pointer', label: 'Click to view report', side: 'right' },
+          ],
+        });
 
         // Click a GenerateReportButton to open the report sheet
         try {
@@ -514,8 +518,8 @@ async function screenshotProfile(page, theme) {
   await page.waitForTimeout(900);
   await shot(page, `profile-license-${theme}.png`, {
     markers: [
-      { selector: 'button:has-text("Update users")', label: 'Assign / remove users', side: 'left' },
-      { selector: 'button:has-text("Invite user")',  label: 'Invite new user',        side: 'left' },
+      { selector: 'button:has-text("Update users")', label: 'Assign / remove seat',  side: 'top' },
+      { selector: 'button:has-text("Invite user")',  label: 'Invite new user',        side: 'bottom' },
     ],
   });
 
@@ -558,7 +562,7 @@ async function screenshotProfile(page, theme) {
   await page.waitForTimeout(900);
   await shot(page, `profile-users-${theme}.png`, {
     markers: [
-      { selector: 'button:has-text("Invite user")', label: 'Invite new user', side: 'left' },
+      { selector: 'button:has-text("Invite user")', label: 'Invite new user', side: 'top' },
     ],
   });
 
