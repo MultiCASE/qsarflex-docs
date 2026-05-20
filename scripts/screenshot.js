@@ -65,90 +65,93 @@ const HIDE_DEV_OVERLAY = `
   nextjs-portal { display: none !important; }
 `;
 
-/** Replace all visible email addresses in the DOM with a generic placeholder. */
+/** Replace all visible emails and UUIDs in the DOM with generic placeholders. */
 async function maskEmails(page) {
   await page.evaluate(() => {
     const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
+    const UUID_RE  = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
+    const sanitize = (s) => s
+      .replace(EMAIL_RE, 'user@example.com')
+      .replace(UUID_RE,  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
     const walk = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {
-        if (EMAIL_RE.test(node.textContent)) {
-          node.textContent = node.textContent.replace(EMAIL_RE, 'user@example.com');
-        }
+        const cleaned = sanitize(node.textContent);
+        if (cleaned !== node.textContent) node.textContent = cleaned;
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        // also mask value attributes (inputs)
-        if (node.tagName === 'INPUT' && EMAIL_RE.test(node.value || '')) {
-          node.value = node.value.replace(EMAIL_RE, 'user@example.com');
+        if (node.tagName === 'INPUT') {
+          const cleaned = sanitize(node.value || '');
+          if (cleaned !== node.value) node.value = cleaned;
         }
         for (const child of node.childNodes) walk(child);
       }
     };
-    EMAIL_RE.lastIndex = 0;
     walk(document.body);
   });
 }
 
 /**
  * Add a visual annotation marker pointing at the first element matching `selector`.
+ * Uses Playwright's locator engine (supports :has-text(), filter, role, etc.).
  * `side` can be 'right', 'left', 'top', 'bottom' (default 'right').
- * Returns false if the element isn't found.
  */
 async function addMarker(page, selector, label = '', side = 'right') {
-  return page.evaluate(({ selector, label, side }) => {
-    const el = document.querySelector(selector);
-    if (!el) return false;
-    const rect = el.getBoundingClientRect();
+  let box;
+  try {
+    box = await page.locator(selector).first().boundingBox({ timeout: 2000 });
+  } catch { return false; }
+  if (!box || box.width === 0 || box.height === 0) return false;
 
+  await page.evaluate(({ b, label, side }) => {
     const wrapper = document.createElement('div');
     wrapper.className = '__qf_marker';
     wrapper.style.cssText = `
       position: fixed; z-index: 2147483647; pointer-events: none;
       display: flex; align-items: center; gap: 6px;
-      font-family: -apple-system, sans-serif; font-size: 13px; font-weight: 600;
+      font-family: -apple-system, sans-serif; font-weight: 700;
     `;
 
-    // Arrow SVG (points right by default; rotated per side)
-    const arrowRotation = { right: 0, left: 180, top: 270, bottom: 90 }[side] ?? 0;
+    // Arrow SVG points right (→) at 0°. Rotate so it always points TOWARD the element.
+    const arrowRotation = { right: 180, left: 0, top: 90, bottom: 270 }[side] ?? 180;
     const arrow = document.createElement('div');
-    arrow.innerHTML = `<svg width="32" height="18" viewBox="0 0 32 18" fill="none">
-      <path d="M0 9 L22 9 M18 3 L28 9 L18 15" stroke="#FF4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    arrow.innerHTML = `<svg width="30" height="16" viewBox="0 0 30 16" fill="none">
+      <path d="M0 8 L20 8 M16 2 L26 8 L16 14" stroke="#E8380D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
-    arrow.style.transform = `rotate(${arrowRotation}deg)`;
-    arrow.style.display = 'flex';
+    arrow.style.cssText = `transform:rotate(${arrowRotation}deg); display:flex; flex-shrink:0;`;
 
     const badge = document.createElement('span');
     badge.textContent = label;
     badge.style.cssText = `
-      background: #FF4444; color: #fff; border-radius: 4px;
-      padding: 2px 8px; white-space: nowrap; font-size: 12px;
+      background:#E8380D; color:#fff; border-radius:4px;
+      padding:2px 7px; white-space:nowrap; font-size:11px; line-height:18px;
     `;
 
     const GAP = 8;
     let top, left;
     if (side === 'right') {
-      top  = rect.top + rect.height / 2 - 9;
-      left = rect.right + GAP;
+      top  = b.y + b.height / 2 - 8;
+      left = b.x + b.width + GAP;
       wrapper.append(arrow, badge);
     } else if (side === 'left') {
-      top  = rect.top + rect.height / 2 - 9;
-      left = rect.left - GAP - 120;
+      top  = b.y + b.height / 2 - 8;
+      left = Math.max(GAP, b.x - GAP - 160);
       wrapper.append(badge, arrow);
     } else if (side === 'top') {
-      top  = rect.top - GAP - 30;
-      left = rect.left + rect.width / 2 - 16;
+      top  = b.y - GAP - 28;
+      left = b.x + b.width / 2 - 15;
       wrapper.style.flexDirection = 'column';
       wrapper.append(badge, arrow);
-    } else {
-      top  = rect.bottom + GAP;
-      left = rect.left + rect.width / 2 - 16;
+    } else { // bottom
+      top  = b.y + b.height + GAP;
+      left = b.x + b.width / 2 - 15;
       wrapper.style.flexDirection = 'column';
       wrapper.append(arrow, badge);
     }
 
-    wrapper.style.top  = `${top}px`;
-    wrapper.style.left = `${left}px`;
+    wrapper.style.top  = `${Math.max(4, top)}px`;
+    wrapper.style.left = `${Math.max(4, left)}px`;
     document.body.appendChild(wrapper);
-    return true;
-  }, { selector, label, side });
+  }, { b: box, label, side });
+  return true;
 }
 
 /** Remove all injected markers. */
@@ -263,15 +266,28 @@ async function screenshotLibrary(page, theme) {
   await setTheme(page, theme);
   await clearLibrary(page);
   await navigateTo(page, '/');
-  await shot(page, `library-empty-${theme}.png`);
+  await shot(page, `library-empty-${theme}.png`, {
+    markers: [
+      { selector: 'button:has-text("Compounds")',  label: 'Add compounds', side: 'bottom' },
+      { selector: 'button:has-text("Reaction")',   label: 'Add reaction',  side: 'bottom' },
+    ],
+  });
+
+  // Re-navigate after shot to ensure clean state before interacting
+  await navigateTo(page, '/');
+  await page.waitForTimeout(600);
 
   // ── Add Compound dialog — single tab (empty) ──
   const addBtn = page.locator('button').filter({ hasText: 'Compounds' }).first();
-  if (await addBtn.isVisible({ timeout: 4000 }).catch(() => false)) {
+  if (await addBtn.isVisible({ timeout: 6000 }).catch(() => false)) {
     await addBtn.click();
     await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
     await page.waitForTimeout(700);
-    await shot(page, `add-compound-${theme}.png`);
+    await shot(page, `add-compound-${theme}.png`, {
+      markers: [
+        { selector: 'button:has-text("Auto Fill")', label: 'Fetch from PubChem', side: 'right' },
+      ],
+    });
 
     // Autofill with Caffeine — fill the name field, then click Auto Fill
     try {
@@ -282,7 +298,11 @@ async function screenshotLibrary(page, theme) {
         if (await autofillBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
           await autofillBtn.click();
           await page.waitForTimeout(3500);
-          await shot(page, `add-compound-autofill-${theme}.png`);
+          await shot(page, `add-compound-autofill-${theme}.png`, {
+            markers: [
+              { selector: 'button:has-text("Add to Library")', label: 'Add to Library', side: 'left' },
+            ],
+          });
         }
       }
     } catch {}
@@ -300,7 +320,11 @@ async function screenshotLibrary(page, theme) {
         if (await fileInput.count() > 0) {
           await fileInput.setInputFiles(DK_FILE);
           await page.waitForTimeout(900);
-          await shot(page, `batch-upload-with-file-${theme}.png`);
+          await shot(page, `batch-upload-with-file-${theme}.png`, {
+            markers: [
+              { selector: 'button:has-text("Add to Library")', label: 'Import all', side: 'left' },
+            ],
+          });
         }
       }
     } catch {}
@@ -312,7 +336,11 @@ async function screenshotLibrary(page, theme) {
   // Library with compounds (pre-injected, no results)
   await injectLibrary(page, SAMPLE_COMPOUNDS, null);
   await navigateTo(page, '/');
-  await shot(page, `library-compounds-${theme}.png`);
+  await shot(page, `library-compounds-${theme}.png`, {
+    markers: [
+      { selector: 'button:has-text("Evaluate")', label: 'Run evaluation  ⌘K', side: 'bottom' },
+    ],
+  });
 
   // Library with evaluation results pre-injected
   await injectLibrary(page, SAMPLE_COMPOUNDS, PRECOMPUTED_RESULTS);
@@ -420,7 +448,11 @@ async function screenshotEvaluation(page, theme) {
     { timeout: 15000 }
   ).catch(() => {});
   await page.waitForTimeout(900);
-  await shot(page, `evaluate-dialog-${theme}.png`);
+  await shot(page, `evaluate-dialog-${theme}.png`, {
+    markers: [
+      { selector: '[role="dialog"] [role="checkbox"]', label: 'Select modules', side: 'right' },
+    ],
+  });
 
   // Select first available module
   try {
@@ -480,7 +512,12 @@ async function screenshotProfile(page, theme) {
   // License tab
   await navigateTo(page, '/profile?tab=license');
   await page.waitForTimeout(900);
-  await shot(page, `profile-license-${theme}.png`);
+  await shot(page, `profile-license-${theme}.png`, {
+    markers: [
+      { selector: 'button:has-text("Update users")', label: 'Assign / remove users', side: 'left' },
+      { selector: 'button:has-text("Invite user")',  label: 'Invite new user',        side: 'left' },
+    ],
+  });
 
   // Click "Update users" button to open assign users dialog
   try {
@@ -489,7 +526,11 @@ async function screenshotProfile(page, theme) {
       await updateBtn.click();
       await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
       await page.waitForTimeout(700);
-      await shot(page, `profile-license-assign-users-${theme}.png`);
+      await shot(page, `profile-license-assign-users-${theme}.png`, {
+        markers: [
+          { selector: '[role="dialog"] [role="checkbox"]:first-of-type', label: 'Toggle seat assignment', side: 'right' },
+        ],
+      });
       await page.keyboard.press('Escape');
       await page.waitForTimeout(400);
     }
@@ -502,7 +543,11 @@ async function screenshotProfile(page, theme) {
       await inviteBtnLicense.click();
       await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
       await page.waitForTimeout(700);
-      await shot(page, `profile-invite-user-${theme}.png`);
+      await shot(page, `profile-invite-user-${theme}.png`, {
+        markers: [
+          { selector: '[role="dialog"] input[type="email"], [role="dialog"] input[type="text"]', label: 'Enter email address', side: 'right' },
+        ],
+      });
       await page.keyboard.press('Escape');
       await page.waitForTimeout(400);
     }
@@ -511,7 +556,11 @@ async function screenshotProfile(page, theme) {
   // Users tab
   await navigateTo(page, '/profile?tab=users');
   await page.waitForTimeout(900);
-  await shot(page, `profile-users-${theme}.png`);
+  await shot(page, `profile-users-${theme}.png`, {
+    markers: [
+      { selector: 'button:has-text("Invite user")', label: 'Invite new user', side: 'left' },
+    ],
+  });
 
   // Invite user from Users tab (if button is visible there too)
   try {
@@ -520,7 +569,11 @@ async function screenshotProfile(page, theme) {
       await inviteBtnUsers.click();
       await page.waitForSelector('[role="dialog"]', { timeout: 6000 }).catch(() => {});
       await page.waitForTimeout(700);
-      await shot(page, `profile-users-invite-dialog-${theme}.png`);
+      await shot(page, `profile-users-invite-dialog-${theme}.png`, {
+        markers: [
+          { selector: '[role="dialog"] input[type="email"], [role="dialog"] input[type="text"]', label: 'Enter email address', side: 'right' },
+        ],
+      });
       await page.keyboard.press('Escape');
       await page.waitForTimeout(400);
     }
@@ -532,14 +585,25 @@ async function screenshotProfile(page, theme) {
 async function screenshotDataKurator(page, theme) {
   console.log(`\n  🧪 DataKurator (${theme})`);
 
-  // ── Upload step ──
+  // ── Upload step — navigate to / first to flush any lingering DK state ──
   await clearDkState(page);
+  await navigateTo(page, '/');
+  await page.waitForTimeout(400);
   await navigateTo(page, '/datakurator');
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(800);
+  // If DK landed on a later step, go back to upload
+  const isOnUpload = await page.locator('input[type="file"]').first().isVisible({ timeout: 3000 }).catch(() => false);
+  if (!isOnUpload) {
+    await clearDkState(page);
+    await navigateTo(page, '/');
+    await page.waitForTimeout(400);
+    await navigateTo(page, '/datakurator');
+    await page.waitForTimeout(1000);
+  }
   await shot(page, `datakurator-upload-${theme}.png`);
 
   const fileInput = page.locator('input[type="file"]').first();
-  await fileInput.setInputFiles(DK_FILE);
+  await fileInput.setInputFiles(DK_FILE, { timeout: 10000 });
   await page.waitForTimeout(900);
   await shot(page, `datakurator-file-selected-${theme}.png`);
 
@@ -557,7 +621,12 @@ async function screenshotDataKurator(page, theme) {
     { timeout: 20000 }
   ).catch(() => {});
   await page.waitForTimeout(1500);
-  await shot(page, `datakurator-results-${theme}.png`);
+  await shot(page, `datakurator-results-${theme}.png`, {
+    markers: [
+      { selector: 'button:has-text("One Step Cure")',         label: 'Auto-fix all issues', side: 'right' },
+      { selector: 'button:has-text("PubChem Batch Correct")', label: 'Correct via PubChem', side: 'right' },
+    ],
+  });
 
   // ── Structure viewer (hover row → click eye icon) ──
   try {
@@ -570,7 +639,12 @@ async function screenshotDataKurator(page, theme) {
       await page.waitForTimeout(400);
       const viewBtn = page.locator('button[title="View structure"]').first();
       if (await viewBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await shot(page, `datakurator-structure-hover-${theme}.png`);
+        await shot(page, `datakurator-structure-hover-${theme}.png`, {
+          markers: [
+            { selector: 'button[title="View structure"]', label: 'View 2D structure', side: 'left' },
+            { selector: 'button[title="Actions"]',        label: 'Row actions',       side: 'right' },
+          ],
+        });
         await viewBtn.click();
         await page.waitForTimeout(900);
         await shot(page, `datakurator-structure-viewer-${theme}.png`);
@@ -751,7 +825,11 @@ async function screenshotDataKurator(page, theme) {
     if (await proceedBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
       await proceedBtn.click();
       await page.waitForTimeout(1200);
-      await shot(page, `datakurator-export-${theme}.png`);
+      await shot(page, `datakurator-export-${theme}.png`, {
+        markers: [
+          { selector: 'button:has-text("Load")', label: 'Load directly into library', side: 'left' },
+        ],
+      });
     }
   } catch {}
 }

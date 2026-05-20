@@ -34,19 +34,22 @@ const HIDE_DEV = `
 async function maskEmails(page) {
   await page.evaluate(() => {
     const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
+    const UUID_RE  = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
+    const sanitize = (s) => s
+      .replace(EMAIL_RE, 'user@example.com')
+      .replace(UUID_RE,  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
     const walk = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {
-        if (EMAIL_RE.test(node.textContent)) {
-          node.textContent = node.textContent.replace(EMAIL_RE, 'user@example.com');
-        }
+        const cleaned = sanitize(node.textContent);
+        if (cleaned !== node.textContent) node.textContent = cleaned;
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        if (node.tagName === 'INPUT' && EMAIL_RE.test(node.value || '')) {
-          node.value = node.value.replace(EMAIL_RE, 'user@example.com');
+        if (node.tagName === 'INPUT') {
+          const cleaned = sanitize(node.value || '');
+          if (cleaned !== node.value) node.value = cleaned;
         }
         for (const child of node.childNodes) walk(child);
       }
     };
-    EMAIL_RE.lastIndex = 0;
     walk(document.body);
   });
 }
