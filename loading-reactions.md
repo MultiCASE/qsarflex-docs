@@ -10,7 +10,7 @@ The **Reaction SMILES** tab is the default view. Use this to type or paste a rea
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-smiles-tab-dark.png">
-  <img src=".gitbook/assets/reactions-smiles-tab-light.png" alt="">
+  <img src=".gitbook/assets/reactions-smiles-tab-light.png" alt="" width="100%">
 </picture>
 
 **Reaction SMILES format:** `reactants>>products` — use `.` to separate multiple reactants or products. Optionally include agents in the middle segment: `reactants>agents>products`.
@@ -26,7 +26,7 @@ CC(=O)Cl.OCC>>CC(=O)OCC.Cl
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-smiles-result-dark.png">
-  <img src=".gitbook/assets/reactions-smiles-result-light.png" alt="">
+  <img src=".gitbook/assets/reactions-smiles-result-light.png" alt="" width="100%">
 </picture>
 
 The reaction diagram is rendered inline, showing all reactants, agents (if any), and products with 2D structure depictions. Multi-step reactions are displayed as a sequence.
@@ -39,7 +39,7 @@ Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-files-tab-dark.png">
-  <img src=".gitbook/assets/reactions-files-tab-light.png" alt="">
+  <img src=".gitbook/assets/reactions-files-tab-light.png" alt="" width="100%">
 </picture>
 
 1. Drag & drop one or more `.rxn` files into the upload area, or click to browse. You can select **multiple files at once** for a multi-step synthesis.
@@ -47,14 +47,14 @@ Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-uploaded-dark.png">
-  <img src=".gitbook/assets/reactions-rxn-uploaded-light.png" alt="">
+  <img src=".gitbook/assets/reactions-rxn-uploaded-light.png" alt="" width="100%">
 </picture>
 
 3. Submit to visualize all reaction steps together.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-visualized-dark.png">
-  <img src=".gitbook/assets/reactions-rxn-visualized-light.png" alt="">
+  <img src=".gitbook/assets/reactions-rxn-visualized-light.png" alt="" width="100%">
 </picture>
 
 Multi-step synthesis sequences are loaded by selecting all step files together in a single upload — QSARFlex renders them as a connected sequence.
@@ -67,7 +67,7 @@ Once submitted, the reaction appears in the Library alongside your compounds as 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/library-with-reaction-dark.png">
-  <img src=".gitbook/assets/library-with-reaction-light.png" alt="">
+  <img src=".gitbook/assets/library-with-reaction-light.png" alt="" width="100%">
 </picture>
 
 You can freely mix compounds and reactions in the same library — they show up as separate cards. Loaded reaction cards display:

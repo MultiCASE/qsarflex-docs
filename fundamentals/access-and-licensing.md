@@ -69,7 +69,7 @@ After signing in, click your **profile avatar** (top right) and go to **Profile 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-license-dark.png">
-  <img src="../.gitbook/assets/profile-license-light.png" alt="">
+  <img src="../.gitbook/assets/profile-license-light.png" alt="" width="100%">
 </picture>
 
 - Your active license type, coverage, and status

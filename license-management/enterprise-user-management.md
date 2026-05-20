@@ -23,14 +23,14 @@ Go to your **profile avatar** in the top-right corner to open the Profile panel.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-dark.png">
-  <img src="../.gitbook/assets/profile-light.png" alt="">
+  <img src="../.gitbook/assets/profile-light.png" alt="" width="100%">
 </picture>
 
 Select the **License Information** tab to see your active license, assigned users, and available seats.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-license-dark.png">
-  <img src="../.gitbook/assets/profile-license-light.png" alt="">
+  <img src="../.gitbook/assets/profile-license-light.png" alt="" width="100%">
 </picture>
 
 The license card shows:
@@ -53,7 +53,7 @@ Only users with the **Company Admin** role can modify seat assignments.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-license-assign-users-dark.png">
-  <img src="../.gitbook/assets/profile-license-assign-users-light.png" alt="">
+  <img src="../.gitbook/assets/profile-license-assign-users-light.png" alt="" width="100%">
 </picture>
 
 3. The dialog shows all platform users in your organization and which ones are currently assigned.
@@ -77,14 +77,14 @@ Adding a new person to your organization requires two steps: first invite them t
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-invite-user-dark.png">
-  <img src="../.gitbook/assets/profile-invite-user-light.png" alt="">
+  <img src="../.gitbook/assets/profile-invite-user-light.png" alt="" width="100%">
 </picture>
 
 3. Enter the user's email address and click **Send Invitation**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-users-invite-dialog-dark.png">
-  <img src="../.gitbook/assets/profile-users-invite-dialog-light.png" alt="">
+  <img src="../.gitbook/assets/profile-users-invite-dialog-light.png" alt="" width="100%">
 </picture>
 
 The user receives an automated setup email with a link to create their MultiCASE account. Once they complete registration, their account appears in your organization's user list.
@@ -106,7 +106,7 @@ Go to **Profile → Users** to see all users in your organization.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-users-dark.png">
-  <img src="../.gitbook/assets/profile-users-light.png" alt="">
+  <img src="../.gitbook/assets/profile-users-light.png" alt="" width="100%">
 </picture>
 
 The Users tab shows:

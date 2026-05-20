@@ -4,7 +4,7 @@ Compounds are managed in the **Library** on the main screen. Click **+ Compounds
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-empty-dark.png">
-  <img src="../.gitbook/assets/library-empty-light.png" alt="">
+  <img src="../.gitbook/assets/library-empty-light.png" alt="" width="100%">
 </picture>
 
 ---
@@ -15,7 +15,7 @@ The **Single Compound** tab is active by default.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-dark.png">
-  <img src="../.gitbook/assets/add-compound-light.png" alt="">
+  <img src="../.gitbook/assets/add-compound-light.png" alt="" width="100%">
 </picture>
 
 1. Enter a **compound name**, **CAS number**, or **SMILES** — any one field is enough to start.
@@ -25,7 +25,7 @@ The **Single Compound** tab is active by default.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-autofill-dark.png">
-  <img src="../.gitbook/assets/add-compound-autofill-light.png" alt="">
+  <img src="../.gitbook/assets/add-compound-autofill-light.png" alt="" width="100%">
 </picture>
 
 **Auto Fill** uses the value you typed to search PubChem. It works best with an exact compound name, CAS number, or valid SMILES string. After Auto Fill completes, review the results — PubChem data is generally reliable but you can edit any field before adding.
@@ -40,7 +40,7 @@ Switch to the **Batch** tab to upload a file containing multiple compounds.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-dark.png">
-  <img src="../.gitbook/assets/batch-upload-light.png" alt="">
+  <img src="../.gitbook/assets/batch-upload-light.png" alt="" width="100%">
 </picture>
 
 **Supported formats:**
@@ -54,7 +54,7 @@ Drag & drop the file into the upload area or click to browse. A preview of the d
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-with-file-dark.png">
-  <img src="../.gitbook/assets/batch-upload-with-file-light.png" alt="">
+  <img src="../.gitbook/assets/batch-upload-with-file-light.png" alt="" width="100%">
 </picture>
 
 Click **Add to Library** to import all compounds.
@@ -71,7 +71,7 @@ All compounds appear in the Library as cards — one card per compound.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-compounds-dark.png">
-  <img src="../.gitbook/assets/library-compounds-light.png" alt="">
+  <img src="../.gitbook/assets/library-compounds-light.png" alt="" width="100%">
 </picture>
 
 Each card shows:
@@ -81,7 +81,7 @@ Each card shows:
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-with-results-dark.png">
-  <img src="../.gitbook/assets/library-with-results-light.png" alt="">
+  <img src="../.gitbook/assets/library-with-results-light.png" alt="" width="100%">
 </picture>
 
 Click any evaluation result value to generate and view the full HTML report for that compound and module.

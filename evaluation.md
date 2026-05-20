@@ -12,7 +12,7 @@ The **Select Modules to Evaluate** dialog opens, listing every module available 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
-  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
+  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="" width="100%">
 </picture>
 
 Modules are shown grouped by their license bundle — for example, **Physicochemical**, **Nitrosamine**, **Ecotoxicity**, and **ADME**. Modules you are not licensed for appear grayed out and cannot be selected. Contact [support@multicase.com](mailto:support@multicase.com) to add bundles.
@@ -29,7 +29,7 @@ After evaluation completes, results appear in each compound's card in the Librar
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
-  <img src=".gitbook/assets/eval-results-light.png" alt="">
+  <img src=".gitbook/assets/eval-results-light.png" alt="" width="100%">
 </picture>
 
 Each compound card shows a table with:
@@ -50,7 +50,7 @@ Click any result value in a compound's card to generate a full HTML report for t
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
-  <img src=".gitbook/assets/eval-report-light.png" alt="">
+  <img src=".gitbook/assets/eval-report-light.png" alt="" width="100%">
 </picture>
 
 Reports include:

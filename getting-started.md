@@ -10,7 +10,7 @@ QSAR Flex is available as a **web application** and a **Windows desktop applicat
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/signin-dark.png">
-  <img src=".gitbook/assets/signin-light.png" alt="">
+  <img src=".gitbook/assets/signin-light.png" alt="" width="100%">
 </picture>
 
 Clicking the button redirects you to the MultiCASE Cognito-hosted login page. Enter your email address first, then your password on the next screen.
@@ -37,29 +37,29 @@ Click **+ Compounds** in the Library toolbar to open the compound input dialog.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-dark.png">
-  <img src=".gitbook/assets/add-compound-light.png" alt="">
+  <img src=".gitbook/assets/add-compound-light.png" alt="" width="100%">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-autofill-dark.png">
-  <img src=".gitbook/assets/add-compound-autofill-light.png" alt="">
+  <img src=".gitbook/assets/add-compound-autofill-light.png" alt="" width="100%">
 </picture>
 
 **Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (`.smi`), or TXT file to load multiple compounds at once.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-dark.png">
-  <img src=".gitbook/assets/batch-upload-light.png" alt="">
+  <img src=".gitbook/assets/batch-upload-light.png" alt="" width="100%">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-with-file-dark.png">
-  <img src=".gitbook/assets/batch-upload-with-file-light.png" alt="">
+  <img src=".gitbook/assets/batch-upload-with-file-light.png" alt="" width="100%">
 </picture>
 
 Compounds appear in your Library. Add as many as you need before evaluating.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/library-compounds-dark.png">
-  <img src=".gitbook/assets/library-compounds-light.png" alt="">
+  <img src=".gitbook/assets/library-compounds-light.png" alt="" width="100%">
 </picture>
 
 ---
@@ -70,21 +70,21 @@ Click the green **Evaluate** button in the Library toolbar. A dialog opens to se
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
-  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
+  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="" width="100%">
 </picture>
 
 Check the modules you want to run and click **Evaluate**. Results appear in the Library for each compound.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
-  <img src=".gitbook/assets/eval-results-light.png" alt="">
+  <img src=".gitbook/assets/eval-results-light.png" alt="" width="100%">
 </picture>
 
 Click any result value to generate and view a full HTML report for that compound and module.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
-  <img src=".gitbook/assets/eval-report-light.png" alt="">
+  <img src=".gitbook/assets/eval-report-light.png" alt="" width="100%">
 </picture>
 
 ---

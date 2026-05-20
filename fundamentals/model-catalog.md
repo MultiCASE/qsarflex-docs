@@ -4,7 +4,7 @@ The QSAR Flex model catalog lists all available prediction endpoints organized b
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/evaluate-dialog-dark.png">
-  <img src="../.gitbook/assets/evaluate-dialog-light.png" alt="">
+  <img src="../.gitbook/assets/evaluate-dialog-light.png" alt="" width="100%">
 </picture>
 
 ---

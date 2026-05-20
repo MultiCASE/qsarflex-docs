@@ -16,7 +16,7 @@ DataKurator is a three-step process: **Upload → Curate → Export**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-upload-dark.png">
-  <img src=".gitbook/assets/datakurator-upload-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-upload-light.png" alt="" width="100%">
 </picture>
 
 Drag & drop or click to select your compound file. **Supported formats:**
@@ -27,7 +27,7 @@ Once a file is selected, it is shown in the upload zone before analysis begins.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-file-selected-dark.png">
-  <img src=".gitbook/assets/datakurator-file-selected-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-file-selected-light.png" alt="" width="100%">
 </picture>
 
 Click **Run Analysis** to parse the file and run structural analysis. This step runs entirely on your device — no data is sent to any server at this point.
@@ -40,7 +40,7 @@ After analysis, results appear in a table with one row per compound. Each row sh
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-results-dark.png">
-  <img src=".gitbook/assets/datakurator-results-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-results-light.png" alt="" width="100%">
 </picture>
 
 ### Error Types
@@ -68,11 +68,11 @@ Hover over any row to reveal the **👁 View Structure** button on the right sid
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-structure-hover-dark.png">
-  <img src=".gitbook/assets/datakurator-structure-hover-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-structure-hover-light.png" alt="" width="100%">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-structure-viewer-dark.png">
-  <img src=".gitbook/assets/datakurator-structure-viewer-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-structure-viewer-light.png" alt="" width="100%">
 </picture>
 
 ---
@@ -83,7 +83,7 @@ Every row has a **⋮ Actions** button on the far right. Click it to open a drop
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-row-menu-dark.png">
-  <img src=".gitbook/assets/datakurator-row-menu-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-row-menu-light.png" alt="" width="100%">
 </picture>
 
 | Action | What it does |
@@ -102,7 +102,7 @@ For rows tagged as **Mixture**, clicking **Pick components (N)** in the row menu
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-fragment-picker-dark.png">
-  <img src=".gitbook/assets/datakurator-fragment-picker-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-fragment-picker-light.png" alt="" width="100%">
 </picture>
 
 - Click individual fragments to select them, or click **Select all** to select every fragment.
@@ -110,11 +110,11 @@ For rows tagged as **Mixture**, clicking **Pick components (N)** in the row menu
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-fragments-selected-dark.png">
-  <img src=".gitbook/assets/datakurator-fragments-selected-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-fragments-selected-light.png" alt="" width="100%">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-after-split-dark.png">
-  <img src=".gitbook/assets/datakurator-after-split-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-after-split-light.png" alt="" width="100%">
 </picture>
 
 After splitting, the resulting rows appear in-place with a "└" indent marker showing their ancestry. You can re-pick components at any time via the row menu.
@@ -127,7 +127,7 @@ Click **Edit SMILES** in a row's Actions menu to edit the SMILES string directly
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-edit-smiles-dark.png">
-  <img src=".gitbook/assets/datakurator-edit-smiles-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-edit-smiles-light.png" alt="" width="100%">
 </picture>
 
 - Press **Enter** or click the green ✓ to commit your change.
@@ -143,7 +143,7 @@ The **One Step Cure** button runs an automated batch fix across your entire data
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-osc-dialog-dark.png">
-  <img src=".gitbook/assets/datakurator-osc-dialog-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-osc-dialog-light.png" alt="" width="100%">
 </picture>
 
 **Configurable options:**
@@ -157,7 +157,7 @@ After running, a **Change Summary** dialog lists every action taken — removed 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-osc-summary-dark.png">
-  <img src=".gitbook/assets/datakurator-osc-summary-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-osc-summary-light.png" alt="" width="100%">
 </picture>
 
 ---
@@ -168,7 +168,7 @@ Click **PubChem Batch Correct** to look up every compound in [PubChem's REST API
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-warning-dark.png">
-  <img src=".gitbook/assets/datakurator-pubchem-warning-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-pubchem-warning-light.png" alt="" width="100%">
 </picture>
 
 > ⚠️ **Privacy note:** PubChem Batch Correct sends each compound's SMILES to the PubChem REST API (`pubchem.ncbi.nlm.nih.gov`). MultiCASE does **not** store or log the data sent to PubChem. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before use.
@@ -177,7 +177,7 @@ After running, a **PubChem Results** summary dialog shows what was corrected for
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-results-dark.png">
-  <img src=".gitbook/assets/datakurator-pubchem-results-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-pubchem-results-light.png" alt="" width="100%">
 </picture>
 
 For each compound, PubChem Batch Correct can:
@@ -197,7 +197,7 @@ Once your dataset is ready, click **Proceed to Export** to see a full curation s
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-export-dark.png">
-  <img src=".gitbook/assets/datakurator-export-light.png" alt="">
+  <img src=".gitbook/assets/datakurator-export-light.png" alt="" width="100%">
 </picture>
 
 The export page shows:
