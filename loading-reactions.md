@@ -1,85 +1,46 @@
+---
+description: Step-by-Step Instructions for Reaction Input in QSAR Flex
+icon: flask-gear
+---
+
 # Loading Reactions
 
-⚗️ QSAR Flex can load and visualize chemical reactions alongside compounds in your library. Click **+ Reaction** in the Library toolbar to open the reaction input dialog.
+**Access the Reaction Input Screen**
 
----
+1. Click on the "+ Reaction" option from the main menu.
+2. Select either the "Reaction SMILES" tab or the "Reaction Files" tab to open the reaction input dialog.
 
-## ✏️ Reaction SMILES
+**Enter Reaction Information**
 
-The **Reaction SMILES** tab is the default view. Use this to type or paste a reaction SMILES string directly.
+* **Using Reaction SMILES Tab**:
+  * Choose the "Reaction SMILES" tab.
+  * Type the Reaction SMILES string in the provided field (e.g., `O=C(OC)CC>HCl.H2O.Heat>O=C(O)CC.CO`\
+    `O=C(O)CC.CNC>DCC>O=C(N(C)C)CC`).
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-smiles-tab-dark.png">
-  <img src=".gitbook/assets/reactions-smiles-tab-light.png" alt="">
-</picture></figure>
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 12.24.59.png" alt=""><figcaption></figcaption></figure>
 
-**Reaction SMILES format:** `reactants>>products` — use `.` to separate multiple reactants or products. Optionally include agents in the middle segment: `reactants>agents>products`.
+* **Using Reaction Files Tab**:
+  * Choose the "Reaction Files" tab.
+  * Drag and drop a `.rxn` file into the designated area or click to select a `.rxn` file from your device.
 
-Examples:
-```
-CC(=O)Cl.OCC>>CC(=O)OCC.Cl
-[Na]Br.ClC>>ClC.[Na]Br
-```
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 13.05.21.png" alt=""><figcaption></figcaption></figure>
 
-1. Paste your reaction SMILES into the text field.
-2. Click the submit button to process and visualize.
+**Visualize the Reaction**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-smiles-result-dark.png">
-  <img src=".gitbook/assets/reactions-smiles-result-light.png" alt="">
-</picture></figure>
+* Click the "Visualise" button to preview the reaction steps and chemical structures.
+* Review the displayed reaction diagram to ensure accuracy (e.g., step-by-step transformations like Lisinopril synthesis).
 
-The reaction diagram is rendered inline, showing all reactants, agents (if any), and products with 2D structure depictions. Multi-step reactions are displayed as a sequence.
+**Reset if Needed**
 
----
+* If you need to start over, click the "Reset" button to clear the current input and begin again.
 
-## 📄 Reaction Files (RXN)
+**Submit the Reaction**
 
-Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the industry-standard MDL RXN format used by ChemDraw, Marvin, and other chemistry tools.
+* Click the "Submit" button to add the reaction to your library.
+* Verify that the reaction appears in your library.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-files-tab-dark.png">
-  <img src=".gitbook/assets/reactions-files-tab-light.png" alt="">
-</picture></figure>
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 13.05.51.png" alt=""><figcaption></figcaption></figure>
 
-1. Drag & drop one or more `.rxn` files into the upload area, or click to browse. You can select **multiple files at once** for a multi-step synthesis.
-2. The file names appear once uploaded.
+## **Next Steps**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-uploaded-dark.png">
-  <img src=".gitbook/assets/reactions-rxn-uploaded-light.png" alt="">
-</picture></figure>
-
-3. Submit to visualize all reaction steps together.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-visualized-dark.png">
-  <img src=".gitbook/assets/reactions-rxn-visualized-light.png" alt="">
-</picture></figure>
-
-Multi-step synthesis sequences are loaded by selecting all step files together in a single upload — QSARFlex renders them as a connected sequence.
-
----
-
-## 📚 Reactions in the Library
-
-Once submitted, the reaction appears in the Library alongside your compounds as its own card.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/library-with-reaction-dark.png">
-  <img src=".gitbook/assets/library-with-reaction-light.png" alt="">
-</picture></figure>
-
-You can freely mix compounds and reactions in the same library — they show up as separate cards. Loaded reaction cards display:
-- The reaction diagram with all structures
-- Arrow notation for reaction direction
-- Any evaluation results if the reaction was run through a compatible module
-
----
-
-## 🔬 Next Steps
-
-With reactions in your library, click **Evaluate** to run analysis modules. Some modules (such as reaction-specific models) operate on reaction entries rather than individual compounds.
-
-- [Evaluation](evaluation.md) — run prediction modules on your library
-- [Loading Compounds](product-guide/loading-compounds.md) — add compounds alongside reactions
+* After adding compounds, click "Evaluate" to analyze your compounds.

@@ -1,127 +1,41 @@
+---
+icon: users
+---
+
 # Enterprise User Management
 
-👥 Enterprise licenses support multiple users under a single organization. A **Company Admin** can invite users to the platform, assign them to license seats, and reassign seats at any time. Non-admin users have read-only access to license information.
+## User Management Guide
 
----
+This guide provides instructions for managing users within the application, specifically for "Company Admin" roles. Non-admin users have read-only access.
 
-## Understanding License Seats
+### Adding a New User to an Active License
 
-An enterprise license has a fixed number of **seats** — the number of users who can be actively assigned to it at one time. Your organization can have more total platform users than available seats.
+To add a new user to your license:
 
-**Example:** Your organization has 5 registered users but a 3-seat license. As an admin, you can freely choose which 3 of those 5 users are assigned to the license at any given time. You can swap assignments at any point — no data is lost when a user is removed from a seat and re-added later.
+* Navigate to your "Profile" by clicking the icon in the top right corner.
 
-This flexibility is useful for:
-- Teams with rotating access needs (e.g., project-based usage)
-- Organizations that need to share a license across departments
-- Onboarding new team members before deciding on seat allocation
+<figure><img src="../.gitbook/assets/p1.png" alt=""><figcaption></figcaption></figure>
 
----
+* Click on the "License Information" tab.
 
-## Viewing Your License
+<figure><img src="../.gitbook/assets/p2.png" alt=""><figcaption></figcaption></figure>
 
-Go to your **profile avatar** in the top-right corner to open the Profile panel.
+* In the "Active License Information" section, click on "Update Users".
+* Select the user you wish to add from the dropdown menu, then click "Save".
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-dark.png">
-  <img src="../.gitbook/assets/profile-light.png" alt="">
-</picture></figure>
+<figure><img src="../.gitbook/assets/p3.png" alt=""><figcaption></figcaption></figure>
 
-Select the **License Information** tab to see your active license, assigned users, and available seats.
+**Note:** If the user is not listed, invite them to QSAR Flex first.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-license-dark.png">
-  <img src="../.gitbook/assets/profile-license-light.png" alt="">
-</picture></figure>
+### Inviting a New User to QSAR Flex
 
-The license card shows:
-- License name and software (e.g., QSARFlex)
-- Coverage type (individual / enterprise)
-- Billing model (subscription / pay-per-test / on-demand)
-- Status (active / inactive / expired)
-- Start and end dates (for subscriptions)
-- Remaining tests (for pay-per-test licenses)
-- Currently assigned users
+To invite a new user:
 
----
+* Navigate to your "Profile" by clicking the icon in the top right corner.
+* Click on the "Users" tab.
+* Click the "Invite New User" button.
+* Enter the new user's email address for the automated setup email.
 
-## Assigning & Removing Users from a License
+<figure><img src="../.gitbook/assets/p4 copy.png" alt=""><figcaption></figcaption></figure>
 
-Only users with the **Company Admin** role can modify seat assignments.
-
-1. Go to **Profile → License Information**.
-2. In the **Active License** section, click **Update users**.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-license-assign-users-dark.png">
-  <img src="../.gitbook/assets/profile-license-assign-users-light.png" alt="">
-</picture></figure>
-
-3. The dialog shows all platform users in your organization and which ones are currently assigned.
-4. Add or remove users from the license as needed.
-5. Click **Save** to apply the changes.
-
-Users removed from the license lose access to the licensed modules immediately. Users added gain access immediately.
-
-> 💡 You can reassign seats as often as needed — there is no cooldown or limit on reassignments.
-
----
-
-## Inviting a New User to the Platform
-
-Adding a new person to your organization requires two steps: first invite them to the platform, then assign them to a license.
-
-### Step 1 — Send the Invitation
-
-1. Go to **Profile → License Information**.
-2. Click **Invite user**.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-invite-user-dark.png">
-  <img src="../.gitbook/assets/profile-invite-user-light.png" alt="">
-</picture></figure>
-
-3. Enter the user's email address and click **Send Invitation**.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-users-invite-dialog-dark.png">
-  <img src="../.gitbook/assets/profile-users-invite-dialog-light.png" alt="">
-</picture></figure>
-
-The user receives an automated setup email with a link to create their MultiCASE account. Once they complete registration, their account appears in your organization's user list.
-
-### Step 2 — Assign to a License
-
-After the user accepts the invitation and creates their account:
-
-1. Go to **Profile → License Information** → **Update users**.
-2. Select the new user from the list and click **Save**.
-
-The user now has access to all modules included in that license.
-
----
-
-## Managing Platform Users
-
-Go to **Profile → Users** to see all users in your organization.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-users-dark.png">
-  <img src="../.gitbook/assets/profile-users-light.png" alt="">
-</picture></figure>
-
-The Users tab shows:
-- Each user's name and email
-- Their role (Company Admin or standard user)
-- Whether they currently have an active license assignment
-
-From this tab, admins can also invite new users directly using the **Invite user** button.
-
----
-
-## Notes
-
-- Only users with the **Company Admin** role can manage users and license assignments.
-- A user must accept their invitation and create an account before they can be assigned to a license.
-- Each license seat can be assigned to one user at a time, but you can freely swap who occupies each seat.
-- To change your license capacity (add or remove seats), contact [support@multicase.com](mailto:support@multicase.com).
-- Any **Company Admin** can promote other users to Company Admin or change their role from the **Profile → Users** tab.
+**Reminder:** After inviting, add the user to an active license for access to QSAR Flex.

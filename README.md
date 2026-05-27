@@ -1,55 +1,33 @@
-# QSAR Flex
-
-**QSAR Flex** is a computational platform by [MultiCASE](https://multicase.com) for chemical safety assessment and toxicological prediction. It provides high-quality (Q)SAR models, read-across modules, and analysis tools — built for regulatory, pharmaceutical, and environmental science workflows.
-
-Available as a **web application** and a **Windows desktop application**. All variants require an active license (individual or enterprise) and an internet connection.
-
+---
+description: Welcome to the QSAR Flex documentation!
 ---
 
-## 🚀 What Can QSAR Flex Do?
+# 👋 QSAR Flex Docs
 
-- **🔬 Predict toxicological endpoints** — Ames mutagenicity, N-nitrosamine CPCA, ecotoxicity, physicochemical properties, ADME, and more
-- **📂 Load and curate compounds** — Enter SMILES, names, or CAS numbers; upload batch files (SDF, SMI, TXT)
-- **✅ Curate your dataset** — Use [DataKurator](datakurator.md) to detect and fix structural issues before evaluation
-- **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
-- **📄 Generate reports** — One-click detailed HTML reports per compound per module
+## What is QSAR Flex?
 
----
+**QSAR Flex** is a software platform that provides high quality (Q)SAR models, databases, read across modules and various tools for the application of novel computational approaches for risk assessment of chemical compounds and is especially suitable for complex toxicological end points.
 
-## Variants
+Now all this goodness in Web!
 
-| | 🌐 Web App | 💻 Desktop — Local | ☁️ Desktop — Cloud |
-|---|---|---|---|
-| **Access** | [qsarflex.com](https://qsarflex.com) | [Download installer](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe) | [Download installer](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe) |
-| **Compound loading** | ✓ | ✓ | ✓ |
-| **Batch upload** | ✓ | ✓ | ✓ |
-| **DataKurator** | ✓ | ✓ | ✓ |
-| **Evaluation** | ✓ | ✓ | ✓ |
-| **Reaction loading** | ✓ | ✓ | ✓ |
-| **Model inference** | MultiCASE servers | On-device | On-device |
-| **Reference database** | MultiCASE servers | Local SQLite | MultiCASE cloud (PostgreSQL) — used by N-Nitrosation & Oral Bioavailability |
-| **Internet required** | Always | License/auth only | Always |
-| **Surrogate Search** | — | ✓ | ✓ |
-| **Cross Similarity** | — | ✓ | ✓ |
+**Key Features:**
 
-> **Desktop — Local** runs QSAR model inference on-device with a local SQLite database — compound structures are never sent to MultiCASE servers for evaluation. Internet is still required for license verification and authentication.
+* **Comprehensive Analysis**: Analyzes diverse structures like _N-_&#x6E;itrosamine Drug Substance Related Impurities (NDSRIs).
+* **Predictive Modeling**: Uses structural searches and descriptor calculations for evidence-based toxicity predictions.
+* **Application Flexibility**: Offers solutions for pharmaceutical, chemical, and other fields needing chemical safety assessment.
 
-> **Desktop — Cloud** also runs QSAR model inference on-device. The only remote component is the reference database (queried for N-Nitrosation and Oral Bioavailability modules) hosted on MultiCASE's cloud.
+## How to use the docs?
 
----
+Step-by-step instructions on how to get started with QSAR Flex and evaluate your first compound.
 
-## Get Started
+{% content-ref url="getting-started.md" %}
+[getting-started.md](getting-started.md)
+{% endcontent-ref %}
 
-1. 🔐 [Getting Started](getting-started.md) — log in and run your first evaluation
-2. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to your library
-3. ✅ [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
-4. 🔬 [Evaluation](evaluation.md) — select modules and generate results
-5. ⚗️ [Loading Reactions](loading-reactions.md) — submit reaction SMILES and RXN files
-6. 📋 [Model Catalog](fundamentals/model-catalog.md) — all available endpoints by bundle
-7. 👥 [License Management](license-management/enterprise-user-management.md) — manage users and seats
+Need an account? Find more info here.
 
----
+{% content-ref url="fundamentals/access-and-licensing/" %}
+[access-and-licensing](fundamentals/access-and-licensing/)
+{% endcontent-ref %}
 
-## Contact
-
-For access, licensing, or support: [support@multicase.com](mailto:support@multicase.com)
+## Next Steps

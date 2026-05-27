@@ -1,96 +1,70 @@
+---
+description: Step-by-Step Instructions for Compound Input in QSAR Flex
+icon: atom
+---
+
 # Loading Compounds
 
-Compounds are managed in the **Library** on the main screen. Click **+ Compounds** to open the compound input dialog.
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 12.12.22.png" alt=""><figcaption></figcaption></figure>
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-empty-dark.png">
-  <img src="../.gitbook/assets/library-empty-light.png" alt="">
-</picture></figure>
+### **Individual Compound Loading**
 
----
+**Access the Compound Input Screen**
 
-## ➕ Single Compound
+1. Click on the "+ Compounds" option from the home screen.
+2. Go to the "Single Compound" tab, which is active by default.
 
-The **Single Compound** tab is active by default.
+**Enter Compound Information**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-dark.png">
-  <img src="../.gitbook/assets/add-compound-light.png" alt="">
-</picture></figure>
+* **Input SMILES or InChI**: Enter the SMILES notation or InChI string for the compound (e.g., `CC(C1=CC=CC=C1)(C2=CC=CC=N2)OCCN(C)C`).
+* **Add Name**: Enter a name for the compound (e.g., `doxylamine`).
+* **Add Registry Number**: Provide the registry number (e.g., `469-21-6`).
 
-1. Enter a **compound name**, **CAS number**, or **SMILES** — any one field is enough to start.
-2. Click **Auto Fill** to have QSARFlex fetch missing details (name, CAS, SMILES) from PubChem automatically.
-3. Review the populated fields and the structure preview.
-4. Click **Add to Library**.
+**Utilize the Autofill Feature**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/add-compound-autofill-dark.png">
-  <img src="../.gitbook/assets/add-compound-autofill-light.png" alt="">
-</picture></figure>
+* **Autofill Feature**: Enter a SMILES, name, or registry number if you lack complete information about a compound, and we'll MultiCASE magic the missing details for you.
 
-**Auto Fill** uses the value you typed to search PubChem. It works best with an exact compound name, CAS number, or valid SMILES string. After Auto Fill completes, review the results — PubChem data is generally reliable but you can edit any field before adding.
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 11.59.53.png" alt=""><figcaption></figcaption></figure>
 
-> If you enter a SMILES string directly and the structure has issues, you'll see a warning. You can still add the compound and fix it in [DataKurator](../datakurator.md) later.
+* **Manual Override**: Edit any autofilled fields if needed.
 
----
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 12.00.46.png" alt=""><figcaption></figcaption></figure>
 
-## 📂 Batch Upload
+**View the Structure**
 
-Switch to the **Batch** tab to upload a file containing multiple compounds.
+* Click the "Visualize" button to see the compound structure before adding to the library.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-dark.png">
-  <img src="../.gitbook/assets/batch-upload-light.png" alt="">
-</picture></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 12.00.29.png" alt=""><figcaption></figcaption></figure>
 
-**Supported formats:**
+### **Batch Compound Loading**
 
-| Format | Extension | Notes |
-|---|---|---|
-| SMILES | `.smi`, `.txt` | One compound per line; optional name and CAS columns |
-| SDF / MOL | `.sdf`, `.mol` | Standard structure-data file |
+**Accessing the Batch Input Screen**
 
-Drag & drop the file into the upload area or click to browse. A preview of the detected compounds is shown before import.
+1. Click on "+ Compounds" in the main menu.
+2. Select "Batch" to open the batch compound input dialog.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/batch-upload-with-file-dark.png">
-  <img src="../.gitbook/assets/batch-upload-with-file-light.png" alt="">
-</picture></figure>
+**Uploading a File**
 
-Click **Add to Library** to import all compounds.
+* **Select File:** Drag and drop a file into the designated area or click to choose a file from your device.
+  * **Supported Formats:** `.smi`, `.sdf`, `.mol`
+  * **Note:** Only one file can be uploaded at a time, and all compounds within it will be processed.
 
-> **Structural issues detected?** If your file contains mixtures, aromaticity errors, or other structural problems, QSARFlex will prompt you with two options:
-> - **Add Anyway** — load the compounds as-is
-> - **Fix in DataKurator** — send the file directly to [DataKurator](../datakurator.md) for curation before importing
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 12.02.04.png" alt=""><figcaption></figcaption></figure>
 
----
 
-## 📋 Library View
 
-All compounds appear in the Library as cards — one card per compound.
+**Resetting if Needed**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-compounds-dark.png">
-  <img src="../.gitbook/assets/library-compounds-light.png" alt="">
-</picture></figure>
+* In both cases, click "Reset" to clear the current input and start over if necessary.
 
-Each card shows:
-- Compound name, CAS number, and SMILES
-- A 2D structure preview
-- Evaluation results (if the compound has been evaluated) — one row per module
+**Add to Library**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/library-with-results-dark.png">
-  <img src="../.gitbook/assets/library-with-results-light.png" alt="">
-</picture></figure>
+* In both cases, click the "+ Add to Library" button to add the compound(s) to your library.
+* Verify the compound(s) appears in your library list.
 
-Click any evaluation result value to generate and view the full HTML report for that compound and module.
+<figure><img src="../.gitbook/assets/Screenshot 2025-07-22 at 12.02.30.png" alt=""><figcaption></figcaption></figure>
 
-Click the **trash icon** on a card to remove a compound. Use **Clear Library** (the trash button in the toolbar, visible when the library has items) to remove all entries at once.
+## **Next Steps**
 
----
-
-## Next Steps
-
-- [DataKurator](../datakurator.md) — validate and clean your compounds before evaluation
-- [Evaluation](../evaluation.md) — run prediction modules on your library
+* After adding compounds, click "Evaluate" to analyze your compounds.
+* Or, do you want to Load reactions into your Library?

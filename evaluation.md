@@ -1,85 +1,38 @@
-# Evaluation
-
-🔬 Run licensed prediction modules against all compounds in your Library with one click. QSAR Flex evaluates every compound simultaneously and displays results inline — no waiting between compounds.
-
+---
+description: Step-by-Step Instructions for Compound evaluation in QSAR Flex
 ---
 
-## Starting an Evaluation
+# 🧑‍🔬 Evaluation
 
-With at least one compound in the Library, click the green **Evaluate** button in the toolbar — or press **⌘K** (Mac) / **Ctrl+K** (Windows).
+**Initiate Evaluation**
 
-The **Select Modules to Evaluate** dialog opens, listing every module available under your license grouped by bundle.
+* **Load Compounds or Reactions**: Ensure compounds or reactions are loaded.
+* **Click "Evaluate"**: From the home screen, press the green "Evaluate" button.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
-  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
-</picture></figure>
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 12.02.30.png" alt=""><figcaption></figcaption></figure>
 
-Modules are shown grouped by their license bundle — for example, **Physicochemical**, **Nitrosamine**, **Ecotoxicity**, and **ADME**. Modules you are not licensed for appear grayed out and cannot be selected. Contact [support@multicase.com](mailto:support@multicase.com) to add bundles.
+**Select Evaluation Modules**
 
-Select one or more modules and click **Evaluate**. QSARFlex runs every selected module against every compound in the Library simultaneously.
+* **Dialog Box**: A "Select Modules to Evaluate" dialog appears.
+* **Choose Modules**: Select from available modules, limited by your license (e.g., Soil Adsorption, Tetrahymena 48h GC50, Water Solubility, CPCA Prediction, N-Nitroso).
 
-> 💡 **Tip:** You can evaluate the same library multiple times with different module selections — results accumulate per-module without overwriting previous runs.
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
----
+**Confirm Evaluation**
 
-## Results
+* **Click "Evaluate"**: In the dialog box, click "Evaluate" to proceed.
+* **Modify or Exit**: Click "Cancel" to modify your selection or exit.
 
-After evaluation completes, results appear in each compound's card in the Library.
+**Review Outcome**
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
-  <img src=".gitbook/assets/eval-results-light.png" alt="">
-</picture></figure>
+* **Check Outcomes**: After evaluation, review the results in the "Results" panel for the selected modules.
 
-Each compound card shows a table with:
-- **Module** — the prediction endpoint that was run
-- **Outcome** — the prediction result (e.g., Active/Inactive, a numeric value, or a category label)
+<figure><img src=".gitbook/assets/Screenshot 2025-07-23 at 09.10.25.png" alt=""><figcaption></figcaption></figure>
 
-Possible result formats depend on the module:
-- **Binary** — `Active` / `Inactive` (e.g., Ames Mutagenicity)
-- **Numeric** — a predicted value with units (e.g., `3.4 mg/mL` for Water Solubility)
-- **Category** — a potency class or descriptor (e.g., CPCA category)
-- **Click to view** — for matrix outputs like Cross Similarity
+* Click the button next to the outcome to generate a module report, which will open in a new tab.
 
----
+You can see a sample report [here](https://d35fy2f4trk71w.cloudfront.net/sample-report.html).
 
-## 📄 Module Reports
+## Next Steps
 
-Click any result value in a compound's card to generate a full HTML report for that compound and module. The report opens as a slide-in panel on the right.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
-  <img src=".gitbook/assets/eval-report-light.png" alt="">
-</picture></figure>
-
-Reports include:
-- **Prediction outcome** and confidence level
-- **Structural alerts** — fragments or substructures that contributed to the prediction
-- **Supporting evidence** — analogues, model metadata, and regulatory context where applicable
-- **CPCA / Surrogate** reports — for nitrosamine modules, full potency categorization with acceptable intake limits and supporting data
-
-Use the **Export** button at the top of the report panel to download the report as an HTML or PDF file.
-
----
-
-## Where Evaluation Runs
-
-| Variant | Evaluation |
-|---|---|
-| 🌐 **Web App** | Sent to MultiCASE servers over HTTPS |
-| 💻 **Desktop — Local** | Runs on-device — compound structures are not sent to MultiCASE servers for model inference |
-| ☁️ **Desktop — Cloud** | Sent to MultiCASE cloud infrastructure over HTTPS |
-
-All variants require internet for license verification and authentication. See [Security](security.md) for full details.
-
----
-
-## Tips
-
-- **Multiple runs accumulate** — run evaluation again at any time; new module results are added to existing ones without overwriting.
-- **Cross Similarity** generates an NxN matrix and requires ≥2 compounds to produce meaningful output.
-- **Surrogate Search** and **Cross Similarity** are Desktop-only modules.
-- Results persist across sessions — the Library retains evaluation outcomes even after closing and reopening the app.
-
-See the [Model Catalog](fundamentals/model-catalog.md) for descriptions of all available endpoints.
+For issues regarding Access and Licensing, proceed to the next section.

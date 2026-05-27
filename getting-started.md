@@ -1,98 +1,46 @@
-# Getting Started
-
-QSAR Flex is available as a **web application** and a **Windows desktop application**. Both share the same interface and features.
-
+---
+description: >-
+  Step-by-step instructions on how to get started with QSAR Flex and evaluate
+  your first compound.
 ---
 
-## 1. 🔐 Log In
+# 🚀 Getting Started
 
-**Web:** Go to [qsarflex.com](https://qsarflex.com) and click **Sign in with Cognito** to authenticate with your MultiCASE account.
+### Accessing QSAR Flex Platform
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/signin-dark.png">
-  <img src=".gitbook/assets/signin-light.png" alt="">
-</picture></figure>
+#### Log In
 
-Clicking the button redirects you to the MultiCASE Cognito-hosted login page. Enter your email address first, then your password on the next screen.
+* Check the [Access and Licensing](fundamentals/access-and-licensing/) page for more information on creating an account
+* Go to [qsarflex.com](https://qsarflex.com) or [qsarflex.multicase.com](https://qsarflex.multicase.com) to log in.
 
-![](.gitbook/assets/cognito-signin-email.png)
-![](.gitbook/assets/cognito-signin-password.png)
+#### Add Compounds
 
-**Desktop:** Download and install the app, then open it — it opens directly to the sign-in screen.
+* Click on "+ Compounds" to begin adding new compounds.
+* Provide the necessary details or use the autofill feature with the compound name, SMILES notation, or registry number.
 
-- 💻 [QSARFlex Local installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe) — on-device inference, local SQLite database
-- ☁️ [QSARFlex Cloud installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe) — on-device inference, cloud reference database
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 10.46.13.png" alt=""><figcaption></figcaption></figure>
 
-Both variants require internet for license verification and authentication.
+* Add the compound to your library.
 
-> Don't have an account? See [Access & Licensing](fundamentals/access-and-licensing.md) or email [support@multicase.com](mailto:support@multicase.com).
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 10.48.59.png" alt=""><figcaption></figcaption></figure>
 
----
+#### Evaluate Compounds
 
-## 2. ➕ Add Compounds
+* Click on the green "Evaluate" button to start the analysis.
+* Select the desired modules for evaluation and click on "Evaluate."
 
-Click **+ Compounds** in the Library toolbar to open the compound input dialog.
+<figure><img src=".gitbook/assets/Screenshot 2025-07-22 at 10.49.55.png" alt=""><figcaption></figcaption></figure>
 
-**Single compound** — enter a name, CAS number, or SMILES. Use **Auto Fill** to look up missing details from PubChem automatically.
+#### Review Outcome
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-dark.png">
-  <img src=".gitbook/assets/add-compound-light.png" alt="">
-</picture></figure>
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-autofill-dark.png">
-  <img src=".gitbook/assets/add-compound-autofill-light.png" alt="">
-</picture></figure>
+* After evaluation, review the analysis results.
 
-**Batch upload** — switch to the **Batch** tab and upload an SDF, SMILES (`.smi`), or TXT file to load multiple compounds at once.
+<figure><img src=".gitbook/assets/Screenshot 2025-07-23 at 09.10.25.png" alt=""><figcaption></figcaption></figure>
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-dark.png">
-  <img src=".gitbook/assets/batch-upload-light.png" alt="">
-</picture></figure>
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/batch-upload-with-file-dark.png">
-  <img src=".gitbook/assets/batch-upload-with-file-light.png" alt="">
-</picture></figure>
+* Click the button next to the outcome to generate a module report, which will open in a new tab.
 
-Compounds appear in your Library. Add as many as you need before evaluating.
+You can see a sample report [here](https://d35fy2f4trk71w.cloudfront.net/sample-report.html).
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/library-compounds-dark.png">
-  <img src=".gitbook/assets/library-compounds-light.png" alt="">
-</picture></figure>
+## Next Steps
 
----
-
-## 3. 🔬 Evaluate
-
-Click the green **Evaluate** button in the Library toolbar. A dialog opens to select the prediction modules licensed to you.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
-  <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
-</picture></figure>
-
-Check the modules you want to run and click **Evaluate**. Results appear in the Library for each compound.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
-  <img src=".gitbook/assets/eval-results-light.png" alt="">
-</picture></figure>
-
-Click any result value to generate and view a full HTML report for that compound and module.
-
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
-  <img src=".gitbook/assets/eval-report-light.png" alt="">
-</picture></figure>
-
----
-
-## What's Next
-
-- [Loading Compounds](product-guide/loading-compounds.md) — all supported file formats and autofill details
-- [Loading Reactions](loading-reactions.md) — submit reaction SMILES and RXN files
-- [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
-- [Evaluation](evaluation.md) — module selection, results, and report generation
-- [License Management](license-management/enterprise-user-management.md) — manage users and license seats
+See what else you can do with QSAR Flex:
