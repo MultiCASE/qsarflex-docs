@@ -20,8 +20,8 @@ Clicking the button redirects you to the MultiCASE Cognito-hosted login page. En
 
 **Desktop:** Download and install the app, then open it — it opens directly to the sign-in screen.
 
-- 💻 [QSARFlex Local installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe) — on-device inference, local SQLite database
-- ☁️ [QSARFlex Cloud installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe) — on-device inference, cloud reference database
+- 💻 [QSARFlex Local installer (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-win-Setup.exe) — on-device inference, local SQLite database
+- ☁️ [QSARFlex Cloud installer (.exe)](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-win-Setup.exe) — on-device inference, cloud reference database
 
 Both variants require internet for license verification and authentication.
 

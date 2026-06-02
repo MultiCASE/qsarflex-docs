@@ -96,10 +96,10 @@ See [Enterprise User Management](../license-management/enterprise-user-managemen
 
 QSAR model inference runs on-device — compound structures are not sent to MultiCASE servers for evaluation. Requires internet for license verification, authentication, and optional PubChem lookups.
 
-- [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/local/QSARFlex-Local-win-Setup.exe)
+- [Installer (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-win-Setup.exe)
 
 ### ☁️ QSARFlex Cloud
 
 Filter models are installed locally and QSAR inference runs on-device. The reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried from MultiCASE's cloud. Compound structures are not sent to MultiCASE servers for evaluation. Requires an active individual or enterprise license and internet connection throughout use.
 
-- [Installer (.exe)](https://qsarflex-win-releases.s3.us-east-2.amazonaws.com/releases/cloud/QSARFlex-Cloud-win-Setup.exe)
+- [Installer (.exe)](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-win-Setup.exe)
