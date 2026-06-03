@@ -20,3 +20,7 @@
 ## License Management
 
 * [Enterprise User Management](license-management/enterprise-user-management.md)
+
+## Support
+
+* [Getting Support](support.md)
