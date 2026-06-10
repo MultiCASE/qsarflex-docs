@@ -102,14 +102,14 @@ The user now has access to all modules included in that license.
 
 ## Managing Platform Users
 
-Go to **Profile → Users** to see all users in your organization.
+Go to **Profile → Team** to see all users in your organization.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/profile-users-dark.png">
   <img src="../.gitbook/assets/profile-users-light.png" alt="">
 </picture></figure>
 
-The Users tab shows:
+The Team tab shows:
 - Each user's name and email
 - Their role (Company Admin or standard user)
 - Whether they currently have an active license assignment
@@ -124,4 +124,4 @@ From this tab, admins can also invite new users directly using the **Invite user
 - A user must accept their invitation and create an account before they can be assigned to a license.
 - Each license seat can be assigned to one user at a time, but you can freely swap who occupies each seat.
 - To change your license capacity (add or remove seats), contact [support@multicase.com](mailto:support@multicase.com).
-- Any **Company Admin** can promote other users to Company Admin or change their role from the **Profile → Users** tab.
+- Any **Company Admin** can promote other users to Company Admin or change their role from the **Profile → Team** tab.

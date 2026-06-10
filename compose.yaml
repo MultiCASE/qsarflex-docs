@@ -70,6 +70,7 @@ services:
       USER_MANAGER_API_KEY: ${SCREENSHOT_BACKEND_API_KEY}
       SOFTWARE_ID: 65d6db1c-e3d3-4af3-8848-cc5fddab2eda
       PLATFORM: web
+      RESOURCES_CONNECTION_STRING: ${RESOURCES_CONNECTION_STRING}
 
 volumes:
   postgres-data:

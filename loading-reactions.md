@@ -22,14 +22,16 @@ CC(=O)Cl.OCC>>CC(=O)OCC.Cl
 ```
 
 1. Paste your reaction SMILES into the text field.
-2. Click the submit button to process and visualize.
+2. Click **Visualise** to render the reaction diagram inline.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-smiles-result-dark.png">
   <img src=".gitbook/assets/reactions-smiles-result-light.png" alt="">
 </picture></figure>
 
-The reaction diagram is rendered inline, showing all reactants, agents (if any), and products with 2D structure depictions. Multi-step reactions are displayed as a sequence.
+The reaction diagram shows all reactants, agents (if any), and products with 2D structure depictions. Multi-step reactions are displayed as a sequence.
+
+3. Click **Submit** to add the reaction to your Library.
 
 ---
 
@@ -50,7 +52,7 @@ Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the
   <img src=".gitbook/assets/reactions-rxn-uploaded-light.png" alt="">
 </picture></figure>
 
-3. Submit to visualize all reaction steps together.
+3. Click **Visualise** to render all reaction steps together.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-visualized-dark.png">
@@ -58,6 +60,8 @@ Switch to the **Reaction Files** tab to load reactions from `.rxn` files — the
 </picture></figure>
 
 Multi-step synthesis sequences are loaded by selecting all step files together in a single upload — QSARFlex renders them as a connected sequence.
+
+4. Click **Submit** to add the reaction to your Library.
 
 ---
 
