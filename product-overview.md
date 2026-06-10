@@ -58,13 +58,13 @@ Load reaction files for structural analysis.
 
 QSAR model inference runs on-device — compound structures are not sent to MultiCASE servers for evaluation. Requires internet for license verification, authentication, and optional PubChem lookups.
 
-[Download QSARFlex Local Installer (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-win-Setup.exe)
+[Download QSARFlex Local Installer (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 
 ### ☁️ Desktop — Cloud
 
 Filter models are installed locally and QSAR inference runs on-device — compound data is not sent to MultiCASE servers for evaluation. The reference database (used by the N-Nitrosation and Oral Bioavailability modules) is queried from MultiCASE's cloud. Requires an active individual or enterprise license and internet connection.
 
-[Download QSARFlex Cloud Installer (.exe)](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-win-Setup.exe)
+[Download QSARFlex Cloud Installer (.exe)](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe)
 
 ---
 

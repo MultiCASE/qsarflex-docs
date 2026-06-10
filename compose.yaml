@@ -1,0 +1,75 @@
+services:
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: qsarflex_screenshots
+      POSTGRES_USER: screenshots
+      POSTGRES_PASSWORD: screenshots
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/01_seed.sql
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U screenshots -d qsarflex_screenshots"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  user-manager-be:
+    build:
+      context: ../../RiderProjects/multicase-user-manager-be
+      dockerfile: multicase-user-manager-be/Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JWT_ISSUER: ${SCREENSHOT_JWT_ISSUER}
+      FE_URL: http://localhost:3000
+      APP_NAME: QSARFlex
+      AWS_ACCESS_KEY_ID: ${SCREENSHOT_AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${SCREENSHOT_AWS_SECRET_ACCESS_KEY}
+      USERDATA_CLOUDFRONT_DOMAIN: ${SCREENSHOT_CLOUDFRONT_DOMAIN}
+      USERDATA_CLOUDFRONT_KEY_ID: ${SCREENSHOT_CLOUDFRONT_KEY_ID}
+      USERDATA_BUCKET_NAME: ${SCREENSHOT_USERDATA_BUCKET}
+      USERPOOL_ID: ${SCREENSHOT_USERPOOL_ID}
+      AWS_REGION: us-east-2
+      PRIVATE_KEY: ${SCREENSHOT_PRIVATE_KEY}
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=qsarflex_screenshots;Username=screenshots;Password=screenshots;Port=5432
+      COGNITO_CLIENT_ID: ${SCREENSHOT_COGNITO_CLIENT_ID}
+      COGNITO_CLIENT_SECRET: ${SCREENSHOT_COGNITO_CLIENT_SECRET}
+      REDIS_CONNECTION_STRING: redis:6379
+      MULTICASE_BACKEND_API_KEY: ${SCREENSHOT_BACKEND_API_KEY}
+
+  qsarflex-be:
+    platform: linux/amd64
+    build:
+      context: ../../RiderProjects/qsarflex-be
+      dockerfile: qsarflex-be/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-manager-be
+    volumes:
+      - ../../RiderProjects/qsarflex-be/qsarflex-be/Data:/app/Data:ro
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JWT_ISSUER: ${SCREENSHOT_JWT_ISSUER}
+      USER_MANAGER_SERVICE_URL: http://user-manager-be:8080
+      USER_MANAGER_API_KEY: ${SCREENSHOT_BACKEND_API_KEY}
+      SOFTWARE_ID: 65d6db1c-e3d3-4af3-8848-cc5fddab2eda
+      PLATFORM: web
+
+volumes:
+  postgres-data:
