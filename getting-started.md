@@ -13,11 +13,6 @@ QSAR Flex is available as a **web application** and a **Windows desktop applicat
   <img src=".gitbook/assets/signin-light.png" alt="">
 </picture></figure>
 
-Clicking the button redirects you to the MultiCASE Cognito-hosted login page. Enter your email address first, then your password on the next screen.
-
-![](.gitbook/assets/cognito-signin-email.png)
-![](.gitbook/assets/cognito-signin-password.png)
-
 **Desktop:** Download and install the app, then open it — it opens directly to the sign-in screen.
 
 - 💻 [QSARFlex Local installer (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe) — on-device inference, local SQLite database

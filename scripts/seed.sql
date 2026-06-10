@@ -295,6 +295,49 @@ VALUES (
     NOW(), NOW()
 );
 
+-- ── Bundles ───────────────────────────────────────────────────────────────────
+
+INSERT INTO "Bundles" ("Id", "Name", "SoftwareId", "CreatedAt", "UpdatedAt") VALUES
+  ('bd000001-0000-0000-0000-000000000000', 'Nitrosamine',      '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
+  ('bd000002-0000-0000-0000-000000000000', 'Ecotoxicity',      '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
+  ('bd000003-0000-0000-0000-000000000000', 'Physicochemical',  '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
+  ('bd000004-0000-0000-0000-000000000000', 'Genotoxicity',     '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
+  ('bd000005-0000-0000-0000-000000000000', 'ADME',             '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW());
+
+-- ── Modules (names must match FilterModels filenames, case-insensitive) ────────
+
+INSERT INTO "Modules" ("Id", "Name", "SoftwareId", "BundleId", "Coverage", "CreatedAt", "UpdatedAt") VALUES
+  -- Nitrosamine
+  ('0d000001-0000-0000-0000-000000000000', 'N-Nitrosation',          '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000001-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000002-0000-0000-0000-000000000000', 'CPCA Prediction',        '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000001-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000003-0000-0000-0000-000000000000', 'Surrogate Search',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000001-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000004-0000-0000-0000-000000000000', 'Cross Similarity',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000001-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  -- Ecotoxicity
+  ('0d000005-0000-0000-0000-000000000000', 'Bio Concentration Factor','65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000006-0000-0000-0000-000000000000', 'Daphnia 48h LC50',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000007-0000-0000-0000-000000000000', 'Algae 72h EC50',         '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000008-0000-0000-0000-000000000000', 'Fathead Minnow 96h LC50','65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000009-0000-0000-0000-000000000000', 'Ready Biodegradability', '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000010-0000-0000-0000-000000000000', 'Tetrahymena 48h GC50',   '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000011-0000-0000-0000-000000000000', 'Soil Adsorption',        '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000002-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  -- Physicochemical
+  ('0d000012-0000-0000-0000-000000000000', 'Boiling Point',          '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000013-0000-0000-0000-000000000000', 'Vapor Pressure',         '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000014-0000-0000-0000-000000000000', 'LogP',                   '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  ('0d000015-0000-0000-0000-000000000000', 'Water Solubility',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  -- Genotoxicity (filter filename has typo: "Mutagencity")
+  ('0d000016-0000-0000-0000-000000000000', 'Ames Mutagencity',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000004-0000-0000-0000-000000000000', 0, NOW(), NOW()),
+  -- ADME
+  ('0d000017-0000-0000-0000-000000000000', 'Oral Bioavailability',   '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000005-0000-0000-0000-000000000000', 0, NOW(), NOW());
+
+-- ── License modules (all licenses get all modules) ────────────────────────────
+
+INSERT INTO "LicenseModules" ("LicenseId", "ModuleId", "CreatedAt", "UpdatedAt")
+SELECT l."Id", m."Id", NOW(), NOW()
+FROM "Licenses" l
+CROSS JOIN "Modules" m
+WHERE l."SoftwareId" = '65d6db1c-e3d3-4af3-8848-cc5fddab2eda';
+
 -- ── Enterprise license members ────────────────────────────────────────────────
 
 INSERT INTO "LicenseUsers" ("LicenseId", "UserId", "CreatedAt", "UpdatedAt") VALUES
