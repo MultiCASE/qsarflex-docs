@@ -3,4 +3,4 @@ scripts/package-lock.json
 scripts/probe_login.js
 scripts/probe_login2.js
 scripts/start.sh
-images/
+.idea/

@@ -87,6 +87,7 @@ CREATE TABLE "Licenses" (
     "RemainingTests"      integer,
     "Status"              text,
     "AllModulesSelected"  boolean     NOT NULL DEFAULT false,
+    "IsTrial"             boolean     NOT NULL DEFAULT false,
     "OnDemand"            boolean     NOT NULL DEFAULT false,
     "ActivatedById"       uuid,
     "ActivatedTime"       timestamptz,

@@ -13,7 +13,7 @@ const INDIVIDUAL_EMAIL  = 'demo@qsarflex.test';
 const ENTERPRISE_EMAIL  = 'demo-enterprise@qsarflex.test';
 const PASS              = 'QSARFlexDemo2026!';
 const BASE              = 'http://localhost:3000';
-const OUT               = path.resolve(__dirname, '../images');
+const OUT               = path.resolve(__dirname, '../.gitbook/assets');
 
 const INDIVIDUAL_USER = '619bc5c0-6081-70ff-5a62-fcec8d5c1bba';
 const ENTERPRISE_USER = '41dbb5b0-70f1-7046-5c01-7bc9cc86cb83';
