@@ -2,6 +2,8 @@
 
 * [QSAR Flex Docs](README.md)
 * [Getting Started](getting-started.md)
+* [Installing on macOS](install-mac.md)
+* [Installing on Windows](install-win.md)
 * [Product Overview](product-overview.md)
 
 ## Product Guide
