@@ -233,6 +233,11 @@ Then **More curation steps**, a set of checkboxes:
 - **Neutralize negative charges (O- to OH, S- to SH etc.)**
 - **Neutralize positive charge on nitrogen (ammonium and pyridinium)**
 
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-option-dark.png">
+  <img src=".gitbook/assets/datakurator-pubchem-option-light.png" alt="">
+</picture></figure>
 **Cancel** closes the dialog; **Proceed** runs it.
 
 What each choice does:
@@ -277,7 +282,17 @@ PubChem is contacted only after you agree, every time. The dialog is titled **Se
 
 Both add *This data will leave your system.*, print the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and ask *Do you want to continue?* with **Cancel** and **Continue**.
 
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-warning-dark.png">
+  <img src=".gitbook/assets/datakurator-pubchem-warning-light.png" alt="">
+</picture></figure>
+
 The question is asked before anything is changed. Cancelling a batch consent aborts the whole One Step Cure run before it touches a compound.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-results-dark.png">
+  <img src=".gitbook/assets/datakurator-pubchem-results-light.png" alt="">
+</picture></figure>
 
 A lookup can correct the SMILES to the structure PubChem returns, and fill in a missing CAS number or name. A row being looked up shows a **Looking up…** chip in its Status column. A single-row lookup reports in a summary dialog titled **PubChem — &lt;name&gt;**, with lines such as *SMILES corrected*, *CAS added: 50-00-0*, *Name added: …*, or the warning *No match found in PubChem.* A batch lookup that comes back with nothing reports *PubChem returned nothing — compounds left unchanged.*
 
@@ -308,6 +323,11 @@ The **Download** dropdown writes the current table to a file. It offers two labe
 |---|---|
 | **Clean only — N compounds** | Only rows with no issue. |
 | **Everything — N compounds** | Every row, with *Includes N with unresolved issues.* spelled out under the heading. |
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-export-dark.png">
+  <img src=".gitbook/assets/datakurator-export-light.png" alt="">
+</picture></figure>
 
 Each section offers **SMILES** (`.smi`) or **SDF** (`.sdf`), and the files are saved as `curated_clean.smi`, `curated_clean.sdf`, `curated_all.smi` or `curated_all.sdf`. A successful export confirms *Exported N compounds as SMILES.*; with nothing to write you get *Nothing to export.*
 

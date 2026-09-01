@@ -64,6 +64,10 @@ CREATE TABLE "Modules" (
     "SoftwareId"  uuid        NOT NULL,
     "BundleId"    uuid,
     "Coverage"    integer     NOT NULL DEFAULT 0,
+    -- Private per-company modules (Module.OwnerCompanyId). VisibleModulesQuery
+    -- joins on this, so without the column every licensed-module lookup 500s
+    -- and the navbar chip falls back to "Licence unavailable".
+    "OwnerCompanyId" uuid,
     "CreatedAt"   timestamptz NOT NULL DEFAULT '-infinity',
     "CreatedById" uuid,
     "UpdatedAt"   timestamptz NOT NULL DEFAULT '-infinity',

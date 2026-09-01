@@ -160,7 +160,14 @@ async function removeMarkers(page) {
   });
 }
 
+// Callout badges were tuned for the 3.x layout. The 4.0 UI is denser — on the
+// Curate action bar, the Evaluate dialog and the empty-library card they land on
+// top of the very controls and copy they point at. Ship clean screenshots; the
+// prose names every control it refers to.
+const DRAW_MARKERS = false;
+
 async function shot(page, name, { markers = [] } = {}) {
+  if (!DRAW_MARKERS) markers = [];
   await page.addStyleTag({ content: HIDE_DEV_OVERLAY }).catch(() => {});
   for (const m of markers) {
     await addMarker(page, m.selector, m.label || '', m.side || 'right');
@@ -270,18 +277,15 @@ async function screenshotLibrary(page, theme) {
   await setTheme(page, theme);
   await clearLibrary(page);
   await navigateTo(page, '/');
-  await shot(page, `library-empty-${theme}.png`, {
-    markers: [
-      { selector: 'button:has-text("Compounds")', label: 'Add compounds', side: 'bottom' },
-      { selector: 'button:has-text("Reaction")',  label: 'Add reaction',  side: 'bottom' },
-    ],
-  });
+  // No markers: the empty-state card already labels both buttons, and a badge
+  // under them lands on the drop/paste hint line.
+  await shot(page, `library-empty-${theme}.png`);
 
   await navigateTo(page, '/');
   await page.waitForTimeout(600);
 
   // Add Compound dialog
-  const addBtn = page.locator('button').filter({ hasText: 'Compounds' }).first();
+  const addBtn = page.locator('button').filter({ hasText: /^\+?\s*(Add )?Compounds$/ }).first();
   if (await addBtn.isVisible({ timeout: 6000 }).catch(() => false)) {
     await addBtn.click();
     await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
@@ -673,22 +677,29 @@ async function screenshotDataKurator(page, theme) {
   await page.waitForTimeout(900);
   await shot(page, `datakurator-file-selected-${theme}.png`);
 
-  const runBtn = page.locator('button').filter({ hasText: /run analysis/i }).first();
-  if (!await runBtn.isEnabled({ timeout: 4000 }).catch(() => false)) {
-    console.warn('  ⚠ Run Analysis not enabled');
+  // 4.0 loads straight into Curate and analyses on arrival, so "Run Analysis"
+  // usually never appears — the action bar comes up already in its analysed
+  // state. Click it only if it is actually there; otherwise just wait for the
+  // analysed bar. Returning early here is what silently skipped every
+  // DataKurator frame in the 3.x script.
+  const runBtn = page.locator('button').filter({ hasText: /^Run Analysis$/ }).first();
+  if (await runBtn.isEnabled({ timeout: 3000 }).catch(() => false)) {
+    await runBtn.click();
+  }
+  const analysed = await page.waitForSelector(
+    'button:has-text("One Step Cure"), button:has-text("Re-analyze")',
+    { timeout: 60000 }
+  ).catch(() => null);
+  if (!analysed) {
+    console.warn('  ⚠ Curate never reached its analysed state — skipping DataKurator');
     return;
   }
-
-  await runBtn.click();
-  await page.waitForSelector(
-    'button:has-text("One Step Cure"), button:has-text("Re-analyze")',
-    { timeout: 20000 }
-  ).catch(() => {});
   await page.waitForTimeout(1500);
   await shot(page, `datakurator-results-${theme}.png`, {
     markers: [
-      { selector: 'button:has-text("One Step Cure")',         label: 'Auto-fix all issues', side: 'right' },
-      { selector: 'button:has-text("PubChem Batch Correct")', label: 'Correct via PubChem', side: 'right' },
+      { selector: 'button:has-text("One Step Cure")', label: 'Fix issues in bulk',       side: 'right' },
+      { selector: 'button:has-text("Download")',      label: 'Export without leaving',   side: 'bottom' },
+      { selector: 'button:has-text("into library")',  label: 'Hand the clean set over',  side: 'left' },
     ],
   });
 
@@ -835,48 +846,63 @@ async function screenshotDataKurator(page, theme) {
     await page.waitForTimeout(500);
   }
 
+  // PubChem has no button of its own in 4.0: it is a checkbox inside One Step
+  // Cure, and Proceed raises the consent dialog. Shoot it where it now lives.
   try {
-    await page.waitForSelector('button:not([disabled]):has-text("PubChem Batch Correct")', { timeout: 8000 });
-    const pubchemBtn = page.locator('button:not([disabled])').filter({ hasText: 'PubChem Batch Correct' }).first();
-    await pubchemBtn.click({ timeout: 5000 });
-    await page.waitForSelector('[role="alertdialog"]', { timeout: 6000 });
-    await page.waitForTimeout(700);
-    await shot(page, `datakurator-pubchem-warning-${theme}.png`);
+    await page.waitForSelector('button:not([disabled]):has-text("One Step Cure")', { timeout: 8000 });
+    await page.locator('button:not([disabled])').filter({ hasText: 'One Step Cure' }).first().click({ timeout: 5000 });
+    await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
+    await page.waitForTimeout(500);
 
-    const continueBtn = page.locator('[role="alertdialog"] button').filter({ hasText: /continue|proceed|yes|confirm/i }).first();
-    if (await continueBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await continueBtn.click({ timeout: 5000 });
-      await page.waitForFunction(
-        () => !document.body.textContent?.includes('Correcting') && !document.body.textContent?.includes('Re-analyzing'),
-        { timeout: 40000 }
-      ).catch(() => {});
-      await page.waitForTimeout(1500);
-      await shot(page, `datakurator-pubchem-results-${theme}.png`);
-      if (await page.locator('[role="dialog"]').isVisible({ timeout: 3000 }).catch(() => false)) {
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(400);
-      }
-    } else {
-      await page.keyboard.press('Escape').catch(() => {});
-    }
-  } catch (e) {
-    console.warn('  ⚠ PubChem batch:', e.message?.split('\n')[0]);
-    await page.screenshot({ path: path.join(OUT, `debug-pubchem-${theme}.png`) }).catch(() => {});
-    await page.keyboard.press('Escape').catch(() => {});
-  }
-
-  try {
-    const proceedBtn = page.locator('button').filter({ hasText: /proceed|next|export/i }).first();
-    if (await proceedBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await proceedBtn.click();
-      await page.waitForTimeout(1200);
-      await shot(page, `datakurator-export-${theme}.png`, {
+    const verify = page.locator('#web');
+    if (await verify.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await verify.click();
+      await page.waitForTimeout(300);
+      await shot(page, `datakurator-pubchem-option-${theme}.png`, {
         markers: [
-          { selector: 'button:has-text("Load")', label: 'Load directly into library', side: 'left' },
+          { selector: '#web', label: 'Off by default; asks before sending', side: 'right' },
         ],
       });
+
+      await page.locator('[role="dialog"] button').filter({ hasText: /^Proceed$/ }).first().click({ timeout: 5000 });
+      await page.waitForSelector('[role="alertdialog"]', { timeout: 8000 });
+      await page.waitForTimeout(600);
+      await shot(page, `datakurator-pubchem-warning-${theme}.png`);
+
+      const cont = page.locator('[role="alertdialog"] button').filter({ hasText: /continue/i }).first();
+      if (await cont.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await cont.click({ timeout: 5000 });
+        await page.waitForSelector('[role="dialog"]:has-text("Summary")', { timeout: 60000 }).catch(() => {});
+        await page.waitForTimeout(1200);
+        await shot(page, `datakurator-pubchem-results-${theme}.png`);
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(400);
+      } else {
+        await page.keyboard.press('Escape');
+      }
+    } else {
+      await page.keyboard.press('Escape');
     }
-  } catch {}
+  } catch (e) {
+    console.warn('  ⚠ PubChem via One Step Cure:', e.message?.split('\n')[0]);
+    await page.keyboard.press('Escape').catch(() => {});
+    await page.waitForTimeout(400);
+  }
+
+  // There is no third Export screen in 4.0 — export is a menu on this screen.
+  try {
+    const dl = page.locator('button:not([disabled])').filter({ hasText: 'Download' }).first();
+    if (await dl.isVisible({ timeout: 4000 }).catch(() => false)) {
+      await dl.click({ timeout: 4000 });
+      await page.waitForTimeout(600);
+      await shot(page, `datakurator-export-${theme}.png`);
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(300);
+    }
+  } catch (e) {
+    console.warn('  ⚠ Download menu:', e.message?.split('\n')[0]);
+  }
+
 }
 
 // ── main ──────────────────────────────────────────────────────────────────────
