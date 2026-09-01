@@ -1,18 +1,25 @@
 # QSAR Flex
 
+**Version 4.0**
+
 **QSAR Flex** is a computational platform by [MultiCASE](https://multicase.com) for chemical safety assessment and toxicological prediction. It provides high-quality (Q)SAR models, read-across modules, and analysis tools — built for regulatory, pharmaceutical, and environmental science workflows.
 
-Available as a **web application** and a **Windows desktop application**. All variants require an active license (individual or enterprise) and an internet connection.
+Available as a **web application** and as a **desktop application for Windows and macOS**. Every variant runs the same interface and needs an internet connection. Evaluation requires an active license; the desktop apps check for one every time they start.
+
+{% hint style="info" %}
+**New in 4.0.** The interface has been rebuilt end to end — a new navigation bar, a ⌘K command bar, a redesigned Library, a two-step DataKurator, and a full Account page for your license. The models and endpoints are unchanged. See [What's New in 4.0](whats-new-4-0.md).
+{% endhint %}
 
 ---
 
 ## 🚀 What Can QSAR Flex Do?
 
 - **🔬 Predict toxicological endpoints** — Ames mutagenicity, N-nitrosamine CPCA, ecotoxicity, physicochemical properties, ADME, and more
-- **📂 Load and curate compounds** — Enter SMILES, names, or CAS numbers; upload batch files (SDF, SMI, TXT)
+- **📂 Load and curate compounds** — Enter SMILES, InChI, names, or registry numbers; upload batch files (SMILES, SDF, MOL, TXT, CSV); drop files onto the library or paste structures straight in
 - **✅ Curate your dataset** — Use [DataKurator](datakurator.md) to detect and fix structural issues before evaluation
 - **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
-- **📄 Generate reports** — One-click detailed HTML reports per compound per module
+- **📄 Generate reports** — Detailed HTML reports per compound per module, which you can download or print to PDF
+- **⌨️ Reach any action by name** — Press ⌘K (Ctrl+K on Windows) to open the command bar
 
 ---
 
@@ -20,36 +27,64 @@ Available as a **web application** and a **Windows desktop application**. All va
 
 | | 🌐 Web App | 💻 Desktop — Local | ☁️ Desktop — Cloud |
 |---|---|---|---|
-| **Access** | [qsarflex.com](https://qsarflex.com) | [Download installer](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe) | [Download installer](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe) |
+| **Platforms** | Any modern browser | Windows (64-bit) and macOS 12+ (Apple Silicon) | Windows (64-bit) and macOS 12+ (Apple Silicon) |
+| **Get it** | [www.qsarflex.multicase.com](https://www.qsarflex.multicase.com) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) |
 | **Compound loading** | ✓ | ✓ | ✓ |
 | **Batch upload** | ✓ | ✓ | ✓ |
 | **DataKurator** | ✓ | ✓ | ✓ |
 | **Evaluation** | ✓ | ✓ | ✓ |
 | **Reaction loading** | ✓ | ✓ | ✓ |
-| **Model inference** | MultiCASE servers | On-device | On-device |
-| **Reference database** | MultiCASE servers | Local SQLite | MultiCASE cloud (PostgreSQL) — used by N-Nitrosation & Oral Bioavailability |
-| **Internet required** | Always | License/auth only | Always |
+| **Where evaluation runs** | MultiCASE servers | On your machine | On your machine |
+| **Where curation runs** | MultiCASE servers | On your machine | On your machine |
+| **Reference database** | MultiCASE servers | Encrypted database on your machine (~4 GB, downloaded on first launch and again whenever MultiCASE publishes new data) | MultiCASE cloud (PostgreSQL) |
+| **Internet required** | Always | Sign-in and license check at every launch | Sign-in and license check at every launch, plus every evaluation |
 | **Surrogate Search** | — | ✓ | ✓ |
 | **Cross Similarity** | — | ✓ | ✓ |
 
-> **Desktop — Local** runs QSAR model inference on-device with a local SQLite database — compound structures are never sent to MultiCASE servers for evaluation. Internet is still required for license verification and authentication.
+> **Web App** does the work on MultiCASE servers. The structures you load are sent to the QSAR Flex service for evaluation, DataKurator curation, report generation, and the structure drawings you see on screen. They are not retained after the request.
 
-> **Desktop — Cloud** also runs QSAR model inference on-device. The only remote component is the reference database (queried for N-Nitrosation and Oral Bioavailability modules) hosted on MultiCASE's cloud.
+> **Desktop — Local** runs the models and DataKurator on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
+
+> **Desktop — Cloud** also runs the models and DataKurator on your machine. The difference is the reference database: it is hosted in MultiCASE's cloud rather than downloaded, so there is no large first-run download. Every evaluation opens a connection to that database at `central-db.multicase.com`, and some of the lookups it makes carry the structure being evaluated as a query. If your compounds must not leave your machine at all, choose **Desktop — Local**.
+
+{% hint style="info" %}
+Both desktop variants are the same application as the web app, wrapped in a native shell. If you are choosing between them, the deciding questions are where the reference database should live and whether your structures may leave the workstation. See [Installing on Windows](install-win.md) or [Installing on macOS](install-mac.md).
+{% endhint %}
 
 ---
 
 ## Get Started
 
-1. 🔐 [Getting Started](getting-started.md) — log in and run your first evaluation
-2. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to your library
-3. ✅ [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
-4. 🔬 [Evaluation](evaluation.md) — select modules and generate results
-5. ⚗️ [Loading Reactions](loading-reactions.md) — submit reaction SMILES and RXN files
-6. 📋 [Model Catalog](fundamentals/model-catalog.md) — all available endpoints by bundle
-7. 👥 [License Management](license-management/enterprise-user-management.md) — manage users and seats
+1. 🆕 [What's New in 4.0](whats-new-4-0.md) — what changed in this release
+2. 🔐 [Getting Started](getting-started.md) — log in and run your first evaluation
+3. 🖥️ [The QSAR Flex Window](interface.md) — the navigation bar, the command bar, and the license status chip
+4. 💾 [Installing on Windows](install-win.md) / [Installing on macOS](install-mac.md) — set up the desktop app
+5. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to your library
+6. ✅ [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
+7. 🔬 [Evaluation](evaluation.md) — select modules and generate results
+8. ⚗️ [Loading Reactions](loading-reactions.md) — submit reaction SMILES and RXN files
+9. 📋 [Model Catalog](fundamentals/model-catalog.md) — all available endpoints by bundle
+10. 🔑 [Access & Licensing](fundamentals/access-and-licensing.md) — the Account page, your license details, and usage history
+11. 👥 [Enterprise User Management](license-management/enterprise-user-management.md) — manage users and seats
+12. 💬 [Getting Support](support.md) — raise a ticket on the support portal
 
 ---
 
-## Contact
+## Your Account and License
 
-For access, licensing, or support: [support@multicase.com](mailto:support@multicase.com)
+Everything about your account now lives in one place. Click your avatar in the top-right and choose **Profile**. The page it opens is headed **Account** and has four tabs:
+
+- **Profile** — display name and profile photo
+- **Security** — change your password
+- **License** — your license details, validity, remaining tests, assigned users, and a **View activity** link to the full usage history
+- **Team** — your company's users, shown to company admins only; seat assignments are on the **License** tab
+
+The navigation bar also carries a **license status chip**, so you can see where your license stands without leaving the page you are on — tests remaining on a pay-per-test license, time left on a subscription, **Unlimited** on an on-demand one, or **No active licence** when there is none. Hover it for the license type and the rest of the detail; click it to open the License tab. See [Access & Licensing](fundamentals/access-and-licensing.md).
+
+---
+
+## Support
+
+Support runs through the MultiCASE support portal: **[support.multicase.com](https://support.multicase.com)**.
+
+Sign in with the same MultiCASE account you use for QSAR Flex — there is no separate login — and raise a ticket for access, licensing, bundles, or anything that is not working. See [Getting Support](support.md) for a walkthrough.

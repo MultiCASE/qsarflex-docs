@@ -337,7 +337,10 @@ async function screenshotLibrary(page, theme) {
   await navigateTo(page, '/');
   await shot(page, `library-compounds-${theme}.png`, {
     markers: [
-      { selector: 'button:has-text("Evaluate")', label: 'Run evaluation  ⌘K', side: 'bottom' },
+      // Not "Run evaluation  ⌘K". ⌘K/Ctrl+K opens the command bar
+      // (usePaletteShortcut in components/CommandBar.tsx); the Evaluate
+      // button's own tooltip is just "Run evaluation".
+      { selector: 'button:has-text("Evaluate")', label: 'Run evaluation', side: 'bottom' },
     ],
   });
 

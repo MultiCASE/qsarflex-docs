@@ -1,14 +1,18 @@
 # Getting Support
 
-If you run into an issue, have a question, or need help with anything related to QSAR Flex, you can open a support ticket at [support.multicase.com](https://www.support.multicase.com). Our team — or your distributor — will respond directly in the ticket thread.
+The support portal at [support.multicase.com](https://support.multicase.com) is now the single channel for all QSAR Flex support. It uses the same MultiCASE account you sign in to QSAR Flex with — no separate registration.
 
-> **Heads up:** We are gradually moving away from support@multicase.com. Please use the support portal for all new requests so nothing falls through the cracks.
+If you run into an issue, have a question, or need help with anything related to QSAR Flex, open a support ticket there. Our team — or your distributor — will respond directly in the ticket thread.
+
+{% hint style="info" %}
+The portal replaces email support. Please open a ticket for all new requests so nothing falls through the cracks.
+{% endhint %}
 
 ---
 
 ## 1. Sign In
 
-Go to [support.multicase.com](https://www.support.multicase.com) and click **Sign in with Cognito**. Use the same MultiCASE account credentials you use for QSAR Flex.
+Go to [support.multicase.com](https://support.multicase.com) and click **Sign in with Cognito**. Use the same MultiCASE account credentials you use for QSAR Flex.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/support/support-signin-dark.png">
@@ -17,8 +21,9 @@ Go to [support.multicase.com](https://www.support.multicase.com) and click **Sig
 
 You will be redirected to the MultiCASE login page. Enter your **email address** first, then your **password** on the next screen.
 
-![](.gitbook/assets/support/support-cognito-email.png)
-![](.gitbook/assets/support/support-cognito-password.png)
+<figure><img src=".gitbook/assets/support/support-cognito-email.png" alt="MultiCASE sign-in — email address"></figure>
+
+<figure><img src=".gitbook/assets/support/support-cognito-password.png" alt="MultiCASE sign-in — password"></figure>
 
 ---
 
@@ -37,18 +42,17 @@ After signing in you land on the dashboard. It shows a summary of your open, in-
 
 Click **New ticket** — either from the dashboard or from the **Tickets** page in the sidebar.
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/support/support-tickets-empty-dark.png">
-  <img src=".gitbook/assets/support/support-tickets-empty-light.png" alt="Tickets page — no tickets yet">
-</picture></figure>
+<figure><img src=".gitbook/assets/support/support-tickets-empty-light.png" alt="Tickets page — no tickets yet"></figure>
 
-The **Create support ticket** dialog opens. Fill in three fields:
+The **Create support ticket** dialog opens. Fill in the three required fields:
 
 | Field | What to enter |
 |---|---|
 | **Software** | Select the product you need help with (e.g. QSAR Flex) |
 | **Subject** | A short, clear summary of the issue |
 | **Description** | Full details — steps to reproduce, what you expected, what happened |
+
+You can also set **Platform** and **Version**. Both are optional, and the portal pre-fills them for you when it can.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/support/support-new-ticket-empty-dark.png">
@@ -98,7 +102,7 @@ Click any ticket to open the full conversation thread. You can read replies from
   <img src=".gitbook/assets/support/support-ticket-detail-light.png" alt="Ticket detail view">
 </picture></figure>
 
-When the status shows **Waiting on You**, the support team has replied and is waiting for more information. Type your response in the reply box at the bottom and click **Send**.
+When the status shows **Waiting on You**, the support team has replied and is waiting for more information. Type your response in the reply box at the bottom and click **Send reply**.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/support/support-ticket-reply-dark.png">
@@ -111,10 +115,17 @@ You can attach additional files to any reply the same way as when creating the t
 
 ## Ticket Statuses
 
+Each ticket carries a status badge, visible in the ticket list and under **Status** in the details panel beside the ticket thread.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/support/support-ticket-status-dark.png">
+  <img src=".gitbook/assets/support/support-ticket-status-light.png" alt="Ticket status badge">
+</picture></figure>
+
 | Status | Meaning |
 |---|---|
-| **Open** | Ticket received, not yet assigned |
-| **In Progress** | Being actively worked on |
+| **Open** | Ticket received, awaiting a first response |
+| **In Progress** | Being actively worked on — the **Active** filter tab shows these tickets |
 | **Waiting on You** | Support team has replied and needs your input |
 | **Resolved** | Issue has been fixed or answered |
-| **Closed** | Ticket archived |
+| **Closed** | Ticket finished — it stays in your list, and a new reply reopens it |

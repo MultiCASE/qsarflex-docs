@@ -1,11 +1,15 @@
 # Model Catalog
 
-The QSAR Flex model catalog lists all available prediction endpoints organized by license bundle. Modules are licensed in bundles — purchasing a bundle unlocks all endpoints within it. Contact [support@multicase.com](mailto:support@multicase.com) to add bundles to your account.
+The QSAR Flex model catalog lists all available prediction endpoints organized by license bundle. The module catalogue and its bundles are unchanged in 4.0 — 4.0 changed the interface, not the science. Modules are grouped into the bundles below. A licence grants either every QSAR Flex module or a named list of modules — the **License** tab on your Account page shows which. Ask at the support portal, [support.multicase.com](https://support.multicase.com), to add bundles to your account.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/evaluate-dialog-dark.png">
   <img src="../.gitbook/assets/evaluate-dialog-light.png" alt="">
 </picture></figure>
+
+{% hint style="info" %}
+Where another page summarises a bundle in a single line, the tables here carry the detail. What you can actually run is set by your licence — the **Select Modules to Evaluate** dialog and the **License** tab on your Account page are the final word.
+{% endhint %}
 
 ---
 
@@ -15,9 +19,9 @@ For N-nitrosamine impurity assessment (NDSRIs and related compounds). Covers ICH
 
 | Module | Records | Platform | Description |
 |---|---|---|---|
-| **CPCA Prediction** | 209 NDSRIs (AI = 577) | Web + Desktop | Carcinogenicity Potency Categorization Approach (CPCA) for N-nitrosamines. Assigns NDSRIs to an AI potency category following ICH M7 and EMA guidance, with reasoning based on structural alerts and potency analogues. |
-| **Surrogate Search** | 194 | Desktop only | Analog-based read-across using nitrosamine local environment similarity measure. Finds N-nitrosamine surrogates with available animal carcinogenicity data for read-across and AI derivation. |
-| **N-Nitrosation Tool** | 1,238 | Web + Desktop | Nitrosation assessment for both individual compounds and synthetic routes. Predicts whether a compound is susceptible to nitrosation — i.e., can form an N-nitrosamine impurity under relevant pharmaceutical manufacturing conditions. |
+| **CPCA Prediction** | — | Web + Desktop | Carcinogenic Potency Categorization Approach (CPCA) for N-nitrosamines. Finds every N-nitrosamine centre in your structure and assigns each one a potency category from its α-hydrogen count and its activating and deactivating structural features, following ICH M7 and EMA guidance. The most potent centre sets the reported acceptable intake: 18 or 26.5, 100, 400 or 1500 ng/day. A structure with no N-nitrosamine centre returns N/A. The rules run on your structure, so there is no reference set to count. |
+| **Surrogate Search** | 209 | Desktop only | Analog-based read-across using nitrosamine local environment similarity measure. Finds N-nitrosamine surrogates with available animal carcinogenicity data for read-across and AI derivation. |
+| **N-Nitrosation** | 1,238 | Web + Desktop | Nitrosation assessment for both individual compounds and synthetic routes. Predicts whether a compound is susceptible to nitrosation — i.e., can form an N-nitrosamine impurity under relevant pharmaceutical manufacturing conditions. |
 | **Cross Similarity** | — | Desktop only | Generates a full N×N structural similarity matrix across your entire compound library using fingerprint-based comparison. Useful for grouping NDSRIs by structural class. |
 
 ---
@@ -57,7 +61,7 @@ Genotoxicity hazard endpoints required for ICH M7 and standard safety evaluation
 
 | Module | Platform | Description |
 |---|---|---|
-| **Ames Mutagenicity** | Web + Desktop | Predicts bacterial reverse mutation (Ames test) outcome. A primary endpoint in ICH M7 and pharmaceutical genotoxicity assessments. |
+| **Ames Mutagencity** *(the app spells it this way)* | Web + Desktop | Reports experimental bacterial reverse mutation (Ames test) data by exact-structure lookup against a reference set of 463 N-nitroso compounds. A compound held in that set returns its measured outcome marked with an asterisk. Anything else returns a dash, including every structure that is not an N-nitroso compound. A primary endpoint in ICH M7 and pharmaceutical genotoxicity assessments. |
 
 ---
 
@@ -67,19 +71,16 @@ Evaluate the extent to which a chemical is systemically available following oral
 
 | Module | Records | Platform | Description |
 |---|---|---|---|
-| **Bioavailability Experimental Database** | 1,594 | Web + Desktop | Reference dataset of experimentally measured oral bioavailability values. Used as ground truth for analog-based and QSAR predictions. |
-| **Bioavailability Analog-based Prediction** | 1,594 | Web + Desktop | Analog-based read-across to predict oral bioavailability by structural similarity to compounds with known experimental values. |
-| **Bioavailability QSAR Model** | 1,594 | Web + Desktop | QSAR model to predict the fraction of an orally administered dose that reaches systemic circulation — a key early-stage drug development filter. |
-| **Human Liver Microsomal Metabolism** | 4,637 | Web + Desktop | Predicts likelihood of rapid metabolic degradation in human liver microsomes. |
-| **CYP3A4 Substrate Potential** | 2,601 | Web + Desktop | Predicts likelihood that the compound is a substrate for the major human cytochrome P450 enzyme CYP3A4. |
-| **CYP2D6 Substrate Potential** | 2,249 | Web + Desktop | Predicts likelihood that the compound is a substrate for the major human cytochrome P450 enzyme CYP2D6. |
-| **CYP2C9 Substrate Potential** | 2,209 | Web + Desktop | Predicts likelihood that the compound is a substrate for the major human cytochrome P450 enzyme CYP2C9. |
-| **MDR1 (P-gp) Substrate Potential** | 539 | Web + Desktop | Predicts likelihood that the compound functions as a substrate for key solute carrier (SLC) and ATP-binding cassette (ABC) transporters, including MDR1 P-glycoprotein. |
+| **Oral Bioavailability** | 1,594 | Web + Desktop | Oral-exposure assessment reported four ways side by side — experimental data (database lookup), read-across from close analogs with measured bioavailability, a QSAR model prediction, and a rule-based prediction. The same report adds metabolic-stability (human liver microsome) and CYP3A4 / CYP2D6 / CYP2C9 substrate assessments, MDR1 (P-gp) substrate potential, formulation sensitivity and a BCS class. These are sections of the Oral Bioavailability report, not separately licensed modules. |
 
 ---
 
 ## 🔍 Checking Your Active Modules
 
-After signing in, go to **Profile → License Information** to see which bundles and modules are active on your account. Modules you are not licensed for appear grayed out in the Evaluate dialog.
+After signing in, open the avatar menu in the top right and choose **Profile** to reach the **Account** page, then select the **License** tab. Under **Validity & usage**, **Modules** reads `all` when your licence covers every module, or `specific` — in which case a **Selected modules** list names the ones you hold. The licence chip in the navbar takes you to the same tab in one click.
 
-If you need to add a bundle, contact [support@multicase.com](mailto:support@multicase.com).
+Modules you are not licensed for are greyed out and cannot be ticked in the **Select Modules to Evaluate** dialog, which opens from the green **Evaluate** button in the Library toolbar.
+
+Modules marked **Desktop only** above are a separate case. They are not greyed out in the web app — they are not listed at all. Run the desktop app to see them in the dialog.
+
+If you need to add a bundle, raise a request at the support portal, [support.multicase.com](https://support.multicase.com).
