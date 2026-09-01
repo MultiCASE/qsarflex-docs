@@ -28,9 +28,19 @@ OUT = HERE.parent / "images.css"
 
 # (variable name, file, max box) — downscaling keeps the CSS from bloating; the
 # marks are never drawn larger than ~170mm.
+# Raster sources: (variable, file, max box). Downscaling keeps the CSS from
+# bloating; these are never drawn larger than ~170mm.
 SOURCES = [
-    ("--img-mark", "qsarflex-mark.png", (900, 900)),
     ("--img-mc", "multicase-hex.png", (600, 600)),
+    ("--img-mc-logo", "multicase-logo.png", (1400, 1400)),
+]
+
+# Vector sources stay vector — the QSAR Flex mark is set at 21mm on the cover and
+# as a 172mm watermark, where a raster shows. This is the same file the app
+# serves from the public assets CDN ("QSAR flex Logo.svg"), so the documents and
+# the product cannot drift apart.
+SVG_SOURCES = [
+    ("--img-mark", "qsarflex-logo.svg"),
 ]
 
 
@@ -42,8 +52,17 @@ def encode(path: pathlib.Path, box: tuple[int, int]) -> str:
     return base64.b64encode(buf.getvalue()).decode()
 
 
+def encode_svg(path: pathlib.Path) -> str:
+    return base64.b64encode(path.read_bytes()).decode()
+
+
 def main() -> None:
     lines = [":root {"]
+    for var, name in SVG_SOURCES:
+        path = ASSETS / name
+        if not path.exists():
+            raise SystemExit(f"missing {path}")
+        lines.append(f"  {var}: url(data:image/svg+xml;base64,{encode_svg(path)});")
     for var, name, box in SOURCES:
         path = ASSETS / name
         if not path.exists():
@@ -52,7 +71,8 @@ def main() -> None:
     lines.append("}")
 
     OUT.write_text("\n".join(lines) + "\n")
-    print(f"{OUT.name}: {len(SOURCES)} images, {OUT.stat().st_size / 1024:.0f} KB")
+    n = len(SOURCES) + len(SVG_SOURCES)
+    print(f"{OUT.name}: {n} images, {OUT.stat().st_size / 1024:.0f} KB")
 
 
 if __name__ == "__main__":

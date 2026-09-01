@@ -84,13 +84,11 @@
 }
 .itcover .foot .addr { font-size: 7.6pt; line-height: 1.5; color: var(--ink-3); text-align: right; }
 .itcover .foot .addr b { color: var(--ink-2); font-weight: 500; }
-.mclogo { display: flex; align-items: center; gap: 2.4mm; }
-.mclogo .hex {
-  width: 7.2mm; height: 8.2mm;
-  background-image: var(--img-mc);
-  background-size: contain; background-repeat: no-repeat; background-position: center;
+.mclogo {
+  width: 46mm; height: 12.6mm;
+  background-image: var(--img-mc-logo);
+  background-size: contain; background-repeat: no-repeat; background-position: left center;
 }
-.mclogo .wm { font-size: 8.4pt; font-weight: 600; letter-spacing: .14em; color: var(--ink); }
 
 /* ---------- IT interior ---------- */
 .plat {
@@ -235,7 +233,7 @@
   </div>
 
   <div class="foot">
-    <div class="mclogo"><div class="hex"></div><div class="wm">MULTICASE</div></div>
+    <div class="mclogo"></div>
     <div class="addr">
       <b>MultiCASE Inc.</b><br>
       5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA<br>
@@ -248,8 +246,8 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">01</span>
-      <span class="ttl h-sec">System requirements</span>
+      <div class="hd-top"><span class="sn">Section 01</span><span class="tag"></span></div>
+      <div class="ttl h-sec">System requirements</div>
     </div>
 
     <span class="plat win">Desktop — Windows</span>
@@ -260,8 +258,8 @@
         <tr><td class="k">Runtime</td><td>.NET 8 — bundled with the application. No separate installation, and no machine-wide .NET is used.</td></tr>
         <tr><td class="k">Web rendering</td><td>Microsoft Edge WebView2 Runtime. Pre-installed on Windows 11; may need deploying on Windows 10 (see section 06).</td></tr>
         <tr><td class="k">Memory</td><td>4 GB minimum, 8 GB recommended.</td></tr>
-        <tr><td class="k">Disk — application</td><td>≈285 MB for the per-user installation, measured on a clean 3.9 install. That covers the current version plus Velopack's package cache; an update lands alongside the current one before it is removed, so allow headroom.</td></tr>
-        <tr><td class="k">Disk — reference data</td><td><b>Local build only:</b> ≈4.0 GB downloaded, ≈4.0 GB on disk. Allow at least 10 GB free (see section 05). The Cloud build downloads no reference data.</td></tr>
+        <tr><td class="k">Disk — application</td><td>≈285 MB for the per-user installation, measured on a clean install of the preceding 3.9 release. That covers the current version plus Velopack's package cache; an update lands alongside the current one before it is removed, so allow headroom.</td></tr>
+        <tr><td class="k">Disk — reference data</td><td><b>Local build only:</b> ≈4.0 GB downloaded, ≈4.0 GB on disk. Allow at least 10 GB free (see section 05). The Cloud build downloads the model files only, about 27&nbsp;MB.</td></tr>
         <tr><td class="k">Internet connection</td><td>Required at every launch, for sign-in and licence verification. See section 10 for what is transmitted.</td></tr>
       </tbody>
     </table>
@@ -275,7 +273,7 @@
         <tr><td class="k">Web rendering</td><td>WKWebView, part of macOS. Nothing to install or configure.</td></tr>
         <tr><td class="k">Memory</td><td>4 GB minimum, 8 GB recommended.</td></tr>
         <tr><td class="k">Disk — application</td><td>≈275 MB for the application bundle, measured on a clean install.</td></tr>
-        <tr><td class="k">Disk — reference data</td><td><b>Local build only:</b> ≈4.0 GB downloaded, ≈4.0 GB on disk; allow at least 10 GB free. The Cloud build downloads no reference data.</td></tr>
+        <tr><td class="k">Disk — reference data</td><td><b>Local build only:</b> ≈4.0 GB downloaded, ≈4.0 GB on disk; allow at least 10 GB free. The Cloud build downloads the model files only, about 27&nbsp;MB.</td></tr>
         <tr><td class="k">Internet connection</td><td>Required at every launch for sign-in and licence verification, and for updates.</td></tr>
       </tbody>
     </table>
@@ -292,8 +290,8 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">01</span>
-      <span class="ttl h-sec">System requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></span>
+      <div class="hd-top"><span class="sn">Section 01</span><span class="tag"></span></div>
+      <div class="ttl h-sec">System requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></div>
     </div>
 
     <span class="plat web">Web application</span>
@@ -326,6 +324,49 @@
         </p>
       </div>
     </div>
+
+    <div class="sub-h" style="margin-bottom:2.6mm;">Backup, and what happens when a user leaves</div>
+    <p class="body" style="margin-bottom:4mm;">
+      A user's compound library is held by the interface in the web view's own storage, not in a document
+      they save. Plan for it explicitly: it is the kind of data a reviewer assumes is backed up, and it
+      is not.
+    </p>
+
+    <div class="grid g3" style="margin-bottom:6mm;">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">There is one copy</div>
+        <p class="small">
+          MultiCASE holds none — the backend evaluates and returns, it does not store libraries — and the
+          product has no export of the library as a set. Whatever protects the user's profile is what
+          protects the library.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Back up the profile</div>
+        <p class="small">
+          Include the web view store in the profile backup and the library is covered; section 06 gives
+          its path on each platform. Exclude the ≈4&nbsp;GB reference data — it costs backup space and
+          re-downloads on demand.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Offboarding</div>
+        <p class="small">
+          Uninstalling does <b>not</b> remove it. To decommission a machine, delete the web view store as
+          well as the application — section 06 gives its path, and sections 03 and 04 cover uninstall on
+          Windows and macOS.
+        </p>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Signing out clears the library.</b> Sign-out discards the compound library and the evaluation
+        results on that machine, and there is no undo. Tell users to download the results they need before
+        signing out, and treat a forced re-authentication the same way.
+      </p>
+    </div>
   </div>
 
   <div class="pg-foot">
@@ -338,8 +379,8 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">02</span>
-      <span class="ttl h-sec">Choosing a build: Local or Cloud</span>
+      <div class="hd-top"><span class="sn">Section 02</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Choosing a build: Local or Cloud</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
@@ -356,9 +397,9 @@
       <tbody>
         <tr><td class="k">Where the models run</td><td><b>On the workstation</b></td><td><b>On the workstation</b></td><td>In MultiCASE's cloud</td></tr>
         <tr><td class="k">Reference database</td><td><b>On the workstation</b></td><td>Hosted by MultiCASE</td><td>Hosted by MultiCASE</td></tr>
-        <tr><td class="k">Structures transmitted</td><td><b>Never</b></td><td>Yes — in reference-database lookups</td><td>Yes — sent for evaluation</td></tr>
+        <tr><td class="k">Structures transmitted to MultiCASE</td><td><b>Never</b> — but Auto Fill sends a SMILES to PubChem (§10)</td><td>Yes — in reference-database lookups</td><td>Yes — sent for evaluation</td></tr>
         <tr><td class="k">Outbound protocols</td><td>HTTPS 443 only</td><td>HTTPS 443 <b>and PostgreSQL 5432</b></td><td>HTTPS 443 only</td></tr>
-        <tr><td class="k">Reference data download</td><td>≈4.0 GB on first launch</td><td>None</td><td>None</td></tr>
+        <tr><td class="k">First-launch download</td><td>≈4.0 GB — models and database</td><td>≈27 MB — models only</td><td>None</td></tr>
         <tr><td class="k">Disk footprint</td><td>≈4.3 GB</td><td>≈275–285 MB</td><td>None</td></tr>
         <tr><td class="k">Usable while offline</td><td><b>No</b></td><td><b>No</b></td><td><b>No</b></td></tr>
         <tr><td class="k">Desktop-only modules</td><td>Available</td><td>Available</td><td>Not available</td></tr>
@@ -422,9 +463,8 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">03</span>
-      <span class="ttl h-sec">Installation — Windows</span>
-      <span class="tag">Per-user, no admin rights</span>
+      <div class="hd-top"><span class="sn">Section 03</span><span class="tag">Per-user, no admin rights</span></div>
+      <div class="ttl h-sec">Installation — Windows</div>
     </div>
 
     <div class="sub-h">Installers</div>
@@ -452,6 +492,10 @@ https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe</spa
       <div class="i">
         <div class="l">Services and drivers</div>
         <div class="v"><b>None.</b> No Windows service, scheduled task or kernel driver — verified on a clean install: zero services and zero scheduled tasks matching the product.</div>
+      </div>
+      <div class="i">
+        <div class="l">Uninstall</div>
+        <div class="v">Removes the application folder and the per-user uninstall entry. It does <b>not</b> remove the reference data or the web view store, which holds the working set including structures — delete both when decommissioning a machine or offboarding a user. Section 06 gives their paths.</div>
       </div>
       <div class="i">
         <div class="l">Multiple users</div>
@@ -488,9 +532,8 @@ https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe</spa
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">04</span>
-      <span class="ttl h-sec">Installation — macOS</span>
-      <span class="tag">Signed and notarized</span>
+      <div class="hd-top"><span class="sn">Section 04</span><span class="tag">Signed and notarized</span></div>
+      <div class="ttl h-sec">Installation — macOS</div>
     </div>
 
     <div class="sub-h">Installers</div>
@@ -517,7 +560,7 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       </div>
       <div class="i">
         <div class="l">Uninstall</div>
-        <div class="v">Move the application to the Trash. Reference data and session state under <span class="path">~/Library/Application Support/QSARFlex/</span> can then be deleted separately.</div>
+        <div class="v">Move the application to the Trash. Two directories are left behind and must be removed separately: reference data under <span class="path">~/Library/Application Support/QSARFlex/</span>, and the web view store — which holds the user's compound library — under <span class="path">~/Library/WebKit/</span>, in a folder named for the installed build.</div>
       </div>
       <div class="i">
         <div class="l">MDM deployment</div>
@@ -552,9 +595,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">05</span>
-      <span class="ttl h-sec">Reference data files</span>
-      <span class="tag">Local build only</span>
+      <div class="hd-top"><span class="sn">Section 05</span><span class="tag">Local build only</span></div>
+      <div class="ttl h-sec">Reference data files</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
@@ -608,7 +650,9 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       Twenty workstations means twenty downloads of ≈4.0 GB each. <b>An interrupted download does not
       resume; it restarts from the beginning</b>, which is the practical argument for staging a rollout
       rather than letting a department start on the same morning. The transfer is verified before it
-      replaces anything, so a partial download is never silently accepted — nor salvaged.
+      replaces anything, so a partial download is never silently accepted — nor salvaged. It is one connection with a
+      two-hour ceiling, so a workstation must hold roughly 5&nbsp;Mbit/s for the whole download or it times
+      out and starts again from nothing.
     </p>
 
     <div class="card tint">
@@ -633,8 +677,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">06</span>
-      <span class="ttl h-sec">Web rendering runtime</span>
+      <div class="hd-top"><span class="sn">Section 06</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Web rendering runtime</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
@@ -689,12 +733,16 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 
     <div class="kv2" style="margin-bottom:6mm;">
       <div class="i">
-        <div class="l">WebView2 user data folder (Windows)</div>
-        <div class="v"><span class="path">%APPDATA%\QSARFlex\WebView2Main</span></div>
+        <div class="l">Web view store — Windows</div>
+        <div class="v"><span class="path">%APPDATA%\QSARFlex\WebView2Main</span> — note this is the <b>roaming</b> profile, not the local one.</div>
+      </div>
+      <div class="i">
+        <div class="l">Web view store — macOS</div>
+        <div class="v"><span class="path">~/Library/WebKit/</span>, in a folder named for the installed build — <b>not</b> under Application Support, which holds only reference data.</div>
       </div>
       <div class="i">
         <div class="l">What it holds</div>
-        <div class="v">The web view's cache and profile, and the interface's own working state — the compound library, the evaluation results and the DataKurator working set, including structures, names and registry numbers. It holds <b>no credentials and no session tokens</b>. It is per-user and <b>not separately encrypted</b>, so on a managed estate rely on full-disk encryption. Deleting it costs the user their unsaved working set and nothing else.</div>
+        <div class="v">The web view's cache and profile, and the interface's own working state — the compound library, the evaluation results and the DataKurator working set, including structures, names and registry numbers. It holds <b>no credentials and no session tokens</b>. It is per-user and <b>not separately encrypted</b>, so on a managed estate rely on full-disk encryption. Deleting it costs the user their whole library, because there is no second copy: MultiCASE keeps none, and the product has no export of the library as a set. Signing out clears it as well.</div>
       </div>
     </div>
 
@@ -710,8 +758,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">07</span>
-      <span class="ttl h-sec">Software updates</span>
+      <div class="hd-top"><span class="sn">Section 07</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Software updates</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
@@ -782,8 +830,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">08</span>
-      <span class="ttl h-sec">Authentication and sessions</span>
+      <div class="hd-top"><span class="sn">Section 08</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Authentication and sessions</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
@@ -825,11 +873,11 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
     <div class="kv2" style="margin-top:6mm;">
       <div class="i">
         <div class="l">Token lifetime</div>
-        <div class="v">Identity tokens are short-lived — minutes, not hours — and are refreshed in the background while the application is open.</div>
+        <div class="v">Identity tokens are short-lived — minutes, not hours — and refresh in the background while the application is open.</div>
       </div>
       <div class="i">
         <div class="l">What the browser holds (web app)</div>
-        <div class="v">A standard session cookie for the signed-in session. Chemical structures in a web session live in the page, not in a server-side account record.</div>
+        <div class="v">A session cookie, plus the working set in <b>browser local storage</b> — the compound library, the evaluation results and the DataKurator set, including structures and names. It survives a browser restart, and only signing out clears it. Nothing goes to a server-side account record; on a shared machine treat it as you would the desktop web view store (section 06).</div>
       </div>
       <div class="i">
         <div class="l">Password policy and reset</div>
@@ -837,7 +885,7 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       </div>
       <div class="i">
         <div class="l">Federated sign-on</div>
-        <div class="v">QSAR Flex signs in against MultiCASE Accounts. If you need SAML or OIDC federation with your own identity provider, raise it with MultiCASE before you plan the deployment.</div>
+        <div class="v">QSAR Flex signs in against MultiCASE Accounts. Raise SAML or OIDC federation with your own identity provider with MultiCASE before you plan the deployment.</div>
       </div>
     </div>
   </div>
@@ -852,15 +900,17 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">09</span>
-      <span class="ttl h-sec">Network requirements</span>
-      <span class="tag">HTTPS 443 — plus 5432 on Cloud</span>
+      <div class="hd-top"><span class="sn">Section 09</span><span class="tag">HTTPS 443 — plus 5432 on Cloud</span></div>
+      <div class="ttl h-sec">Network requirements</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
       Almost all communication is HTTPS on port 443 with TLS 1.2 or later. There is one exception, and it
       matters: the <b>Desktop — Cloud</b> build also makes a direct <b>PostgreSQL connection on TCP 5432</b>
-      to query its hosted reference database. The Local build and the web application use HTTPS only. The
+      to query its hosted reference database. That session is not HTTPS, and the client negotiates TLS
+      <b>opportunistically</b> — it does not require encryption or verify a server certificate. If your
+      policy requires structures to travel only over verified TLS, treat this as an open item for
+      MultiCASE (section 13). The Local build and the web application use HTTPS only. The
       applications open <b>no inbound ports</b> — there is no listening socket, service or daemon.
     </p>
 
@@ -877,7 +927,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
         <tr><td>qsarflex-be.multicase.com</td><td>Web <b>only</b></td><td>The evaluation service: evaluation, report generation, structure depiction and curation requests from the browser. Confirm against your own account before writing the rule, in case a dedicated endpoint has been provisioned for you.</td></tr>
         <tr><td>resources.multicase.com</td><td>Desktop, Web</td><td>Product documentation, opened from the Documentation button. Not required to run an evaluation.</td></tr>
         <tr><td>support.multicase.com</td><td>Users</td><td>The support portal. Not required to run an evaluation.</td></tr>
-        <tr><td>pubchem.ncbi.nlm.nih.gov</td><td>Desktop, Web</td><td><b>Optional.</b> Compound name, CAS and structure lookups. DataKurator's are gated behind an explicit consent dialog; <b>Add Compound's Auto Fill button is not</b> — pressing it queries PubChem directly, on every build. Blocking this host disables both and nothing else.</td></tr>
+        <tr><td>d35fy2f4trk71w.cloudfront.net</td><td>Desktop, Web</td><td>Static product assets — logos and profile images — loaded by the application interface and the sign-in pages. Carries no chemical data.</td></tr>
+        <tr><td>pubchem.ncbi.nlm.nih.gov</td><td>Desktop <b>only</b></td><td><b>Optional.</b> Compound name, CAS and structure lookups. DataKurator's are gated behind a consent dialog; <b>Add Compound's Auto Fill is not</b> — pressing it queries PubChem directly. Blocking this host stops those lookups on the desktop builds only: in the web application the call is made server-side, so a workstation rule does not affect it.</td></tr>
         <tr><td>central-db.multicase.com<br><span style="color:var(--ink-3)">TCP 5432, not 443</span></td><td>Desktop&nbsp;— Cloud <b>only</b></td><td>The hosted reference database the models query. <b>Not needed by the Local build or the web application.</b> Without it, the Cloud build cannot evaluate.</td></tr>
       </tbody>
     </table>
@@ -894,14 +945,14 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">09</span>
-      <span class="ttl h-sec">Network requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></span>
+      <div class="hd-top"><span class="sn">Section 09</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Network requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></div>
     </div>
 
     <div class="kv2">
       <div class="i">
         <div class="l">Proxies</div>
-        <div class="v">The system proxy configuration is used for HTTPS; there is no separate proxy setting inside the application. <b>The Cloud build's PostgreSQL session cannot traverse an HTTP proxy</b> — that build needs direct outbound egress to <code>central-db.multicase.com</code> on 5432, which is often the deciding constraint in an estate with no direct egress.</div>
+        <div class="v">The system proxy configuration, including a PAC script, is used for HTTPS; there is no separate proxy setting inside the application. <b>The application supplies no proxy credentials</b> and offers nowhere to enter them, so a proxy that requires NTLM, Kerberos or Basic authentication rejects its requests and sign-in, licence checks, updates and the reference-data download all fail. Where an authenticating proxy is enforced, exempt the hostnames in this section from proxy authentication. <b>The Cloud build's PostgreSQL session cannot traverse an HTTP proxy</b> — that build needs direct outbound egress to <code>central-db.multicase.com</code> on 5432, which is often the deciding constraint in an estate with no direct egress.</div>
       </div>
       <div class="i">
         <div class="l">TLS inspection</div>
@@ -917,11 +968,26 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       </div>
       <div class="i">
         <div class="l">Where the services sit</div>
-        <div class="v">MultiCASE's evaluation service and the hosted reference database run in Amazon Web Services, <b>US East (Ohio)</b>. Confirm current arrangements with MultiCASE if you have a data-residency requirement.</div>
+        <div class="v">MultiCASE Accounts, the licensing backend and the usage records it holds, the evaluation service and the hosted reference database all run in Amazon Web Services, <b>US East (Ohio)</b>. This applies to every build: Desktop — Local sends no structures, but its sign-in and licence traffic still terminates there. Confirm current arrangements with MultiCASE if you have a data-residency requirement.</div>
       </div>
     </div>
 
-    <div class="sub-h" style="margin-top:8mm;">The rule set, per build</div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
+    <span class="pn">11</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <div class="hd-top"><span class="sn">Section 09</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Network requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></div>
+    </div>
+
+    <div class="sub-h">The rule set, per build</div>
     <p class="body" style="margin-bottom:4mm;">
       Allow only what the build you are deploying actually needs. Every rule is outbound; none needs a
       matching inbound rule.
@@ -944,7 +1010,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
         <tr><td class="host">downloads.multicase.com</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td><td class="n">—</td></tr>
         <tr><td class="host">central-db.multicase.com</td><td class="pt hi">5432</td><td class="n">—</td><td class="y hi">Required</td><td class="n">—</td></tr>
         <tr><td class="host">qsarflex-be.multicase.com</td><td class="pt">443</td><td class="n">—</td><td class="n">—</td><td class="y">Required</td></tr>
-        <tr><td class="host">pubchem.ncbi.nlm.nih.gov</td><td class="pt">443</td><td class="o">Optional</td><td class="o">Optional</td><td class="o">Optional</td></tr>
+        <tr><td class="host">d35fy2f4trk71w.cloudfront.net</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td><td class="y">Required</td></tr>
+        <tr><td class="host">pubchem.ncbi.nlm.nih.gov</td><td class="pt">443</td><td class="o">Optional</td><td class="o">Optional</td><td class="n">—</td></tr>
         <tr><td class="host">resources.multicase.com<br>support.multicase.com</td><td class="pt">443</td><td class="o">Convenience</td><td class="o">Convenience</td><td class="o">Convenience</td></tr>
       </tbody>
     </table>
@@ -954,15 +1021,16 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       <p class="nt">
         <b>Read the last row as convenience, not function.</b> Blocking the documentation site or the support
         portal leaves evaluation working — users simply cannot reach the docs or raise a ticket from their
-        desk. <b>Optional</b> means a PubChem lookup, which is user-initiated and always asks first; blocking
-        it removes that one capability and nothing else.
+        desk. <b>Optional</b> means a PubChem lookup. It is always user-initiated, but only DataKurator's
+        lookups ask before sending — Add Compound's Auto Fill queries immediately. Blocking the host
+        removes that one capability and nothing else.
       </p>
     </div>
   </div>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">11</span>
+    <span class="pn">12</span>
   </div>
 </section>
 
@@ -970,9 +1038,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">10</span>
-      <span class="ttl h-sec">Where chemical structures go</span>
-      <span class="tag">Read this one</span>
+      <div class="hd-top"><span class="sn">Section 10</span><span class="tag">Read this one</span></div>
+      <div class="ttl h-sec">Where chemical structures go</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
@@ -1043,7 +1110,7 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">12</span>
+    <span class="pn">13</span>
   </div>
 </section>
 
@@ -1051,8 +1118,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">11</span>
-      <span class="ttl h-sec">Licence verification and usage reporting</span>
+      <div class="hd-top"><span class="sn">Section 11</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Licence verification and usage reporting</div>
     </div>
 
     <div class="sub-h">How verification works</div>
@@ -1078,8 +1145,7 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
     <table class="spec-tbl" style="margin-bottom:5mm;">
       <tbody>
         <tr><td class="k">User identifier</td><td>An opaque account identifier. Not a name, not an email address.</td></tr>
-        <tr><td class="k">Product identifier</td><td>A fixed identifier for QSAR Flex.</td></tr>
-        <tr><td class="k">Module identifiers</td><td>Which modules are being used.</td></tr>
+        <tr><td class="k">Product and modules</td><td>A fixed identifier for QSAR Flex, and which modules are being used.</td></tr>
         <tr><td class="k">Item count</td><td>How many compounds are being evaluated.</td></tr>
         <tr><td class="k">Version and platform</td><td>The application version and which build it is.</td></tr>
         <tr><td class="k">Never included</td><td><b>No chemical structures. No machine or hardware identifiers. No personal data beyond the account identifier.</b></td></tr>
@@ -1092,7 +1158,7 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
         <b>No build works offline — Desktop&nbsp;— Local included.</b> Every launch needs sign-in and a
         licence check, and every evaluation needs a live entitlement check: the module picker fetches your
         licensed modules from <code>user-manager-be.multicase.com</code>, and if that call fails <b>no module
-        can be selected</b>. Holding the reference data locally removes the download, not the dependency.
+        can be selected</b>. Local data removes the download, not the dependency.
       </p>
     </div>
 
@@ -1100,9 +1166,9 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
       <div class="card tint">
         <div class="eyebrow green" style="margin-bottom:2.6mm;">How a test is counted</div>
         <p class="body">
-          One run consumes the number of compounds in the library multiplied by the number of distinct
-          <b>bundles</b> the selected modules belong to. Three modules from one bundle cost the same as one;
-          three bundles cost three times as much. Subscriptions are not metered this way.
+          One run consumes the library size multiplied by the number of distinct <b>bundles</b> the selected
+          modules belong to. Three modules from one bundle cost the same as one; three bundles cost three
+          times as much. A fixed-term subscription is not metered this way; an On&nbsp;Demand subscription is.
         </p>
       </div>
       <div class="card">
@@ -1118,16 +1184,16 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
     <div class="card">
       <div class="eyebrow green" style="margin-bottom:2.6mm;">Enterprise administration</div>
       <p class="body">
-        An enterprise licence carries a fixed number of seats. Your own company administrators assign and
-        remove seats, create users within your company, grant administrator rights, and activate the
-        company's licence — from inside the product, without involving MultiCASE.
+        An enterprise licence carries a fixed number of seats. Your own administrators assign and remove
+        seats, create users, grant administrator rights and activate the company's licence — from inside
+        the product, without involving MultiCASE.
       </p>
     </div>
   </div>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">13</span>
+    <span class="pn">14</span>
   </div>
 </section>
 
@@ -1135,8 +1201,8 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">12</span>
-      <span class="ttl h-sec">Code signing, firewall and antivirus</span>
+      <div class="hd-top"><span class="sn">Section 12</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Code signing, firewall and antivirus</div>
     </div>
 
     <div class="grid g2" style="margin-bottom:5mm;">
@@ -1178,29 +1244,25 @@ https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg<
         <span class="pathblock">/Applications/QSAR Flex.app
   or ~/Applications/QSAR Flex.app
 ~/Library/Application Support/QSARFlex/
-  reference data and application state</span>
+  reference data
+~/Library/WebKit/&lt;build&gt;/
+  web view store and working state</span>
       </div>
     </div>
 
     <div class="sub-h" style="margin-bottom:2.6mm;">Verifying the signature yourself</div>
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div>
-        <span class="plat win">Windows</span>
-        <span class="pathblock">signtool verify /pa /v QSARFlex-Local-Installer.exe</span>
-        <p class="small" style="margin-top:2.4mm;">
-          Expect a valid chain and a timestamp. <code>Get-AuthenticodeSignature</code> reports the same
-          without the Windows SDK.
-        </p>
-      </div>
-      <div>
-        <span class="plat mac">macOS</span>
-        <span class="pathblock">codesign -dv --verbose=4 "/Applications/QSAR Flex.app"
+    <div style="margin-bottom:6mm;">
+      <span class="plat win">Windows</span>
+      <span class="pathblock">signtool verify /pa /v QSARFlex-Local-Installer.exe</span>
+      <p class="small" style="margin-top:2mm; margin-bottom:3.4mm;">
+        Expect a valid chain and a timestamp. <code>Get-AuthenticodeSignature</code> reports the same without the Windows SDK.
+      </p>
+      <span class="plat mac">macOS</span>
+      <span class="pathblock">codesign -dv --verbose=4 "/Applications/QSAR Flex.app"
 spctl -a -vv "/Applications/QSAR Flex.app"</span>
-        <p class="small" style="margin-top:2.4mm;">
-          Expect a Developer ID authority and <code>source=Notarized Developer ID</code> from
-          <code>spctl</code>.
-        </p>
-      </div>
+      <p class="small" style="margin-top:2mm;">
+        Expect a Developer ID authority and <code>source=Notarized Developer ID</code> from <code>spctl</code>.
+      </p>
     </div>
 
     <div class="note">
@@ -1216,7 +1278,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">14</span>
+    <span class="pn">15</span>
   </div>
 </section>
 
@@ -1224,9 +1286,8 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">13</span>
-      <span class="ttl h-sec">Questions to raise with MultiCASE</span>
-      <span class="tag">Not answered here</span>
+      <div class="hd-top"><span class="sn">Section 13</span><span class="tag">Not answered here</span></div>
+      <div class="ttl h-sec">Questions to raise with MultiCASE</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
@@ -1306,7 +1367,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">15</span>
+    <span class="pn">16</span>
   </div>
 </section>
 
@@ -1314,8 +1375,8 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">14</span>
-      <span class="ttl h-sec">Summary checklist for IT</span>
+      <div class="hd-top"><span class="sn">Section 14</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Summary checklist for IT</div>
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:6mm;">
@@ -1357,7 +1418,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
         <div class="checklist">
           <div class="ci"><span class="box"></span><span>Sign-in is required every time the application starts — this is by design, not a fault</span></div>
           <div class="ci"><span class="box"></span><span>Signing in on another machine ends the session on the first</span></div>
-          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company, and always asks before it does</span></div>
+          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company. DataKurator asks first; Add Compound's Auto Fill does not — it queries immediately (section 10)</span></div>
           <div class="ci"><span class="box"></span><span>Support goes through <b>support.multicase.com</b>, with the same account</span></div>
         </div>
       </div>
@@ -1384,7 +1445,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">16</span>
+    <span class="pn">17</span>
   </div>
 </section>
 
@@ -1392,8 +1453,8 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <span class="sn">15</span>
-      <span class="ttl h-sec">Contact</span>
+      <div class="hd-top"><span class="sn">Section 15</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Contact</div>
     </div>
 
     <div class="grid g2" style="margin-bottom:7mm;">
@@ -1411,7 +1472,8 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
         <div class="h-sub" style="margin-bottom:2.6mm;">info@multicase.com</div>
         <p class="body">
           Seats, bundles, managed deployment paths, and evaluation on your behalf where you would rather
-          not deploy the software at all.
+          not deploy the software at all. Existing account holders can raise the same requests in the
+          support portal.
         </p>
       </div>
     </div>
@@ -1464,7 +1526,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">17</span>
+    <span class="pn">18</span>
   </div>
 </section>
 

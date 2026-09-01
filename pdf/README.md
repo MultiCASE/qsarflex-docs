@@ -8,8 +8,8 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 
 | File | Output | What it is |
 |---|---|---|
-| `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 8pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
-| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 18pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
+| `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
+| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 19pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
 
 ## Build
 
@@ -41,6 +41,12 @@ exists solely to catch that:
 Page furniture — running foot, page number, section number — is drawn per page by the
 markup, not by CSS paged media. Renumbering after inserting or moving a page is manual;
 `check.mjs` will not catch a wrong number, so re-read the proofs.
+
+**Any change to `.pg-head` changes every page's budget.** Moving the section number from a
+baseline-aligned column to an eyebrow above the title added ~5mm of head height, which was
+enough to clip two IT-guide pages that had previously fit. After touching shared vertical
+metrics in `system.css`, re-run `check.mjs` over BOTH documents, not just the one you were
+working on.
 
 ## The design system
 
@@ -89,10 +95,15 @@ python3 pdf/tools/embed-fonts.py     # rewrites fonts.css  (needs network)
 python3 pdf/tools/embed-images.py    # rewrites images.css (needs Pillow)
 ```
 
-`assets/qsarflex-mark.png` came from `QSARFlexMac/scripts/dmg-assets/qsarflex-logo.png`,
-trimmed to its bounding box. `assets/multicase-hex.png` is the MultiCASE hexagon with its
-white wordmark cropped off, so it can sit on any ground; the wordmark is live type in the
-HTML.
+`assets/qsarflex-logo.svg` is fetched verbatim from the public assets CDN —
+`https://d35fy2f4trk71w.cloudfront.net/QSAR%20flex%20Logo.svg`, the same file the product
+serves — so the documents and the product cannot drift apart. Keep it **vector**: it is set
+at 21mm on the cover and as a 172mm watermark, where the old PNG showed its edges, and the
+switch also took `images.css` from 592 KB to 217 KB.
+
+`assets/multicase-hex.png` is the MultiCASE hexagon with its white wordmark cropped off so
+it can sit on any ground; `assets/multicase-logo.png` is the full lockup used in the
+brochure foot.
 
 ## Updating for a new release
 
@@ -109,6 +120,36 @@ HTML.
 3. **Bump the version** in the cover, the running feet and the document-control block.
 4. `node pdf/check.mjs`, then read every proof PNG.
 5. Ship the PDFs from `pdf/out/`.
+
+## Facts that were wrong before round 4, and are easy to get wrong again
+
+Every one of these was stated confidently in an earlier draft and disproved by reading the
+product. Re-check them, do not re-assert them:
+
+- **The Cloud build does download data on first launch** — the model files, ≈27 MB
+  (`DataUpdateService.DownloadDataAsync`: `DownloadFilterModelsAsync` is unconditional, only
+  `DownloadSqliteDbAsync` is gated on `_isSqlite`). Only the ≈4 GB database is Local-only.
+- **Desktop — Local is not "structures never leave"** — Add Compound's Auto Fill sends a SMILES
+  to PubChem on every build, un-gated. Only DataKurator's lookups ask first. Say "not for
+  evaluation", never "never".
+- **Blocking `pubchem.ncbi.nlm.nih.gov` does nothing for the web app** — the browser calls the
+  QSAR Flex backend, which makes the PubChem call server-side.
+- **The 5432 session is not HTTPS and is not verified TLS** — no `SslMode` is set anywhere, so
+  Npgsql's `Prefer` default applies: TLS if offered, plaintext if not, no certificate check.
+- **`d35fy2f4trk71w.cloudfront.net` is a required egress host** on all three builds
+  (`next.config.ts`, `NEXT_PUBLIC_ASSETS`). It was missing from both hostname tables.
+- **The compound library lives in the web view's local storage**, not in a file or a database —
+  `%APPDATA%\QSARFlex\WebView2Main` (roaming) and `~/Library/WebKit/<build>/`. It survives
+  uninstall, has no export, and sign-out clears it. On macOS the folder is named for the .NET
+  build (`com.MultiCASE_Inc..QSARFlex_Local`), **not** the `Info.plist` bundle id — check the
+  real directory before printing a literal.
+- **The catalog's N-Nitrosation record count could not be reproduced** from the shipped resource
+  set, so the brochure prints an em dash. `fundamentals/model-catalog.md` still says 1,238;
+  confirm it with MultiCASE or drop it there too.
+
+One claim that survived review but is **false**: that not all model files ship encrypted. Every
+extension in the shipped set (`.filter .json .txt .txtdb .csv`) is in `PublishData`'s
+`encryptedExts`, and a `.txtdb` on disk is ciphertext. No `.sdf` or `.bin` ships.
 
 ## Known gaps, carried from 4.0
 
