@@ -99,7 +99,7 @@ The one place QSAR Flex handles a password itself is **Account → Security**. C
 **Desktop tokens are never written to disk.** The ID token is held in memory for the lifetime of the process — there is no Keychain entry, no DPAPI blob, no token file. That is why the desktop apps ask you to sign in at every launch, and why closing the app ends the session on that machine. A background timer refreshes the token every five minutes while the app is open.
 {% endhint %}
 
-There is also no offline licence cache: both desktop apps fetch an active licence at launch and will not open without one.
+There is also no offline licence cache, and no build works offline — the desktop apps included. Both fetch an active licence at launch and will not open without one, and every evaluation needs a live entitlement check: opening the module picker fetches the module catalogue and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.
 
 ---
 

@@ -4,7 +4,7 @@
 
 **QSAR Flex** is a computational platform by [MultiCASE](https://multicase.com) for chemical safety assessment and toxicological prediction. It provides high-quality (Q)SAR models, read-across modules, and analysis tools — built for regulatory, pharmaceutical, and environmental science workflows.
 
-Available as a **web application** and as a **desktop application for Windows and macOS**. Every variant runs the same interface and needs an internet connection. Evaluation requires an active license; the desktop apps check for one every time they start.
+Available as a **web application** and as a **desktop application for Windows and macOS**. Every variant runs the same interface and needs an internet connection — **none of them works offline**, the desktop apps included. Sign-in and a license check run at every launch, and every evaluation needs a live entitlement check before you can select a module.
 
 {% hint style="info" %}
 **New in 4.0.** The interface has been rebuilt end to end — a new navigation bar, a ⌘K command bar, a redesigned Library, a two-step DataKurator, and a full Account page for your license. The models and endpoints are unchanged. See [What's New in 4.0](whats-new-4-0.md).
@@ -37,7 +37,7 @@ Available as a **web application** and as a **desktop application for Windows an
 | **Where evaluation runs** | MultiCASE servers | On your machine | On your machine |
 | **Where curation runs** | MultiCASE servers | On your machine | On your machine |
 | **Reference database** | MultiCASE servers | Encrypted database on your machine (~4 GB, downloaded on first launch and again whenever MultiCASE publishes new data) | MultiCASE cloud (PostgreSQL) |
-| **Internet required** | Always | Sign-in and license check at every launch | Sign-in and license check at every launch, plus every evaluation |
+| **Internet required** | Always | Always | Always |
 | **Surrogate Search** | — | ✓ | ✓ |
 | **Cross Similarity** | — | ✓ | ✓ |
 

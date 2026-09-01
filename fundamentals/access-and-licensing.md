@@ -276,7 +276,7 @@ The desktop applications are available to all licensed users, on Windows and on 
 
 Both builds run the prediction models on your workstation. What separates them is where the reference database lives.
 
-**QSAR Flex Local** — the reference database lives on the machine. On first run the app downloads an encrypted copy of roughly 4 GB. An internet connection is still needed for sign-in and the licence check, but the structures you evaluate never leave the workstation.
+**QSAR Flex Local** — the reference database lives on the machine. On first run the app downloads an encrypted copy of roughly 4 GB. The structures you evaluate never leave the workstation, but the variant is **not** usable offline: an internet connection is needed for sign-in and the licence check at every launch, and for the entitlement check that runs each time you open the module picker.
 
 - [⬇️ Download QSAR Flex Local for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 - [⬇️ Download QSAR Flex Local for macOS](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)

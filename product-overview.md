@@ -18,7 +18,7 @@ QSAR Flex is available in three forms. All three share the same interface — th
 | 💻 **Desktop — Local** | Windows and macOS app that evaluates on your machine. Your structures are not sent anywhere for evaluation. On first run it downloads its encrypted model files and a reference database (~4.0 GB). |
 | ☁️ **Desktop — Cloud** | Windows and macOS app with the same interface. Evaluation still runs on your machine — the difference is the reference database, which MultiCASE hosts and the app queries over the network instead of downloading. There is no multi-gigabyte first-run download, but some of those lookups carry the structure you are evaluating to the hosted database. |
 
-Both desktop variants ship for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). Every variant needs an internet connection at launch to sign in and check your licence. **Desktop — Cloud** needs one throughout the session as well, because every evaluation queries the hosted reference database.
+Both desktop variants ship for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). **No variant works offline.** Every one needs an internet connection at launch to sign in and check your licence, and again at every evaluation — the module picker fetches your licensed modules before you can select one. **Desktop — Cloud** needs a connection throughout the session as well, because every evaluation queries the hosted reference database.
 
 > All variants require a valid license — either **individual** or **enterprise**. See [Access & Licensing](fundamentals/access-and-licensing.md) for details.
 
@@ -72,7 +72,7 @@ Load reaction files for structural analysis.
 
 ### 💻 Desktop — Local
 
-Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). Sign-in and a licence check need an internet connection at every launch.
+Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). This variant still is not usable offline: sign-in and a licence check run at every launch, and every evaluation checks your entitlements before you can pick a module.
 
 - [Download for Windows (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 - [Download for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)
