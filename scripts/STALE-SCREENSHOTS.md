@@ -7,33 +7,33 @@
 | Set | State |
 |---|---|
 | Web UI (92 files, 46 light/dark pairs) | **Re-captured 2026-09-01** against the 4.0 UI |
-| Install guides (17 files) | **Still 3.9.0-beta** — blocked, see below |
+| Install guides (17 files) | **Re-captured 2026-09-01** from the **beta** channel |
 | Support portal (23 files, `assets/support/`) | Current; shot 2026-06-03 against the 4.0-era portal |
 
-## Install guides — blocked, not forgotten
+## Install guides — captured from beta, re-do at 4.0 stable
 
-Six frames show the app's own pre-4.0 UI and need re-shooting:
+Captured 2026-09-01 with `CHANNEL=beta` on both platforms, because the branded **stable**
+installer URLs still return HTTP 403 — the 4.0 tag has not run `build-release.yml` yet.
 
-`install-mac-03-signin`, `install-mac-05-data-download`, `install-mac-06-app-ready`,
-`install-win-05-signin`, `install-win-07-data-download`, `install-win-08-app-ready`
+Consequences to be aware of, and to fix when stable exists:
 
-Two more show the web app's `/auth/desktop-return` page and should be re-checked:
-`install-mac-04-desktop-return`, `install-win-06-desktop-return`
+- **Title bars read a beta version**, and the two platforms are not even on the same
+  build: macOS shot `v3.9.0-beta.19`, Windows shot `v3.9.0-beta.32`. Both will read
+  `4.0` once the stable installers are published and these are re-run without
+  `CHANNEL=beta`.
+- **The frames use a real MultiCASE account**, not the demo fixtures the web pass uses
+  (`scripts/.env.local` → `QSARFLEX_EMAIL` / `QSARFLEX_PASS`). Its avatar photo and its
+  licence chip — `∞ 4720 pending billing` — are visible in `install-mac-06-app-ready`
+  and `install-win-08-app-ready`. If that should not be public, re-shoot those two with
+  a demo account.
 
-The rest are OS and installer chrome and are unaffected by the 4.0 UI.
+Re-run with:
 
-**Why they could not be re-shot on 2026-09-01:**
+    ./scripts/capture-mac-install.sh          # stable, once the DMG is live
+    ./scripts/capture-win.sh                  # stable, once the EXE is live
 
-1. `capture-mac-install.sh` downloads the **stable** DMG, and the branded stable URLs
-   still return HTTP 403 — the 4.0 tag has not run `build-release.yml` yet. The script
-   supports `CHANNEL=beta`, but a beta title bar reading `v3.9.0-beta.N` is worse in a
-   4.0 guide than a stale frame.
-2. It also performs a full clean-slate uninstall and reinstall of QSAR Flex on the Mac
-   running it — not something to do as a side effect of a docs pass.
-3. The Windows set needs the Parallels VM and an interactive-logon scheduled task.
-
-**Do them once the 4.0 stable installers are live**, and run them **after** any web pass
-(see the hazard below).
+Both do a **full clean-slate uninstall and reinstall**, and the Local build then
+re-downloads its ~4.0 GB reference database. Budget the time and the bandwidth.
 
 ## Hazards, still true
 
