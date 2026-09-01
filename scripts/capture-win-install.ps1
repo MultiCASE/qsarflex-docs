@@ -264,7 +264,16 @@ Start-Sleep -Seconds 8   # let the workspace render and transient windows settle
 Get-Process msedge -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 } |
   ForEach-Object { [Win]::ShowWindow($_.MainWindowHandle, 6) | Out-Null }
 Start-Sleep -Seconds 1
-$h = $p.MainWindowHandle; Place $h 1600 1000
+# 1600 was wide enough for the 3.x navbar. The 4.0 bar carries the segmented
+# nav, the command bar AND the licence chip, and at 1600 the chip wraps onto two
+# lines ("4720 / pending billing"). Size to the real work area instead, capped so
+# the shot stays a sensible documentation width.
+Add-Type -AssemblyName System.Windows.Forms
+$wa = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+$winW = [Math]::Min(1920, $wa.Width  - 40)
+$winH = [Math]::Min(1120, $wa.Height - 40)
+Log "work area $($wa.Width)x$($wa.Height) -> window ${winW}x${winH}"
+$h = $p.MainWindowHandle; Place $h $winW $winH
 Start-Sleep -Seconds 2
 [Win]::SetForegroundWindow($h) | Out-Null; Start-Sleep -Milliseconds 800
 if (Grab $h '08-app-ready') { Log "saved 08-app-ready" }
