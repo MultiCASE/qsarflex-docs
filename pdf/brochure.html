@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>QSAR Flex 4.0 — Release Brochure</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="images.css">
+<link rel="stylesheet" href="system.css">
+<style>
+/* ---------- cover ---------- */
+.cover { background: var(--paper); padding: 0; }
+.cover .top {
+  flex: 1;
+  padding: 16mm var(--mx) 0 var(--mx);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.cover .pack { margin-top: auto; }
+.cover .watermark {
+  position: absolute;
+  top: 4mm; right: -30mm;
+  width: 172mm; height: 172mm;
+  background-image: var(--img-mark);
+  background-size: contain; background-repeat: no-repeat;
+  opacity: .07;
+}
+.cover .metarow {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 3mm;
+  border-bottom: 0.8pt solid var(--ink);
+}
+.wordmark {
+  display: flex;
+  align-items: flex-start;
+  gap: 5mm;
+}
+.wordmark .qmark {
+  width: 21mm; height: 21mm;
+  background-image: var(--img-mark);
+  background-size: contain; background-repeat: no-repeat;
+  margin-top: 2.4mm;
+}
+.wordmark .name {
+  font-size: 48pt;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: .96;
+  color: var(--ink);
+}
+.wordmark .ver {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 14pt;
+  font-weight: 500;
+  color: var(--green-mid);
+  letter-spacing: -0.01em;
+  margin-top: 4mm;
+}
+.cover .strap {
+  margin-top: 8mm;
+  font-size: 15pt;
+  line-height: 1.32;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  font-weight: 500;
+  max-width: 128mm;
+}
+.cover .strap em { font-style: normal; color: var(--green-mid); }
+.cover .sub {
+  margin-top: 5.5mm;
+  font-size: 10.2pt;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 108mm;
+}
+.cover .newband {
+  margin-top: 10mm;
+  margin-bottom: 9mm;
+  display: flex;
+  gap: 3mm;
+  flex-wrap: wrap;
+}
+.cover .ledger {
+  flex: none;
+  background: var(--ink);
+  color: #fff;
+  padding: 9mm var(--mx) 8mm var(--mx);
+}
+.cover .ledger .lhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 0.5pt solid #363C42;
+  padding-bottom: 2.6mm; margin-bottom: 4mm;
+}
+.cover .ledger .lhead .lt {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7.2pt; letter-spacing: .16em; text-transform: uppercase; color: #7FE3AC;
+}
+.cover .ledger .lhead .lr {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7.2pt; letter-spacing: .12em; text-transform: uppercase; color: #8B949B;
+}
+.bundles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+.bundles .b { display: flex; flex-direction: column; gap: 1.6mm; }
+.bundles .b .bn {
+  font-size: 9.2pt; font-weight: 600; color: #fff; letter-spacing: -0.01em; line-height: 1.15;
+}
+.bundles .b .bc {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.5pt; letter-spacing: .05em; white-space: nowrap; text-transform: uppercase; color: #6EE7A8;
+}
+.bundles .b .bd { font-size: 7.4pt; line-height: 1.42; color: #A8B0B6; }
+.cover .foot {
+  flex: none;
+  padding: 5mm var(--mx) 6mm var(--mx);
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.cover .foot .addr {
+  font-size: 7.6pt; line-height: 1.5; color: var(--ink-3); text-align: right;
+}
+.cover .foot .addr b { color: var(--ink-2); font-weight: 500; }
+.mclogo { display: flex; align-items: center; gap: 2.4mm; }
+.mclogo .hex {
+  width: 7.2mm; height: 8.2mm;
+  background-image: var(--img-mc);
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+}
+.mclogo .wm {
+  font-size: 8.4pt; font-weight: 600; letter-spacing: .14em; color: var(--ink);
+}
+
+/* ---------- flow strip ---------- */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.flow .f {
+  position: relative;
+  padding: 3.4mm 3mm 3.4mm 0;
+  border-top: 1pt solid var(--ink);
+}
+.flow .f:not(:last-child) { padding-right: 4mm; }
+.flow .f .fn {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt; color: var(--green-mid); letter-spacing: .12em; margin-bottom: 1.4mm;
+}
+.flow .f .ft { font-size: 9.2pt; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 1.2mm; }
+.flow .f .fd { font-size: 7.6pt; line-height: 1.45; color: var(--ink-3); }
+
+/* ---------- new-in grid ---------- */
+.newgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.newitem { background: var(--sheet); border: 0.5pt solid var(--rule); border-radius: 1.6mm; padding: 3.6mm 4mm; }
+.newitem .nh { display: flex; align-items: center; gap: 2.4mm; margin-bottom: 2mm; }
+.newitem .nh .idx {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7pt; color: var(--green-mid); letter-spacing: .1em;
+}
+.newitem .nt { font-size: 9.8pt; font-weight: 600; letter-spacing: -0.012em; margin-bottom: 1.6mm; }
+.newitem .nb { font-size: 8.3pt; line-height: 1.48; color: var(--ink-2); }
+
+/* ---------- badge rail (curation classes) ---------- */
+.badges { display: flex; flex-wrap: wrap; gap: 1.8mm; }
+.badge {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.8pt; letter-spacing: .06em;
+  padding: 1mm 2mm; border-radius: 1mm; border: 0.4pt solid transparent;
+}
+.bg-clean { background: var(--green-l2); color: var(--green-d); }
+.bg-fatal { background: var(--amber-l);   color: var(--amber); }
+.bg-mix, .bg-dup, .bg-atom, .bg-arom, .bg-misc, .bg-cas, .bg-name {
+  background: #ECEDE9; color: var(--ink-2);
+}
+
+/* ---------- catalog table ---------- */
+.cat td { font-size: 7.4pt; padding: 1.2mm 2.1mm 1.2mm 0; }
+.cat th { font-size: 6.6pt; }
+.cat .bhead td {
+  background: var(--ink);
+  color: #fff;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 1.2mm 2.4mm;
+  border-bottom: none;
+}
+.cat .bhead td:first-child { border-top-left-radius: 1mm; border-bottom-left-radius: 1mm; }
+.cat .bhead td:last-child  { border-top-right-radius: 1mm; border-bottom-right-radius: 1mm; }
+.cat .bhead td span { color: #6EE7A8; }
+.cat .mn { color: var(--ink); font-weight: 500; }
+.cat .rec { font-family:'Geist Mono', ui-monospace, monospace; font-size: 6.9pt; line-height: 1.42; color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cat td { line-height: 1.42; }
+.cat .basis {
+  font-family:'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt; letter-spacing: .01em; color: var(--green-d);
+  line-height: 1.42;
+  white-space: nowrap;
+}
+.cat .plat { font-family:'Geist Mono', ui-monospace, monospace; font-size: 6.5pt; line-height: 1.42; letter-spacing:.04em; color: var(--ink-3); white-space: nowrap; }
+
+/* ---------- deployment table ---------- */
+.dep th:first-child, .dep td:first-child { width: 30%; }
+.dep td { font-size: 8.2pt; }
+.dep .yes { color: var(--green-mid); font-weight: 600; }
+
+.spec { table-layout: fixed; }
+.spec td { font-size: 7.8pt; padding: 1.7mm 2.5mm; }
+.spec td:first-child { padding-left: 4mm; }
+.spec td:last-child { padding-right: 4mm; }
+.spec .chip { font-size: 6.4pt; white-space: normal; }
+
+/* ---------- closing ---------- */
+.cta {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 2mm;
+  padding: 7mm 7mm;
+  display: flex; align-items: center; justify-content: space-between; gap: 8mm;
+}
+.cta .ct { font-size: 14.5pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.cta .cb { font-size: 8.8pt; line-height: 1.5; color: #B7BEC4; margin-top: 2.6mm; max-width: 88mm; }
+.cta .cm {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.2pt; color: #6EE7A8; white-space: nowrap; text-align: right; line-height: 1.9;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ 01 · COVER ═══════════════════ -->
+<section class="page cover">
+  <div class="top">
+    <div class="watermark"></div>
+    <div class="metarow">
+      <span class="eyebrow">MultiCASE Inc. &nbsp;·&nbsp; Product Release</span>
+      <span class="eyebrow">September 2026</span>
+    </div>
+
+    <div class="pack">
+    <div class="wordmark">
+      <div class="qmark"></div>
+      <div>
+        <div class="name">QSAR&nbsp;Flex</div>
+      </div>
+      <div class="ver">4.0</div>
+    </div>
+
+    <div class="strap">
+      Predictive chemistry for impurities,<br>degradants and drug substances.
+    </div>
+
+    <div class="sub">
+      Build a library, curate it, and evaluate it against MultiCASE models for nitrosamine potency,
+      genotoxicity, ecotoxicity, physicochemical properties and ADME — on the web or entirely on your
+      own machine. Every prediction opens a report that shows the evidence behind it.
+    </div>
+
+    </div>
+
+    <div class="newband">
+      <span class="chip new">New in 4.0 — Rebuilt interface</span>
+      <span class="chip">New DataKurator</span>
+      <span class="chip">New library</span>
+      <span class="chip">Support portal</span>
+    </div>
+  </div>
+
+  <div class="ledger">
+    <div class="lhead">
+      <span class="lt">Model catalog</span>
+      <span class="lr">Five bundles &nbsp;·&nbsp; 24 modules</span>
+    </div>
+    <div class="bundles">
+      <div class="b">
+        <div class="bc">01 / Nitrosamine</div>
+        <div class="bn">CPCA &amp; nitrosation</div>
+        <div class="bd">Potency categorisation, surrogate search, route-level nitrosation risk.</div>
+      </div>
+      <div class="b">
+        <div class="bc">02 / Genotoxicity</div>
+        <div class="bn">Ames mutagenicity</div>
+        <div class="bd">The bacterial reverse-mutation endpoint used in ICH M7 assessments.</div>
+      </div>
+      <div class="b">
+        <div class="bc">03 / Ecotoxicity</div>
+        <div class="bn">Aquatic &amp; fate</div>
+        <div class="bd">Fish, daphnia, algae and ciliate toxicity; BCF, biodegradability, soil adsorption.</div>
+      </div>
+      <div class="b">
+        <div class="bc">04 / Physicochemical</div>
+        <div class="bn">LogP &amp; friends</div>
+        <div class="bd">LogP, water solubility, vapor pressure and boiling point.</div>
+      </div>
+      <div class="b">
+        <div class="bc">05 / ADME</div>
+        <div class="bn">Oral exposure</div>
+        <div class="bd">Bioavailability three ways at once, microsomal stability, CYP and P-gp liabilities.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="mclogo"><div class="hex"></div><div class="wm">MULTICASE</div></div>
+    <div class="addr">
+      <b>MultiCASE Inc.</b><br>
+      5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA<br>
+      qsarflex.com &nbsp;·&nbsp; support.multicase.com
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 02 · HOW IT WORKS ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">01</span>
+      <span class="ttl h-sec">From a list of structures to a defensible answer</span>
+    </div>
+
+    <p class="lead" style="max-width:150mm; margin-bottom:7mm;">
+      QSAR Flex is a workbench, not a single calculator. Assemble a library, clean it, choose the models
+      to run against it, and read the results as a table you can drill into — whether you are screening one
+      impurity or a few thousand.
+    </p>
+
+    <div class="flow" style="margin-bottom:6.5mm;">
+      <div class="f">
+        <div class="fn">STEP 01</div>
+        <div class="ft">Load</div>
+        <div class="fd">SMILES, InChI, SDF, MOL, delimited text or MDL RXN. Drop files on the page or paste structures straight in.</div>
+      </div>
+      <div class="f">
+        <div class="fn">STEP 02</div>
+        <div class="ft">Curate</div>
+        <div class="fd">DataKurator finds mixtures, duplicates, bad atom types and aromaticity faults before they reach a model.</div>
+      </div>
+      <div class="f">
+        <div class="fn">STEP 03</div>
+        <div class="ft">Select</div>
+        <div class="fd">Pick modules from the bundles your licence covers. Everything else stays visible but disabled.</div>
+      </div>
+      <div class="f">
+        <div class="fn">STEP 04</div>
+        <div class="ft">Evaluate</div>
+        <div class="fd">Each compound and reaction is run against each selected module, with progress you can cancel.</div>
+      </div>
+      <div class="f">
+        <div class="fn">STEP 05</div>
+        <div class="ft">Report</div>
+        <div class="fd">Click any outcome to open a self-contained HTML report carrying the evidence behind it.</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:0; gap:3.5mm;">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.4mm;">Prediction methods</div>
+        <div class="h-sub" style="margin-bottom:2.6mm;">Nine ways to answer a question</div>
+        <p class="body" style="margin-bottom:3mm;">
+          A module is not always a regression. The engine carries ordinary least-squares and logistic
+          regression, naive Bayes, random-forest classification and regression, Bayesian networks,
+          expert structural alerts expressed as SMARTS, fragment descriptors, and read-across over a
+          fingerprint reference set — including read-across localised to the environment around a
+          specific alert.
+        </p>
+        <p class="small">
+          The method is chosen when the model is built, so a nitrosamine potency call and a boiling point
+          arrive in the same results table.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Applicability domain</div>
+        <div class="h-sub" style="margin-bottom:2.6mm;">A prediction that says when to distrust it</div>
+        <p class="body" style="margin-bottom:3mm;">
+          Domain is checked explicitly, by similarity to the nearest training-set neighbours or by
+          looking for fragments of your query that the training set never covered. An outcome outside
+          the domain is labelled <span class="path">(out of domain)</span> in the report rather than
+          quietly returned as a number.
+        </p>
+        <p class="small">
+          Where the check is fragment-based, the un-modelled part of the molecule is identified, so you
+          can see <em>which</em> corner of the structure the model has never met.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:auto; padding-top:4mm;">
+      <div class="eyebrow" style="margin-bottom:2.6mm;">Specimen — what a results row looks like</div>
+      <div class="card flush">
+        <table class="tbl-tight spec" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:20%; padding:3.4mm 2.8mm 2.4mm 4mm;">Compound</th>
+              <th style="width:20%;">Module</th>
+              <th style="width:22%;">Outcome</th>
+              <th style="width:38%;">Evidence in the report</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="k" style="padding-left:4mm;">Nitrosamine impurity</td>
+              <td>CPCA Prediction</td>
+              <td><span class="chip">Potency category · acceptable intake</span></td>
+              <td>Decision flow-chart, activating and deactivating features highlighted on the structure</td>
+            </tr>
+            <tr>
+              <td class="k" style="padding-left:4mm;">Nitrosamine impurity</td>
+              <td>Surrogate Search</td>
+              <td><span class="chip">Up to 5 surrogates</span></td>
+              <td>TD<sub>50</sub>, species, reliability score and the regulatory acceptable intake for each surrogate</td>
+            </tr>
+            <tr>
+              <td class="k" style="padding-left:4mm;">API</td>
+              <td>Ames Mutagenicity</td>
+              <td><span class="chip">Call + confidence</span></td>
+              <td>The structural alerts that fired, with the matched atoms drawn on the molecule</td>
+            </tr>
+            <tr>
+              <td class="k" style="padding-left:4mm;">Synthesis route</td>
+              <td>N-Nitrosation Tool</td>
+              <td><span class="chip">Risk per step</span></td>
+              <td>Nitrosamines formed at each step, scavengers and catalysts found, literature references</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note" style="margin-top:4.5mm;">
+        <span class="dot" style="margin-top:1.2mm;"></span>
+        <p class="nt">
+          <b>One file, nothing to unpack.</b> A report is a single self-contained HTML document with the
+          structures drawn inline as vector graphics, and print styling built in — so a browser print turns
+          it into a paginated PDF fit for a dossier, and records the software, its version and the run date.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">01</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 03 · WHAT'S NEW ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">02</span>
+      <span class="ttl h-sec">What is new in 4.0</span>
+      <span class="tag">Interface release</span>
+    </div>
+
+    <p class="lead" style="max-width:150mm; margin-bottom:6mm;">
+      4.0 is a rebuild of everything you touch. The models, the endpoints and the numbers they return
+      are unchanged — this release is about how quickly you can get a library in, get it clean, and get
+      the answer out.
+    </p>
+
+    <div class="newgrid" style="margin-bottom:5mm;">
+      <div class="newitem">
+        <div class="nh"><span class="idx">01</span><span class="tick"></span></div>
+        <div class="nt">One interface, three places to run it</div>
+        <div class="nb">
+          The web app, the Windows desktop app and the macOS desktop app now render the same interface.
+          A 48-pixel navigation bar carries the Library / DataKurator control, the command bar, your
+          licence status, and a light or dark theme that follows your system.
+        </div>
+      </div>
+      <div class="newitem">
+        <div class="nh"><span class="idx">02</span><span class="tick"></span></div>
+        <div class="nt">A command bar for every action</div>
+        <div class="nb">
+          <span class="path">⌘K</span> — or <span class="path">Ctrl K</span> — opens a search over every
+          action in the product. Commands work from any page: run one from DataKurator that belongs to
+          the Library and you are taken there and it fires on arrival. Actions that are not available
+          are still listed, greyed, with the reason why.
+        </div>
+      </div>
+      <div class="newitem">
+        <div class="nh"><span class="idx">03</span><span class="tick"></span></div>
+        <div class="nt">A library you can drop things onto</div>
+        <div class="nb">
+          Drag a file anywhere onto the page or paste SMILES from the clipboard. Compound files and
+          reaction files in the same drop are sorted automatically. Compounds and reactions render as
+          cards with their structure and their results side by side, and any structure zooms into a
+          dialog sized for it.
+        </div>
+      </div>
+      <div class="newitem">
+        <div class="nh"><span class="idx">04</span><span class="tick"></span></div>
+        <div class="nt">DataKurator, rebuilt around one screen</div>
+        <div class="nb">
+          Curation and export now live together instead of behind a third step. Undo and redo cover
+          every change and name it, One Step Cure is a single dialog with counts against every choice,
+          and long runs report named phases and can be cancelled without losing work.
+        </div>
+      </div>
+      <div class="newitem">
+        <div class="nh"><span class="idx">05</span><span class="tick"></span></div>
+        <div class="nt">Your licence, in plain sight</div>
+        <div class="nb">
+          A status chip in the navigation bar shows tests remaining, or Unlimited, or that a licence has
+          expired. The Account page gathers Profile, Security, License and Team into one place, so a
+          question about entitlement no longer needs an email.
+        </div>
+      </div>
+      <div class="newitem">
+        <div class="nh"><span class="idx">06</span><span class="tick"></span></div>
+        <div class="nt">A support portal, not an inbox</div>
+        <div class="nb">
+          Support moves to <span class="path">support.multicase.com</span>, signed in with the same
+          MultiCASE account you use for QSAR Flex. Raise a ticket against a specific product, attach the
+          files that show the problem, and follow the thread — with the status visible instead of guessed at.
+        </div>
+      </div>
+    </div>
+
+    <div class="card flush" style="margin-bottom:4mm;">
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr);">
+        <div style="padding:4.4mm 4.4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Structures</div>
+          <p class="small">Depictions are drawn by the engine in the current theme, so a structure is legible on paper and on a dark screen.</p>
+        </div>
+        <div style="padding:4.4mm 4.4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Empty states</div>
+          <p class="small">Every blank screen now says what to do next, and offers the action that does it.</p>
+        </div>
+        <div style="padding:4.4mm 4.4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Partial runs</div>
+          <p class="small">If a run returns fewer results than it was given, a banner says so — nothing is quietly presented as complete.</p>
+        </div>
+        <div style="padding:4.4mm 4.4mm;">
+          <div class="eyebrow" style="margin-bottom:2mm;">Cancelling</div>
+          <p class="small">Long operations report named phases and stop cleanly, telling you exactly what did and did not change.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="dot" style="margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Unchanged in 4.0.</b> Every model, every endpoint, every record count and every number a
+        model returns. Licence types are unchanged too — subscription, on-demand subscription and
+        pay-per-test, individual or enterprise. If you have validated a QSAR Flex result, 4.0 does not
+        move it.
+      </p>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">02</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 04 · DATAKURATOR ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">03</span>
+      <span class="ttl h-sec">DataKurator — get the library right first</span>
+    </div>
+
+    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
+      A model can only be as good as the structure you hand it. DataKurator checks a set the moment it
+      loads, tells you exactly what is wrong with each row, and gives you bulk and single-row tools to
+      fix it — with undo behind every change.
+    </p>
+
+    <div class="grid g2" style="margin-bottom:6mm;">
+      <div class="stack" style="gap:4mm;">
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">What it looks for</div>
+          <p class="body" style="margin-bottom:3mm;">
+            Every row is classified as it loads, and a row can carry more than one finding. The summary
+            counts clean rows, rows with issues, and rows split out of mixtures.
+          </p>
+          <div class="badges">
+            <span class="badge bg-clean">Clean</span>
+            <span class="badge bg-mix">Mixture</span>
+            <span class="badge bg-dup">Duplicate</span>
+            <span class="badge bg-atom">AtomType</span>
+            <span class="badge bg-arom">Aromaticity</span>
+            <span class="badge bg-fatal">Fatal</span>
+            <span class="badge bg-misc">Misc</span>
+            <span class="badge bg-cas">CasMismatch</span>
+            <span class="badge bg-name">NameMismatch</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">Row by row</div>
+          <div class="bul dense">
+            <div class="li">Edit a name or a SMILES in place; the table asks you to re-analyse afterwards</div>
+            <div class="li">Expand a mixture, tick the components you want, and split it into its own rows</div>
+            <div class="li">Look a single compound up in PubChem to fill a missing name or CAS</div>
+            <div class="li">Delete a row, or rename it, from the row menu</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:4mm;">
+        <div class="card tint">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">One Step Cure</div>
+          <div class="h-sub" style="margin-bottom:2.6mm;">Bulk correction, with the counts up front</div>
+          <p class="body" style="margin-bottom:3mm;">
+            One dialog, four decisions, each showing how many rows it applies to. Mixtures and salts can
+            be removed, separated, or reduced to the largest part. Duplicates can be removed or collapsed
+            by highest, lowest or averaged activity. Atom-type and other errors can be removed or left
+            for manual repair.
+          </p>
+          <p class="body">
+            A further section adds optional passes: strip chiral tags, neutralise negative charges,
+            neutralise positive charge on nitrogen, and verify structures against PubChem.
+          </p>
+        </div>
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">Curation asks before it looks anything up</div>
+          <p class="body">
+            DataKurator never contacts PubChem during the initial analysis. Any lookup it makes — a single
+            row or the whole set — first raises a dialog naming exactly what would be sent and the endpoint
+            it would go to, and waits for you to agree. Elsewhere, the Auto Fill button in Add Compound is
+            itself the instruction to look a compound up.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card flush" style="margin-bottom:5mm;">
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr);">
+        <div style="padding:4mm 4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Undo / redo</div>
+          <p class="small">Fifty steps deep, and every step is named — “Undo One Step Cure”, “Undo Split into 3 components”.</p>
+        </div>
+        <div style="padding:4mm 4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Change summaries</div>
+          <p class="small">A bulk run finishes in a summary you can filter down to just the rows that still need attention.</p>
+        </div>
+        <div style="padding:4mm 4mm; border-right:0.5pt solid var(--rule);">
+          <div class="eyebrow" style="margin-bottom:2mm;">Export</div>
+          <p class="small">Download the clean rows or everything, as SMILES or SDF, without leaving the curation screen.</p>
+        </div>
+        <div style="padding:4mm 4mm;">
+          <div class="eyebrow" style="margin-bottom:2mm;">Hand-off</div>
+          <p class="small">Load the clean compounds straight into the evaluation library in one click.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="dot" style="margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Curation is also built into loading.</b> Add compounds anywhere in QSAR Flex and the same
+        checks run. If something is wrong you are told how many rows and how many findings, and offered
+        the choice of adding them anyway or sending the set straight to DataKurator to fix.
+      </p>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">03</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 05 · NITROSAMINE / REACTIONS ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">04</span>
+      <span class="ttl h-sec">Nitrosamines, and the routes that make them</span>
+    </div>
+
+    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
+      QSAR Flex evaluates synthesis routes, not only isolated structures. Load a multi-step scheme as
+      reaction SMILES or MDL RXN files and the same evaluation machinery asks where in the process an
+      N-nitrosamine could form.
+    </p>
+
+    <div class="grid g2" style="margin-bottom:6mm; align-items:start;">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Potency categorisation</div>
+        <div class="h-sub" style="margin-bottom:3mm;">CPCA, with the decision drawn out</div>
+        <p class="body" style="margin-bottom:3mm;">
+          The Carcinogenic Potency Categorization Approach report highlights the nitrosamine centre,
+          renders the decision flow-chart with the α-hydrogen, activating and deactivating scores shown
+          at each box, and states the resulting potency category and acceptable intake.
+        </p>
+        <p class="body">
+          Every activating and deactivating feature it found is listed and highlighted on the structure
+          with its own comment — the assessment is auditable rather than asserted.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Read-across</div>
+        <div class="h-sub" style="margin-bottom:3mm;">Surrogates with real carcinogenicity data</div>
+        <p class="body" style="margin-bottom:3mm;">
+          Surrogate search matches the local environment of each nitrosamine centre against MultiCASE's
+          nitrosamine database, returning small-nitrosamine surrogates and NDSRI surrogates with their
+          TD<sub>50</sub>, test species, reliability score and regulatory acceptable-intake values.
+        </p>
+        <p class="body">
+          Cross-similarity builds a full similarity matrix across your library, which is how you group a
+          set of NDSRIs into structural classes before you start.
+        </p>
+      </div>
+    </div>
+
+    <div class="card ink" style="margin-bottom:5mm;">
+      <div class="eyebrow" style="margin-bottom:2.6mm;">Route analysis</div>
+      <div class="h-sub" style="font-size:10.4pt; margin-bottom:3.4mm;">What the nitrosation tool does with a synthesis scheme</div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:6mm;">
+        <div>
+          <div class="h-card" style="color:#fff; margin-bottom:1.8mm;">Nitrosates every step</div>
+          <p class="body" style="font-size:7.4pt;">
+            Each amine in each step is nitrosated in turn, so the tool reports which intermediates could
+            give rise to which nitrosamine products — not just whether the final API is at risk.
+          </p>
+        </div>
+        <div>
+          <div class="h-card" style="color:#fff; margin-bottom:1.8mm;">Reads the reagent list</div>
+          <p class="body" style="font-size:7.4pt;">
+            Reagents are resolved by SMILES, InChI, acronym, name or registry number, and the route is
+            checked for nitrite scavengers and catalysts that change the risk picture.
+          </p>
+        </div>
+        <div>
+          <div class="h-card" style="color:#fff; margin-bottom:1.8mm;">Cites the literature</div>
+          <p class="body" style="font-size:7.4pt;">
+            Similar nitrosation reactions are looked up in the reaction database and returned with their
+            references, so a conclusion can be defended with published precedent.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Genotoxicity</div>
+        <p class="body">
+          Ames mutagenicity predicts the bacterial reverse-mutation outcome — the endpoint at the centre of
+          an ICH M7 assessment — and opens the same evidence-carrying report as every other module, with the
+          structural features behind the call drawn on the molecule.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Oral exposure</div>
+        <p class="body">
+          The ADME bundle answers oral bioavailability three ways side by side — measured data, close
+          analogues and a QSAR model, one catalog module each — and the assessment adds a rule-based
+          cross-check, microsomal stability, CYP3A4, CYP2D6, CYP2C9 and P-gp substrate potential, and a
+          BCS class.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">04</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 06 · CATALOG ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">05</span>
+      <span class="ttl h-sec">The model catalog</span>
+      <span class="tag">Unchanged in 4.0</span>
+    </div>
+
+    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
+      Seventeen modules in five bundles; a licence grants every module or a named list. <b>Basis</b> says
+      what kind of answer you get — measured data, a rule, a read-across, or a statistical model — because
+      that decides how a result is used and defended.
+    </p>
+
+    <table class="cat">
+      <thead>
+        <tr><th style="width:23%">Module</th><th style="width:16%">Basis</th><th style="width:9%">Records</th><th style="width:13%">Available</th><th style="width:39%">What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr class="bhead"><td colspan="5">Nitrosamine bundle <span>— N-nitrosamine impurity assessment, ICH M7 and EMA CPCA workflows</span></td></tr>
+        <tr><td class="mn">CPCA Prediction</td><td class="basis">Rule-based</td><td class="rec">—</td><td class="plat">Web · Desktop</td><td>Assigns each N-nitrosamine centre a potency category from its α-hydrogen count and its activating and deactivating features; the most potent sets the acceptable intake.</td></tr>
+        <tr><td class="mn">Surrogate Search</td><td class="basis">Read-across</td><td class="rec">209</td><td class="plat">Desktop only</td><td>Surrogates with animal carcinogenicity data, matched on the nitrosamine centre’s local environment.</td></tr>
+        <tr><td class="mn">N-Nitrosation</td><td class="basis">Rule-based</td><td class="rec">1,238</td><td class="plat">Web · Desktop</td><td>Whether a compound — or any step of a route — can form an N-nitrosamine under manufacturing conditions.</td></tr>
+        <tr><td class="mn">Cross Similarity</td><td class="basis">Similarity</td><td class="rec">—</td><td class="plat">Desktop only</td><td>A full N×N structural similarity matrix across the library, for grouping NDSRIs by class.</td></tr>
+        <tr class="bhead"><td colspan="5">Genotoxicity bundle <span>— the bacterial reverse-mutation endpoint, by measured data</span></td></tr>
+        <tr><td class="mn">Ames Mutagencity</td><td class="basis">Experimental data</td><td class="rec">463</td><td class="plat">Web · Desktop</td><td>Measured Ames outcomes by exact-structure lookup against a set of N-nitroso compounds. A structure in the set returns its result; anything else returns a dash.</td></tr>
+        <tr class="bhead"><td colspan="5">Ecotoxicity bundle <span>— adverse impact on the natural environment</span></td></tr>
+        <tr><td class="mn">Fathead Minnow 96h LC50</td><td class="basis">Statistical QSAR</td><td class="rec">920</td><td class="plat">Web · Desktop</td><td>Acute toxicity to <em>Pimephales promelas</em> over 96 hours.</td></tr>
+        <tr><td class="mn">Daphnia 48h LC50</td><td class="basis">Statistical QSAR</td><td class="rec">2,124</td><td class="plat">Web · Desktop</td><td>Acute toxicity to <em>Daphnia magna</em> over 48 hours.</td></tr>
+        <tr><td class="mn">Tetrahymena 48h GC50</td><td class="basis">Statistical QSAR</td><td class="rec">1,898</td><td class="plat">Web · Desktop</td><td>48-hour growth concentration causing 50% inhibition.</td></tr>
+        <tr><td class="mn">Algae 72h EC50</td><td class="basis">Statistical QSAR</td><td class="rec">1,377</td><td class="plat">Web · Desktop</td><td>72-hour algal growth inhibition — required for EU environmental classification.</td></tr>
+        <tr><td class="mn">Bio Concentration Factor</td><td class="basis">Statistical QSAR</td><td class="rec">563</td><td class="plat">Web · Desktop</td><td>How readily a compound accumulates in aquatic organisms relative to ambient water.</td></tr>
+        <tr><td class="mn">Ready Biodegradability</td><td class="basis">Statistical QSAR</td><td class="rec">1,443</td><td class="plat">Web · Desktop</td><td>Aerobic biodegradation within 28 days, per OECD Test 301.</td></tr>
+        <tr><td class="mn">Soil Adsorption</td><td class="basis">Statistical QSAR</td><td class="rec">651</td><td class="plat">Web · Desktop</td><td>Organic carbon-normalised soil adsorption coefficient (K<sub>oc</sub>).</td></tr>
+        <tr class="bhead"><td colspan="5">Physicochemical bundle <span>— formulation, bioavailability and environmental fate</span></td></tr>
+        <tr><td class="mn">LogP</td><td class="basis">Experimental → QSAR</td><td class="rec">12,645</td><td class="plat">Web · Desktop</td><td>Octanol–water partition coefficient.</td></tr>
+        <tr><td class="mn">Water Solubility</td><td class="basis">Experimental → QSAR</td><td class="rec">3,800</td><td class="plat">Web · Desktop</td><td>Water solubility at 25 °C.</td></tr>
+        <tr><td class="mn">Vapor Pressure</td><td class="basis">Experimental → QSAR</td><td class="rec">1,829</td><td class="plat">Web · Desktop</td><td>Vapor pressure at 25 °C.</td></tr>
+        <tr><td class="mn">Boiling Point</td><td class="basis">Experimental → QSAR</td><td class="rec">4,890</td><td class="plat">Web · Desktop</td><td>Boiling point of organic compounds.</td></tr>
+        <tr class="bhead"><td colspan="5">ADME bundle <span>— systemic availability after oral exposure</span></td></tr>
+        <tr><td class="mn">Oral Bioavailability</td><td class="basis">Four methods</td><td class="rec">1,594</td><td class="plat">Web · Desktop</td><td>Oral bioavailability four ways — measured data, close analogues, a QSAR model, a rule — plus microsomal stability, CYP3A4 / CYP2D6 / CYP2C9 and P-gp substrate potential, formulation sensitivity and a BCS class, all sections of one report.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note" style="margin-top:5mm;">
+      <span class="dot" style="margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Why two modules are desktop-only.</b> Surrogate Search and Cross Similarity read across the whole
+        reference database rather than fetching one record, which the web build's service does not expose.
+        Both desktop builds run them.
+      </p>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">05</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 08 · DEPLOYMENT & LICENSING ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">06</span>
+      <span class="ttl h-sec">Where it runs, and how you pay for it</span>
+    </div>
+
+    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
+      The interface is identical in all three. What differs is where the models run and where the
+      reference data they consult lives — and therefore whether your structures ever leave the machine.
+      Only the <b>Desktop — Local</b> build keeps everything on the workstation.
+    </p>
+
+    <table class="dep" style="margin-bottom:7mm;">
+      <thead>
+        <tr><th></th><th>Web application</th><th>Desktop — Local</th><th>Desktop — Cloud</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="k">Runs on</td><td>Any modern browser</td><td>Windows x64 · macOS 12+ (Apple Silicon)</td><td>Windows x64 · macOS 12+ (Apple Silicon)</td></tr>
+        <tr><td class="k">Where the models run</td><td>MultiCASE cloud</td><td class="yes">Your machine</td><td class="yes">Your machine</td></tr>
+        <tr><td class="k">Reference database</td><td>Hosted by MultiCASE</td><td class="yes">On your machine</td><td>Hosted by MultiCASE</td></tr>
+        <tr><td class="k">Do structures leave the machine?</td><td>Yes — sent for evaluation</td><td class="yes">No</td><td>Yes — in reference lookups</td></tr>
+        <tr><td class="k">Works offline</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td class="k">Reference data download</td><td>None</td><td>≈4 GB on first launch</td><td>None</td></tr>
+        <tr><td class="k">Desktop-only modules</td><td>Not available</td><td class="yes">Available</td><td class="yes">Available</td></tr>
+        <tr><td class="k">Internet needed</td><td>Always</td><td>Always</td><td>Always</td></tr>
+        <tr><td class="k">Kept current</td><td>Automatically</td><td>In-app updates, no admin rights</td><td>In-app updates, no admin rights</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid g3" style="margin-bottom:6mm;">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.4mm;">Pay by time</div>
+        <div class="h-sub" style="margin-bottom:2.4mm;">Subscription</div>
+        <p class="body">One price for a fixed term. Run as much as the work needs across the bundles on the licence, without counting.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.4mm;">Pay by volume</div>
+        <div class="h-sub" style="margin-bottom:2.4mm;">Pay-per-test</div>
+        <p class="body">Buy a pool of tests and draw it down. A run costs your library size times the number of bundles you select, and what is left shows in the navigation bar.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.4mm;">Pay in arrears</div>
+        <div class="h-sub" style="margin-bottom:2.4mm;">On-demand</div>
+        <p class="body">No expiry and no ceiling. Work is never blocked mid-assessment; usage is gathered and invoiced afterwards.</p>
+      </div>
+    </div>
+
+    <div class="card ink">
+      <div class="row" style="gap:8mm;">
+        <div style="flex:1;">
+          <div class="eyebrow" style="margin-bottom:2.4mm;">Enterprise</div>
+          <div class="h-sub" style="font-size:10.4pt; margin-bottom:2.8mm;">Your administrators hold the keys</div>
+          <p class="body">
+            An enterprise licence carries a number of seats. Your own company administrators assign and
+            remove those seats, create users, grant administrator rights to colleagues, and activate the
+            company's licence — without opening a ticket with MultiCASE for day-to-day changes.
+          </p>
+        </div>
+        <div style="flex:1;">
+          <div class="eyebrow" style="margin-bottom:2.4mm;">Usage you can audit</div>
+          <p class="body">
+            Every evaluation is recorded against the licence: who ran it, how many tests it consumed,
+            which modules were used, when, and whether it has been billed. Administrators read that
+            history in the product, alongside the invoice reference once it is raised.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">06</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 08 · SUPPORT & GET STARTED ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <span class="sn">07</span>
+      <span class="ttl h-sec">Getting started, and getting help</span>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:7mm; align-items:start;">
+      <div class="stack" style="gap:4mm;">
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:3mm;">First run</div>
+          <div class="steps">
+            <div class="step">
+              <span class="sn">1</span>
+              <div class="sb">
+                <div class="h-card" style="margin-bottom:1mm;">Sign in with your MultiCASE account</div>
+                <p class="small">One account covers QSAR Flex, the support portal and every other MultiCASE product.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="sn">2</span>
+              <div class="sb">
+                <div class="h-card" style="margin-bottom:1mm;">Add a compound, or drop a file</div>
+                <p class="small">A single structure, a batch file, or a synthesis route as RXN files.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="sn">3</span>
+              <div class="sb">
+                <div class="h-card" style="margin-bottom:1mm;">Run Evaluate</div>
+                <p class="small">Choose the modules; anything outside your licence stays visible but disabled.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="sn">4</span>
+              <div class="sb">
+                <div class="h-card" style="margin-bottom:1mm;">Open a result</div>
+                <p class="small">Click any outcome for the full report, then download it or print it to PDF.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card ink">
+          <div class="eyebrow" style="margin-bottom:2.6mm;">Where to get it</div>
+          <div class="stack" style="gap:3mm;">
+            <div>
+              <div class="h-card" style="color:#fff; margin-bottom:1mm;">Web application</div>
+              <p class="body" style="font-size:8.4pt;">qsarflex.com — sign in and start; nothing to install.</p>
+            </div>
+            <div>
+              <div class="h-card" style="color:#fff; margin-bottom:1mm;">Windows and macOS</div>
+              <p class="body" style="font-size:8.4pt;">
+                Download the Local or Cloud build from downloads.multicase.com. Installation is per-user
+                and needs no administrator rights.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:4mm;">
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">Support portal</div>
+          <div class="h-sub" style="margin-bottom:2.6mm;">support.multicase.com</div>
+          <p class="body" style="margin-bottom:3mm;">
+            Signed in with the same MultiCASE account as the application, so there is nothing extra to set
+            up — and every ticket you or a colleague raises stays visible to you.
+          </p>
+          <p class="small">Open · Active · Waiting · Resolved · Closed — the state of every ticket is visible to you.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">Documentation</div>
+          <div class="h-sub" style="margin-bottom:2.6mm;">resources.multicase.com</div>
+          <p class="body">
+            User guides, the model catalog, installation guides for Windows and macOS, licensing and
+            enterprise administration. The Documentation button in the navigation bar opens it directly
+            from the app.
+          </p>
+        </div>
+        <div class="card">
+          <div class="eyebrow green" style="margin-bottom:2.6mm;">Have us run it</div>
+          <p class="body">
+            Send a structure list or a synthesis scheme and MultiCASE will return the same self-contained
+            reports the product generates — no installation, no licence, no IT review. Often the fastest
+            route to a dossier-ready answer when the question is one submission rather than a programme.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div>
+        <div class="ct">Ready to see it on your own compounds?</div>
+        <div class="cb">
+          Request access, ask for a demonstration, or talk to us about an enterprise deployment. If you
+          already have an account, sign in and QSAR Flex 4.0 is waiting for you.
+        </div>
+      </div>
+      <div class="cm">
+        info@multicase.com<br>
+        qsarflex.com<br>
+        support.multicase.com
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — Release Brochure</span></div>
+    <span class="pn">07</span>
+  </div>
+</section>
+
+</body>
+</html>
