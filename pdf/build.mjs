@@ -18,6 +18,7 @@ const OUT = path.join(HERE, 'out')
 const DOCS = {
   brochure: { src: 'brochure.html',        pdf: 'QSAR Flex 4.0 Release Brochure.pdf' },
   it:       { src: 'it-requirements.html', pdf: 'QSAR Flex IT Requirements.pdf' },
+  notes:    { src: 'release-notes.html',    pdf: 'QSAR Flex 4.0 Release Notes.pdf' },
 }
 
 const pick = process.argv[2]

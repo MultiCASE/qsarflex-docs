@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>QSAR Flex 4.0 · Release Notes</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="images.css">
+<link rel="stylesheet" href="system.css">
+<style>
+/* ---------- cover ---------- */
+.cover { background: var(--paper); padding: 0; }
+.cover .top {
+  flex: 1;
+  padding: 16mm var(--mx) 0 var(--mx);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.cover .pack { margin-top: auto; }
+.cover .watermark {
+  position: absolute;
+  top: 4mm; right: -30mm;
+  width: 172mm; height: 172mm;
+  background-image: var(--img-mark);
+  background-size: contain; background-repeat: no-repeat;
+  opacity: .07;
+}
+.cover .metarow {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 3mm;
+  border-bottom: 0.8pt solid var(--ink);
+}
+.wordmark {
+  display: flex;
+  align-items: flex-start;
+  gap: 5mm;
+}
+.wordmark .qmark {
+  width: 21mm; height: 21mm;
+  background-image: var(--img-mark);
+  background-size: contain; background-repeat: no-repeat;
+  margin-top: 2.4mm;
+}
+.wordmark .name {
+  font-size: 48pt;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: .96;
+  color: var(--ink);
+}
+.wordmark .ver {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 44pt;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: -0.03em;
+  line-height: .96;
+  margin-top: 1mm;
+}
+.cover .strap {
+  margin-top: 8mm;
+  font-size: 15pt;
+  line-height: 1.32;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  font-weight: 500;
+  max-width: 128mm;
+}
+.cover .strap em { font-style: normal; color: var(--green-mid); }
+.cover .sub {
+  margin-top: 5.5mm;
+  font-size: 10.2pt;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 108mm;
+}
+.cover .newband {
+  margin-top: 10mm;
+  margin-bottom: 9mm;
+  display: flex;
+  gap: 3mm;
+  flex-wrap: wrap;
+}
+.cover .ledger {
+  flex: none;
+  background: var(--ink);
+  color: #fff;
+  padding: 9mm var(--mx) 8mm var(--mx);
+}
+.cover .ledger .lhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 0.5pt solid #363C42;
+  padding-bottom: 2.6mm; margin-bottom: 4mm;
+}
+.cover .ledger .lhead .lt {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7.2pt; letter-spacing: .16em; text-transform: uppercase; color: #7FE3AC;
+}
+.cover .ledger .lhead .lr {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7.2pt; letter-spacing: .12em; text-transform: uppercase; color: #8B949B;
+}
+.bundles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+.bundles .b { display: flex; flex-direction: column; gap: 1.6mm; }
+.bundles .b .bn {
+  font-size: 9.2pt; font-weight: 600; color: #fff; letter-spacing: -0.01em; line-height: 1.15;
+}
+.bundles .b .bc {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.5pt; letter-spacing: .05em; white-space: nowrap; text-transform: uppercase; color: #6EE7A8;
+}
+.bundles .b .bd { font-size: 7.4pt; line-height: 1.42; color: #A8B0B6; }
+.cover .foot {
+  flex: none;
+  padding: 5mm var(--mx) 6mm var(--mx);
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.cover .foot .addr {
+  font-size: 7.6pt; line-height: 1.5; color: var(--ink-3); text-align: right;
+}
+.cover .foot .addr b { color: var(--ink-2); font-weight: 500; }
+.mclogo {
+  width: 46mm; height: 12.6mm;
+  background-image: var(--img-mc-logo);
+  background-size: contain; background-repeat: no-repeat; background-position: left center;
+}
+
+/* ---------- flow strip ---------- */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.flow .f {
+  position: relative;
+  padding: 3.4mm 3mm 3.4mm 0;
+  border-top: 1pt solid var(--ink);
+}
+.flow .f:not(:last-child) { padding-right: 4mm; }
+.flow .f .fn {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt; color: var(--green-mid); letter-spacing: .12em; margin-bottom: 1.4mm;
+}
+.flow .f .ft { font-size: 9.2pt; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 1.2mm; }
+.flow .f .fd { font-size: 7.6pt; line-height: 1.45; color: var(--ink-3); }
+
+/* ---------- new-in grid ---------- */
+.newgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.newitem { background: var(--sheet); border: 0.5pt solid var(--rule); border-radius: 1.6mm; padding: 3.6mm 4mm; }
+.newitem .nh { display: flex; align-items: center; gap: 2.4mm; margin-bottom: 2mm; }
+.newitem .nh .idx {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7pt; color: var(--green-mid); letter-spacing: .1em;
+}
+.newitem .nt { font-size: 9.8pt; font-weight: 600; letter-spacing: -0.012em; margin-bottom: 1.6mm; }
+.newitem .nb { font-size: 8.3pt; line-height: 1.48; color: var(--ink-2); }
+
+/* ---------- badge rail (curation classes) ---------- */
+.badges { display: flex; flex-wrap: wrap; gap: 1.8mm; }
+.badge {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.8pt; letter-spacing: .06em;
+  padding: 1mm 2mm; border-radius: 1mm; border: 0.4pt solid transparent;
+}
+.bg-clean { background: #DCFCE7; color: #166534; }  /* green-100 / 800   : None      */
+.bg-mix   { background: #FEF9C3; color: #854D0E; }  /* yellow-100 / 800  : Mixture   */
+.bg-dup   { background: #DBEAFE; color: #1E40AF; }  /* blue-100 / 800    : Duplicate */
+.bg-atom  { background: #FFEDD5; color: #9A3412; }  /* orange-100 / 800  : AtomType  */
+.bg-arom  { background: #F3E8FF; color: #6B21A8; }  /* purple-100 / 800  : Aromaticity */
+.bg-fatal { background: #FEE2E2; color: #991B1B; }  /* red-100 / 800     : Fatal     */
+.bg-misc  { background: #F3F4F6; color: #1F2937; }  /* gray-100 / 800    : Misc      */
+.bg-cas   { background: #FEF3C7; color: #92400E; }  /* amber-100 / 800   : CasMismatch  */
+.bg-name  { background: #E0F2FE; color: #075985; }  /* sky-100 / 800     : NameMismatch */
+
+/* ---------- catalog table ---------- */
+.cat td { font-size: 7.3pt; padding: 1.05mm 2mm 1.05mm 0; }
+.cat th { font-size: 6.6pt; }
+.cat .bhead td {
+  background: var(--ink);
+  color: #fff;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 1.05mm 2.4mm;
+  border-bottom: none;
+}
+.cat .bhead td:first-child { border-top-left-radius: 1mm; border-bottom-left-radius: 1mm; }
+.cat .bhead td:last-child  { border-top-right-radius: 1mm; border-bottom-right-radius: 1mm; }
+.cat .bhead td span { color: #6EE7A8; }
+.cat .mn { color: var(--ink); font-weight: 500; }
+.cat .rec { font-family:'Geist Mono', ui-monospace, monospace; font-size: 6.9pt; line-height: 1.42; color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cat td { line-height: 1.42; }
+.cat .basis {
+  font-family:'Geist Mono', ui-monospace, monospace;
+  font-size: 6.9pt; letter-spacing: .01em; color: var(--green-d);
+  line-height: 1.42;
+  white-space: nowrap;
+}
+.cat .plat { font-family:'Geist Mono', ui-monospace, monospace; font-size: 6.5pt; line-height: 1.42; letter-spacing:.04em; color: var(--ink-3); white-space: nowrap; }
+
+/* ---------- deployment table ---------- */
+.dep th:first-child, .dep td:first-child { width: 30%; }
+.dep td { font-size: 8.2pt; }
+.dep .yes { color: var(--green-mid); font-weight: 600; }
+
+.spec { table-layout: fixed; }
+.spec td { font-size: 7.8pt; padding: 1.7mm 2.5mm; }
+.spec th { padding: 3.2mm 2.5mm 1.8mm 2.5mm; }
+.spec td:first-child, .spec th:first-child { padding-left: 4mm; }
+.spec td:last-child,  .spec th:last-child  { padding-right: 4mm; }
+.spec .chip { font-size: 6.4pt; white-space: normal; }
+
+/* ---------- closing ---------- */
+.cta {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 2mm;
+  padding: 7mm 7mm;
+  display: flex; align-items: center; justify-content: space-between; gap: 8mm;
+}
+.cta .ct { font-size: 14.5pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.cta .cb { font-size: 8.8pt; line-height: 1.5; color: #B7BEC4; margin-top: 2.6mm; max-width: 88mm; }
+.cta .cm {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 9.2pt; color: #6EE7A8; white-space: nowrap; text-align: right; line-height: 1.9;
+}
+
+/* ---------- release notes ---------- */
+.rn { display: grid; grid-template-columns: 30mm 1fr; gap: 0 6mm; }
+.rn .g {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 7pt; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green-mid); padding-top: 1.2mm;
+}
+.rn .e { padding-bottom: 4.6mm; }
+.rn .e:last-child { padding-bottom: 0; }
+.rn .t { font-size: 9.6pt; font-weight: 600; color: var(--ink); margin-bottom: 1.2mm; }
+.rn .d { font-size: 8.3pt; line-height: 1.45; color: var(--ink-2); }
+.rn .sep { grid-column: 1 / -1; border-top: 0.4pt solid var(--rule-2); margin: 0 0 4.6mm 0; }
+.was { color: var(--ink-3); }
+.was b { color: var(--ink-2); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="page cover">
+  <div class="top">
+    <div class="watermark"></div>
+    <div class="metarow">
+      <span class="eyebrow">MultiCASE Inc. &nbsp;·&nbsp; Release Notes</span>
+      <span class="eyebrow">September 2026</span>
+    </div>
+
+    <div class="pack">
+    <div class="wordmark">
+      <div class="qmark"></div>
+      <div>
+        <div class="name">QSAR&nbsp;Flex</div>
+      </div>
+      <div class="ver">4.0</div>
+    </div>
+
+    <div class="strap">
+      What has changed,<br>and what has not.
+    </div>
+
+    <div class="sub">
+      For customers upgrading from 3.x. The models, the endpoints and the numbers they return are
+      unchanged. This release rebuilt the interface around them, moved support to a portal, and gave
+      licences their own account pages.
+    </div>
+
+    </div>
+
+    <div class="newband">
+      <span class="chip new">Read first · ⌘K has changed</span>
+      <span class="chip">Rebuilt interface</span>
+      <span class="chip">New DataKurator</span>
+      <span class="chip">Support portal</span>
+    </div>
+  </div>
+
+  <div class="ledger">
+    <div class="lhead">
+      <span class="lt">At a glance</span>
+      <span class="lr">No action needed &nbsp;·&nbsp; no data migration</span>
+    </div>
+    <div class="bundles">
+      <div class="b">
+        <div class="bc">01 / Interface</div>
+        <div class="bn">One navbar</div>
+        <div class="bd">Everything behind a single 48-pixel bar, with a command bar and light or dark themes.</div>
+      </div>
+      <div class="b">
+        <div class="bc">02 / Library</div>
+        <div class="bn">Drop and paste</div>
+        <div class="bd">Drag files onto the page or paste SMILES. Compounds and reactions route themselves.</div>
+      </div>
+      <div class="b">
+        <div class="bc">03 / DataKurator</div>
+        <div class="bn">Two steps, not three</div>
+        <div class="bd">Curate and export on one screen, with fifty steps of named undo.</div>
+      </div>
+      <div class="b">
+        <div class="bc">04 / Licensing</div>
+        <div class="bn">An Account page</div>
+        <div class="bd">Profile, Security, License and Team in one place, with per-licence activity.</div>
+      </div>
+      <div class="b">
+        <div class="bc">05 / Support</div>
+        <div class="bn">A portal</div>
+        <div class="bd">support.multicase.com, signed in with the account you already use.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="mclogo"></div>
+    <div class="addr">
+      <b>MultiCASE Inc.</b><br>
+      5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA<br>
+      qsarflex.multicase.com &nbsp;·&nbsp; support.multicase.com
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 01 · READ FIRST ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <div class="hd-top"><span class="sn">Section 01</span><span class="tag">Read first</span></div>
+      <div class="ttl h-sec">Three things that behave differently</div>
+    </div>
+
+    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
+      Nothing in 4.0 needs a migration and no saved work is affected. Three habits from 3.x will not
+      carry over, and they are the changes most likely to generate a support ticket in the first week.
+    </p>
+
+    <div class="grid g3" style="margin-bottom:6mm;">
+      <div class="card tint">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">01 · Keyboard</div>
+        <div class="h-sub" style="font-size:10.6pt; margin-bottom:2.6mm;">⌘K no longer opens Evaluate</div>
+        <p class="small">
+          In 3.x, <span class="path">⌘K</span> / <span class="path">Ctrl K</span> opened the Evaluate
+          dialog. It now opens the command bar. To evaluate from the keyboard press
+          <span class="path">⌘K</span>, type <b>evaluate</b> and press Enter; the command runs from any
+          page. The green <b>Evaluate</b> button in the Library toolbar is unchanged.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">02 · DataKurator</div>
+        <div class="h-sub" style="font-size:10.6pt; margin-bottom:2.6mm;">Two buttons are gone</div>
+        <p class="small">
+          <b>Proceed to Export</b> no longer exists; export is a <b>Download</b> menu on the Curate
+          screen. <b>PubChem Batch Correct</b> is no longer a button either; it is a checkbox inside the
+          One Step Cure dialog. Curation is now Upload then Curate, not Upload, Curate, Export.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">03 · Library</div>
+        <div class="h-sub" style="font-size:10.6pt; margin-bottom:2.6mm;">An empty Library hides its toolbar</div>
+        <p class="small">
+          <b>+ Compounds</b>, <b>+ Reaction</b>, <b>Evaluate</b> and <b>Clear all</b> are hidden while the
+          Library is empty. In their place is a single card offering the two actions that make sense at
+          that point. The toolbar returns as soon as something is loaded.
+        </p>
+      </div>
+    </div>
+
+    <div class="sub-h" style="margin-bottom:2.6mm;">Where things moved</div>
+    <table class="spec-tbl" style="margin-bottom:6mm;">
+      <thead>
+        <tr><th style="width:34%">In 3.x</th><th>In 4.0</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="k">⌘K opened Evaluate</td><td>⌘K opens the command bar. Type <b>evaluate</b> and press Enter, or use the green <b>Evaluate</b> button.</td></tr>
+        <tr><td class="k">Proceed to Export</td><td>A <b>Download</b> menu in the Curate action bar. There is no third step.</td></tr>
+        <tr><td class="k">PubChem Batch Correct button</td><td>A checkbox inside the One Step Cure dialog.</td></tr>
+        <tr><td class="k">Add Compounds dialog</td><td>Still there, but you can drop files anywhere on the Library or paste SMILES directly.</td></tr>
+        <tr><td class="k">Profile</td><td>An <b>Account</b> page with Profile, Security, License and Team tabs.</td></tr>
+        <tr><td class="k">Emailing support</td><td>A ticket at <b>support.multicase.com</b>, using your existing account.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <span class="dot" style="margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Nothing else about upgrading needs planning.</b> There is no data migration, no licence
+        re-issue and no change to how you sign in. The desktop application updates itself, per user,
+        without administrator rights.
+      </p>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 · Release Notes</span></div>
+    <span class="pn">01</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 02 · WHAT CHANGED ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <div class="hd-top"><span class="sn">Section 02</span><span class="tag"></span></div>
+      <div class="ttl h-sec">What changed</div>
+    </div>
+
+    <div class="rn">
+      <div class="g">Interface</div>
+      <div class="e">
+        <div class="t">One navbar, and a command bar in it</div>
+        <div class="d">
+          The old top navigation is gone. A single 48-pixel bar carries the Library and DataKurator tabs,
+          a <b>Search</b> control on <span class="path">⌘K</span>, your licence status, a Documentation
+          button and the theme control. The command bar searches every action in the product and runs it
+          from any page: ask for a DataKurator command while standing in the Library and it takes you
+          there and fires on arrival. Actions that cannot run are still listed, greyed, with the reason.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Interface</div>
+      <div class="e">
+        <div class="t">Light and dark themes</div>
+        <div class="d">
+          Light, Dark and System. Structures are drawn by the engine in the current text colour, so a
+          depiction is legible on paper and on a dark screen instead of being a white tile.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Library</div>
+      <div class="e">
+        <div class="t">Drop a file anywhere, or paste structures</div>
+        <div class="d">
+          No dialog needed. Drop files onto the page or paste SMILES straight in. The extension decides
+          which importer runs, so compounds and reactions in the same drop are sorted for you. Compound
+          and reaction cards were redrawn for contrast in both themes, and clicking a reaction scheme
+          opens a dialog sized for the scheme rather than for a single molecule.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">DataKurator</div>
+      <div class="e">
+        <div class="t">Upload then Curate, with export on the same screen</div>
+        <div class="d">
+          Loading a file analyses it, so the old third step is gone. The <b>Download</b> menu sits in the
+          Curate action bar. Undo and redo keep a fifty-step history and every step is named, so a tooltip
+          tells you what will come back: <i>Undo One Step Cure</i>, <i>Undo Split into 3 components</i>.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">DataKurator</div>
+      <div class="e">
+        <div class="t">One Step Cure is a single dialog</div>
+        <div class="d">
+          Four decisions, each showing how many rows it applies to, plus optional passes for chiral tags,
+          charge neutralisation and PubChem verification. A bulk run now finishes in a summary you can
+          filter down to the rows that still need attention, rather than silently redrawing the table.
+          PubChem remains opt-in: any lookup raises a dialog naming exactly what would be sent.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Licensing</div>
+      <div class="e">
+        <div class="t">An Account page, and licence activity</div>
+        <div class="d">
+          Profile is now a full <b>Account</b> page with Profile, Security, License and Team tabs. The
+          navbar chip shows tests remaining, Unlimited, or that a licence has expired, and takes you to
+          the same place in one click. Each licence has its own activity page listing every evaluation
+          with its user, modules, item count and billing state. Enterprise users who are not company
+          administrators see an explicit <b>View only</b> badge.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Support</div>
+      <div class="e">
+        <div class="t">A portal instead of an inbox</div>
+        <div class="d">
+          Support has moved to <b>support.multicase.com</b>, signed in with the same MultiCASE account you
+          use for QSAR Flex. Open a ticket for anything: access, licensing, bundles, seats, bugs or
+          questions. Replies come back in the ticket thread, and the status is visible rather than guessed
+          at. Use the portal rather than emailing support or info at multicase.com.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Throughout</div>
+      <div class="e">
+        <div class="t">Runs you can watch, and results you can trust</div>
+        <div class="d">
+          Long operations report named phases instead of a fake percentage, and can be cancelled cleanly.
+          If a run returns fewer results than it was given, a banner says so and names the time, the
+          counts and the modules. Every blank screen says what to do next and offers the action that does
+          it.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 · Release Notes</span></div>
+    <span class="pn">02</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ 03 · WHAT HAS NOT CHANGED ═══════════════════ -->
+<section class="page">
+  <div class="sheet">
+    <div class="pg-head">
+      <div class="hd-top"><span class="sn">Section 03</span><span class="tag">Unchanged</span></div>
+      <div class="ttl h-sec">What has not changed</div>
+    </div>
+
+    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
+      If you have validated a QSAR Flex result, 4.0 does not move it. The release changed the interface
+      around the engine, not the chemistry.
+    </p>
+
+    <table class="spec-tbl" style="margin-bottom:6mm;">
+      <tbody>
+        <tr><td class="k">The models</td><td>The same statistical models, expert alerts, read-across and rule-based methods, with the same applicability-domain and uncertainty handling.</td></tr>
+        <tr><td class="k">The endpoints</td><td>The module catalog and its bundles are unchanged: sixteen modules in four bundles, Nitrosamine, Ecotoxicity, Physicochemical and ADME.</td></tr>
+        <tr><td class="k">The results</td><td>Predictions, reports and their supporting evidence come from the same engine. Every record count and every number a model returns is the same.</td></tr>
+        <tr><td class="k">The licence types</td><td>Coverage is still Individual or Enterprise. The types are still Subscription, On-Demand Subscription and Pay-Per-Test, with the same module and bundle entitlements and the same enterprise seat management.</td></tr>
+        <tr><td class="k">Sign-in</td><td>Still your MultiCASE account, and still the same account across QSAR Flex and the support portal.</td></tr>
+        <tr><td class="k">Where evaluation runs</td><td>The desktop application still evaluates on the workstation. The web application still sends structures to the QSAR Flex service. Neither has changed in this release.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note" style="margin-bottom:6mm;">
+      <span class="dot" style="margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>One correction to earlier documentation.</b> In the web application, DataKurator sends your
+        structures to the QSAR Flex service for its curation checks. Earlier documentation implied the
+        analysis ran in the browser. The desktop application curates in the application process, against
+        the reference data on the machine.
+      </p>
+    </div>
+
+    <div class="cta">
+      <div>
+        <div class="ct">Questions about the upgrade?</div>
+        <div class="cb">
+          Open a ticket at support.multicase.com with the same account you use for QSAR Flex. The full
+          user guides, the model catalog and the IT deployment guide are on resources.multicase.com.
+        </div>
+      </div>
+      <div class="cm">
+        support.multicase.com<br>
+        resources.multicase.com<br>
+        qsarflex.multicase.com
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 · Release Notes</span></div>
+    <span class="pn">03</span>
+  </div>
+</section>
+
+</body>
+</html>

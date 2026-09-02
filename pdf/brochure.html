@@ -202,8 +202,9 @@
 
 .spec { table-layout: fixed; }
 .spec td { font-size: 7.8pt; padding: 1.7mm 2.5mm; }
-.spec td:first-child { padding-left: 4mm; }
-.spec td:last-child { padding-right: 4mm; }
+.spec th { padding: 3.2mm 2.5mm 1.8mm 2.5mm; }
+.spec td:first-child, .spec th:first-child { padding-left: 4mm; }
+.spec td:last-child,  .spec th:last-child  { padding-right: 4mm; }
 .spec .chip { font-size: 6.4pt; white-space: normal; }
 
 /* ---------- closing ---------- */
@@ -381,7 +382,7 @@
         <table class="tbl-tight spec" style="margin:0;">
           <thead>
             <tr>
-              <th style="width:20%; padding-left:4mm;">Compound</th>
+              <th style="width:20%;">Compound</th>
               <th style="width:20%;">Module</th>
               <th style="width:22%;">Outcome</th>
               <th style="width:38%;">Evidence in the report</th>
@@ -744,7 +745,7 @@
       <thead><tr><th style="width:22%">Licensing</th><th>What you are choosing between</th></tr></thead>
       <tbody>
         <tr><td class="k">Subscription</td><td>One price for a fixed term. Run as much as the work needs across the bundles on the licence, without counting.</td></tr>
-        <tr><td class="k" style="padding-left:4mm;">On demand</td><td>The same subscription with no expiry and no ceiling. Work is never blocked mid-assessment; usage is gathered and invoiced afterwards.</td></tr>
+        <tr><td class="k">On-demand subscription</td><td>The same subscription with no expiry and no ceiling. Work is never blocked mid-assessment; usage is gathered and invoiced afterwards.</td></tr>
         <tr><td class="k">Pay-per-test</td><td>A pool of tests drawn down as you go. A run costs your library size times the number of bundles selected; the balance shows in the navigation bar.</td></tr>
       </tbody>
     </table>

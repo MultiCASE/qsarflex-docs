@@ -10,12 +10,13 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 |---|---|---|
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
 | `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
+| `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For existing customers upgrading from 3.x: what changed, where things moved, and what did not change. Reuses the brochure's cover system. |
 
 ## Build
 
 ```bash
-node pdf/build.mjs              # both → pdf/out/
-node pdf/build.mjs brochure     # one
+node pdf/build.mjs              # all three → pdf/out/
+node pdf/build.mjs brochure     # one (brochure | it | notes)
 node pdf/check.mjs              # page-fit check — run after EVERY edit
 ```
 
@@ -133,6 +134,14 @@ brochure foot.
 3. **Bump the version** in the cover, the running feet and the document-control block.
 4. `node pdf/check.mjs`, then read every proof PNG.
 5. Ship the PDFs from `pdf/out/`.
+
+## Three documents, one system
+
+`release-notes.html` shares the brochure's cover CSS by copying its `<style>` block, so a change to
+the cover treatment has to be made in both. It exists because the brochure sells to someone who does
+not have the product, and an existing customer needs the opposite document: what changed, where
+things moved, and an explicit list of what did not. Keep it aligned with `whats-new-4-0.md`, which
+is the authoritative changelog.
 
 ## House style
 
