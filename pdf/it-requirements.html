@@ -212,25 +212,18 @@
   </div>
 
   <div class="contents">
-    <div class="ch"><span class="l">Contents</span><span class="r">15 sections</span></div>
+    <div class="ch"><span class="l">Contents</span><span class="r">8 sections</span></div>
     <div class="toc">
       <div class="t"><span class="tn">01</span><span>System requirements</span></div>
-      <div class="t"><span class="tn">09</span><span>Network requirements</span></div>
-      <div class="t"><span class="tn">02</span><span>Choosing a deployment: web or desktop</span></div>
-      <div class="t"><span class="tn">10</span><span>Where chemical structures go</span></div>
-      <div class="t"><span class="tn">03</span><span>Installation — Windows</span></div>
-      <div class="t"><span class="tn">11</span><span>Licence verification and usage reporting</span></div>
-      <div class="t"><span class="tn">04</span><span>Installation — macOS</span></div>
-      <div class="t"><span class="tn">12</span><span>Code signing, firewall and antivirus</span></div>
-      <div class="t"><span class="tn">05</span><span>Reference data files</span></div>
-      <div class="t"><span class="tn">13</span><span>Questions to raise with MultiCASE</span></div>
-      <div class="t"><span class="tn">06</span><span>Web rendering runtime</span></div>
-      <div class="t"><span class="tn">14</span><span>Summary checklist for IT</span></div>
-      <div class="t"><span class="tn">07</span><span>Software updates</span></div>
-      <div class="t"><span class="tn">15</span><span>Contact</span></div>
-      <div class="t"><span class="tn">08</span><span>Authentication and sessions</span></div>
-      <div class="t"><span class="tn">&nbsp;</span><span></span></div>
+      <div class="t"><span class="tn">05</span><span>Network requirements</span></div>
+      <div class="t"><span class="tn">02</span><span>Installation</span></div>
+      <div class="t"><span class="tn">06</span><span>Choosing a deployment: where structures go</span></div>
+      <div class="t"><span class="tn">03</span><span>Reference data, web runtime and updates</span></div>
+      <div class="t"><span class="tn">07</span><span>Code signing, firewall and antivirus</span></div>
+      <div class="t"><span class="tn">04</span><span>Authentication, licensing and usage</span></div>
+      <div class="t"><span class="tn">08</span><span>Before you approve a rollout</span></div>
     </div>
+  </div>
   </div>
 
   <div class="foot">
@@ -251,34 +244,47 @@
       <div class="ttl h-sec">System requirements</div>
     </div>
 
-    <span class="plat win">Desktop — Windows</span>
-    <table class="spec-tbl" style="margin-bottom:7mm;">
+    <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
+      The <b>web application</b> needs nothing installed and no particular operating system — any current
+      Chrome, Edge, Firefox or Safari, and a connection at all times. The <b>desktop</b> application is
+      below.
+    </p>
+
+    <table class="spec-tbl" style="margin-bottom:6mm;">
+      <thead>
+        <tr><th style="width:22%"></th><th style="width:39%">Windows</th><th>macOS</th></tr>
+      </thead>
       <tbody>
-        <tr><td class="k">Operating system</td><td>64-bit Windows 10 or Windows 11. Microsoft's own floors apply: .NET 8 needs Windows 10 1607+, the WebView2 Evergreen Runtime needs 1803+.</td></tr>
-        <tr><td class="k">Architecture</td><td>x64 only. There is no 32-bit or Arm64 Windows build.</td></tr>
-        <tr><td class="k">Runtime</td><td>.NET 8 — bundled with the application. No separate installation, and no machine-wide .NET is used.</td></tr>
-        <tr><td class="k">Web rendering</td><td>Microsoft Edge WebView2 Runtime. Pre-installed on Windows 11; may need deploying on Windows 10 (see section 06).</td></tr>
-        <tr><td class="k">Memory</td><td>4 GB minimum, 8 GB recommended.</td></tr>
-        <tr><td class="k">Disk — application</td><td>≈285 MB for the per-user installation, measured on a clean install of the preceding 3.9 release. That covers the current version plus Velopack's package cache; an update lands alongside the current one before it is removed, so allow headroom.</td></tr>
-        <tr><td class="k">Disk — reference data</td><td>≈4.0 GB downloaded, ≈4.0 GB on disk. Allow at least 10 GB free (see section 05).</td></tr>
-        <tr><td class="k">Internet connection</td><td>Required at every launch, for sign-in and licence verification. See section 10 for what is transmitted.</td></tr>
+        <tr><td class="k">Operating system</td><td>64-bit Windows 10 or 11. Microsoft&#39;s own floors apply: .NET 8 needs 10 1607+, WebView2 needs 1803+.</td><td>macOS 12 (Monterey) or later.</td></tr>
+        <tr><td class="k">Architecture</td><td><b>x64 only</b> — no 32-bit or Arm64 build.</td><td><b>Apple Silicon only</b> — no Intel or universal build, and Rosetta is not involved.</td></tr>
+        <tr><td class="k">Runtime</td><td>.NET 8, bundled. No separate installation and no machine-wide .NET.</td><td>.NET 9, bundled in the app bundle. The platforms ship different runtimes deliberately.</td></tr>
+        <tr><td class="k">Web rendering</td><td>Edge <b>WebView2</b> — pre-installed on Windows 11, may need deploying on Windows 10 (section 03).</td><td><b>WKWebView</b>, part of macOS. Nothing to install.</td></tr>
+        <tr><td class="k">Memory</td><td colspan="2">4 GB minimum, 8 GB recommended.</td></tr>
+        <tr><td class="k">Disk</td><td>≈285 MB application (measured on a clean install of the preceding 3.9 release, and covering Velopack&#39;s package cache) plus ≈4.0 GB reference data — allow <b>10 GB</b> free.</td><td>≈275 MB bundle plus ≈4.0 GB reference data — allow <b>10 GB</b> free.</td></tr>
+        <tr><td class="k">Internet</td><td colspan="2">Required at <b>every launch</b> for sign-in and licence verification, and for updates. Section 06 sets out what is transmitted.</td></tr>
       </tbody>
     </table>
 
-    <span class="plat mac">Desktop — macOS</span>
-    <table class="spec-tbl" style="margin-bottom:7mm;">
-      <tbody>
-        <tr><td class="k">Operating system</td><td>macOS 12 (Monterey) or later.</td></tr>
-        <tr><td class="k">Architecture</td><td>Apple Silicon (arm64) only. There is no Intel or universal build.</td></tr>
-        <tr><td class="k">Runtime</td><td>.NET 9 — bundled inside the application bundle. No separate installation. <b>The Windows build ships .NET 8; that is deliberate</b> — each platform ships the runtime its own build targets.</td></tr>
-        <tr><td class="k">Web rendering</td><td>WKWebView, part of macOS. Nothing to install or configure.</td></tr>
-        <tr><td class="k">Memory</td><td>4 GB minimum, 8 GB recommended.</td></tr>
-        <tr><td class="k">Disk — application</td><td>≈275 MB for the application bundle, measured on a clean install.</td></tr>
-        <tr><td class="k">Disk — reference data</td><td>≈4.0 GB downloaded, ≈4.0 GB on disk; allow at least 10 GB free.</td></tr>
-        <tr><td class="k">Internet connection</td><td>Required at every launch for sign-in and licence verification, and for updates.</td></tr>
-      </tbody>
-    </table>
-
+    <div class="sub-h">Estate considerations</div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Virtual and shared desktops</div>
+        <p class="small">
+          The install is per-user and so is the ≈4.0&nbsp;GB reference data — there is no shared or
+          machine-wide copy. On non-persistent VDI or multi-session Windows Server that cost multiplies per
+          session or per rebuild. Put it to MultiCASE (section 08) rather than assuming it works; the web
+          application is usually the better fit for those estates.
+        </p>
+      </div>
+      <div class="card">
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">Roaming profiles</div>
+        <p class="small">
+          The application and its data live under the <b>local</b> profile; the only thing in
+          <code>%APPDATA%</code> is the web view&#39;s working state. A roaming-profile policy that syncs that
+          folder will carry a user&#39;s compound library between machines — and its size with it.
+        </p>
+      </div>
+    </div>
   </div>
 
   <div class="pg-foot">
@@ -287,227 +293,69 @@
   </div>
 </section>
 
-<!-- ═══════════════════ 01 · SYSTEM REQUIREMENTS (cont.) ═══════════════════ -->
+<!-- ═══════════════════ 03 · INSTALLATION ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 01</span><span class="tag"></span></div>
-      <div class="ttl h-sec">System requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></div>
+      <div class="hd-top"><span class="sn">Section 02</span><span class="tag">Per-user, no admin rights</span></div>
+      <div class="ttl h-sec">Installation</div>
     </div>
 
-    <span class="plat web">Web application</span>
-    <p class="body" style="margin-bottom:7mm;">
-      Nothing is installed and there is no operating-system requirement: any current version of Chrome,
-      Edge, Firefox or Safari, and an internet connection at all times.
+    <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
+      Both platforms install into the user&#39;s own profile, need no administrator rights, install no
+      service or driver and open no port. The step-by-step walkthrough is on resources.multicase.com.
     </p>
 
-    <div class="sub-h">Estate considerations</div>
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Virtual and shared desktops</div>
-        <p class="body">
-          The install is per-user, and so is the ≈4.0 GB reference data — there is no
-          shared or machine-wide copy. On non-persistent VDI or multi-session Windows Server that cost
-          multiplies per session or per rebuild. Put it to MultiCASE (section 13) rather than assuming it
-          works; the web application is usually the better fit for those estates.
-        </p>
+    <div class="grid g2" style="margin-bottom:5mm;">
+      <div>
+        <span class="plat win">Windows</span>
+        <span class="pathblock">https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe</span>
       </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Roaming profiles</div>
-        <p class="body">
-          The application and its data both live under the local profile, not the roaming one — the only
-          thing in <code>%APPDATA%</code> is the web view's working state. A roaming-profile policy that
-          syncs that folder will carry a user's compound library between machines, and its size with it.
-        </p>
+      <div>
+        <span class="plat mac">macOS</span>
+        <span class="pathblock">https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg</span>
       </div>
     </div>
 
-    <div class="sub-h" style="margin-bottom:2.6mm;">Backup, and what happens when a user leaves</div>
-    <p class="body" style="margin-bottom:4mm;">
-      A user's compound library is held by the interface in the web view's own storage, not in a document
-      they save. Plan for it explicitly: it is the kind of data a reviewer assumes is backed up, and it
-      is not.
-    </p>
-
-    <div class="grid g3" style="margin-bottom:6mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">There is one copy</div>
-        <p class="small">
-          MultiCASE holds none — the backend evaluates and returns, it does not store libraries — and the
-          product has no export of the library as a set. Whatever protects the user's profile is what
-          protects the library.
-        </p>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Back up the profile</div>
-        <p class="small">
-          Include the web view store in the profile backup and the library is covered; section 06 gives
-          its path on each platform. Exclude the ≈4&nbsp;GB reference data — it costs backup space and
-          re-downloads on demand.
-        </p>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Offboarding</div>
-        <p class="small">
-          Uninstalling does <b>not</b> remove it. To decommission a machine, delete the web view store as
-          well as the application — section 06 gives its path, and sections 03 and 04 cover uninstall on
-          Windows and macOS.
-        </p>
-      </div>
-    </div>
-
-    <div class="note warn">
-      <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Signing out clears the library.</b> Sign-out discards the compound library and the evaluation
-        results on that machine, and there is no undo. Tell users to download the results they need before
-        signing out, and treat a forced re-authentication the same way.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">02</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 02 · WEB OR DESKTOP ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 02</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Choosing a deployment: web or desktop</div>
-    </div>
-
-    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
-      There are two, and they differ in one way that matters more than the rest: where the models run, and
-      therefore whether your structures leave the workstation. Everything else in this guide follows from
-      that choice.
-    </p>
-
-    <table style="margin-bottom:5mm;">
+    <table class="spec-tbl" style="margin-bottom:5mm;">
       <thead>
-        <tr><th style="width:34%"></th><th style="width:33%">Desktop</th><th>Web application</th></tr>
+        <tr><th style="width:24%"></th><th style="width:38%">Windows</th><th>macOS</th></tr>
       </thead>
       <tbody>
-        <tr><td class="k">Where the models run</td><td><b>On the workstation</b></td><td>In MultiCASE&#39;s cloud</td></tr>
-        <tr><td class="k">Reference database</td><td><b>On the workstation</b></td><td>Hosted by MultiCASE</td></tr>
-        <tr><td class="k">Structures transmitted to MultiCASE</td><td><b>Never</b> — but Auto Fill sends a SMILES to PubChem (§10)</td><td>Yes — sent for evaluation</td></tr>
-        <tr><td class="k">Outbound protocols</td><td>HTTPS 443 only</td><td>HTTPS 443 only</td></tr>
-        <tr><td class="k">First-launch download</td><td>≈4.0 GB — models and reference database</td><td>None</td></tr>
-        <tr><td class="k">Disk footprint</td><td>≈4.3 GB</td><td>None</td></tr>
-        <tr><td class="k">Usable while offline</td><td><b>No</b></td><td><b>No</b></td></tr>
-        <tr><td class="k">Desktop-only modules</td><td>Available</td><td>Not available</td></tr>
-        <tr><td class="k">Installation</td><td>Per-user, no administrator rights</td><td>Nothing installed</td></tr>
+        <tr><td class="k">Installs to</td><td><span class="path">%LOCALAPPDATA%\QSARFlex-Local\</span> — the current user&#39;s profile</td><td><span class="path">/Applications</span> or <span class="path">~/Applications</span></td></tr>
+        <tr><td class="k">Administrator rights</td><td><b>Not required</b> to install, run or update</td><td><b>Not required</b> for <span class="path">~/Applications</span>; macOS may prompt for <span class="path">/Applications</span></td></tr>
+        <tr><td class="k">Signing</td><td><b>Azure Trusted Signing</b>, SHA-256 with an RFC 3161 timestamp, published as <b>MultiCASE Inc.</b></td><td>Apple <b>Developer ID</b>, <b>notarized and stapled</b>, hardened runtime enabled — Gatekeeper admits it with no user override</td></tr>
+        <tr><td class="k">Detection rule</td><td><span class="path">HKCU\SOFTWARE\…\Uninstall\QSARFlex-Local</span> — DisplayName QSARFlex, Publisher MultiCASE Inc.</td><td>The application bundle at either path above</td></tr>
+        <tr><td class="k">Machine-wide changes</td><td><b>None.</b> No HKLM entry, no service, no scheduled task, no driver — verified on a clean install</td><td><b>None.</b> No kernel extension, launch daemon or background agent</td></tr>
+        <tr><td class="k">URL scheme</td><td><code>qsarflex://</code> under <span class="path">HKCU\Software\Classes</span></td><td><code>qsarflexmac://</code>, registered from the bundle</td></tr>
+        <tr><td class="k">Multiple users</td><td>Each user who runs the installer gets an independent copy in their own profile</td><td>One bundle serves every user; data stays per-user</td></tr>
+        <tr><td class="k">Managed deployment</td><td>A per-user bootstrapper — <b>no silent MSI push</b>. Run it per user from a login script or a distribution tool</td><td>Distributable with Jamf, Mosyle or another MDM</td></tr>
       </tbody>
     </table>
 
-    <div class="note" style="margin-bottom:5mm;">
+    <p class="small" style="margin-bottom:5mm;">
+      The URL scheme is used for one thing only: handing the sign-in result back from the browser to the
+      application on the same machine. At first launch the application offers to download its reference
+      data and the user starts it — section 03.
+    </p>
+
+<div class="note" style="margin-bottom:5mm;">
       <span class="dot" style="margin-top:1.2mm;"></span>
       <p class="nt">
-        <b>If your structures may not leave the network, deploy the desktop build.</b> It holds both the
-        models and their reference data on the workstation and transmits no structures for evaluation.
-        Section 10 sets out precisely what each deployment sends, and by what route.
+        <b>Release channels.</b> There is a <b>stable</b> and a <b>beta</b> channel, with separate
+        installers and update feeds — a beta installation follows the beta feed for all future updates, so
+        deploy stable unless asked otherwise. The URLs above are the stable links; they are republished
+        each release, so confirm them with MultiCASE before circulating them.
       </p>
-    </div>
-
-    <div class="sub-h">Which for which team</div>
-    <div class="grid g2" style="margin-bottom:5mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.4mm;">Deploy the desktop when</div>
-        <div class="bul dense">
-          <div class="li">Structures are covered by a confidentiality or data-residency rule</div>
-          <div class="li">The team needs the desktop-only modules</div>
-          <div class="li">The ≈4 GB first-launch download is acceptable on those machines</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.4mm;">Use the web application when</div>
-        <div class="bul dense">
-          <div class="li">You would rather deploy nothing at all</div>
-          <div class="li">Users move between machines</div>
-          <div class="li">Sending structures to MultiCASE for evaluation is permitted</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="note">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Release channels.</b> The desktop build is published on a <b>stable</b> and a <b>beta</b>
-        channel, with separate installers and separate update feeds. Deploy stable unless you have been
-        asked to test a pre-release: a beta installation follows the beta feed for all future updates. The
-        URLs in sections 03 and 04 are the stable links; they are republished with each release, so confirm
-        them with MultiCASE before circulating them internally.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">03</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 03 · INSTALL WINDOWS ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 03</span><span class="tag">Per-user, no admin rights</span></div>
-      <div class="ttl h-sec">Installation — Windows</div>
-    </div>
-
-    <div class="sub-h">Installers</div>
-    <span class="pathblock" style="margin-bottom:6mm;">https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe</span>
-
-    <div class="sub-h">What the installer does</div>
-    <div class="flowsteps" style="margin-bottom:6mm;">
-      <div class="fs"><span class="n">1</span><div class="b">The downloaded file is a small bootstrapper. It fetches the full installation package from <code>downloads.multicase.com</code> and runs it.</div></div>
-      <div class="fs"><span class="n">2</span><div class="b">The application is installed <b>into the current user's profile</b>, under <code>%LOCALAPPDATA%</code>. No administrator rights are required to install, run or update.</div></div>
-      <div class="fs"><span class="n">3</span><div class="b">An uninstall entry is written to the current user's registry hive, so the application appears in <b>Apps &amp; Features</b> for that user, published by <b>MultiCASE Inc.</b></div></div>
-      <div class="fs"><span class="n">4</span><div class="b">The <code>qsarflex://</code> URL scheme is registered under <code>HKCU\Software\Classes</code>. It is used only to hand the sign-in result back from the browser to the application on the same machine.</div></div>
-      <div class="fs"><span class="n">5</span><div class="b">The application offers to download its reference data at first launch; the user starts it (section 05).</div></div>
-    </div>
-
-    <div class="kv2" style="margin-bottom:6mm;">
-      <div class="i">
-        <div class="l">Uninstall key</div>
-        <div class="v"><span class="path">HKCU\SOFTWARE\…\Uninstall\QSARFlex-Local</span> — verified on a clean install: <b>DisplayName</b> QSARFlex, <b>Publisher</b> MultiCASE Inc., <b>InstallLocation</b> the per-user folder above. Use it as your detection rule.</div>
-      </div>
-      <div class="i">
-        <div class="l">Machine-wide keys</div>
-        <div class="v"><b>None.</b> A clean install writes no <b>HKLM</b> uninstall entry — verified.</div>
-      </div>
-      <div class="i">
-        <div class="l">Services and drivers</div>
-        <div class="v"><b>None.</b> No Windows service, scheduled task or kernel driver — verified on a clean install: zero services and zero scheduled tasks matching the product.</div>
-      </div>
-      <div class="i">
-        <div class="l">Uninstall</div>
-        <div class="v">Removes the application folder and the per-user uninstall entry. It does <b>not</b> remove the reference data or the web view store, which holds the working set including structures — delete both when decommissioning a machine or offboarding a user. Section 06 gives their paths.</div>
-      </div>
-      <div class="i">
-        <div class="l">Multiple users</div>
-        <div class="v">Each user who runs the installer gets an independent installation in their own profile.</div>
-      </div>
-    </div>
-
-    <div class="sub-h">What the user sees on first launch</div>
-    <div class="bul" style="margin-bottom:6mm;">
-      <div class="li">The application opens and asks the user to sign in. Their default browser opens on the MultiCASE Accounts page.</div>
-      <div class="li">After signing in, the browser hands control back to the application. On some configurations Windows asks the user to confirm that the link may open QSAR Flex — this is the operating system's own prompt.</div>
-      <div class="li">The application then offers to download its reference data and shows progress. This is the long step — see section 05 for the size.</div>
-      <div class="li">The workspace opens. A licence status chip in the top right shows what the account is entitled to.</div>
     </div>
 
     <div class="note warn">
       <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
       <p class="nt">
-        <b>Silent and MSI deployment.</b> The current installer is a per-user bootstrapper and does not
-        support silent MSI-style enterprise push deployment. In managed environments it can be run per user
-        from a login script or a software distribution tool. If you need a managed deployment path, raise a
-        request at <b>support.multicase.com</b> so we can discuss the options for your environment.
+        <b>Uninstalling does not remove the data.</b> Windows removes the application folder and the
+        uninstall entry; on macOS you move the bundle to the Trash. Either way the reference data and the
+        web view store — which holds the user&#39;s compound library — are left behind. Section 03 gives both
+        paths; delete them when decommissioning a machine or offboarding a user.
       </p>
     </div>
   </div>
@@ -518,60 +366,64 @@
   </div>
 </section>
 
-<!-- ═══════════════════ 04 · INSTALL MACOS ═══════════════════ -->
+<!-- ═══════════════════ 04 · DATA, RUNTIME, UPDATES ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 04</span><span class="tag">Signed and notarized</span></div>
-      <div class="ttl h-sec">Installation — macOS</div>
+      <div class="hd-top"><span class="sn">Section 03</span><span class="tag">Desktop only</span></div>
+      <div class="ttl h-sec">Reference data, web runtime and updates</div>
     </div>
 
-    <div class="sub-h">Installers</div>
-    <span class="pathblock" style="margin-bottom:6mm;">https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg</span>
+    <div class="sub-h">Reference data</div>
+    <p class="body" style="margin-bottom:4mm;">
+      At first launch the desktop application downloads its model files and reference database —
+      <b>≈4.0 GB</b>, into the signed-in user&#39;s profile. Allow at least <b>10 GB</b> free. Every workstation
+      downloads its own copy; there is no shared location and no peer distribution.
+    </p>
 
-    <div class="sub-h">What the installer does</div>
-    <div class="flowsteps" style="margin-bottom:6mm;">
-      <div class="fs"><span class="n">1</span><div class="b">The download is a disk image. Open it and drag <b>QSAR Flex</b> to your Applications folder.</div></div>
-      <div class="fs"><span class="n">2</span><div class="b">Installing to <code>~/Applications</code> requires no administrator rights. Installing to <code>/Applications</code> may prompt for administrator credentials — that prompt comes from macOS, not from the application.</div></div>
-      <div class="fs"><span class="n">3</span><div class="b">The application and the disk image are signed with an Apple Developer ID certificate and <b>notarized and stapled by Apple</b>, so Gatekeeper admits them without the user overriding any security setting.</div></div>
-      <div class="fs"><span class="n">4</span><div class="b">The <code>qsarflexmac://</code> URL scheme is registered by macOS from the application bundle. It is used only to hand the sign-in result back from the browser to the application on the same machine.</div></div>
-      <div class="fs"><span class="n">5</span><div class="b">The application offers to download its reference data at first launch; the user starts it (section 05).</div></div>
-    </div>
+    <span class="pathblock" style="margin-bottom:5mm;">%LOCALAPPDATA%\QSARFlex\data\          (Windows)
+~/Library/Application Support/QSARFlex/data/  (macOS)</span>
 
-    <div class="kv2" style="margin-bottom:6mm;">
-      <div class="i">
-        <div class="l">Hardened runtime</div>
-        <div class="v">Enabled, with a timestamped signature. The bundle is signed with an explicit entitlements set — outbound network client access and user-selected file access, plus the JIT entitlements the .NET runtime requires.</div>
-      </div>
-      <div class="i">
-        <div class="l">Daemons and extensions</div>
-        <div class="v"><b>None.</b> No kernel extension, launch daemon or background agent is installed.</div>
-      </div>
-      <div class="i">
-        <div class="l">Uninstall</div>
-        <div class="v">Move the application to the Trash. Two directories are left behind and must be removed separately: reference data under <span class="path">~/Library/Application Support/QSARFlex/</span>, and the web view store — which holds the user's compound library — under <span class="path">~/Library/WebKit/</span>, in a folder named for the installed build.</div>
-      </div>
-      <div class="i">
-        <div class="l">MDM deployment</div>
-        <div class="v">The application bundle can be distributed with an MDM solution such as Jamf or Mosyle. Raise a request at <b>support.multicase.com</b> if you would like help.</div>
-      </div>
-    </div>
-
-    <div class="sub-h">What the user sees on first launch</div>
-    <div class="bul" style="margin-bottom:6mm;">
-      <div class="li">macOS confirms that the application was downloaded from the internet, names MultiCASE as the verified developer, and opens it.</div>
-      <div class="li">The application asks the user to sign in and opens their default browser on the MultiCASE Accounts page.</div>
-      <div class="li">After signing in, macOS asks permission to hand the result back to QSAR Flex. This is the operating system's own prompt for a custom URL scheme.</div>
-      <div class="li">The application then offers to download its reference data and shows progress.</div>
-    </div>
-
-    <div class="note">
-      <span class="dot" style="margin-top:1.2mm;"></span>
+    <div class="note warn" style="margin-bottom:6mm;">
+      <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
       <p class="nt">
-        <b>Rosetta is not involved.</b> The macOS build is a native Apple Silicon binary. It will not run on
-        an Intel Mac, and no translation layer is used or required.
+        <b>Stage the rollout.</b> The transfer is one connection with a two-hour ceiling, so a workstation
+        must hold roughly <b>5&nbsp;Mbit/s</b> throughout or it times out and starts again from nothing — an
+        interrupted download does not resume. Twenty workstations on the same morning is twenty
+        simultaneous 4&nbsp;GB transfers.
       </p>
     </div>
+
+    <p class="small" style="margin-bottom:6mm;">
+      Encrypted at rest as shipped — model files with AES-256, the database as encrypted SQLite — under
+      the user&#39;s own permissions. MultiCASE intellectual property, not customer data; the application
+      only downloads and verifies. Nothing you evaluate is written here.
+    </p>
+
+    <div class="sub-h">Web rendering runtime</div>
+    <p class="body" style="margin-bottom:4mm;">
+      The desktop application draws its interface with the operating system&#39;s web view, from files inside
+      the installation — nothing is fetched from the internet to render it. It is not a general-purpose
+      browser: no address bar, no arbitrary navigation, no extensions.
+    </p>
+
+    <table class="spec-tbl" style="margin-bottom:6mm;">
+      <tbody>
+        <tr><td class="k">Windows</td><td>Microsoft Edge <b>WebView2</b>, updated by Microsoft alongside Edge. Included in Windows 11 and present on most updated Windows 10 machines; where missing, pre-deploy the Evergreen Runtime through Group Policy or your management tool.</td></tr>
+        <tr><td class="k">macOS</td><td><b>WKWebView</b>, part of the WebKit framework built into macOS. Nothing to install or configure; updated with macOS itself.</td></tr>
+        <tr><td class="k">Web view store</td><td><span class="path">%APPDATA%\QSARFlex\WebView2Main</span> — the <b>roaming</b> profile — and <span class="path">~/Library/WebKit/</span>, in a folder named for the build and <b>not</b> under Application Support. It holds the cache, the profile and the user&#39;s working set including structures; <b>no credentials, no session tokens</b>, and not separately encrypted — rely on full-disk encryption. Section 06 covers backup and offboarding.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub-h">Software updates</div>
+    <table class="spec-tbl">
+      <tbody>
+        <tr><td class="k">Source and frequency</td><td><code>downloads.multicase.com</code>. Checked at launch and every 15 minutes while running — application and reference data both.</td></tr>
+        <tr><td class="k">User control</td><td>The user is notified and must start the download. <b>Nothing downloads without user action</b>, and no administrator rights are required.</td></tr>
+        <tr><td class="k">Applying an update</td><td><b>The application restarts itself as soon as the download finishes</b>, not at the next launch — and because sign-in runs at every launch, that ends the session. Reference-data updates work the same way and are checksum-verified first.</td></tr>
+        <tr><td class="k">Blocking updates</td><td>Denying outbound access to <code>downloads.multicase.com</code> blocks application <i>and</i> reference-data updates, and on a first install prevents the reference data arriving at all.</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="pg-foot">
@@ -580,78 +432,54 @@
   </div>
 </section>
 
-<!-- ═══════════════════ 05 · REFERENCE DATA ═══════════════════ -->
+<!-- ═══════════════════ 05 · AUTH + LICENSING ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 05</span><span class="tag">Desktop only</span></div>
-      <div class="ttl h-sec">Reference data files</div>
+      <div class="hd-top"><span class="sn">Section 04</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Authentication, licensing and usage</div>
     </div>
 
-    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      The desktop build evaluates compounds on the workstation, which means it needs MultiCASE's
-      model and reference data on the workstation. These files are not bundled with the installer: they are
-      downloaded on first launch and updated independently of the application.
+    <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
+      Passwords are entered on the MultiCASE Accounts page in the user&#39;s own browser and validated there —
+      the application never sees or stores one. The same account serves QSAR Flex and the support portal.
     </p>
 
-    <div class="datarow" style="margin-bottom:6mm;">
-      <div class="stat">
-        <div class="sl">Model files</div>
-        <div class="sv">27 MB</div>
-        <div class="sd">FilterModels.zip — the model definitions and their small reference sets.</div>
-      </div>
-      <div class="stat">
-        <div class="sl">Reference database</div>
-        <div class="sv">4.0 GB</div>
-        <div class="sd">na_master_db.sqlite — the analogue and nitrosamine reference database.</div>
-      </div>
-      <div class="stat">
-        <div class="sl">Free space needed</div>
-        <div class="sv">10 GB</div>
-        <div class="sd">To cover the download and extraction comfortably alongside the application.</div>
-      </div>
-    </div>
+    <table class="spec-tbl" style="margin-bottom:5mm;">
+      <tbody>
+        <tr><td class="k">Desktop sign-in</td><td>Opens <code>auth.multicase.com</code> in the <b>default browser</b>, not an embedded window. The authorisation code is exchanged for tokens <b>server-side</b> — no client secret ships in the application — and the result returns through the registered URL scheme.</td></tr>
+        <tr><td class="k">Tokens at rest</td><td><b>None.</b> Tokens live in memory for the life of the process — nothing in the Windows Credential Manager, the registry, the macOS Keychain or any file. The user therefore signs in at <b>every launch</b>. Identity tokens are short-lived and refresh in the background while the app is open.</td></tr>
+        <tr><td class="k">Sessions</td><td>One live session per product: signing in on another device ends the first. Signing out invalidates the session at the accounts service, not just locally. A network or server error does not sign the user out — only an explicit rejection does.</td></tr>
+        <tr><td class="k">Identity and federation</td><td>An account is an email address belonging to one company; company administrators manage their own users. Password policy and reset sit entirely with MultiCASE Accounts. Raise SAML or OIDC federation with MultiCASE before planning the deployment.</td></tr>
+        <tr><td class="k">What the browser holds</td><td>Web application only: a session cookie plus the working set in <b>browser local storage</b> — compound library, results and the DataKurator set, structures included. It survives a browser restart; only signing out clears it. Nothing goes to a server-side account record.</td></tr>
+      </tbody>
+    </table>
 
-    <div class="sub-h">Where the files are stored</div>
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div>
-        <span class="plat win">Windows</span>
-        <span class="pathblock">%LOCALAPPDATA%\QSARFlex\data\</span>
-      </div>
-      <div>
-        <span class="plat mac">macOS</span>
-        <span class="pathblock">~/Library/Application Support/QSARFlex/data/</span>
-      </div>
-    </div>
-
-    <div class="sub-h">Download behaviour</div>
-    <div class="bul" style="margin-bottom:6mm;">
-      <div class="li">On first launch the application reads a manifest at <code>downloads.multicase.com</code> and downloads whatever is missing before evaluation is allowed.</div>
-      <div class="li">On later launches it re-reads the manifest and offers an update when the published data has changed. Nothing is downloaded without the user starting it.</div>
-      <div class="li">Every download is verified against a <b>SHA-256 checksum</b> — the archive as a whole, each extracted model file, and the database. A corrupted or tampered download is rejected.</div>
-      <div class="li">The data directory is left untouched by application updates, so a version update does not re-download the ≈4.0 GB database.</div>
-      <div class="li">If the machine is offline and the data files are present, the manifest check is skipped without an error. That is a convenience, not offline operation — see section 11.</div>
-    </div>
-
-    <div class="sub-h">Planning the rollout</div>
+    <div class="sub-h">Licence verification</div>
     <p class="body" style="margin-bottom:4mm;">
-      Every workstation downloads its own copy — no shared network location, no peer distribution.
-      Twenty workstations means twenty downloads of ≈4.0 GB each. <b>An interrupted download does not
-      resume; it restarts from the beginning</b>, which is the practical argument for staging a rollout
-      rather than letting a department start on the same morning. The transfer is verified before it
-      replaces anything, so a partial download is never silently accepted — nor salvaged. It is one connection with a
-      two-hour ceiling, so a workstation must hold roughly 5&nbsp;Mbit/s for the whole download or it times
-      out and starts again from nothing.
+      On the desktop the application asks the backend at start-up for the active licence and will not
+      proceed without one; the module picker then re-checks entitlement <b>live before every run</b>. In the
+      web application the evaluation service validates the licence server to server on every run — the
+      browser is never trusted to assert its own entitlement.
     </p>
 
-    <div class="card tint">
-      <div class="eyebrow green" style="margin-bottom:2.6mm;">What sits in the data directory, and who can read it</div>
-      <p class="body">
-        Both are encrypted at rest as shipped — the model files with AES-256, the reference database
-        as an encrypted SQLite database. They are MultiCASE intellectual property, not customer data, and they
-        land in the signed-in user's profile under that user's permissions, so another user on the same
-        machine cannot read them. Traffic runs one way: the application downloads and verifies, and has no
-        code path that uploads anything from this directory. Nothing you evaluate is written here either.
+    <table class="spec-tbl" style="margin-bottom:5mm;">
+      <tbody>
+        <tr><td class="k">A licence request carries</td><td>An opaque account identifier — not a name or an email address — a fixed product identifier, which modules are in use, how many compounds are being evaluated, and the application version and platform.</td></tr>
+        <tr><td class="k">Never included</td><td><b>No chemical structures. No machine or hardware identifiers. No personal data beyond the account identifier.</b></td></tr>
+        <tr><td class="k">How a test is counted</td><td>One run consumes the library size multiplied by the number of distinct <b>bundles</b> the selected modules belong to — three modules from one bundle cost the same as one. A fixed-term subscription is not metered this way; an On&nbsp;Demand subscription is.</td></tr>
+        <tr><td class="k">What MultiCASE retains</td><td>A usage record per evaluation: who ran it, when, how many items, which modules, and its billing state. That is what administrators read back as licence activity and what an invoice reconciles against. <b>No chemical structures are recorded in it.</b></td></tr>
+        <tr><td class="k">Enterprise administration</td><td>An enterprise licence carries a fixed number of seats. Your own administrators assign and remove seats, create users, grant administrator rights and activate the licence — from inside the product, without involving MultiCASE.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
+      <p class="nt">
+        <b>Neither deployment works offline — the desktop included.</b> Every launch needs sign-in and a
+        licence check, and every evaluation needs a live entitlement check against
+        <code>user-manager-be.multicase.com</code>; if that call fails, <b>no module can be selected</b>.
+        Holding the reference data locally removes the download, not the dependency.
       </p>
     </div>
   </div>
@@ -662,234 +490,11 @@
   </div>
 </section>
 
-<!-- ═══════════════════ 06 · RUNTIME + 07 UPDATES ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 06</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Web rendering runtime</div>
-    </div>
-
-    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      The Windows and macOS applications draw their interface with the operating system's web view, loading files
-      from inside the installation. No page is fetched from the internet to render the interface, and no
-      browser is embedded in the installer.
-    </p>
-
-    <div class="grid g2" style="margin-bottom:7mm;">
-      <div class="card">
-        <span class="plat win">Windows — WebView2</span>
-        <p class="body" style="margin-bottom:3mm;">
-          The Windows application hosts a Microsoft Edge WebView2 control. WebView2 is a Microsoft system
-          component, updated by Microsoft alongside Edge, and needs no action from IT once present.
-        </p>
-        <div class="bul dense" style="margin-bottom:3mm;">
-          <div class="li"><b>Windows 11:</b> included by default. Nothing to do.</div>
-          <div class="li"><b>Windows 10:</b> present on most updated machines. Where it is missing, the Evergreen Runtime can be pre-deployed through Group Policy or your software management tool.</div>
-        </div>
-        <p class="small">
-          Microsoft publishes the Evergreen Bootstrapper at developer.microsoft.com/microsoft-edge/webview2/
-        </p>
-      </div>
-      <div class="card">
-        <span class="plat mac">macOS — WKWebView</span>
-        <p class="body">
-          The macOS application hosts WKWebView, part of the WebKit framework built into macOS. There is
-          nothing to install or configure, and it is updated with macOS itself.
-        </p>
-      </div>
-    </div>
-
-    <div class="sub-h">What the web view can and cannot do</div>
-    <div class="grid g2" style="margin-bottom:7mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">It does</div>
-        <div class="bul dense">
-          <div class="li">Render the application's own interface from files inside the installation</div>
-          <div class="li">Call the application's own code for evaluation, curation and reporting</div>
-          <div class="li">Display a generated report, and hand it to the operating system's print dialog</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">It does not</div>
-        <div class="bul dense">
-          <div class="li">Act as a general-purpose browser — there is no address bar and no arbitrary navigation</div>
-          <div class="li">Load or run browser extensions</div>
-          <div class="li">Fetch the interface from the internet; sign-in happens in the user's own browser, not here</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="kv2" style="margin-bottom:6mm;">
-      <div class="i">
-        <div class="l">Web view store — Windows</div>
-        <div class="v"><span class="path">%APPDATA%\QSARFlex\WebView2Main</span> — note this is the <b>roaming</b> profile, not the local one.</div>
-      </div>
-      <div class="i">
-        <div class="l">Web view store — macOS</div>
-        <div class="v"><span class="path">~/Library/WebKit/</span>, in a folder named for the installed build — <b>not</b> under Application Support, which holds only reference data.</div>
-      </div>
-      <div class="i">
-        <div class="l">What it holds</div>
-        <div class="v">The web view's cache and profile, and the interface's own working state — the compound library, the evaluation results and the DataKurator working set, including structures, names and registry numbers. It holds <b>no credentials and no session tokens</b>. It is per-user and <b>not separately encrypted</b>, so on a managed estate rely on full-disk encryption. Deleting it costs the user their whole library, because there is no second copy: MultiCASE keeps none, and the product has no export of the library as a set. Signing out clears it as well.</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">07</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 07 · UPDATES ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 07</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Software updates</div>
-    </div>
-
-    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      The Windows and macOS applications update themselves, per user, without administrator rights. The mechanism is
-      the same on Windows and macOS, and it covers the reference data as well as the application.
-    </p>
-
-    <table class="spec-tbl">
-      <tbody>
-        <tr><td class="k">Update source</td><td><code>downloads.multicase.com</code> — each build and channel has its own feed.</td></tr>
-        <tr><td class="k">Check frequency</td><td>At launch, and every 15 minutes while the application is running. Both application and reference-data updates are checked.</td></tr>
-        <tr><td class="k">User control</td><td>The user is notified and must start the download. <b>Nothing is downloaded without user action.</b></td></tr>
-        <tr><td class="k">Applying an update</td><td><b>The application restarts itself as soon as the download finishes</b> — this is not deferred to the next launch. No administrator rights are required. Because sign-in runs at every launch, accepting an update ends the session and the user signs in again.</td></tr>
-        <tr><td class="k">Blocking updates</td><td>Denying outbound access to <code>downloads.multicase.com</code> blocks application updates — and also blocks reference-data updates and, on a first install, the initial data download.</td></tr>
-      </tbody>
-    </table>
-
-    <div class="sub-h" style="margin-top:6mm;">What the user sees</div>
-    <div class="bul" style="margin-bottom:6mm;">
-      <div class="li">A notice that an update is available. Work in progress is not interrupted and nothing downloads yet.</div>
-      <div class="li">If they accept, the download runs in the background with visible progress.</div>
-      <div class="li">When the download finishes the application closes and reopens on the new version. The previous version's folder is removed once the new one is in place.</div>
-      <div class="li">A reference-data update follows the same pattern and is verified by checksum before it replaces anything.</div>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:5mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">What an update touches</div>
-        <div class="bul dense">
-          <div class="li">The per-user application folder, and the per-user uninstall entry's version value</div>
-          <div class="li">Nothing in the reference-data directory — an application update never re-downloads it</div>
-          <div class="li">No system directory, no machine-wide registry key, no shared component</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">If an update goes wrong</div>
-        <p class="body">
-          There is no in-app rollback. The recovery path is to uninstall and reinstall from the installer
-          for the version you want, which leaves the reference data in place — so recovery on a Local
-          workstation does not mean another ≈4.0 GB download. Raise a ticket before you do this on
-          more than one machine.
-        </p>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top:5mm;">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>A reference-data update can change a prediction, and the previous data is not kept.</b> A data
-        update replaces the files in place; there is no second copy to fall back to. If you validate results
-        against a specific data version, record which version you validated. <b>There is no version pinning
-        inside the application.</b> A workstation follows the feed for the
-        channel it was installed from. If you need a controlled rollout — validating a version before your
-        users receive it — the practical lever is network access to <code>downloads.multicase.com</code>,
-        which you can hold closed until you are ready. Raise a ticket at <b>support.multicase.com</b> if you
-        need to discuss a controlled-update arrangement.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">08</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 08 · AUTHENTICATION ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 08</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Authentication and sessions</div>
-    </div>
-
-    <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      QSAR Flex signs in with a <b>MultiCASE Account</b>. Passwords are never held by the application: they
-      are entered on the MultiCASE Accounts sign-in page and validated by that service directly. The same
-      account is used for QSAR Flex, the support portal and other MultiCASE products.
-    </p>
-
-    <div class="sub-h">Desktop sign-in flow</div>
-    <div class="flowsteps" style="margin-bottom:6mm;">
-      <div class="fs"><span class="n">1</span><div class="b">The user chooses <b>Sign in</b>. The application opens the MultiCASE Accounts page at <code>auth.multicase.com</code> <b>in the user's default browser</b> — not in an embedded window.</div></div>
-      <div class="fs"><span class="n">2</span><div class="b">The user signs in. Credentials go from the browser to the MultiCASE Accounts service over HTTPS and are never seen by the application.</div></div>
-      <div class="fs"><span class="n">3</span><div class="b">The browser is redirected to a QSAR Flex page which hands the result back to the waiting application through the registered URL scheme, on the same machine.</div></div>
-      <div class="fs"><span class="n">4</span><div class="b">The authorisation code is exchanged for tokens <b>server-side</b> by the MultiCASE backend, so no client secret is shipped inside the application. Only a short-lived identity token is returned to the desktop app.</div></div>
-      <div class="fs"><span class="n">5</span><div class="b">The application refreshes that token about every five minutes while it runs, by asking the MultiCASE backend — it never holds a long-lived refresh token itself.</div></div>
-    </div>
-
-    <div class="note" style="margin-bottom:6mm;">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>The desktop applications write no session tokens to disk.</b> Tokens are held in memory for the
-        life of the process. There is nothing in the Windows Credential Manager, the registry, the macOS
-        Keychain or any file on disk to steal — and, as a consequence, <b>the user signs in each time the
-        application is started</b>.
-      </p>
-    </div>
-
-    <div class="sub-h">Session rules</div>
-    <table class="spec-tbl">
-      <tbody>
-        <tr><td class="k">One session per product</td><td>Signing in on another device ends the session on the first. A user cannot hold two live sessions for the same product.</td></tr>
-        <tr><td class="k">Sign-out</td><td>Signing out invalidates the session with the MultiCASE Accounts service, not only locally.</td></tr>
-        <tr><td class="k">Transient failures</td><td>A network or server error does not sign the user out; only an explicit rejection of the session does.</td></tr>
-        <tr><td class="k">Web application</td><td>The web application uses the same accounts service and the same one-session rule. Its session lives in the browser.</td></tr>
-        <tr><td class="k">Identity</td><td>An account is identified by email address and belongs to one company. Company administrators manage their own users (see section 11).</td></tr>
-      </tbody>
-    </table>
-
-    <div class="kv2" style="margin-top:6mm;">
-      <div class="i">
-        <div class="l">Token lifetime</div>
-        <div class="v">Identity tokens are short-lived — minutes, not hours — and refresh in the background while the application is open.</div>
-      </div>
-      <div class="i">
-        <div class="l">What the browser holds (web app)</div>
-        <div class="v">A session cookie, plus the working set in <b>browser local storage</b> — the compound library, the evaluation results and the DataKurator set, including structures and names. It survives a browser restart, and only signing out clears it. Nothing goes to a server-side account record; on a shared machine treat it as you would the desktop web view store (section 06).</div>
-      </div>
-      <div class="i">
-        <div class="l">Password policy and reset</div>
-        <div class="v">Handled entirely by the MultiCASE Accounts service. The application has no password store and no password logic.</div>
-      </div>
-      <div class="i">
-        <div class="l">Federated sign-on</div>
-        <div class="v">QSAR Flex signs in against MultiCASE Accounts. Raise SAML or OIDC federation with MultiCASE before you plan the deployment.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">09</span>
-  </div>
-</section>
-
 <!-- ═══════════════════ 09 · NETWORK ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 09</span><span class="tag">HTTPS 443 only</span></div>
+      <div class="hd-top"><span class="sn">Section 05</span><span class="tag">HTTPS 443 only</span></div>
       <div class="ttl h-sec">Network requirements</div>
     </div>
 
@@ -900,40 +505,27 @@
     </p>
 
     <div class="sub-h">Hostnames to allow</div>
-    <table class="urltbl" style="margin-bottom:6mm;">
+    <p class="body" style="margin-bottom:4mm;">
+      Every rule is outbound on <b>443</b>. Allow only what the deployment you are rolling out needs.
+    </p>
+    <table class="rules" style="margin-bottom:5mm;">
       <thead>
-        <tr><th>Hostname</th><th style="width:23%">Used by</th><th>Purpose</th></tr>
+        <tr><th style="width:31%">Destination</th><th style="width:13%">Desktop</th><th style="width:13%">Web</th><th>Purpose</th></tr>
       </thead>
       <tbody>
-        <tr><td>auth.multicase.com</td><td>Desktop, Web</td><td>MultiCASE Accounts sign-in. Reached from the user's browser.</td></tr>
-        <tr><td>user-manager-be.multicase.com</td><td>Desktop, Web</td><td>Token exchange and refresh, licence verification, usage reporting, user and seat management.</td></tr>
-        <tr><td>downloads.multicase.com</td><td>Desktop</td><td>Installers, application update feeds, and the reference data files.</td></tr>
-        <tr><td>qsarflex.multicase.com<br>www.qsarflex.multicase.com</td><td>Desktop, Web</td><td>The web application. The <code>www</code> host is where the desktop sign-in returns — <b>allow both</b> for the desktop.</td></tr>
-        <tr><td>qsarflex-be.multicase.com</td><td>Web <b>only</b></td><td>The evaluation service: evaluation, report generation, structure depiction and curation from the browser. Confirm against your own account, in case a dedicated endpoint has been provisioned.</td></tr>
-        <tr><td>resources.multicase.com</td><td>Desktop, Web</td><td>Product documentation, opened from the Documentation button. Not required to run an evaluation.</td></tr>
-        <tr><td>support.multicase.com</td><td>Users</td><td>The support portal. Not required to run an evaluation.</td></tr>
-        <tr><td>d35fy2f4trk71w.cloudfront.net</td><td>Desktop, Web</td><td>Static product assets — logos and profile images — loaded by the application interface and the sign-in pages. Carries no chemical data.</td></tr>
-        <tr><td>pubchem.ncbi.nlm.nih.gov</td><td>Desktop <b>only</b></td><td><b>Optional.</b> Compound name, CAS and structure lookups. DataKurator's are gated behind a consent dialog; <b>Add Compound's Auto Fill is not</b>. Blocking this host stops those lookups on the desktop only — in the web application the call is made server-side, so a workstation rule does not affect it.</td></tr>
+        <tr><td class="host">auth.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>MultiCASE Accounts sign-in, reached from the user&#39;s browser.</td></tr>
+        <tr><td class="host">user-manager-be.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>Token exchange and refresh, licence verification, usage reporting, user and seat management.</td></tr>
+        <tr><td class="host">qsarflex.multicase.com<br>www.qsarflex.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>The web application. The <code>www</code> host is where desktop sign-in returns — <b>allow both</b> for the desktop.</td></tr>
+        <tr><td class="host">downloads.multicase.com</td><td class="y">Required</td><td class="n">—</td><td>Installers, update feeds and the reference data files.</td></tr>
+        <tr><td class="host">qsarflex-be.multicase.com</td><td class="n">—</td><td class="y">Required</td><td>The evaluation service: evaluation, reports, depiction and curation. Confirm against your own account in case a dedicated endpoint was provisioned.</td></tr>
+        <tr><td class="host">d35fy2f4trk71w.cloudfront.net</td><td class="y">Required</td><td class="y">Required</td><td>Static product assets — logos and profile images. Carries no chemical data.</td></tr>
+        <tr><td class="host">pubchem.ncbi.nlm.nih.gov</td><td class="o">Optional</td><td class="n">—</td><td><b>Optional.</b> Name, CAS and structure lookups. DataKurator&#39;s ask first; <b>Auto Fill does not</b>. Blocking it stops desktop lookups only — in the web app the call is made server-side.</td></tr>
+        <tr><td class="host">resources.multicase.com<br>support.multicase.com</td><td class="o">Convenience</td><td class="o">Convenience</td><td>Documentation and the support portal. Neither is needed to run an evaluation.</td></tr>
       </tbody>
     </table>
 
-  </div>
 
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">10</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 09 · NETWORK (cont.) ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 09</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Network requirements <span style="color:var(--ink-4); font-weight:500;">— continued</span></div>
-    </div>
-
-    <div class="kv2">
+<div class="kv2">
       <div class="i">
         <div class="l">Proxies</div>
         <div class="v">The system proxy configuration, including a PAC script, is used for HTTPS; there is no separate proxy setting inside the application. <b>The application supplies no proxy credentials</b> and offers nowhere to enter them, so a proxy that requires NTLM, Kerberos or Basic authentication rejects its requests and sign-in, licence checks, updates and the reference-data download all fail. Where an authenticating proxy is enforced, exempt the hostnames in this section from proxy authentication.</div>
@@ -943,55 +535,17 @@
         <div class="v">Where outbound traffic is inspected, the inspection certificate must be trusted by the system trust store — the Windows certificate store, or the macOS keychain. Certificate pinning is not used.</div>
       </div>
       <div class="i">
-        <div class="l">Local IPC</div>
-        <div class="v">The Windows application uses a named pipe and a single-instance mutex to pass the sign-in result between its own processes. Neither is a network socket.</div>
-      </div>
-      <div class="i">
         <div class="l">Inbound</div>
-        <div class="v"><b>Nothing.</b> No inbound firewall rule is needed on the workstation.</div>
+        <div class="v"><b>Nothing.</b> No inbound rule is needed on the workstation. The Windows build passes the sign-in result between its own processes over a named pipe — not a network socket.</div>
       </div>
       <div class="i">
         <div class="l">Where the services sit</div>
-        <div class="v">MultiCASE Accounts, the licensing backend and the usage records it holds, and the evaluation service all run in Amazon Web Services, <b>US East (Ohio)</b>. This applies to both deployments: the desktop build sends no structures, but its sign-in and licence traffic still terminates there. Confirm current arrangements with MultiCASE if you have a data-residency requirement.</div>
+        <div class="v">MultiCASE Accounts, the licensing backend with its usage records, and the evaluation service all run in Amazon Web Services, <b>US East (Ohio)</b> — for both deployments. The desktop sends no structures, but its sign-in and licence traffic still terminates there. Confirm current arrangements if you have a data-residency requirement.</div>
       </div>
     </div>
 
-    <div class="sub-h" style="margin-top:8mm;">The rule set, per deployment</div>
-    <p class="body" style="margin-bottom:4mm;">
-      Allow only what the deployment you are rolling out actually needs. Every rule is outbound; none needs a
-      matching inbound rule.
-    </p>
+    
 
-    <table class="rules" style="margin-bottom:5mm;">
-      <thead>
-        <tr>
-          <th style="width:38%">Destination</th>
-          <th style="width:11%">Port</th>
-          <th style="width:22%">Desktop</th>
-          <th style="width:22%">Web application</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td class="host">auth.multicase.com</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td></tr>
-        <tr><td class="host">user-manager-be.multicase.com</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td></tr>
-        <tr><td class="host">qsarflex.multicase.com<br>www.qsarflex.multicase.com</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td></tr>
-        <tr><td class="host">downloads.multicase.com</td><td class="pt">443</td><td class="y">Required</td><td class="n">—</td></tr>
-        <tr><td class="host">qsarflex-be.multicase.com</td><td class="pt">443</td><td class="n">—</td><td class="y">Required</td></tr>
-        <tr><td class="host">d35fy2f4trk71w.cloudfront.net</td><td class="pt">443</td><td class="y">Required</td><td class="y">Required</td></tr>
-        <tr><td class="host">pubchem.ncbi.nlm.nih.gov</td><td class="pt">443</td><td class="o">Optional</td><td class="n">—</td></tr>
-        <tr><td class="host">resources.multicase.com<br>support.multicase.com</td><td class="pt">443</td><td class="o">Convenience</td><td class="o">Convenience</td></tr>
-      </tbody>
-    </table>
-
-    <div class="note" style="margin-top:6mm;">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Read the last row as convenience, not function.</b> Blocking the documentation site or the
-        support portal leaves evaluation working — users simply cannot reach the docs or raise a ticket.
-        <b>Optional</b> means a PubChem lookup: always user-initiated, but only DataKurator's asks before
-        sending. Blocking that host removes the capability and nothing else.
-      </p>
-    </div>
   </div>
 
   <div class="pg-foot">
@@ -1004,14 +558,28 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 10</span><span class="tag">Read this one</span></div>
-      <div class="ttl h-sec">Where chemical structures go</div>
+      <div class="hd-top"><span class="sn">Section 06</span><span class="tag">Read this one</span></div>
+      <div class="ttl h-sec">Choosing a deployment: where structures go</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
-      This is usually the question that decides the deployment. The answer differs between the two, so
-      both are set out in full.
+      Two deployments, and this is the question that decides between them.
     </p>
+
+    <table style="margin-bottom:5mm;">
+      <thead>
+        <tr><th style="width:34%"></th><th style="width:33%">Desktop</th><th>Web application</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="k">Where the models run</td><td><b>On the workstation</b></td><td>In MultiCASE&#39;s cloud</td></tr>
+        <tr><td class="k">Reference database</td><td><b>On the workstation</b></td><td>Hosted by MultiCASE</td></tr>
+        <tr><td class="k">Structures sent to MultiCASE</td><td><b>Never</b> — but Auto Fill sends a SMILES to PubChem</td><td>Yes — for evaluation</td></tr>
+        <tr><td class="k">First-launch download</td><td>≈4.0 GB — models and reference database</td><td>None</td></tr>
+        <tr><td class="k">Usable while offline</td><td><b>No</b></td><td><b>No</b></td></tr>
+        <tr><td class="k">Desktop-only modules</td><td>Available</td><td>Not available</td></tr>
+        <tr><td class="k">Installation</td><td>Per-user, no admin rights; ≈4.3 GB on disk</td><td>Nothing installed</td></tr>
+      </tbody>
+    </table>
 
     <div class="card ink" style="margin-bottom:4.5mm; padding:4mm 4.4mm;">
       <span class="plat" style="background:#1F5F3F; color:#9FF3C4; margin-bottom:2.4mm;">Desktop</span>
@@ -1023,7 +591,7 @@
       <div class="eyebrow" style="margin-bottom:2.4mm;">The only things that leave the machine</div>
       <div class="bul dense" style="gap:1.6mm;">
         <div class="li" style="color:#C7CDD2;">Authentication traffic between the browser, the accounts service and the backend</div>
-        <div class="li" style="color:#C7CDD2;">A licence check at start-up, and a usage record per evaluation — user and product identifiers, module identifiers, item count, version, platform</div>
+        <div class="li" style="color:#C7CDD2;">A licence check at start-up and a usage record per evaluation — account and product identifiers, modules, item count, version, platform</div>
         <div class="li" style="color:#C7CDD2;">Update checks, carrying version information only</div>
         <div class="li" style="color:#C7CDD2;">A PubChem lookup — DataKurator's, which asks first, or Add Compound's Auto Fill, which does not</div>
       </div>
@@ -1031,27 +599,23 @@
 
     <div class="card" style="margin-bottom:4.5mm; padding:4mm 4.4mm;">
       <span class="plat web" style="margin-bottom:2.4mm;">Web application</span>
-      <div class="h-sub" style="margin-bottom:2.6mm;">Structures are sent for evaluation, and not retained</div>
+      <div class="h-sub" style="margin-bottom:2.2mm;">Structures are sent for evaluation, and not retained</div>
       <p class="body" style="margin-bottom:3mm;">
         Structures are transmitted to the QSAR Flex service over HTTPS so it can evaluate them, generate
-        reports, draw depictions and run DataKurator's curation checks. Results are returned to the browser.
-        Structures are not persisted in a database after the request.
-      </p>
-      <p class="body">
-        Note that this includes curation: in the web application, DataKurator's analysis and correction
-        steps are performed by the service, not in the browser.
+        reports, draw depictions and run DataKurator's curation checks — curation included: the analysis
+        and correction steps run on the service, not in the browser. Results are returned to the browser,
+        and structures are not persisted in a database after the request.
       </p>
     </div>
 
-    <div class="note" style="margin-top:6mm;">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Two PubChem paths, and only one asks.</b> DataKurator's verification is off by default and gated
-        by a dialog naming what would be sent. <b>Add Compound's Auto Fill is not gated</b> — pressing it
-        sends what you typed straight to PubChem, on the desktop build too. Block the PubChem host if that
-        matters; nothing else depends on it.
-      </p>
-    </div>
+    <div class="sub-h" style="margin-top:1mm; margin-bottom:2.2mm;">Backup, and what happens when a user leaves</div>
+    <p class="small">
+      The compound library lives in the web view&#39;s storage, not a document the user saves, and <b>there is
+      exactly one copy</b> — MultiCASE holds none and there is no export. Back up that store (section 03);
+      exclude the ≈4&nbsp;GB reference data, which re-downloads. Uninstalling does not remove it, so delete
+      it when decommissioning a machine. <b>Signing out clears the library and the results, with no
+      undo.</b>
+    </p>
   </div>
 
   <div class="pg-foot">
@@ -1060,94 +624,11 @@
   </div>
 </section>
 
-<!-- ═══════════════════ 11 · LICENSING ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 11</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Licence verification and usage reporting</div>
-    </div>
-
-    <div class="sub-h">How verification works</div>
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div class="card">
-        <span class="plat win">Desktop</span>
-        <p class="body">
-          At start-up the application asks the MultiCASE backend for the active licence and the modules it
-          covers, and will not proceed without one. The module picker then re-checks that entitlement
-          <b>live before every run</b>, so a session that loses the network cannot start an evaluation.
-        </p>
-      </div>
-      <div class="card">
-        <span class="plat web">Web application</span>
-        <p class="body">
-          The evaluation service validates the licence itself, server to server, on every evaluation and
-          every report generation. The browser is not trusted to assert its own entitlement.
-        </p>
-      </div>
-    </div>
-
-    <div class="sub-h">What a licence request contains</div>
-    <table class="spec-tbl" style="margin-bottom:5mm;">
-      <tbody>
-        <tr><td class="k">User identifier</td><td>An opaque account identifier. Not a name, not an email address.</td></tr>
-        <tr><td class="k">Product and modules</td><td>A fixed identifier for QSAR Flex, and which modules are being used.</td></tr>
-        <tr><td class="k">Item count</td><td>How many compounds are being evaluated.</td></tr>
-        <tr><td class="k">Version and platform</td><td>The application version and which build it is.</td></tr>
-        <tr><td class="k">Never included</td><td><b>No chemical structures. No machine or hardware identifiers. No personal data beyond the account identifier.</b></td></tr>
-      </tbody>
-    </table>
-
-    <div class="note warn" style="margin-bottom:6mm;">
-      <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Neither deployment works offline — the desktop included.</b> Every launch needs sign-in and a
-        licence check, and every evaluation needs a live entitlement check: the module picker fetches your
-        licensed modules from <code>user-manager-be.multicase.com</code>, and if that call fails <b>no module
-        can be selected</b>. Local data removes the download, not the dependency.
-      </p>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:5mm;">
-      <div class="card tint">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">How a test is counted</div>
-        <p class="body">
-          One run consumes the library size multiplied by the number of distinct <b>bundles</b> the selected
-          modules belong to. Three modules from one bundle cost the same as one; three bundles cost three
-          times as much. A fixed-term subscription is not metered this way; an On&nbsp;Demand subscription is.
-        </p>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">What MultiCASE retains</div>
-        <p class="body">
-          A usage record per evaluation — who ran it, when, how many items, which modules, and its billing
-          state. That record is what your administrators read back as licence activity, and what an invoice
-          is reconciled against. <b>No chemical structures are recorded in it.</b>
-        </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="eyebrow green" style="margin-bottom:2.6mm;">Enterprise administration</div>
-      <p class="body">
-        An enterprise licence carries a fixed number of seats. Your own administrators assign and remove
-        seats, create users, grant administrator rights and activate the company's licence — from inside
-        the product, without involving MultiCASE.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">13</span>
-  </div>
-</section>
-
 <!-- ═══════════════════ 12 · SIGNING / AV ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 12</span><span class="tag"></span></div>
+      <div class="hd-top"><span class="sn">Section 07</span><span class="tag"></span></div>
       <div class="ttl h-sec">Code signing, firewall and antivirus</div>
     </div>
 
@@ -1158,7 +639,7 @@
           <div class="li">The application and the installer are signed with <b>Azure Trusted Signing</b> — SHA-256 digest, RFC 3161 timestamp, published as <b>MultiCASE Inc.</b> They should not trigger reputation warnings on a standard configuration.</div>
           <div class="li">The application writes only within the user's profile. Nothing is written to Program Files, to system directories, or to <b>HKLM</b>.</div>
           <div class="li">No service, scheduled task or kernel driver is installed.</div>
-          <div class="li">No inbound port is opened. All outbound traffic goes to the hostnames in section 09, HTTPS on 443.</div>
+          <div class="li">No inbound port is opened. All outbound traffic goes to the hostnames in section 05, HTTPS on 443.</div>
         </div>
       </div>
       <div class="card">
@@ -1167,7 +648,7 @@
           <div class="li">The application and the disk image are signed with an Apple <b>Developer ID</b> certificate and <b>notarized and stapled</b> by Apple, so Gatekeeper admits them without any user override.</div>
           <div class="li">The application writes only to user-owned directories. Nothing requires administrator rights after installation.</div>
           <div class="li">No kernel extension, launch daemon or background agent is installed.</div>
-          <div class="li">No inbound port is opened. All outbound traffic goes to the hostnames in section 09, HTTPS on 443.</div>
+          <div class="li">No inbound port is opened. All outbound traffic goes to the hostnames in section 05, HTTPS on 443.</div>
         </div>
       </div>
     </div>
@@ -1227,252 +708,76 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
   </div>
 </section>
 
-<!-- ═══════════════════ 13 · OPEN QUESTIONS ═══════════════════ -->
+<!-- ═══════════════════ 08 · QUESTIONS, CHECKLIST, CONTACT ═══════════════════ -->
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 13</span><span class="tag">Not answered here</span></div>
-      <div class="ttl h-sec">Questions to raise with MultiCASE</div>
+      <div class="hd-top"><span class="sn">Section 08</span><span class="tag"></span></div>
+      <div class="ttl h-sec">Before you approve a rollout</div>
     </div>
 
-    <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
-      A guide that only answers the easy questions wastes your time. These are the ones it cannot settle —
-      the answer depends on your contract, or is a commitment rather than a technical fact. Ask them before
-      you approve a rollout: a ticket at <b>support.multicase.com</b>, or your MultiCASE contact.
-    </p>
-
-    <div class="grid g2" style="margin-bottom:4mm;">
+    <div class="sub-h" style="margin-bottom:2.6mm;">Checklist</div>
+    <div class="grid g2" style="margin-bottom:5mm;">
       <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.4mm;">Identity</div>
-        <div class="bul dense">
-          <div class="li">Can MultiCASE Accounts federate to our identity provider by SAML 2.0 or OIDC, and if so, on what terms?</div>
-          <div class="li">Can multi-factor authentication be enforced for our users?</div>
-          <div class="li">What is the password policy, and the lockout threshold?</div>
-          <div class="li">What is the turnaround for disabling an account when someone leaves?</div>
+        <div class="eyebrow green" style="margin-bottom:3mm;">Decide, then allow</div>
+        <div class="checklist">
+          <div class="ci"><span class="box"></span><span><b>Which deployment</b> — desktop or web (section 06). A data-governance decision; everything else follows from it.</span></div>
+          <div class="ci"><span class="box"></span><span>Outbound HTTPS 443 to the hosts it uses (section 05)</span></div>
+          <div class="ci"><span class="box"></span><span>Your TLS-inspection certificate trusted by the system store, if you inspect</span></div>
+          <div class="ci"><span class="box"></span><span>A publisher rule for <b>MultiCASE Inc.</b>, if you enforce application control</span></div>
         </div>
       </div>
       <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">The hosted services</div>
+        <div class="eyebrow green" style="margin-bottom:3mm;">Provide, and tell your users</div>
+        <div class="checklist">
+          <div class="ci"><span class="box"></span><span>Windows 10/11 64-bit with WebView2, or macOS 12+ on Apple Silicon; a writable user profile and ≥10 GB free per desktop workstation</span></div>
+          <div class="ci"><span class="box"></span><span><b>Sign-in is required every launch</b> — by design — and signing in elsewhere ends the first session</span></div>
+          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company: DataKurator asks first, <b>Auto Fill does not</b></span></div>
+          <div class="ci"><span class="box"></span><span>A usage record — user, time, modules, item count — is held by MultiCASE for licensing</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-h" style="margin-bottom:2.6mm;">Questions this guide cannot settle</div>
+    <p class="small" style="margin-bottom:3.4mm;">
+      The answers depend on your contract, or are commitments rather than technical facts. Put them to
+      MultiCASE before you scale.
+    </p>
+    <div class="grid g2" style="margin-bottom:5mm;">
+      <div class="card">
         <div class="bul dense">
-          <div class="li">What does the evaluation service log about a request, and for how long is it kept?</div>
-          <div class="li">Are structures ever written to disk, to a queue, or to a backup — even transiently?</div>
+          <div class="li">Can MultiCASE Accounts federate to our identity provider by SAML 2.0 or OIDC, and can MFA be enforced?</div>
+          <div class="li">What does the evaluation service log about a request, how long is it kept, and are structures ever written to disk, a queue or a backup?</div>
           <div class="li">Are structures ever used to improve models or reference data?</div>
-          <div class="li">Is there a data-processing agreement, and a current penetration test or SOC 2 report?</div>
+          <div class="li">Is there a data-processing agreement, and a current penetration test or SOC&nbsp;2 report?</div>
         </div>
       </div>
       <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Security maintenance</div>
         <div class="bul dense">
-          <div class="li">How do we report a suspected vulnerability, and is there a disclosure policy?</div>
-          <div class="li">The application bundles its own .NET runtime, so our OS patching does not cover it. What is the target time to ship a fix for a critical issue in it?</div>
-          <div class="li">How are we notified when a security update is published?</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Managed deployment</div>
-        <div class="bul dense">
-          <div class="li">Are there command-line switches for an unattended install, and documented exit codes?</div>
-          <div class="li">Can the installation payload be pre-staged internally so workstations do not each fetch it?</div>
-          <div class="li">What detection rule should Intune or SCCM use — file version, or the per-user uninstall key?</div>
-          <div class="li">Above what user count is the per-user bootstrapper not recommended?</div>
+          <div class="li">The application bundles its own .NET runtime, so OS patching does not cover it — what is the target time to ship a fix for a critical CVE, and how are we notified?</div>
+          <div class="li">Are there switches for an unattended install, and what detection rule should Intune or SCCM use?</div>
+          <div class="li">Is the desktop supported on non-persistent VDI or multi-session Windows Server?</div>
+          <div class="li">Can a reference-data version be pinned or rolled back — and can a data update change a prediction?</div>
         </div>
       </div>
     </div>
 
-    <div class="grid g2" style="margin-bottom:4mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.4mm;">Reference data</div>
-        <div class="bul dense">
-          <div class="li">Is the encryption key for the downloaded reference database derived per customer, or shipped inside the application?</div>
-          <div class="li">Can a reference-data version be pinned, so an estate can be held on one version while it is validated?</div>
-          <div class="li">Is a checksum or manifest published, so we can verify a download independently?</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Retention and estate</div>
-        <div class="bul dense">
-          <div class="li">How long is a usage record kept, and can it be exported or deleted on request?</div>
-          <div class="li">Can a reference-data version be pinned or rolled back independently of the application, and can a data update change a prediction?</div>
-          <div class="li">Is the desktop build supported on non-persistent VDI or multi-session Windows Server, and can the reference data live on a shared volume?</div>
-          <div class="li">What is the support status of the bundled .NET runtime on each platform, and when does it move to the next long-term release?</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="note" style="padding:2.6mm 3.4mm;">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Everything else here is a technical fact about the shipped software</b>, verified against the
-        released builds and, for the Windows paths, registry entries and disk figures, measured on a clean
-        install — bar two items it flags in place: the installer URLs and the evaluation hostname. If
-        anything else does not match what you observe, tell us.
-      </p>
-    </div>
+    <table class="spec-tbl">
+      <tbody>
+        <tr><td class="k">IT and deployment</td><td><b>support.multicase.com</b> — raise a ticket against QSAR Flex with whatever shows the problem: an installer log, a screenshot, a proxy trace. Same account as the application. Say which build and version, what you expected, and for a network problem which hostname failed.</td></tr>
+        <tr><td class="k">Licensing and enterprise</td><td><b>info@multicase.com</b> — seats, bundles, managed deployment paths, and evaluation on your behalf if you would rather not deploy at all.</td></tr>
+        <tr><td class="k">Documentation</td><td><b>resources.multicase.com</b> — installation guides, the model catalog and the user guides. The Documentation button in the application opens it directly.</td></tr>
+        <tr><td class="k">Document control</td><td>IT Requirements &amp; Deployment Guide · QSAR Flex 4.0 · issued September 2026 · MultiCASE Inc. Supersedes all earlier QSAR Flex IT documentation.</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="pg-foot">
     <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">15</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ 14 · CHECKLIST ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 14</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Summary checklist for IT</div>
-    </div>
-
-    <p class="body" style="max-width:152mm; margin-bottom:6mm;">
-      Ordered by what you actually have to do, not by platform. The first item decides most of the rest.
-    </p>
-
-    <div class="card tint" style="margin-bottom:6mm;">
-      <div class="eyebrow green" style="margin-bottom:2.6mm;">Decide first</div>
-      <div class="checklist">
-        <div class="ci"><span class="box"></span><span><b>Which deployment</b> — desktop or web (section 02). Everything below follows from this one answer, and it is a data-governance decision before it is a technical one.</span></div>
-        <div class="ci"><span class="box"></span><span>Your policy on chemical structures leaving the network has been checked against what that build actually sends (section 10)</span></div>
-      </div>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:3mm;">Allow</div>
-        <div class="checklist">
-          <div class="ci"><span class="box"></span><span>Outbound HTTPS 443 to the hosts your deployment uses (section 09 gives the rule set for each)</span></div>
-          <div class="ci"><span class="box"></span><span>Your TLS-inspection certificate is trusted by the system store, if you inspect outbound traffic</span></div>
-          <div class="ci"><span class="box"></span><span>A publisher rule for <b>MultiCASE Inc.</b>, if you enforce application control (section 12)</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:3mm;">Provide</div>
-        <div class="checklist">
-          <div class="ci"><span class="box"></span><span><b>Windows:</b> 64-bit Windows 10 or 11, with the WebView2 Runtime present — default on Windows 11, may need deploying on Windows 10</span></div>
-          <div class="ci"><span class="box"></span><span><b>macOS:</b> macOS 12 or later on Apple Silicon. Nothing else to install.</span></div>
-          <div class="ci"><span class="box"></span><span>A writable user profile — the install is per-user and needs no administrator rights</span></div>
-          <div class="ci"><span class="box"></span><span><b>Desktop:</b> at least 10 GB free per workstation, and a rollout staged so a department does not download 4 GB each at once</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:6mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:3mm;">Tell your users</div>
-        <div class="checklist">
-          <div class="ci"><span class="box"></span><span>Sign-in is required every time the application starts — this is by design, not a fault</span></div>
-          <div class="ci"><span class="box"></span><span>Signing in on another machine ends the session on the first</span></div>
-          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company. DataKurator asks first; Add Compound's Auto Fill does not — it queries immediately (section 10)</span></div>
-          <div class="ci"><span class="box"></span><span>Support goes through <b>support.multicase.com</b>, with the same account</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:3mm;">Settle before you scale</div>
-        <div class="checklist">
-          <div class="ci"><span class="box"></span><span>The questions in section 13 have been put to MultiCASE and answered</span></div>
-          <div class="ci"><span class="box"></span><span>A company administrator has been nominated to manage seats</span></div>
-          <div class="ci"><span class="box"></span><span>You accept that a usage record — user, time, modules, item count — is held by MultiCASE for licensing</span></div>
-          <div class="ci"><span class="box"></span><span>One pilot machine per platform has been installed and driven end to end</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="note">
-      <span class="dot" style="margin-top:1.2mm;"></span>
-      <p class="nt">
-        <b>Take three numbers off the pilot machine.</b> The exact installation path, the download volume,
-        and how long the first reference-data download takes on your network. Those are the three figures a
-        wider rollout plan needs, and all three depend on your environment rather than on the product.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">16</span>
-  </div>
-</section>
-
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
-<section class="page">
-  <div class="sheet">
-    <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 15</span><span class="tag"></span></div>
-      <div class="ttl h-sec">Contact</div>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:7mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">IT and deployment questions</div>
-        <div class="h-sub" style="margin-bottom:2.6mm;">support.multicase.com</div>
-        <p class="body">
-          Raise a ticket against QSAR Flex and attach whatever shows the problem — an installer log, a
-          screenshot, a proxy trace. The portal uses the same MultiCASE account as the application, and you
-          can follow the ticket to resolution.
-        </p>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Licensing and enterprise deployment</div>
-        <div class="h-sub" style="margin-bottom:2.6mm;">info@multicase.com</div>
-        <p class="body">
-          Seats, bundles, managed deployment paths, and evaluation on your behalf where you would rather
-          not deploy the software at all. Existing account holders can raise the same requests in the
-          support portal.
-        </p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:7mm;">
-      <div class="eyebrow green" style="margin-bottom:2.6mm;">Documentation</div>
-      <div class="h-sub" style="margin-bottom:2.6mm;">resources.multicase.com</div>
-      <p class="body">
-        Installation guides for Windows and macOS, the model catalog, user guides for the Library,
-        DataKurator and evaluation, and the licensing and enterprise administration reference. The
-        Documentation button inside the application opens it directly.
-      </p>
-    </div>
-
-    <div class="grid g2" style="margin-bottom:7mm;">
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">What to include in a ticket</div>
-        <div class="bul dense">
-          <div class="li">Which build: web, or Windows or macOS desktop, and the version shown in the application</div>
-          <div class="li">What you expected, what happened, and whether it happens on more than one machine</div>
-          <div class="li">For a network problem: which hostname failed and what your proxy or firewall logged</div>
-          <div class="li">For an installation problem: the operating system version and whether the machine is managed</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">Document control</div>
-        <table class="spec-tbl tbl-tight">
-          <tbody>
-            <tr><td class="k">Document</td><td>IT Requirements &amp; Deployment Guide</td></tr>
-            <tr><td class="k">Applies to</td><td>QSAR Flex 4.0</td></tr>
-            <tr><td class="k">Issued</td><td>September 2026</td></tr>
-            <tr><td class="k">Publisher</td><td>MultiCASE Inc.</td></tr>
-            <tr><td class="k">Supersedes</td><td>All earlier QSAR Flex IT documentation</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card ink">
-      <div class="eyebrow" style="margin-bottom:2.6mm;">One thing worth repeating</div>
-      <div class="h-sub" style="font-size:11.5pt; margin-bottom:3mm;">The deployment decision is a data decision</div>
-      <p class="body">
-        If chemical structures may not leave your network, deploy <b>Desktop</b>: it evaluates on
-        the workstation and transmits no structures. If that constraint does not apply, the web application
-        needs nothing installed and stays current on its own. Everything else in this guide follows from
-        that one choice.
-      </p>
-    </div>
-  </div>
-
-  <div class="pg-foot">
-    <div class="brand"><span class="fmark"></span><span>QSAR Flex 4.0 — IT Requirements &amp; Deployment Guide</span></div>
-    <span class="pn">17</span>
+    <span class="pn">08</span>
   </div>
 </section>
 
 </body>
+
 </html>

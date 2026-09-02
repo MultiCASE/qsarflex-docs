@@ -9,7 +9,7 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 | File | Output | What it is |
 |---|---|---|
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
-| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 18pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
+| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
 
 ## Build
 
@@ -133,6 +133,25 @@ brochure foot.
 3. **Bump the version** in the cover, the running feet and the document-control block.
 4. `node pdf/check.mjs`, then read every proof PNG.
 5. Ship the PDFs from `pdf/out/`.
+
+## Keeping it to nine pages
+
+The guide was 18pp and was cut to 9 by merging sections and deleting duplication, not by dropping
+requirements. What went, and why — reinstate any of it only if a customer actually asks:
+
+- **Per-platform install walkthroughs** ("what the installer does", "what the user sees on first
+  launch"). That is user-guide material and lives in the GitBook install pages; the IT guide keeps
+  only what a reviewer approves — paths, rights, signing, detection rule, uninstall.
+- **The separate rule-set table.** It listed the same hosts as the hostname table with a port column
+  in which every value was 443. The two are now one table: host, desktop, web, purpose.
+- **Callout notes that restated a table** — the "deploy the desktop if structures may not leave"
+  note, the PubChem note, a paragraph about the document's own reliability, and rollout advice.
+- **The standalone summary checklist and contact pages**, folded together with the open questions
+  into one closing section.
+
+Section numbering is regenerated in document order by a small script when sections move; the cover
+contents and every "section NN" cross-reference must be re-audited afterwards, because `check.mjs`
+cannot see a wrong number.
 
 ## Facts that were wrong before round 4, and are easy to get wrong again
 
