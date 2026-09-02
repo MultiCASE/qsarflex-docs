@@ -22,20 +22,18 @@ Export is not a separate screen. Downloading curated files and loading compounds
 
 | Where you are running QSAR Flex | What happens to your structures |
 |---|---|
-| **Web app** (www.qsarflex.multicase.com) | Your structures go to the QSAR Flex service at `qsarflex-be.multicase.com`. Each curation action is an authenticated HTTPS request to it: `POST /curate/analyze` to classify, `/curate/smiles-transform` for SMILES transforms, `/curate/correct` for PubChem verification, `/curate/export` to build a download. Reading your files uses `/compound/batch` — or `/compound/batch/multi` when you drop more than one — and structure pictures use `/compound/render`. |
-| **Desktop — Windows and macOS, both Local and Cloud** | The app answers those same calls inside itself. The desktop shell intercepts them and runs the curation engine in-process, so curation happens on your machine. |
+| **Web app** (qsarflex.multicase.com) | Your structures go to the QSAR Flex service at `qsarflex-be.multicase.com`. Each curation action is an authenticated HTTPS request to it: `POST /curate/analyze` to classify, `/curate/smiles-transform` for SMILES transforms, `/curate/correct` for PubChem verification, `/curate/export` to build a download. Reading your files uses `/compound/batch` — or `/compound/batch/multi` when you drop more than one — and structure pictures use `/compound/render`. |
+| **Desktop** (Windows and macOS) | The app answers those same calls inside itself. The desktop shell intercepts them and runs the curation engine in-process, so curation happens on your machine. |
 
 On the server, a curation request is handled in memory: the structures are written to a temporary file only so the engine can load them, that file is deleted as the request finishes, and nothing is written to a database.
 
 {% hint style="warning" %}
-Earlier versions of this page said analysis "runs entirely on your device — no data is sent to any server". That is **not** true of the web app, where every curation step is a call to the QSAR Flex service. It is true of curation in the desktop apps.
+Earlier versions of this page said analysis "runs entirely on your device — no data is sent to any server". That is **not** true of the web app, where every curation step is a call to the QSAR Flex service. It is true of curation in the desktop app.
 {% endhint %}
 
 PubChem is a separate matter, and is treated as one: nothing is ever sent to PubChem without the **Send data to PubChem?** dialog first. See [PubChem consent](#pubchem-consent) below.
 
-The Local / Cloud choice you made when installing the desktop app decides where **evaluation's** reference database lives. It does not change where curation runs — curation is local in both desktop variants.
-
-The difference shows up when you evaluate. Both desktop builds run the prediction models on your workstation. The Local build holds the reference database on the machine; the Cloud build queries a MultiCASE-hosted PostgreSQL database at `central-db.multicase.com` over TCP 5432, and some of those lookups carry the structure being evaluated as a SMILES query parameter. So only **Desktop — Local** keeps your structures entirely on the workstation.
+Evaluation on the desktop is local as well: the app runs the prediction models on your workstation, against the reference database it holds on the machine, so your structures stay on the workstation there too.
 
 ---
 

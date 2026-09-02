@@ -1,6 +1,6 @@
 # Installing on macOS
 
-This guide walks through installing the QSAR Flex desktop application on macOS — from choosing a variant to your first evaluation.
+This guide walks through installing the QSAR Flex desktop application on macOS — from download to your first evaluation.
 
 {% hint style="info" %}
 **Before you start**
@@ -8,34 +8,28 @@ This guide walks through installing the QSAR Flex desktop application on macOS �
 - **macOS 12 (Monterey) or later.**
 - **Apple Silicon (arm64).** The macOS build ships for Apple Silicon only — there is no Intel or universal build.
 - **An internet connection at every launch.** QSAR Flex signs you in and checks your licence each time it starts.
-- **About 4 GB of free disk space** if you install the Local variant, for its reference database.
+- **About 4 GB of free disk space** for the reference database.
 {% endhint %}
 
 ---
 
-## 1 — Choose Local or Cloud
+## 1 — Download QSAR Flex
 
-QSAR Flex for macOS comes in two variants. They share the same interface and the same models; what differs is where the reference data lives.
+QSAR Flex for macOS runs the prediction models on your own Mac. On first launch it downloads its
+model files and reference database — about 4 GB — and stores them encrypted on disk. After that,
+evaluation reads the reference data locally.
 
-|                          | **Local**                                                          | **Cloud**                                                     |
-| ------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------- |
-| Reference data           | Downloaded to your Mac and stored encrypted                        | Held in MultiCASE's hosted database, read over the network    |
-| First launch downloads   | Model files plus a reference database of about 4 GB                | Model files only — about 27 MB                                |
-| Network needed to evaluate | No, once sign-in is done and the data is on disk                 | Yes, for every evaluation                                     |
-
-**Choose Local** if you want the evaluation to be self-contained on your own machine — once the one-time download finishes, predictions run without reaching out for reference data. **Choose Cloud** if a 4 GB download is impractical, or you want to be up and running in a couple of minutes.
-
-Download the variant you want:
-
-- 💻 [QSAR Flex **Local** for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg) — `QSARFlex-Local-Installer.dmg`
-- ☁️ [QSAR Flex **Cloud** for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg) — `QSARFlex-Cloud-Installer.dmg`
+- 💻 [QSAR Flex for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg) — `QSARFlex-Local-Installer.dmg`
 
 {% hint style="info" %}
-On both variants the prediction itself is computed by the app on your Mac. Your compounds are never uploaded to MultiCASE to be evaluated for you.
+The prediction itself is computed by the app on your Mac, against reference data on your own disk.
+Your compounds are never uploaded to MultiCASE to be evaluated for you, and nothing about the
+structure leaves your Mac during an evaluation.
 
-What differs is where the reference data comes from. The **Local** variant reads it from the encrypted database on your own disk, so nothing about the structure leaves your Mac during an evaluation. The **Cloud** variant queries MultiCASE's hosted reference database as it evaluates, and some of those lookups carry the structure being looked up.
-
-PubChem is separate, and it is contacted only when you ask for it — **Auto Fill** in the compound dialog, or a **PubChem lookup** in DataKurator. Both send the compound's name, CAS number and SMILES to PubChem, on the Local variant as well as Cloud. DataKurator asks you to confirm before it sends anything. **Auto Fill** goes as soon as you click it.
+PubChem is separate, and it is contacted only when you ask for it — **Auto Fill** in the compound
+dialog, or a **PubChem lookup** in DataKurator. Both send the compound's name, CAS number and SMILES
+to PubChem. DataKurator asks you to confirm before it sends anything; **Auto Fill** goes as soon as
+you click it.
 {% endhint %}
 
 ---
@@ -81,7 +75,7 @@ The browser confirms **You're signed in** and hands you back to QSAR Flex automa
 <figure><img src=".gitbook/assets/install-mac-04-desktop-return.png" alt="You're signed in — the browser hands you back to QSAR Flex"></figure>
 
 {% hint style="info" %}
-Your password is typed into MultiCASE Accounts in the browser, never into QSAR Flex. The same MultiCASE account signs you in to the web app, both desktop apps and the support portal.
+Your password is typed into MultiCASE Accounts in the browser, never into QSAR Flex. The same MultiCASE account signs you in to the web app, the desktop app and the support portal.
 {% endhint %}
 
 {% hint style="warning" %}
@@ -96,8 +90,7 @@ After sign-in, QSAR Flex sets up the data it needs to make predictions. A **Data
 
 <figure><img src=".gitbook/assets/install-mac-05-data-download.png" alt="One-time reference-data download"></figure>
 
-- On the **Local** variant this is the model files plus the encrypted reference database — about 4 GB in total, so allow a few minutes on a fast connection and longer on a slow one.
-- On the **Cloud** variant only the model files are fetched, about 27 MB.
+- This is the model files plus the encrypted reference database — about 4 GB in total, so allow a few minutes on a fast connection and longer on a slow one.
 
 This is a one-time setup. The files are kept in `~/Library/Application Support/QSARFlex/data`, outside the app itself, so later launches skip this step and app updates leave the data in place.
 
@@ -117,6 +110,6 @@ Next, head to [Getting Started](getting-started.md) to run your first evaluation
 
 QSAR Flex updates itself. It checks for a new version of the app and of the reference data when it starts and every 15 minutes after that, and prompts you only when there is something to install. Your reference data is not re-downloaded when the app updates.
 
-Sign-in happens on every launch, so QSAR Flex needs a connection each time you open it, even on the Local variant.
+Sign-in happens on every launch, so QSAR Flex needs a connection each time you open it.
 
 If an update, a sign-in or the data download fails, open a ticket at [support.multicase.com](https://support.multicase.com).

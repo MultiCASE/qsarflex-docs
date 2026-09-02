@@ -32,7 +32,10 @@ const browser = await chromium.launch()
 let failed = false
 
 for (const [name, job] of Object.entries(jobs)) {
+  // Clear stale proofs first — shortening a document used to leave an orphan
+  // page behind, which then read as part of the deliverable.
   const proofDir = path.join(OUT, 'proof', name)
+  fs.rmSync(proofDir, { recursive: true, force: true })
   fs.mkdirSync(proofDir, { recursive: true })
 
   const page = await browser.newPage({ viewport: { width: 1240, height: 1754 }, deviceScaleFactor: 2 })

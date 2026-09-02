@@ -306,7 +306,6 @@ INSERT INTO "Bundles" ("Id", "Name", "SoftwareId", "CreatedAt", "UpdatedAt") VAL
   ('bd000001-0000-0000-0000-000000000000', 'Nitrosamine',      '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
   ('bd000002-0000-0000-0000-000000000000', 'Ecotoxicity',      '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
   ('bd000003-0000-0000-0000-000000000000', 'Physicochemical',  '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
-  ('bd000004-0000-0000-0000-000000000000', 'Genotoxicity',     '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW()),
   ('bd000005-0000-0000-0000-000000000000', 'ADME',             '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', NOW(), NOW());
 
 -- ── Modules (names must match FilterModels filenames, case-insensitive) ────────
@@ -330,8 +329,6 @@ INSERT INTO "Modules" ("Id", "Name", "SoftwareId", "BundleId", "Coverage", "Crea
   ('0d000013-0000-0000-0000-000000000000', 'Vapor Pressure',         '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
   ('0d000014-0000-0000-0000-000000000000', 'LogP',                   '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
   ('0d000015-0000-0000-0000-000000000000', 'Water Solubility',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000003-0000-0000-0000-000000000000', 0, NOW(), NOW()),
-  -- Genotoxicity (filter filename has typo: "Mutagencity")
-  ('0d000016-0000-0000-0000-000000000000', 'Ames Mutagencity',       '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000004-0000-0000-0000-000000000000', 0, NOW(), NOW()),
   -- ADME
   ('0d000017-0000-0000-0000-000000000000', 'Oral Bioavailability',   '65d6db1c-e3d3-4af3-8848-cc5fddab2eda', 'bd000005-0000-0000-0000-000000000000', 0, NOW(), NOW());
 

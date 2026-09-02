@@ -85,7 +85,7 @@ A subscription with no fixed end date. It is active as soon as it is issued and 
 
 ### Pay-per-test
 
-The license has a fixed total test count and no expiry date. It is active as soon as it is issued. Each evaluation consumes tests, and the remaining count is shown both on the License tab and on the navbar chip. When it reaches zero the web app blocks further evaluation until more tests are purchased. The desktop apps do not check the remaining count before a run — the usage is still recorded against the licence.
+The license has a fixed total test count and no expiry date. It is active as soon as it is issued. Each evaluation consumes tests, and the remaining count is shown both on the License tab and on the navbar chip. When it reaches zero the web app blocks further evaluation until more tests are purchased. The desktop app does not check the remaining count before a run — the usage is still recorded against the licence.
 
 {% hint style="info" %}
 **How a test is counted.** One test is one item in your library against one **bundle** — not one module. Tests = library items × the number of distinct bundles among the modules you selected. Evaluating 10 compounds against three modules that all belong to the Ecotoxicity bundle consumes 10 tests. Evaluating the same 10 compounds against one Ecotoxicity module and one Physicochemical module consumes 20.
@@ -241,7 +241,6 @@ Modules are sold in bundles — purchasing a bundle unlocks every endpoint withi
 | 🔴 **Nitrosamine** | CPCA Prediction, Surrogate Search, N-Nitrosation, Cross Similarity |
 | 🌿 **Ecotoxicity** | Fathead Minnow 96h LC50, Daphnia 48h LC50, Tetrahymena 48h GC50, Algae 72h EC50, Bio Concentration Factor, Ready Biodegradability, Soil Adsorption |
 | 💧 **Physicochemical** | LogP, Water Solubility, Vapor Pressure, Boiling Point |
-| 🧬 **Genotoxicity** | Ames Mutagencity *(the app spells it this way)* |
 | 💊 **ADME** | Oral Bioavailability |
 
 The Oral Bioavailability report also covers metabolic stability, CYP3A4 / CYP2D6 / CYP2C9 substrate potential, MDR1 (P-gp) substrate potential, formulation sensitivity and a BCS class. Those are sections of one module, not separately licensed ones.
@@ -272,27 +271,20 @@ Curation is not metered. DataKurator does not consume tests and does not need an
 
 ## Desktop application downloads
 
-The desktop applications are available to all licensed users, on Windows and on macOS (Apple Silicon, macOS 12 or later). Both check for an active licence at launch and will not start without one.
+The desktop application is available to all licensed users, on Windows and on macOS (Apple Silicon, macOS 12 or later). It checks for an active licence at launch and will not start without one.
 
-Both builds run the prediction models on your workstation. What separates them is where the reference database lives.
+The app runs the prediction models on your workstation, and the reference database lives on the machine: on first run the app downloads an encrypted copy of roughly 4 GB. The structures you evaluate never leave the workstation, but the app is **not** usable offline: an internet connection is needed for sign-in and the licence check at every launch, and for the entitlement check that runs each time you open the module picker.
 
-**QSAR Flex Local** — the reference database lives on the machine. On first run the app downloads an encrypted copy of roughly 4 GB. The structures you evaluate never leave the workstation, but the variant is **not** usable offline: an internet connection is needed for sign-in and the licence check at every launch, and for the entitlement check that runs each time you open the module picker.
-
-- [⬇️ Download QSAR Flex Local for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
-- [⬇️ Download QSAR Flex Local for macOS](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)
-
-**QSAR Flex Cloud** — evaluation still runs on your machine, but the reference database does not. There is no 4 GB download; instead the app queries a MultiCASE-hosted PostgreSQL database at `central-db.multicase.com` over TCP port 5432 as it works. Some of those lookups send the structure being evaluated as a canonical SMILES, so structures do leave the machine on this build. An active licence and a connection are needed throughout use.
-
-- [⬇️ Download QSAR Flex Cloud for Windows](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe)
-- [⬇️ Download QSAR Flex Cloud for macOS](https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg)
+- [⬇️ Download QSAR Flex for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
+- [⬇️ Download QSAR Flex for macOS](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)
 
 {% hint style="info" %}
-The web application sends your structures to the QSAR Flex service at `qsarflex-be.multicase.com` — for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. If your structures must stay on your own hardware, **QSAR Flex Local** is the only build that keeps them there.
+The web application sends your structures to the QSAR Flex service at `qsarflex-be.multicase.com` — for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. If your structures must stay on your own hardware, the **desktop application** is the one that keeps them there.
 {% endhint %}
 
-The Windows app installs per user, into your own account rather than machine-wide. Both apps check for application and reference-data updates when they start and every 15 minutes after that, and offer the update in a dialog when one is available.
+The Windows app installs per user, into your own account rather than machine-wide. The app checks for application and reference-data updates when it starts and every 15 minutes after that, and offers the update in a dialog when one is available.
 
-Usage from the desktop apps is recorded against the same licence and appears in the same activity history as usage from the web app.
+Usage from the desktop app is recorded against the same licence and appears in the same activity history as usage from the web app.
 
 See [Installing on Windows](../install-win.md) and [Installing on macOS](../install-mac.md) for step-by-step guides.
 

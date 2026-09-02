@@ -6,3 +6,4 @@ scripts/start.sh
 *.local
 scripts/winid
 .idea/
+compose.override.yaml

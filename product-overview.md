@@ -8,19 +8,18 @@
 
 ---
 
-## Variants
+## Deployments
 
-QSAR Flex is available in three forms. All three share the same interface — the differences are in where computation happens, how you access the platform, and two modules (Surrogate Search and Cross Similarity) that run on the desktop builds only.
+QSAR Flex is available in two forms. Both share the same interface — the differences are in where computation happens, how you access the platform, and two modules (Surrogate Search and Cross Similarity) that run on the desktop only.
 
-| Variant | Description |
+| Deployment | Description |
 |---|---|
-| 🌐 **Web App** | Browser-based, hosted at [www.qsarflex.multicase.com](https://www.qsarflex.multicase.com). No installation required. Your structures go to the QSAR Flex service over HTTPS for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. |
-| 💻 **Desktop — Local** | Windows and macOS app that evaluates on your machine. Your structures are not sent anywhere for evaluation. On first run it downloads its encrypted model files and a reference database (~4.0 GB). |
-| ☁️ **Desktop — Cloud** | Windows and macOS app with the same interface. Evaluation still runs on your machine — the difference is the reference database, which MultiCASE hosts and the app queries over the network instead of downloading. There is no multi-gigabyte first-run download, but some of those lookups carry the structure you are evaluating to the hosted database. |
+| 🌐 **Web App** | Browser-based, hosted at [qsarflex.multicase.com](https://qsarflex.multicase.com). No installation required. Your structures go to the QSAR Flex service over HTTPS for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. |
+| 💻 **Desktop** | Windows and macOS app that evaluates on your machine. Your structures are not sent anywhere for evaluation. On first run it downloads its encrypted model files and a reference database (~4.0 GB). |
 
-Both desktop variants ship for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). **No variant works offline.** Every one needs an internet connection at launch to sign in and check your licence, and again at every evaluation — the module picker fetches your licensed modules before you can select one. **Desktop — Cloud** needs a connection throughout the session as well, because every evaluation queries the hosted reference database.
+The desktop app ships for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). **Neither deployment works offline.** Both need an internet connection at launch to sign in and check your licence, and again at every evaluation — the module picker fetches your licensed modules before you can select one.
 
-> All variants require a valid license — either **individual** or **enterprise**. See [Access & Licensing](fundamentals/access-and-licensing.md) for details.
+> Both deployments require a valid license — either **individual** or **enterprise**. See [Access & Licensing](fundamentals/access-and-licensing.md) for details.
 
 ---
 
@@ -70,19 +69,12 @@ Load reaction files for structural analysis.
 
 ## Downloads
 
-### 💻 Desktop — Local
+### 💻 Desktop
 
-Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). This variant still is not usable offline: sign-in and a licence check run at every launch, and every evaluation checks your entitlements before you can pick a module.
+Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). The desktop app still is not usable offline: sign-in and a licence check run at every launch, and every evaluation checks your entitlements before you can pick a module.
 
 - [Download for Windows (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 - [Download for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)
-
-### ☁️ Desktop — Cloud
-
-Evaluation still runs on your machine, exactly as in the Local build. The difference is the reference database: instead of downloading it, the app queries MultiCASE's hosted copy over the network, so there is no ~4.0 GB first-run download. Some of those lookups carry the structure you are evaluating. The app still downloads its encrypted model files on first run. Requires an active individual or enterprise license and a connection that stays live while you work.
-
-- [Download for Windows (.exe)](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe)
-- [Download for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/cloud/QSARFlex-Cloud-Installer.dmg)
 
 Install steps, screenshots and first-run sign-in are covered in [Installing on Windows](install-win.md) and [Installing on macOS](install-mac.md).
 
@@ -104,9 +96,6 @@ The models and endpoints are unchanged in 4.0. Which ones you can run depends on
 
 **💧 Physicochemical Properties**
 - LogP, Water Solubility, Vapor Pressure, Boiling Point
-
-**🧬 Genotoxicity**
-- Ames Mutagenicity — listed in the Evaluate dialog under its catalogue name, **Ames Mutagencity**
 
 **💊 ADME**
 - Oral bioavailability — experimental database, analog-based read-across, a QSAR model and a rule-based prediction. The same report adds human liver microsomal stability, CYP3A4 / CYP2D6 / CYP2C9 substrate assessments and MDR1 (P-gp) substrate potential. These are sections of that report, not separately licensed modules.

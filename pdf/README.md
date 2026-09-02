@@ -9,7 +9,7 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 | File | Output | What it is |
 |---|---|---|
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
-| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 19pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
+| `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 18pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
 
 ## Build
 
@@ -35,8 +35,10 @@ exists solely to catch that:
 - `### OVERFLOW` — content is being clipped. Fix before shipping.
 - `### VOID` — a 22mm+ gap inside a page. Usually a `margin-top:auto` pinning a block to
   the foot and leaving a hole. Add content or drop the pin.
-- An overflow under ~1mm is a rounding artefact of the measurement, not real clipping.
-  Confirm against the proof PNG before chasing it.
+- **Do not dismiss a sub-1mm overflow as a rounding artefact.** An earlier pass assumed that
+  and shipped a page whose last two lines were sliced in half by the footer rule at 0.8mm.
+  Every reported overflow is real until the proof PNG says otherwise — and the proof is the
+  arbiter, not the number. Both documents should read `No overflow.` before shipping.
 
 Page furniture — running foot, page number, section number — is drawn per page by the
 markup, not by CSS paged media. Renumbering after inserting or moving a page is manual;
@@ -107,16 +109,27 @@ brochure foot.
 
 ## Updating for a new release
 
-1. **Re-verify every number against the code — do not trust the previous edition.** The
-   4.0 pass found the catalog claiming 24 modules when the licensing backend has 17
-   (`scripts/seed.sql`, and the Evaluate dialog), Ames described as a statistical model
-   when it is an exact-structure lookup over a set of N-nitroso compounds, and the ADME
-   bundle listed as eight modules when it is one whose report has eight sections.
+1. **Re-verify every number against the production licensing database — not against
+   `scripts/seed.sql`, which is a screenshot fixture, and not against the previous edition.**
+   The catalog of record is the `Bundles` / `Modules` / `Softwares` tables in `admindb`; the
+   connection string is in `multicase-user-manager-be/.env`:
+
+   ```sql
+   SELECT b."Name" AS bundle, m."Name" AS module
+   FROM "Modules" m
+   JOIN "Softwares" s ON s."Id" = m."SoftwareId"
+   LEFT JOIN "Bundles" b ON b."Id" = m."BundleId"
+   WHERE s."Name" ILIKE '%qsar%' ORDER BY b."Name", m."Name";
+   ```
+
+   As of 4.0 that returns **16 modules in 4 bundles** — Nitrosamine 4, Ecotoxicity 7,
+   Physicochemical 4, ADME 1. The 4.0 pass also found the ADME bundle listed as eight modules
+   when it is one whose report has eight sections.
 2. **Keep the two documents and the GitBook pages agreeing.** Where a fact appears in
-   both, change both. The deployment story especially: **Desktop — Cloud runs the models
-   locally but queries a MultiCASE-hosted PostgreSQL over TCP 5432, and some lookups carry
-   the structure as a SMILES query parameter.** It is not "evaluation in the cloud", and
-   **no build works offline** — the Evaluate module picker needs a live entitlement fetch.
+   both, change both. The deployment story especially: there are **two** deployments, the
+   web application and the desktop application. **Desktop — Cloud was never released** —
+   if you find it anywhere, it is stale. And **neither deployment works offline**: the
+   Evaluate module picker needs a live entitlement fetch before every run.
 3. **Bump the version** in the cover, the running feet and the document-control block.
 4. `node pdf/check.mjs`, then read every proof PNG.
 5. Ship the PDFs from `pdf/out/`.
@@ -126,17 +139,12 @@ brochure foot.
 Every one of these was stated confidently in an earlier draft and disproved by reading the
 product. Re-check them, do not re-assert them:
 
-- **The Cloud build does download data on first launch** — the model files, ≈27 MB
-  (`DataUpdateService.DownloadDataAsync`: `DownloadFilterModelsAsync` is unconditional, only
-  `DownloadSqliteDbAsync` is gated on `_isSqlite`). Only the ≈4 GB database is Local-only.
-- **Desktop — Local is not "structures never leave"** — Add Compound's Auto Fill sends a SMILES
-  to PubChem on every build, un-gated. Only DataKurator's lookups ask first. Say "not for
-  evaluation", never "never".
+- **The desktop is not "structures never leave"** — Add Compound's Auto Fill sends a SMILES
+  to PubChem, un-gated. Only DataKurator's lookups ask first. Say "not for evaluation",
+  never "never".
 - **Blocking `pubchem.ncbi.nlm.nih.gov` does nothing for the web app** — the browser calls the
   QSAR Flex backend, which makes the PubChem call server-side.
-- **The 5432 session is not HTTPS and is not verified TLS** — no `SslMode` is set anywhere, so
-  Npgsql's `Prefer` default applies: TLS if offered, plaintext if not, no certificate check.
-- **`d35fy2f4trk71w.cloudfront.net` is a required egress host** on all three builds
+- **`d35fy2f4trk71w.cloudfront.net` is a required egress host** for both deployments
   (`next.config.ts`, `NEXT_PUBLIC_ASSETS`). It was missing from both hostname tables.
 - **The compound library lives in the web view's local storage**, not in a file or a database —
   `%APPDATA%\QSARFlex\WebView2Main` (roaming) and `~/Library/WebKit/<build>/`. It survives
@@ -144,8 +152,14 @@ product. Re-check them, do not re-assert them:
   build (`com.MultiCASE_Inc..QSARFlex_Local`), **not** the `Info.plist` bundle id — check the
   real directory before printing a literal.
 - **The catalog's N-Nitrosation record count could not be reproduced** from the shipped resource
-  set, so the brochure prints an em dash. `fundamentals/model-catalog.md` still says 1,238;
-  confirm it with MultiCASE or drop it there too.
+  set. Both catalogs now print an em dash, explained the way CPCA's is — the rules run on your
+  structure, so there is no single reference set to count. If MultiCASE can source the old 1,238
+  figure, it can go back into both.
+- **`Ames Mutagencity` is a CASE Ultra module, not a QSAR Flex one.** It sat in the inherited
+  GitBook catalog and in the screenshot fixture for months. In `admindb` it belongs to CASE
+  Ultra's "Bacterial Mutagenicity (ICH M7)" bundle. A model file shipping in `FilterModels/`
+  proves nothing — that set is a superset shared across products, and also carries
+  `LHASA TD50` and `Immunogenicity_quant`, which are likewise not QSAR Flex modules.
 
 One claim that survived review but is **false**: that not all model files ship encrypted. Every
 extension in the shipped set (`.filter .json .txt .txtdb .csv`) is in `PublishData`'s
@@ -156,10 +170,6 @@ extension in the shipped set (`.filter .json .txt .txtdb .csv`) is in `PublishDa
 - **No model performance figures anywhere** — no sensitivity, specificity or concordance.
   The catalog says validation statistics are available from MultiCASE on request, because
   none could be found in the repositories. A regulatory reader will ask.
-- **ICH M7 wants two complementary methodologies**, one expert rule-based and one
-  statistical. The brochure states the Ames endpoint's role without claiming M7 compliance,
-  because whether the module returns both could not be established from the encrypted
-  model files.
 - **The IT guide flags two things it cannot answer**: the installer URLs (they 403 until
   the stable tag runs `build-release.yml`) and the evaluation hostname if a dedicated
   endpoint has been provisioned. Section 13 exists to hold that kind of question honestly

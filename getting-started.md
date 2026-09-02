@@ -6,25 +6,25 @@ QSAR Flex is available as a **web application** and as a **desktop application**
 
 ## 1. 🔐 Sign In
 
-**Web:** Go to [www.qsarflex.multicase.com](https://www.qsarflex.multicase.com). The sign-in page asks you to *Use your MultiCASE account to continue* — click **Sign in with Cognito** and you are taken to MultiCASE Accounts at `auth.multicase.com` to enter your credentials.
+**Web:** Go to [qsarflex.multicase.com](https://qsarflex.multicase.com). The sign-in page asks you to *Use your MultiCASE account to continue* — click **Sign in with Cognito** and you are taken to MultiCASE Accounts at `auth.multicase.com` to enter your credentials.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/signin-dark.png">
   <img src=".gitbook/assets/signin-light.png" alt="">
 </picture></figure>
 
-The same MultiCASE account signs you in to QSAR Flex, to the desktop apps and to the support portal.
+The same MultiCASE account signs you in to QSAR Flex, to the desktop app and to the support portal.
 
-**Desktop:** Install the app and launch it. Sign-in opens in your default browser and hands you back to the app when it finishes, so the desktop apps need a network connection at every launch.
+**Desktop:** Install the app and launch it. Sign-in opens in your default browser and hands you back to the app when it finishes, so the desktop app needs a network connection at every launch.
 
-- 💻 Windows — see [Installing on Windows](install-win.md) for the Local and Cloud installers
-- 🍎 macOS (Apple Silicon) — see [Installing on macOS](install-mac.md) for the Local and Cloud installers
+- 💻 Windows — see [Installing on Windows](install-win.md) for the installer
+- 🍎 macOS (Apple Silicon) — see [Installing on macOS](install-mac.md) for the installer
 
-**Local** and **Cloud** both run the prediction models on your own machine. What differs is where the reference database sits. **Local** downloads it on first launch — an encrypted file of about 4 GB — and keeps it on disk. **Cloud** queries a MultiCASE-hosted database at `central-db.multicase.com` instead, so there is no large download. Both variants download the model files on first launch, and both need internet for sign-in and licence verification.
+The **desktop app** runs the prediction models on your own machine, and the reference database sits there too: it downloads on first launch — an encrypted file of about 4 GB — and stays on disk. The model files download on first launch as well, and the app needs internet for sign-in and licence verification.
 
-Only **Desktop — Local** keeps the structures you evaluate on your own machine. On **Cloud**, some reference lookups carry the structure you are evaluating to the hosted database. In the **web application**, structures go to the QSAR Flex service at `qsarflex-be.multicase.com` for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request.
+The **desktop app** keeps the structures you evaluate on your own machine. In the **web application**, structures go to the QSAR Flex service at `qsarflex-be.multicase.com` for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request.
 
-Two steps reach a third party on every variant, Local included. **Auto Fill** sends the name, CAS number or SMILES you typed to PubChem at NCBI to look up the rest. DataKurator's *Verify structures against PubChem* sends names, CAS numbers and SMILES there as well. You have to ask for both, and DataKurator asks you to confirm before it runs. On Local these are the only steps that leave your machine.
+Two steps reach a third party on either deployment, the desktop app included. **Auto Fill** sends the name, CAS number or SMILES you typed to PubChem at NCBI to look up the rest. DataKurator's *Verify structures against PubChem* sends names, CAS numbers and SMILES there as well. You have to ask for both, and DataKurator asks you to confirm before it runs. On the desktop these are the only steps that send your structures anywhere. Sign-in, the licence check at launch, a usage record per evaluation and update checks still reach MultiCASE — none of them carries a structure.
 
 {% hint style="info" %}
 Don't have an account yet, or need a licence? See [Access & Licensing](fundamentals/access-and-licensing.md), or raise a request at [support.multicase.com](https://support.multicase.com).

@@ -1,6 +1,6 @@
 # The QSAR Flex Window
 
-🧭 QSAR Flex 4.0 puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and in both desktop builds. The desktop builds add one native menu of their own — **Help → Check for Updates** — and nothing else. This page describes each control on the bar.
+🧭 QSAR Flex 4.0 puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and the desktop app. The desktop app adds one native menu of its own — **Help → Check for Updates** — and nothing else. This page describes each control on the bar.
 
 Nothing on this page changes what QSAR Flex predicts. The chemistry, the models and the endpoints are the same as in 3.x — only the way you reach them is new.
 

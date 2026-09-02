@@ -1,6 +1,6 @@
 # Installing on Windows
 
-This guide walks through installing the QSAR Flex desktop application on Windows — from choosing a variant to your first evaluation.
+This guide walks through installing the QSAR Flex desktop application on Windows — from download to your first evaluation.
 
 {% hint style="info" %}
 **Installation needs no administrator rights.** QSAR Flex installs for your Windows user only, and it updates itself when new versions are released.
@@ -23,28 +23,25 @@ This guide walks through installing the QSAR Flex desktop application on Windows
 
 ---
 
-## 1 — Choose a variant
+## 1 — Download QSAR Flex
 
-QSAR Flex for Windows comes in two variants. Both run the prediction engine on your own machine, and both look and behave identically. They differ in where the reference database lives.
-
-| Variant | Reference data | Choose this if |
-| --- | --- | --- |
-| **Local** | Held on your machine as an encrypted database. QSAR Flex downloads it once, on first run (about 4 GB). | You want the reference data — and the structures you evaluate — to stay on your computer, or your evaluations should not depend on a live connection to MultiCASE. |
-| **Cloud** | Read as you evaluate from a MultiCASE-hosted PostgreSQL database at `central-db.multicase.com`. Nothing large to download. | You would rather not use the disk space, and your machine is always online while you work. |
+QSAR Flex for Windows runs the prediction engine on your own machine. Its reference data is held on
+that machine as an encrypted database, which QSAR Flex downloads once, on first run — about 4 GB.
 
 {% hint style="info" %}
-**Where your structures go.** Both variants run the prediction models on your workstation. On **Local**, the structures you evaluate stay on the machine. On **Cloud**, QSAR Flex reaches the hosted reference database over the network — outbound TCP 5432 to `central-db.multicase.com` — and some of those lookups carry the structure being evaluated as a canonical SMILES. Choose **Local** if the structures you evaluate must not leave the workstation, and open that port outbound if you choose **Cloud**.
+**Where your structures go.** The prediction models run on your workstation and the structures you
+evaluate stay on it. Nothing is uploaded to MultiCASE to be evaluated for you.
 
-Two features reach out to PubChem on either variant. **Auto Fill** in Add Compound sends the name, CAS number or SMILES you typed. DataKurator can verify structures against PubChem — that option is off by default and asks you to confirm before anything is sent.
+Two features reach out to PubChem. **Auto Fill** in Add Compound sends the name, CAS number or SMILES
+you typed, as soon as you press it. DataKurator can verify structures against PubChem — that option
+is off by default and asks you to confirm before anything is sent.
 {% endhint %}
 
-Download the installer for the variant you want:
+Download the installer:
 
-[⬇️ Download QSAR Flex **Local** for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
+[⬇️ Download QSAR Flex for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 
-[⬇️ Download QSAR Flex **Cloud** for Windows](https://downloads.multicase.com/qsarflex/cloud/QSARFlex-Cloud-Installer.exe)
-
-The files arrive as `QSARFlex-Local-Installer.exe` and `QSARFlex-Cloud-Installer.exe`. Both links always point at the current release. Install one variant — pick the other later only if your needs change.
+The file arrives as `QSARFlex-Local-Installer.exe`. The link always points at the current release.
 
 {% hint style="info" %}
 **Both the installer and the application are code-signed** with Azure Trusted Signing, using a SHA-256 digest and an RFC 3161 trusted timestamp — so the signature stays verifiable after the signing certificate expires. To check it yourself, right-click the downloaded `.exe`, choose **Properties**, and open the **Digital Signatures** tab.
@@ -110,8 +107,7 @@ On first run, QSAR Flex downloads the reference data it needs for predictions an
 
 <figure><img src=".gitbook/assets/install-win-07-data-download.png" alt="One-time reference-data download"></figure>
 
-* On the **Local** variant this includes the encrypted reference database, roughly **4 GB**, so allow time on a slower connection.
-* On the **Cloud** variant only the model files are downloaded — a much smaller transfer.
+* This includes the encrypted reference database, roughly **4 GB**, so allow time on a slower connection.
 
 Every downloaded file is verified against a SHA-256 checksum before it is used. The data is stored in `%LOCALAPPDATA%\QSARFlex\data` and is left in place when the application updates, so you never download it twice.
 

@@ -21,7 +21,7 @@ For N-nitrosamine impurity assessment (NDSRIs and related compounds). Covers ICH
 |---|---|---|---|
 | **CPCA Prediction** | — | Web + Desktop | Carcinogenic Potency Categorization Approach (CPCA) for N-nitrosamines. Finds every N-nitrosamine centre in your structure and assigns each one a potency category from its α-hydrogen count and its activating and deactivating structural features, following ICH M7 and EMA guidance. The most potent centre sets the reported acceptable intake: 18 or 26.5, 100, 400 or 1500 ng/day. A structure with no N-nitrosamine centre returns N/A. The rules run on your structure, so there is no reference set to count. |
 | **Surrogate Search** | 209 | Desktop only | Analog-based read-across using nitrosamine local environment similarity measure. Finds N-nitrosamine surrogates with available animal carcinogenicity data for read-across and AI derivation. |
-| **N-Nitrosation** | 1,238 | Web + Desktop | Nitrosation assessment for both individual compounds and synthetic routes. Predicts whether a compound is susceptible to nitrosation — i.e., can form an N-nitrosamine impurity under relevant pharmaceutical manufacturing conditions. |
+| **N-Nitrosation** | — | Web + Desktop | Nitrosation assessment for both individual compounds and synthetic routes. The rules run on your structure, so there is no single reference set to count. Predicts whether a compound is susceptible to nitrosation — i.e., can form an N-nitrosamine impurity under relevant pharmaceutical manufacturing conditions. |
 | **Cross Similarity** | — | Desktop only | Generates a full N×N structural similarity matrix across your entire compound library using fingerprint-based comparison. Useful for grouping NDSRIs by structural class. |
 
 ---
@@ -52,16 +52,6 @@ Evaluate critical components of a chemical's physicochemical characteristics rel
 | **Water Solubility** | 3,800 | Web + Desktop | Water solubility at 25°C — relevant to bioavailability, formulation, and environmental fate modeling. |
 | **Vapor Pressure** | 1,829 | Web + Desktop | Vapor pressure at 25°C — relevant for inhalation exposure assessments and environmental volatility. |
 | **Boiling Point** | 4,890 | Web + Desktop | Boiling points of organic compounds, predicted using group contribution and QSAR approaches. |
-
----
-
-## 🧬 Genotoxicity Bundle
-
-Genotoxicity hazard endpoints required for ICH M7 and standard safety evaluation packages.
-
-| Module | Platform | Description |
-|---|---|---|
-| **Ames Mutagencity** *(the app spells it this way)* | Web + Desktop | Reports experimental bacterial reverse mutation (Ames test) data by exact-structure lookup against a reference set of 463 N-nitroso compounds. A compound held in that set returns its measured outcome marked with an asterisk. Anything else returns a dash, including every structure that is not an N-nitroso compound. A primary endpoint in ICH M7 and pharmaceutical genotoxicity assessments. |
 
 ---
 

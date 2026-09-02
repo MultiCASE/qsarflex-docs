@@ -8,7 +8,7 @@ Nothing here changes the chemistry. What changed in 4.0 is DataKurator, and with
 
 ## Where your library lives
 
-In the web app and in both desktop apps, your library, your evaluation results and DataKurator's working set are held **in the browser**, in local storage:
+In the web app and in the desktop app, your library, your evaluation results and DataKurator's working set are held **in the browser**, in local storage:
 
 | What | Storage key | Cleared when |
 |---|---|---|
@@ -21,31 +21,25 @@ There is no MultiCASE-side copy of your library. Signing out clears your library
 The DataKurator working set is cleared at the same time only if DataKurator is the page you signed out from. Sign out from anywhere else — the Library, Account, or any other screen — and it stays in the browser profile until DataKurator is opened again — where it is discarded if a different user has signed in, and restored if the same user has. Use **Clear** in DataKurator if you want it gone immediately.
 
 {% hint style="info" %}
-Because the library lives in your browser profile, it does not follow you between browsers, machines or private windows. The desktop apps keep it in their own embedded browser profile.
+Because the library lives in your browser profile, it does not follow you between browsers, machines or private windows. The desktop app keeps it in its own embedded browser profile.
 {% endhint %}
 
 ---
 
 ## Where the chemistry runs
 
-Structures reach a chemistry engine whenever you parse a file, render a structure, curate, evaluate or generate a report. Which engine depends on the variant.
+Structures reach a chemistry engine whenever you parse a file, render a structure, curate, evaluate or generate a report. Which engine depends on where you run QSAR Flex.
 
 **Web app**
 
 Every one of those operations is an HTTPS call to the QSAR Flex API — `/compound/batch`, `/compound/render`, `/curate/analyze`, `/curate/correct`, `/curate/smiles-transform`, `/curate/export`, `/evaluate`, `/generate-report`. Your structures are transmitted for the duration of the request and the result is returned to your session. The API accepts browser requests only from `multicase.com` origins.
 
-**Desktop — Local**
+**Desktop**
 
 The desktop shell serves those same endpoint paths **inside the application process**. Nothing is posted to the QSAR Flex API: parsing, rendering, curation, evaluation and report generation all run on your machine, against the filter models and the reference database installed under your user profile. The network is used for sign-in, licence checks, updates — and PubChem, only when you ask for it.
 
-**Desktop — Cloud**
-
-The chemistry still runs in the application process, against locally installed filter models. Predictions are not computed in the cloud. The difference is the reference data: instead of the local ~4.0 GB encrypted database, this variant reads MultiCASE's central reference database over a direct PostgreSQL connection to `central-db.multicase.com` on TCP 5432. That connection has to be live throughout use.
-
-That connection carries chemistry. Some reference lookups match on structure, and the structure being evaluated is sent as a canonical SMILES query parameter. So on **Desktop — Cloud** your structures do leave the machine — by a different route than the web app, but they leave.
-
 {% hint style="info" %}
-If your requirement is that your structures never reach MultiCASE, install **Desktop — Local**. It is the only variant that carries the full reference database on the machine, and so the only one where no structure is transmitted in the course of an evaluation. Even there, a PubChem lookup you explicitly confirm still sends the compounds you selected, and every evaluation still reports counts and module ids to the licence service.
+If your requirement is that your structures never reach MultiCASE, install the **desktop application**. It carries the full reference database on the machine, so no structure is transmitted in the course of an evaluation. Even there, a PubChem lookup you explicitly confirm still sends the compounds you selected, and every evaluation still reports counts and module ids to the licence service.
 {% endhint %}
 
 ---
@@ -55,7 +49,7 @@ If your requirement is that your structures never reach MultiCASE, install **Des
 DataKurator is not a purely local tool, and the difference matters:
 
 - **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; a PubChem lookup goes to `/curate/correct`; the neutralise and chirality steps go to `/curate/smiles-transform`; **Download** goes to `/curate/export`.
-- **On the desktop apps**, the same four calls are intercepted by the shell and executed in-process. Curation happens on the machine.
+- **On the desktop app**, the same four calls are intercepted by the shell and executed in-process. Curation happens on the machine.
 
 Automatic analysis never contacts PubChem. Every analysis the app runs for you — on load, on Re-analyze, after a One Step Cure — is sent with PubChem explicitly disabled.
 
@@ -81,7 +75,7 @@ Both DataKurator routes stop at a dialog titled **Send data to PubChem?** before
 
 The question is asked before any work starts. Cancelling a One Step Cure at the dialog abandons the whole run — "One Step Cure cancelled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, CAS numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
 
-In the web app the lookup is made by the QSAR Flex backend on your behalf; on the desktop apps the application calls PubChem directly. Either way the data reaches `pubchem.ncbi.nlm.nih.gov`. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before using these features.
+In the web app the lookup is made by the QSAR Flex backend on your behalf; on the desktop app the application calls PubChem directly. Either way the data reaches `pubchem.ncbi.nlm.nih.gov`. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before using these features.
 
 ---
 
@@ -93,13 +87,13 @@ The one place QSAR Flex handles a password itself is **Account → Security**. C
 
 **Web app.** The session is a NextAuth session in your browser. Cognito tokens expire after about six minutes and are refreshed every four. Only one session is live per user per product: signing in somewhere else ends the earlier one.
 
-**Desktop apps.** Sign-in opens the hosted page in your **default browser** — so password managers and SSO work as they normally do — and a one-time authorization code comes back to the app through its `qsarflex://` (Windows) or `qsarflexmac://` (macOS) URL scheme. No token travels over that scheme. The app posts the code to `user-manager-be.multicase.com` over HTTPS, which performs the Cognito exchange server-side and returns the ID token only — so no client secret ships in the application, and the desktop apps never hold a refresh token.
+**Desktop apps.** Sign-in opens the hosted page in your **default browser** — so password managers and SSO work as they normally do — and a one-time authorization code comes back to the app through its `qsarflex://` (Windows) or `qsarflexmac://` (macOS) URL scheme. No token travels over that scheme. The app posts the code to `user-manager-be.multicase.com` over HTTPS, which performs the Cognito exchange server-side and returns the ID token only — so no client secret ships in the application, and the desktop app never holds a refresh token.
 
 {% hint style="info" %}
-**Desktop tokens are never written to disk.** The ID token is held in memory for the lifetime of the process — there is no Keychain entry, no DPAPI blob, no token file. That is why the desktop apps ask you to sign in at every launch, and why closing the app ends the session on that machine. A background timer refreshes the token every five minutes while the app is open.
+**Desktop tokens are never written to disk.** The ID token is held in memory for the lifetime of the process — there is no Keychain entry, no DPAPI blob, no token file. That is why the desktop app asks you to sign in at every launch, and why closing the app ends the session on that machine. A background timer refreshes the token every five minutes while the app is open.
 {% endhint %}
 
-There is also no offline licence cache, and no build works offline — the desktop apps included. Both fetch an active licence at launch and will not open without one, and every evaluation needs a live entitlement check: opening the module picker fetches the module catalogue and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.
+There is also no offline licence cache, and neither deployment works offline — the desktop app included. It fetches an active licence at launch and will not open without one, and every evaluation, on either deployment, needs a live entitlement check: opening the module picker fetches the module catalogue and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.
 
 ---
 
@@ -120,16 +114,16 @@ These are the hosts the products contact:
 
 | Host | Purpose | Used by |
 |---|---|---|
-| `auth.multicase.com` | Cognito hosted sign-in | All variants |
-| `www.qsarflex.multicase.com` | The web app; also the sign-in return page the desktop apps open in your browser | All variants |
+| `auth.multicase.com` | Cognito hosted sign-in | Both |
+| `qsarflex.multicase.com` and `www.qsarflex.multicase.com` | The web app; the `www` host is also the sign-in return page the desktop app opens in your browser | Both |
 | QSAR Flex API (a `multicase.com` host) | Parsing, rendering, curation, evaluation, reports | Web app |
-| `user-manager-be.multicase.com` | Licences, module entitlements, token refresh, usage counts | All variants |
-| `central-db.multicase.com` | Reference database, over a PostgreSQL connection on TCP 5432; some lookups query by canonical SMILES | Desktop — Cloud |
+| `user-manager-be.multicase.com` | Licences, module entitlements, token refresh, usage counts | Both |
 | `downloads.multicase.com` | Installers, update feeds, encrypted model and database downloads | Desktop |
-| `pubchem.ncbi.nlm.nih.gov` | Auto Fill and DataKurator PubChem lookups | All variants, on request only |
-| `resources.multicase.com` | This documentation, opened when you click **Documentation** | All variants |
+| `pubchem.ncbi.nlm.nih.gov` | Auto Fill and DataKurator PubChem lookups | Desktop, on request only. In the web app the lookup is made server-side, so a workstation firewall rule does not affect it |
+| `resources.multicase.com` | This documentation, opened when you click **Documentation** | Both |
+| `d35fy2f4trk71w.cloudfront.net` | Static product assets — logos and profile images. Carries no chemical data | Both |
 
-The desktop apps run no listeners: there is no local web server, no Windows service and no driver. Sign-in callbacks are handed to the running instance locally — through a named pipe on Windows, through the registered URL scheme on macOS.
+The desktop app runs no listeners: there is no local web server, no Windows service and no driver. Sign-in callbacks are handed to the running instance locally — through a named pipe on Windows, through the registered URL scheme on macOS.
 
 ---
 

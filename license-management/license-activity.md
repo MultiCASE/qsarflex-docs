@@ -96,7 +96,7 @@ A few consequences worth knowing:
 - **One row per evaluation run.** The record is written when the run completes, with the whole library counted once.
 - **Opening a report costs nothing.** Report generation checks your license but writes no activity record and consumes no tests.
 - **Cancelling is not a refund.** Cancelling stops QSAR Flex listening for the result; it does not stop the backend. The app says so at the time — *"Evaluation cancelled. Your library is unchanged; tests already started may still be billed."*
-- **Desktop runs appear here too.** The Windows and macOS desktop apps report each evaluation to the same license. The record also stores the app version and which build ran it (for example a Local or a Cloud desktop); those are kept for support and are not shown in the table.
+- **Desktop runs appear here too.** The Windows and macOS desktop app reports each evaluation to the same license. The record also stores the app version and which build ran it; those are kept for support and are not shown in the table.
 
 ---
 

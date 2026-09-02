@@ -129,9 +129,9 @@ p { margin: 0; }
    title, which read as a stray mark rather than a marker. It is an eyebrow above
    the title now, so number, title and body all hang off one left edge. */
 .pg-head {
-  padding-bottom: 3.2mm;
+  padding-bottom: 3mm;
   border-bottom: 0.5pt solid var(--ink);
-  margin-bottom: 5.2mm;
+  margin-bottom: 4.4mm;
 }
 .pg-head .hd-top {
   display: flex;

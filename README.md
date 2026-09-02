@@ -4,7 +4,7 @@
 
 **QSAR Flex** is a computational platform by [MultiCASE](https://multicase.com) for chemical safety assessment and toxicological prediction. It provides high-quality (Q)SAR models, read-across modules, and analysis tools — built for regulatory, pharmaceutical, and environmental science workflows.
 
-Available as a **web application** and as a **desktop application for Windows and macOS**. Every variant runs the same interface and needs an internet connection — **none of them works offline**, the desktop apps included. Sign-in and a license check run at every launch, and every evaluation needs a live entitlement check before you can select a module.
+Available as a **web application** and as a **desktop application for Windows and macOS**. Both run the same interface and need an internet connection — **none of them works offline**, the desktop app included. Sign-in and a license check run at every launch, and every evaluation needs a live entitlement check before you can select a module.
 
 {% hint style="info" %}
 **New in 4.0.** The interface has been rebuilt end to end — a new navigation bar, a ⌘K command bar, a redesigned Library, a two-step DataKurator, and a full Account page for your license. The models and endpoints are unchanged. See [What's New in 4.0](whats-new-4-0.md).
@@ -14,7 +14,7 @@ Available as a **web application** and as a **desktop application for Windows an
 
 ## 🚀 What Can QSAR Flex Do?
 
-- **🔬 Predict toxicological endpoints** — Ames mutagenicity, N-nitrosamine CPCA, ecotoxicity, physicochemical properties, ADME, and more
+- **🔬 Predict toxicological endpoints** — N-nitrosamine CPCA and nitrosation risk, ecotoxicity, physicochemical properties and ADME
 - **📂 Load and curate compounds** — Enter SMILES, InChI, names, or registry numbers; upload batch files (SMILES, SDF, MOL, TXT, CSV); drop files onto the library or paste structures straight in
 - **✅ Curate your dataset** — Use [DataKurator](datakurator.md) to detect and fix structural issues before evaluation
 - **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
@@ -23,32 +23,30 @@ Available as a **web application** and as a **desktop application for Windows an
 
 ---
 
-## Variants
+## Deployments
 
-| | 🌐 Web App | 💻 Desktop — Local | ☁️ Desktop — Cloud |
-|---|---|---|---|
-| **Platforms** | Any modern browser | Windows (64-bit) and macOS 12+ (Apple Silicon) | Windows (64-bit) and macOS 12+ (Apple Silicon) |
-| **Get it** | [www.qsarflex.multicase.com](https://www.qsarflex.multicase.com) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) |
-| **Compound loading** | ✓ | ✓ | ✓ |
-| **Batch upload** | ✓ | ✓ | ✓ |
-| **DataKurator** | ✓ | ✓ | ✓ |
-| **Evaluation** | ✓ | ✓ | ✓ |
-| **Reaction loading** | ✓ | ✓ | ✓ |
-| **Where evaluation runs** | MultiCASE servers | On your machine | On your machine |
-| **Where curation runs** | MultiCASE servers | On your machine | On your machine |
-| **Reference database** | MultiCASE servers | Encrypted database on your machine (~4 GB, downloaded on first launch and again whenever MultiCASE publishes new data) | MultiCASE cloud (PostgreSQL) |
-| **Internet required** | Always | Always | Always |
-| **Surrogate Search** | — | ✓ | ✓ |
-| **Cross Similarity** | — | ✓ | ✓ |
+| | 🌐 Web App | 💻 Desktop |
+|---|---|---|
+| **Platforms** | Any modern browser | Windows (64-bit) and macOS 12+ (Apple Silicon) |
+| **Get it** | [qsarflex.multicase.com](https://qsarflex.multicase.com) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) |
+| **Compound loading** | ✓ | ✓ |
+| **Batch upload** | ✓ | ✓ |
+| **DataKurator** | ✓ | ✓ |
+| **Evaluation** | ✓ | ✓ |
+| **Reaction loading** | ✓ | ✓ |
+| **Where evaluation runs** | MultiCASE servers | On your machine |
+| **Where curation runs** | MultiCASE servers | On your machine |
+| **Reference database** | MultiCASE servers | Encrypted database on your machine (~4 GB, downloaded on first launch and again whenever MultiCASE publishes new data) |
+| **Internet required** | Always | Always |
+| **Surrogate Search** | — | ✓ |
+| **Cross Similarity** | — | ✓ |
 
 > **Web App** does the work on MultiCASE servers. The structures you load are sent to the QSAR Flex service for evaluation, DataKurator curation, report generation, and the structure drawings you see on screen. They are not retained after the request.
 
-> **Desktop — Local** runs the models and DataKurator on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
-
-> **Desktop — Cloud** also runs the models and DataKurator on your machine. The difference is the reference database: it is hosted in MultiCASE's cloud rather than downloaded, so there is no large first-run download. Every evaluation opens a connection to that database at `central-db.multicase.com`, and some of the lookups it makes carry the structure being evaluated as a query. If your compounds must not leave your machine at all, choose **Desktop — Local**.
+> **Desktop** runs the models and DataKurator on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
 
 {% hint style="info" %}
-Both desktop variants are the same application as the web app, wrapped in a native shell. If you are choosing between them, the deciding questions are where the reference database should live and whether your structures may leave the workstation. See [Installing on Windows](install-win.md) or [Installing on macOS](install-mac.md).
+The desktop app is the same application as the web app, wrapped in a native shell. If you are choosing between the two, the deciding question is whether your structures may leave the workstation. See [Installing on Windows](install-win.md) or [Installing on macOS](install-mac.md).
 {% endhint %}
 
 ---

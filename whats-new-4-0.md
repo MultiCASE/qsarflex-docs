@@ -2,7 +2,7 @@
 
 QSAR Flex 4.0 is a rebuild of the interface. The models, the endpoints and the numbers they produce are unchanged — a compound you evaluated in 3.x returns the same result in 4.0. What has changed is everything around that: the shell you work in, how you get structures into the Library, how DataKurator is laid out, and where you go to see your licence.
 
-The same interface now ships in all three places — the web app at [www.qsarflex.multicase.com](https://www.qsarflex.multicase.com), the Windows desktop app and the macOS desktop app.
+The same interface now ships in all three places — the web app at [qsarflex.multicase.com](https://qsarflex.multicase.com), the Windows desktop app and the macOS desktop app.
 
 {% hint style="warning" %}
 **One change to know about first:** **⌘K** / **Ctrl+K** no longer opens the Evaluate dialog. It opens the new command bar. See [Behaviour changes](#behaviour-changes) below.
@@ -74,7 +74,7 @@ See [Loading Compounds](product-guide/loading-compounds.md), [Loading Reactions]
 **Long runs are legible and cancellable.** One Step Cure and library evaluation run behind a progress overlay that names the phase it is in rather than showing a fake percentage. File loading names its phase on the dropzone card itself — *Reading your file…*, then *Curating N compounds…* — with a **Cancel** button under it. All three can be cancelled, and cancelling says what was left alone (*One Step Cure cancelled — nothing was changed.*).
 
 {% hint style="info" %}
-**Correction to earlier documentation:** in the web app, DataKurator sends your structures to the QSAR Flex service for curation, over HTTPS; they are not persisted after the request. Both desktop apps — Local and Cloud — curate in the application process, so structures do not leave the machine during curation. The Local/Cloud difference is where the reference data lives, not where curation runs: the Cloud build reads MultiCASE's central reference database over a PostgreSQL connection to `central-db.multicase.com`, and some of those lookups carry the structure being evaluated. See [Security](security.md).
+**Correction to earlier documentation:** in the web app, DataKurator sends your structures to the QSAR Flex service for curation, over HTTPS; they are not persisted after the request. The desktop app curates in the application process, so structures do not leave the machine during curation. See [Security](security.md).
 {% endhint %}
 
 See [DataKurator](datakurator.md).

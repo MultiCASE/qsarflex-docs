@@ -47,17 +47,25 @@ const SAMPLE_COMPOUNDS = [
 ];
 
 const PRECOMPUTED_RESULTS = [
-  { id: 1, modules: { "Water Solubility": "3.4 mg/mL", "LogP": "1.19", "Ames Mutagencity": "Inactive" } },
-  { id: 2, modules: { "Water Solubility": "21.6 mg/mL", "LogP": "-0.07", "Ames Mutagencity": "Inactive" } },
-  { id: 3, modules: { "Water Solubility": "0.06 mg/mL", "LogP": "3.32", "Ames Mutagencity": "Inactive" } },
-  { id: 4, modules: { "Water Solubility": "0.09 mg/mL", "LogP": "3.97", "Ames Mutagencity": "Inactive" } },
-  { id: 5, modules: { "Water Solubility": "0.28 mg/mL", "LogP": "4.63", "Ames Mutagencity": "Inactive" } },
-  { id: 6, modules: { "Water Solubility": "0.001 mg/mL", "LogP": "6.04", "Ames Mutagencity": "Active" } },
+  { id: 1, modules: { "Water Solubility": "3.4 mg/mL", "LogP": "1.19", "Boiling Point": "321 °C" } },
+  { id: 2, modules: { "Water Solubility": "21.6 mg/mL", "LogP": "-0.07", "Boiling Point": "416 °C" } },
+  { id: 3, modules: { "Water Solubility": "0.06 mg/mL", "LogP": "3.32", "Boiling Point": "439 °C" } },
+  { id: 4, modules: { "Water Solubility": "0.09 mg/mL", "LogP": "3.97", "Boiling Point": "319 °C" } },
+  { id: 5, modules: { "Water Solubility": "0.28 mg/mL", "LogP": "4.63", "Boiling Point": "460 °C" } },
+  { id: 6, modules: { "Water Solubility": "0.001 mg/mL", "LogP": "6.04", "Boiling Point": "495 °C" } },
 ];
 
-// Clear output dir so stale screenshots from previous runs don't accumulate
+// Clear output dir so stale screenshots from previous runs don't accumulate.
+// NEVER touch install-win-* / install-mac-*: those are captured by a different
+// harness (capture-win.sh, capture-mac-install.sh) against real installers on a
+// VM, they live in this same flat directory, and this line used to delete all 17
+// of them on every web run — leaving both published install guides pointing at
+// missing images.
+const KEEP = /^install-(win|mac)-/
 if (fs.existsSync(OUT)) {
-  fs.readdirSync(OUT).filter(f => f.endsWith('.png')).forEach(f => fs.unlinkSync(path.join(OUT, f)));
+  fs.readdirSync(OUT)
+    .filter(f => f.endsWith('.png') && !KEEP.test(f))
+    .forEach(f => fs.unlinkSync(path.join(OUT, f)));
 }
 fs.mkdirSync(OUT, { recursive: true });
 

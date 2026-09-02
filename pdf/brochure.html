@@ -50,11 +50,12 @@
 }
 .wordmark .ver {
   font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 14pt;
-  font-weight: 500;
-  color: var(--green-mid);
-  letter-spacing: -0.01em;
-  margin-top: 4mm;
+  font-size: 44pt;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: -0.03em;
+  line-height: .96;
+  margin-top: 1mm;
 }
 .cover .strap {
   margin-top: 8mm;
@@ -157,11 +158,15 @@
   font-size: 6.8pt; letter-spacing: .06em;
   padding: 1mm 2mm; border-radius: 1mm; border: 0.4pt solid transparent;
 }
-.bg-clean { background: var(--green-l2); color: var(--green-d); }
-.bg-fatal { background: var(--amber-l);   color: var(--amber); }
-.bg-mix, .bg-dup, .bg-atom, .bg-arom, .bg-misc, .bg-cas, .bg-name {
-  background: #ECEDE9; color: var(--ink-2);
-}
+.bg-clean { background: #DCFCE7; color: #166534; }  /* green-100 / 800   — None      */
+.bg-mix   { background: #FEF9C3; color: #854D0E; }  /* yellow-100 / 800  — Mixture   */
+.bg-dup   { background: #DBEAFE; color: #1E40AF; }  /* blue-100 / 800    — Duplicate */
+.bg-atom  { background: #FFEDD5; color: #9A3412; }  /* orange-100 / 800  — AtomType  */
+.bg-arom  { background: #F3E8FF; color: #6B21A8; }  /* purple-100 / 800  — Aromaticity */
+.bg-fatal { background: #FEE2E2; color: #991B1B; }  /* red-100 / 800     — Fatal     */
+.bg-misc  { background: #F3F4F6; color: #1F2937; }  /* gray-100 / 800    — Misc      */
+.bg-cas   { background: #FEF3C7; color: #92400E; }  /* amber-100 / 800   — CasMismatch  */
+.bg-name  { background: #E0F2FE; color: #075985; }  /* sky-100 / 800     — NameMismatch */
 
 /* ---------- catalog table ---------- */
 .cat td { font-size: 7.3pt; padding: 1.05mm 2mm 1.05mm 0; }
@@ -243,8 +248,8 @@
 
     <div class="sub">
       Build a library, curate it, and evaluate it against MultiCASE models for nitrosamine potency,
-      ecotoxicity, physicochemical properties and ADME. Every prediction opens a report that shows the
-      evidence behind it.
+      ecotoxicity, physicochemical properties and ADME. Predictions open a report that shows the evidence
+      behind them.
     </div>
 
     </div>
@@ -260,7 +265,7 @@
   <div class="ledger">
     <div class="lhead">
       <span class="lt">Model catalog</span>
-      <span class="lr">Five bundles &nbsp;·&nbsp; 17 modules</span>
+      <span class="lr">Four bundles &nbsp;·&nbsp; 16 modules</span>
     </div>
     <div class="bundles">
       <div class="b">
@@ -269,22 +274,17 @@
         <div class="bd">Potency categorisation, surrogate search, route-level nitrosation risk.</div>
       </div>
       <div class="b">
-        <div class="bc">02 / Genotoxicity</div>
-        <div class="bn">Ames data</div>
-        <div class="bd">Measured bacterial reverse-mutation outcomes, by exact-structure lookup.</div>
-      </div>
-      <div class="b">
-        <div class="bc">03 / Ecotoxicity</div>
+        <div class="bc">02 / Ecotoxicity</div>
         <div class="bn">Aquatic &amp; fate</div>
         <div class="bd">Fish, daphnia, algae and ciliate toxicity; BCF, biodegradability, soil adsorption.</div>
       </div>
       <div class="b">
-        <div class="bc">04 / Physicochemical</div>
+        <div class="bc">03 / Physicochemical</div>
         <div class="bn">LogP &amp; friends</div>
         <div class="bd">LogP, water solubility, vapor pressure and boiling point.</div>
       </div>
       <div class="b">
-        <div class="bc">05 / ADME</div>
+        <div class="bc">04 / ADME</div>
         <div class="bn">Oral exposure</div>
         <div class="bd">Bioavailability four ways at once, microsomal stability, CYP and P-gp liabilities.</div>
       </div>
@@ -296,7 +296,7 @@
     <div class="addr">
       <b>MultiCASE Inc.</b><br>
       5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA<br>
-      qsarflex.com &nbsp;·&nbsp; support.multicase.com
+      qsarflex.multicase.com &nbsp;·&nbsp; support.multicase.com
     </div>
   </div>
 </section>
@@ -401,10 +401,10 @@
               <td>TD<sub>50</sub>, species, reliability score and the regulatory acceptable intake for each surrogate</td>
             </tr>
             <tr>
-              <td class="k" style="padding-left:4mm;">Nitrosamine impurity</td>
-              <td>Ames Mutagenicity</td>
-              <td><span class="chip">Measured result, or no match</span></td>
-              <td>The matched reference compound, its measured outcome, and the strain, metabolic activation and citation behind it</td>
+              <td class="k" style="padding-left:4mm;">A set of NDSRIs</td>
+              <td>Cross Similarity</td>
+              <td><span class="chip">N×N similarity matrix</span></td>
+              <td>Every pair scored against every other, so related impurities group into classes you can argue about together</td>
             </tr>
             <tr>
               <td class="k" style="padding-left:4mm;">Synthesis route</td>
@@ -663,7 +663,7 @@
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      Seventeen modules in five bundles; a licence grants every module or a named list. <b>Basis</b> says
+      Sixteen modules in four bundles; a licence grants every module or a named list. <b>Basis</b> says
       what kind of answer each gives — measured data, a rule, a read-across, or a statistical model —
       because that decides how a result is used and defended.
     </p>
@@ -678,8 +678,6 @@
         <tr><td class="mn">Surrogate Search</td><td class="basis">Read-across</td><td class="rec">209</td><td class="plat">Desktop only</td><td>Surrogates with animal carcinogenicity data, matched on the nitrosamine centre’s local environment.</td></tr>
         <tr><td class="mn">N-Nitrosation</td><td class="basis">Rule-based</td><td class="rec">—</td><td class="plat">Web · Desktop</td><td>Whether a compound — or any step of a route — can form an N-nitrosamine under manufacturing conditions.</td></tr>
         <tr><td class="mn">Cross Similarity</td><td class="basis">Similarity</td><td class="rec">—</td><td class="plat">Desktop only</td><td>A full N×N structural similarity matrix across the library, for grouping NDSRIs by class.</td></tr>
-        <tr class="bhead"><td colspan="5">Genotoxicity bundle <span>— the bacterial reverse-mutation endpoint, by measured data</span></td></tr>
-        <tr><td class="mn">Ames Mutagenicity</td><td class="basis">Experimental data</td><td class="rec">463</td><td class="plat">Web · Desktop</td><td>Measured Ames outcomes by exact-structure lookup against a set of N-nitroso compounds. A structure in the set returns its result; anything else returns a dash.</td></tr>
         <tr class="bhead"><td colspan="5">Ecotoxicity bundle <span>— adverse impact on the natural environment</span></td></tr>
         <tr><td class="mn">Fathead Minnow 96h LC50</td><td class="basis">Statistical QSAR</td><td class="rec">920</td><td class="plat">Web · Desktop</td><td>Acute toxicity to <em>Pimephales promelas</em> over 96 hours.</td></tr>
         <tr><td class="mn">Daphnia 48h LC50</td><td class="basis">Statistical QSAR</td><td class="rec">2,124</td><td class="plat">Web · Desktop</td><td>Acute toxicity to <em>Daphnia magna</em> over 48 hours.</td></tr>
@@ -726,24 +724,24 @@
     </div>
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
-      The interface is identical in all three. What differs is where the models run and where the
-      reference data they consult lives — and therefore whether your structures ever leave the machine.
-      Only the <b>Desktop — Local</b> build evaluates without sending your structures to MultiCASE.
+      The interface is identical in both. What differs is where the models run and where the reference
+      data they consult lives — and therefore whether your structures ever leave the machine. The
+      <b>desktop</b> build evaluates without sending your structures to MultiCASE.
     </p>
 
     <table class="dep" style="margin-bottom:7mm;">
       <thead>
-        <tr><th></th><th>Web application</th><th>Desktop — Local</th><th>Desktop — Cloud</th></tr>
+        <tr><th></th><th>Web application</th><th>Desktop</th></tr>
       </thead>
       <tbody>
-        <tr><td class="k">Runs on</td><td>Any modern browser</td><td>Windows x64 · macOS 12+ (Apple&nbsp;Silicon)</td><td>Windows x64 · macOS 12+ (Apple&nbsp;Silicon)</td></tr>
-        <tr><td class="k">Where the models run</td><td>MultiCASE cloud</td><td class="yes">Your machine</td><td class="yes">Your machine</td></tr>
-        <tr><td class="k">Reference database</td><td>Hosted by MultiCASE</td><td class="yes">On your machine</td><td>Hosted by MultiCASE</td></tr>
-        <tr><td class="k">Do structures leave the machine?</td><td>Yes — sent for evaluation</td><td class="yes">Not for evaluation</td><td>Yes — in reference lookups</td></tr>
-        <tr><td class="k">First-launch download</td><td>None</td><td>≈4 GB — models and database</td><td>≈27 MB — models only</td></tr>
-        <tr><td class="k">Desktop-only modules</td><td>Not available</td><td class="yes">Available</td><td class="yes">Available</td></tr>
-        <tr><td class="k">Works offline</td><td colspan="3">No — in all three. Even on Local the module picker checks your entitlement before every run.</td></tr>
-        <tr><td class="k">Kept current</td><td>Automatically</td><td>In-app updates, no admin rights</td><td>In-app updates, no admin rights</td></tr>
+        <tr><td class="k">Runs on</td><td>Any modern browser</td><td>Windows x64 · macOS 12+ (Apple&nbsp;Silicon)</td></tr>
+        <tr><td class="k">Where the models run</td><td>MultiCASE cloud</td><td class="yes">Your machine</td></tr>
+        <tr><td class="k">Reference database</td><td>Hosted by MultiCASE</td><td class="yes">On your machine</td></tr>
+        <tr><td class="k">Do structures leave the machine?</td><td>Yes — sent for evaluation</td><td class="yes">Not for evaluation</td></tr>
+        <tr><td class="k">First-launch download</td><td>None</td><td>≈4 GB — models and reference database</td></tr>
+        <tr><td class="k">Desktop-only modules</td><td>Not available</td><td class="yes">Available</td></tr>
+        <tr><td class="k">Works offline</td><td colspan="2">No — in both. Even on the desktop the module picker checks your entitlement before every run.</td></tr>
+        <tr><td class="k">Kept current</td><td>Automatically</td><td>In-app updates, no admin rights</td></tr>
       </tbody>
     </table>
 
@@ -778,7 +776,7 @@
       </div>
       <div class="cm">
         info@multicase.com<br>
-        qsarflex.com<br>
+        qsarflex.multicase.com<br>
         support.multicase.com
       </div>
     </div>
