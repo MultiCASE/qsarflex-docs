@@ -10,7 +10,7 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 |---|---|---|
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
 | `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
-| `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For existing customers upgrading from 3.x: what changed, where things moved, and what did not change. Reuses the brochure's cover system. |
+| `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For customers on 3.x. Reuses the brochure's cover system. |
 
 ## Build
 
@@ -138,10 +138,23 @@ brochure foot.
 ## Three documents, one system
 
 `release-notes.html` shares the brochure's cover CSS by copying its `<style>` block, so a change to
-the cover treatment has to be made in both. It exists because the brochure sells to someone who does
-not have the product, and an existing customer needs the opposite document: what changed, where
-things moved, and an explicit list of what did not. Keep it aligned with `whats-new-4-0.md`, which
-is the authoritative changelog.
+the cover treatment has to be made in both.
+
+**Know who the reader is before writing a word of it.** The 3.x desktop was a WinForms application
+that never ran the web interface, and almost no customer has used the web application. So for
+practically every reader, 4.0 is a **new application**, not a rebuilt one: nothing they know carries
+over, and macOS is new too — the Windows-only WinForms build had no Mac counterpart.
+
+The first draft got this wrong by taking its structure from `whats-new-4-0.md`, which describes the
+**web application's** 3.x → 4.0 change. That produced a "where your buttons moved" mapping addressed
+to people who never had those buttons. The tell was there to catch: `⌘K` is a Mac shortcut, and the
+old desktop was Windows only.
+
+So the document orients rather than diffs: what the new interface is, a **task-based** "where to do
+what you used to do" table (never a control-level one, which cannot be written honestly without the
+old build), what is genuinely new, what has not changed, and an introduction to the web application
+as something most readers have never opened. `whats-new-4-0.md` remains the changelog, but it is a
+source for facts, not for structure.
 
 ## House style
 
