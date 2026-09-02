@@ -26,10 +26,29 @@ resolving the arm64 image already sitting on `mcr.microsoft.com/dotnet/aspnet:9.
 | Set | State |
 |---|---|
 | Web UI (92 files, 46 light/dark pairs) | **Re-captured 2026-09-02** against the 4.0 UI, after the catalog correction |
-| Install guides (17 files) | **Re-captured 2026-09-01** from the **beta** channel |
+| Install guides (17 files) | Captured 2026-09-01 from a pre-release build; re-shoot at 4.0 stable |
 | Support portal (23 files, `assets/support/`) | Current; shot 2026-06-03 against the 4.0-era portal |
 
-## Install guides — captured from beta, re-do at 4.0 stable
+## The beta channel is closed — never name it in customer-facing text
+
+The pre-release channel is not offered to the public, so **no published page or PDF may mention a
+beta or a release channel**. The IT guide's "Release channels" note was removed on 2026-09-02; both
+PDFs and every published page now contain zero references. When editing, check text only — the
+capture scripts here still take `CHANNEL=beta` and that is fine, because `scripts/` is absent from
+`SUMMARY.md` and never publishes.
+
+Two published frames do still show a pre-release version string in the window title bar, which Shri
+has accepted for now rather than lose the screenshots:
+
+| Frame | Shows |
+|---|---|
+| `install-mac-06-app-ready.png` | `QSARFlex v3.9.0-beta.19` |
+| `install-win-08-app-ready.png` | `QSAR Flex v3.9.0-beta.32` |
+
+Both clear when these are re-shot from a stable build. The other 15 frames are installer chrome or
+browser sign-in pages and carry no version string.
+
+## Re-doing the install captures at 4.0 stable
 
 Captured 2026-09-01 with `CHANNEL=beta` on both platforms, because the branded **stable**
 installer URLs still return HTTP 403 — the 4.0 tag has not run `build-release.yml` yet.
