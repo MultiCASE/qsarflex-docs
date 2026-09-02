@@ -11,6 +11,7 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
 | `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
 | `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For customers on 3.x. Reuses the brochure's cover system. |
+| `brand-kit.html` | *QSAR Flex Brand Kit.pdf* | 2pp. The palette, the type split, logo rules and house style. Built so someone rebuilding these in another tool has the system written down. |
 
 ## Build
 
