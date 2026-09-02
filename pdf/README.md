@@ -134,6 +134,21 @@ brochure foot.
 4. `node pdf/check.mjs`, then read every proof PNG.
 5. Ship the PDFs from `pdf/out/`.
 
+## House style
+
+Two rules the client set, both easy to breach by accident:
+
+- **No em dashes in prose.** They read as machine-written. Use a comma, a colon, a semicolon, a full
+  stop or brackets, whichever the sentence actually wants. The only em dashes left in either
+  document are the standalone `—` glyphs that mean "not applicable" in a table cell
+  (`<td class="n">—</td>` and the catalog's Records column). Check with
+  `grep -c ' — ' pdf/*.html` — it must be 0.
+- **Do not explain the obvious to an IT reader.** The guide had "Twenty workstations on the same
+  morning is twenty simultaneous 4 GB transfers", which spells out arithmetic for a professional
+  audience and reads as condescension. State the constraint (one connection, two-hour ceiling,
+  ~5 Mbit/s) and stop. The same applies to "which is the practical argument for…", "note that…",
+  "in other words…" and similar throat-clearing.
+
 ## Keeping it to nine pages
 
 The guide was 18pp and was cut to 9 by merging sections and deleting duplication, not by dropping
