@@ -15,7 +15,7 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const FILES = process.argv.length > 2 ? process.argv.slice(2) : ['brochure.html', 'it-requirements.html', 'release-notes.html', 'brand-kit.html']
+const FILES = process.argv.length > 2 ? process.argv.slice(2) : ['brochure.html', 'it-requirements.html', 'release-notes.html']
 const PX_PER_MM = 1240 / 210   // the viewport width is one A4 width
 
 const browser = await chromium.launch()

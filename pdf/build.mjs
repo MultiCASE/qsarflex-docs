@@ -19,7 +19,6 @@ const DOCS = {
   brochure: { src: 'brochure.html',        pdf: 'QSAR Flex 4.0 Release Brochure.pdf' },
   it:       { src: 'it-requirements.html', pdf: 'QSAR Flex IT Requirements.pdf' },
   notes:    { src: 'release-notes.html',    pdf: 'QSAR Flex 4.0 Release Notes.pdf' },
-  brand:    { src: 'brand-kit.html',        pdf: 'QSAR Flex Brand Kit.pdf' },
 }
 
 const pick = process.argv[2]
