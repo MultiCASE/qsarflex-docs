@@ -7,6 +7,22 @@
 <link rel="stylesheet" href="images.css">
 <link rel="stylesheet" href="system.css">
 <style>
+/* ---------- screenshot figure ---------- */
+.shot {
+  border: 0.5pt solid var(--rule);
+  border-radius: 1.8mm;
+  overflow: hidden;
+  background: var(--sheet);
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot-cap {
+  margin-top: 2.4mm;
+  font-size: 7.4pt;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.shot-cap b { color: var(--ink-2); font-weight: 600; }
+
 /* ---------- cover ---------- */
 .cover { background: var(--paper); padding: 0; }
 .cover .top {
@@ -259,13 +275,13 @@
     </div>
 
     <div class="strap">
-      A new desktop application,<br>and the same chemistry.
+      A new desktop interface,<br>and the same chemistry.
     </div>
 
     <div class="sub">
-      For customers on QSAR Flex 3.x. The desktop application has been rebuilt from the ground up, so the
-      interface is new throughout: this is not a refresh of the one you have been using. The models, the
-      endpoints and the numbers they return are unchanged.
+      For customers on QSAR Flex 3.x. Version 4.0 introduces a completely rebuilt desktop application
+      with an all-new interface. While the experience has changed, the models, endpoints and results
+      remain the same.
     </div>
 
     </div>
@@ -287,7 +303,7 @@
       <div class="b">
         <div class="bc">01 / Interface</div>
         <div class="bn">Entirely new</div>
-        <div class="bd">One navbar, a command bar, light and dark themes. Nothing carries over visually.</div>
+        <div class="bd">One navbar, a command bar, and light and dark themes.</div>
       </div>
       <div class="b">
         <div class="bc">02 / Platform</div>
@@ -331,15 +347,14 @@
 <section class="page">
   <div class="sheet">
     <div class="pg-head">
-      <div class="hd-top"><span class="sn">Section 01</span><span class="tag">Read first</span></div>
+      <div class="hd-top"><span class="sn">Section 01</span><span class="tag"></span></div>
       <div class="ttl h-sec">The interface is new, not moved around</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:5mm;">
       The desktop application you have been running was a Windows program with its own interface. 4.0
       replaces it with the interface QSAR Flex uses on the web, wrapped in a native application for
-      Windows and macOS. Expect to learn where things are rather than to find them where they were. It
-      takes about ten minutes, and nothing you have saved is affected.
+      Windows and macOS. Nothing you have saved is affected.
     </p>
 
     <div class="grid g3" style="margin-bottom:6mm;">
@@ -372,21 +387,17 @@
       </div>
     </div>
 
-    <div class="sub-h" style="margin-bottom:2.6mm;">Where to do what you used to do</div>
-    <table class="spec-tbl">
-      <thead>
-        <tr><th style="width:34%">To do this</th><th>In 4.0</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="k">Load compounds</td><td>Drop a file anywhere on the <b>Library</b>, paste SMILES straight in, or use <b>+ Compounds</b>. SMILES, InChI, SDF, MOL, delimited text and MDL RXN are all accepted, and compounds and reactions in one drop are sorted for you.</td></tr>
-        <tr><td class="k">Clean a set before running it</td><td>The <b>DataKurator</b> tab. Loading a file analyses it immediately; bulk correction is the <b>One Step Cure</b> dialog.</td></tr>
-        <tr><td class="k">Export a cleaned set</td><td>The <b>Download</b> menu on the Curate screen, or send the clean rows straight to the Library in one click.</td></tr>
-        <tr><td class="k">Run an evaluation</td><td>The green <b>Evaluate</b> button in the Library, or <span class="path">⌘K</span> then <b>evaluate</b>. Modules are grouped by bundle; anything outside your licence is listed but greyed.</td></tr>
-        <tr><td class="k">Open a report</td><td>Click the outcome in the results table. The report opens beside the compound and can be downloaded as a self-contained file.</td></tr>
-        <tr><td class="k">Check your licence</td><td>The chip in the navbar shows tests remaining or Unlimited, and opens the <b>Account</b> page, where License and Team live.</td></tr>
-        <tr><td class="k">Get help</td><td><b>support.multicase.com</b>, using the same account you sign in with. The book icon in the navbar opens the documentation.</td></tr>
-      </tbody>
-    </table>
+    <div class="sub-h" style="margin-bottom:2.6mm;">The Library, with the whole interface around it</div>
+    <div class="shot">
+      <img src="../.gitbook/assets/library-with-results-light.png" alt="The QSAR Flex 4.0 Library, showing the navbar, the Evaluate button and a results table">
+    </div>
+    <p class="shot-cap">
+      Left to right along the bar: the <b>Library</b> and <b>DataKurator</b> tabs, the <b>Search</b> box that
+      the command bar opens behind, then your licence status, the documentation button and the light/dark
+      toggle. Below it, <b>+ Compounds</b>, <b>+ Reaction</b> and <b>Evaluate</b>, and one card per compound
+      with its structure beside its outcomes. Clicking an outcome opens the report.
+    </p>
+
   </div>
 
   <div class="pg-foot">
@@ -433,7 +444,7 @@
         <div class="d">
           Curation keeps a fifty-step history and every step is named, so a tooltip tells you what will
           come back before you press it. <b>One Step Cure</b> is a single dialog with four counted
-          decisions, plus optional passes for chiral tags, charge neutralisation and PubChem verification.
+          decisions, plus optional passes for chiral tags, charge neutralization and PubChem verification.
           A bulk run finishes in a summary you can filter down to the rows that still need attention
           instead of silently redrawing the table.
         </div>
@@ -442,11 +453,11 @@
 
       <div class="g">Everywhere</div>
       <div class="e">
-        <div class="t">Long runs report what they are doing, and can be cancelled</div>
+        <div class="t">Long runs report what they are doing, and can be canceled</div>
         <div class="d">
           Evaluation, curation and file loading run behind a progress overlay that names the phase it is
-          in rather than showing a percentage that means nothing. All three can be cancelled, and
-          cancelling says what was left alone. If a run returns fewer results than it was given, a banner
+          in rather than showing a percentage. All three can be canceled, and
+          canceling says what was left alone. If a run returns fewer results than it was given, a banner
           says so and names the counts, so a short run is never quietly presented as a complete one.
         </div>
       </div>
@@ -469,11 +480,12 @@
       <div class="e">
         <div class="t">A support portal, which did not exist before</div>
         <div class="d">
-          Until now support meant an email thread. <b>support.multicase.com</b> is new in this release:
-          sign in with the same MultiCASE account you use for QSAR Flex, with no separate registration,
-          and raise a ticket for anything — access, licensing, bundles, seats, bugs or questions. Attach
-          whatever shows the problem, follow the ticket to resolution, and see its status rather than
-          guessing at it. Replies come back in the thread. Use the portal rather than emailing support or
+          Until now support meant an email thread. <b>support.multicase.com</b> is new in this release.
+          It is a site of its own: open it in a browser and sign in with the same MultiCASE account you
+          use for QSAR Flex, with no separate registration. QSAR Flex itself links out to the
+          documentation, not to the portal. Raise a ticket for anything — access, licensing, bundles,
+          seats, bugs or questions. Attach whatever shows the problem, follow the ticket to resolution,
+          and see its status rather than guessing at it. Replies come back in the thread. Use the portal rather than emailing support or
           info at multicase.com.
         </div>
       </div>

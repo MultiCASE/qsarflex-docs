@@ -12,6 +12,12 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 | `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
 | `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For customers on 3.x. Reuses the brochure's cover system. |
 
+`release-notes.html` is the only one of the three that pulls a product screenshot: section 01 references
+`../.gitbook/assets/library-with-results-light.png` directly, not through `images.css`. The build renders
+over `file://`, so the relative path resolves and Chromium embeds the raster in the PDF. Re-shoot that
+frame and the notes pick it up on the next build — check the proof, because the figure is sized by its own
+aspect ratio and a taller frame will push section 01 past the page.
+
 ## Build
 
 ```bash

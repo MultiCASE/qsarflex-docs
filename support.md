@@ -4,6 +4,8 @@ The support portal at [support.multicase.com](https://support.multicase.com) is 
 
 If you run into an issue, have a question, or need help with anything related to QSAR Flex, open a support ticket there. Our team — or your distributor — will respond directly in the ticket thread.
 
+The portal is a separate website, opened in a browser. QSAR Flex has no ticket form of its own: the book icon in the navbar opens this documentation, and support is raised at the portal.
+
 {% hint style="info" %}
 The portal replaces email support. Please open a ticket for all new requests so nothing falls through the cracks.
 {% endhint %}
