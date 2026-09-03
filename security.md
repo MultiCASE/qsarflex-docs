@@ -16,7 +16,7 @@ In the web app and in the desktop app, your library, your evaluation results and
 | Evaluation results | `evaluation-result-storage` | You clear the library, or sign out |
 | DataKurator working set | `qsarflex_dk_state` | You clear DataKurator, or DataKurator is next opened by a different user |
 
-There is no MultiCASE-side copy of your library. Signing out clears your library and your evaluation results locally, and also asks the licence service to end the session.
+There is no MultiCASE-side copy of your library. Signing out clears your library and your evaluation results locally, and also asks the license service to end the session.
 
 The DataKurator working set is cleared at the same time only if DataKurator is the page you signed out from. Sign out from anywhere else — the Library, Account, or any other screen — and it stays in the browser profile until DataKurator is opened again — where it is discarded if a different user has signed in, and restored if the same user has. Use **Clear** in DataKurator if you want it gone immediately.
 
@@ -36,10 +36,10 @@ Every one of those operations is an HTTPS call to the QSAR Flex API — `/compou
 
 **Desktop**
 
-The desktop shell serves those same endpoint paths **inside the application process**. Nothing is posted to the QSAR Flex API: parsing, rendering, curation, evaluation and report generation all run on your machine, against the filter models and the reference database installed under your user profile. The network is used for sign-in, licence checks, updates — and PubChem, only when you ask for it.
+The desktop shell serves those same endpoint paths **inside the application process**. Nothing is posted to the QSAR Flex API: parsing, rendering, curation, evaluation and report generation all run on your machine, against the filter models and the reference database installed under your user profile. The network is used for sign-in, license checks, updates — and PubChem, only when you ask for it.
 
 {% hint style="info" %}
-If your requirement is that your structures never reach MultiCASE, install the **desktop application**. It carries the full reference database on the machine, so no structure is transmitted in the course of an evaluation. Even there, a PubChem lookup you explicitly confirm still sends the compounds you selected, and every evaluation still reports counts and module ids to the licence service.
+If your requirement is that your structures never reach MultiCASE, install the **desktop application**. It carries the full reference database on the machine, so no structure is transmitted in the course of an evaluation. Even there, a PubChem lookup you explicitly confirm still sends the compounds you selected, and every evaluation still reports counts and module ids to the license service.
 {% endhint %}
 
 ---
@@ -48,7 +48,7 @@ If your requirement is that your structures never reach MultiCASE, install the *
 
 DataKurator is not a purely local tool, and the difference matters:
 
-- **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; a PubChem lookup goes to `/curate/correct`; the neutralise and chirality steps go to `/curate/smiles-transform`; **Download** goes to `/curate/export`.
+- **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; a PubChem lookup goes to `/curate/correct`; the neutralize and chirality steps go to `/curate/smiles-transform`; **Download** goes to `/curate/export`.
 - **On the desktop app**, the same four calls are intercepted by the shell and executed in-process. Curation happens on the machine.
 
 Automatic analysis never contacts PubChem. Every analysis the app runs for you — on load, on Re-analyze, after a One Step Cure — is sent with PubChem explicitly disabled.
@@ -66,14 +66,14 @@ PubChem is the only third-party service QSAR Flex contacts with your data. There
 | **PubChem lookup** — a row's ⋮ menu in Curate | That compound's name, CAS number and SMILES | Choosing **PubChem lookup**, then confirming the consent dialog |
 
 {% hint style="info" %}
-There is no **PubChem Batch Correct** *button* in 4.0. The bulk lookup is now the **Verify structures against PubChem** checkbox inside the One Step Cure dialog, under **More curation steps**. The confirmation dialog it opens still refers to the run by the old name.
+There is no **PubChem Batch Correct** *button* anywhere in 4.0. The bulk lookup is the **Verify structures against PubChem** checkbox inside the One Step Cure dialog, under **More curation steps**. The confirmation dialog it opens still refers to the run by the old name, which is worth knowing if you are matching this page against what is on screen.
 {% endhint %}
 
 ### The consent dialog
 
 Both DataKurator routes stop at a dialog titled **Send data to PubChem?** before anything is transmitted. It names exactly what will leave — "compound names, CAS numbers, and SMILES for all compounds" for the bulk run, "the compound's name, CAS number, and SMILES" for a single row — states that "This data will leave your system.", prints the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and asks "Do you want to continue?" with **Cancel** and **Continue**.
 
-The question is asked before any work starts. Cancelling a One Step Cure at the dialog abandons the whole run — "One Step Cure cancelled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, CAS numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
+The question is asked before any work starts. Canceling a One Step Cure at the dialog abandons the whole run — "One Step Cure canceled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, CAS numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
 
 In the web app the lookup is made by the QSAR Flex backend on your behalf; on the desktop app the application calls PubChem directly. Either way the data reaches `pubchem.ncbi.nlm.nih.gov`. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before using these features.
 
@@ -93,7 +93,7 @@ The one place QSAR Flex handles a password itself is **Account → Security**. C
 **Desktop tokens are never written to disk.** The ID token is held in memory for the lifetime of the process — there is no Keychain entry, no DPAPI blob, no token file. That is why the desktop app asks you to sign in at every launch, and why closing the app ends the session on that machine. A background timer refreshes the token every five minutes while the app is open.
 {% endhint %}
 
-There is also no offline licence cache, and neither deployment works offline — the desktop app included. It fetches an active licence at launch and will not open without one, and every evaluation, on either deployment, needs a live entitlement check: opening the module picker fetches the module catalogue and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.
+There is also no offline license cache, and neither deployment works offline — the desktop app included. It fetches an active license at launch and will not open without one, and every evaluation, on either deployment, needs a live entitlement check: opening the module picker fetches the module catalog and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.
 
 ---
 
@@ -117,7 +117,7 @@ These are the hosts the products contact:
 | `auth.multicase.com` | Cognito hosted sign-in | Both |
 | `qsarflex.multicase.com` and `www.qsarflex.multicase.com` | The web app; the `www` host is also the sign-in return page the desktop app opens in your browser | Both |
 | QSAR Flex API (a `multicase.com` host) | Parsing, rendering, curation, evaluation, reports | Web app |
-| `user-manager-be.multicase.com` | Licences, module entitlements, token refresh, usage counts | Both |
+| `user-manager-be.multicase.com` | Licenses, module entitlements, token refresh, usage counts | Both |
 | `downloads.multicase.com` | Installers, update feeds, encrypted model and database downloads | Desktop |
 | `pubchem.ncbi.nlm.nih.gov` | Auto Fill and DataKurator PubChem lookups | Desktop, on request only. In the web app the lookup is made server-side, so a workstation firewall rule does not affect it |
 | `resources.multicase.com` | This documentation, opened when you click **Documentation** | Both |
@@ -135,7 +135,7 @@ The QSAR Flex API has no user database. It holds nothing about you or your compo
 - Reports and evaluation results are generated per request and returned to your session.
 - The API's request log records the method, path, status code and elapsed time of each call — not the request body.
 
-MultiCASE does record **licence usage**. Each evaluation reports the user and software id, the number of items in the library, the module ids used, the application version and the platform. No structures are included. You can see the resulting record yourself under **Account → License → View activity**.
+MultiCASE does record **license usage**. Each evaluation reports the user and software id, the number of items in the library, the module ids used, the application version and the platform. No structures are included. You can see the resulting record yourself under **Account → License → View activity**.
 
 ---
 

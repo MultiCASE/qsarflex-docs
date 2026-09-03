@@ -20,14 +20,14 @@ The same MultiCASE account signs you in to QSAR Flex, to the desktop app and to 
 - 💻 Windows — see [Installing on Windows](install-win.md) for the installer
 - 🍎 macOS (Apple Silicon) — see [Installing on macOS](install-mac.md) for the installer
 
-The **desktop app** runs the prediction models on your own machine, and the reference database sits there too: it downloads on first launch — an encrypted file of about 4 GB — and stays on disk. The model files download on first launch as well, and the app needs internet for sign-in and licence verification.
+The **desktop app** runs the prediction models on your own machine, and the reference database sits there too: it downloads on first launch — an encrypted file of about 4 GB — and stays on disk. The model files download on first launch as well, and the app needs internet for sign-in and license verification.
 
 The **desktop app** keeps the structures you evaluate on your own machine. In the **web application**, structures go to the QSAR Flex service at `qsarflex-be.multicase.com` for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request.
 
-Two steps reach a third party on either deployment, the desktop app included. **Auto Fill** sends the name, CAS number or SMILES you typed to PubChem at NCBI to look up the rest. DataKurator's *Verify structures against PubChem* sends names, CAS numbers and SMILES there as well. You have to ask for both, and DataKurator asks you to confirm before it runs. On the desktop these are the only steps that send your structures anywhere. Sign-in, the licence check at launch, a usage record per evaluation and update checks still reach MultiCASE — none of them carries a structure.
+Two steps reach a third party on either deployment, the desktop app included. **Auto Fill** sends the name, CAS number or SMILES you typed to PubChem at NCBI to look up the rest. DataKurator's *Verify structures against PubChem* sends names, CAS numbers and SMILES there as well. You have to ask for both, and DataKurator asks you to confirm before it runs. On the desktop these are the only steps that send your structures anywhere. Sign-in, the license check at launch, a usage record per evaluation and update checks still reach MultiCASE — none of them carries a structure.
 
 {% hint style="info" %}
-Don't have an account yet, or need a licence? See [Access & Licensing](fundamentals/access-and-licensing.md), or raise a request at [support.multicase.com](https://support.multicase.com).
+Don't have an account yet, or need a license? See [Access & Licensing](fundamentals/access-and-licensing.md), or raise a request at [support.multicase.com](https://support.multicase.com).
 {% endhint %}
 
 ---
@@ -79,7 +79,7 @@ If any compound fails curation on the way in, a **Curation issues detected** dia
 
 ## 3. 🔬 Evaluate
 
-Click the green **Evaluate** button in the Library toolbar. The **Select Modules to Evaluate** dialog opens, listing modules grouped by bundle. Only modules your licence covers can be selected, and you must select at least one.
+Click the green **Evaluate** button in the Library toolbar. The **Select Modules to Evaluate** dialog opens, listing modules grouped by bundle. Only modules your license covers can be selected, and you must select at least one.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">

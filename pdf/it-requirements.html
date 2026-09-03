@@ -260,7 +260,7 @@
         <tr><td class="k">Web rendering</td><td>Edge <b>WebView2</b>, pre-installed on Windows 11, may need deploying on Windows 10 (section 03).</td><td><b>WKWebView</b>, part of macOS. Nothing to install.</td></tr>
         <tr><td class="k">Memory</td><td colspan="2">4 GB minimum, 8 GB recommended.</td></tr>
         <tr><td class="k">Disk</td><td>≈285 MB application (measured on a clean install of the preceding 3.9 release, and covering Velopack&#39;s package cache) plus ≈4.0 GB reference data. Allow <b>10 GB</b> free.</td><td>≈275 MB bundle plus ≈4.0 GB reference data. Allow <b>10 GB</b> free.</td></tr>
-        <tr><td class="k">Internet</td><td colspan="2">Required at <b>every launch</b> for sign-in and licence verification, and for updates. Section 06 sets out what is transmitted.</td></tr>
+        <tr><td class="k">Internet</td><td colspan="2">Required at <b>every launch</b> for sign-in and license verification, and for updates. Section 06 sets out what is transmitted.</td></tr>
       </tbody>
     </table>
 
@@ -440,20 +440,20 @@
       </tbody>
     </table>
 
-    <div class="sub-h">Licence verification</div>
+    <div class="sub-h">License verification</div>
     <p class="body" style="margin-bottom:4mm;">
-      On the desktop the application asks the backend at start-up for the active licence and will not
+      On the desktop the application asks the backend at start-up for the active license and will not
       proceed without one; the module picker then re-checks entitlement <b>live before every run</b>. In the
-      web application the evaluation service validates the licence server to server on every run; the browser is never trusted to assert its own entitlement.
+      web application the evaluation service validates the license server to server on every run; the browser is never trusted to assert its own entitlement.
     </p>
 
     <table class="spec-tbl" style="margin-bottom:5mm;">
       <tbody>
-        <tr><td class="k">A licence request carries</td><td>An opaque account identifier, not a name or an email address; a fixed product identifier, which modules are in use, how many compounds are being evaluated, and the application version and platform.</td></tr>
+        <tr><td class="k">A license request carries</td><td>An opaque account identifier, not a name or an email address; a fixed product identifier, which modules are in use, how many compounds are being evaluated, and the application version and platform.</td></tr>
         <tr><td class="k">Never included</td><td><b>No chemical structures. No machine or hardware identifiers. No personal data beyond the account identifier.</b></td></tr>
         <tr><td class="k">How a test is counted</td><td>One run consumes the library size multiplied by the number of distinct <b>bundles</b> the selected modules belong to, so three modules from one bundle cost the same as one. A fixed-term subscription is not metered this way; an On&nbsp;Demand subscription is.</td></tr>
-        <tr><td class="k">What MultiCASE retains</td><td>A usage record per evaluation: who ran it, when, how many items, which modules, and its billing state. That is what administrators read back as licence activity and what an invoice reconciles against. <b>No chemical structures are recorded in it.</b></td></tr>
-        <tr><td class="k">Enterprise administration</td><td>An enterprise licence carries a fixed number of seats. Your own administrators assign and remove seats, create users, grant administrator rights and activate the licence, from inside the product, without involving MultiCASE.</td></tr>
+        <tr><td class="k">What MultiCASE retains</td><td>A usage record per evaluation: who ran it, when, how many items, which modules, and its billing state. That is what administrators read back as license activity and what an invoice reconciles against. <b>No chemical structures are recorded in it.</b></td></tr>
+        <tr><td class="k">Enterprise administration</td><td>An enterprise license carries a fixed number of seats. Your own administrators assign and remove seats, create users, grant administrator rights and activate the license, from inside the product, without involving MultiCASE.</td></tr>
       </tbody>
     </table>
 
@@ -461,7 +461,7 @@
       <span class="dot" style="background:var(--amber); margin-top:1.2mm;"></span>
       <p class="nt">
         <b>Neither deployment works offline, the desktop included.</b> Every launch needs sign-in and a
-        licence check, and every evaluation needs a live entitlement check against
+        license check, and every evaluation needs a live entitlement check against
         <code>user-manager-be.multicase.com</code>; if that call fails, <b>no module can be selected</b>.
         Holding the reference data locally removes the download, not the dependency.
       </p>
@@ -497,7 +497,7 @@
       </thead>
       <tbody>
         <tr><td class="host">auth.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>MultiCASE Accounts sign-in, reached from the user&#39;s browser.</td></tr>
-        <tr><td class="host">user-manager-be.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>Token exchange and refresh, licence verification, usage reporting, user and seat management.</td></tr>
+        <tr><td class="host">user-manager-be.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>Token exchange and refresh, license verification, usage reporting, user and seat management.</td></tr>
         <tr><td class="host">qsarflex.multicase.com<br>www.qsarflex.multicase.com</td><td class="y">Required</td><td class="y">Required</td><td>The web application. The <code>www</code> host is where desktop sign-in returns, so <b>allow both</b> for the desktop.</td></tr>
         <tr><td class="host">downloads.multicase.com</td><td class="y">Required</td><td class="n">—</td><td>Installers, update feeds and the reference data files.</td></tr>
         <tr><td class="host">qsarflex-be.multicase.com</td><td class="n">—</td><td class="y">Required</td><td>The evaluation service: evaluation, reports, depiction and curation. Confirm against your own account in case a dedicated endpoint was provisioned.</td></tr>
@@ -511,7 +511,7 @@
 <div class="kv2">
       <div class="i">
         <div class="l">Proxies</div>
-        <div class="v">The system proxy configuration, including a PAC script, is used for HTTPS; there is no separate proxy setting inside the application. <b>The application supplies no proxy credentials</b> and offers nowhere to enter them, so a proxy that requires NTLM, Kerberos or Basic authentication rejects its requests and sign-in, licence checks, updates and the reference-data download all fail. Where an authenticating proxy is enforced, exempt the hostnames in this section from proxy authentication.</div>
+        <div class="v">The system proxy configuration, including a PAC script, is used for HTTPS; there is no separate proxy setting inside the application. <b>The application supplies no proxy credentials</b> and offers nowhere to enter them, so a proxy that requires NTLM, Kerberos or Basic authentication rejects its requests and sign-in, license checks, updates and the reference-data download all fail. Where an authenticating proxy is enforced, exempt the hostnames in this section from proxy authentication.</div>
       </div>
       <div class="i">
         <div class="l">TLS inspection</div>
@@ -523,7 +523,7 @@
       </div>
       <div class="i">
         <div class="l">Where the services sit</div>
-        <div class="v">MultiCASE Accounts, the licensing backend with its usage records, and the evaluation service all run in Amazon Web Services, <b>US East (Ohio)</b>, for both deployments. The desktop sends no structures, but its sign-in and licence traffic still terminates there. Confirm current arrangements if you have a data-residency requirement.</div>
+        <div class="v">MultiCASE Accounts, the licensing backend with its usage records, and the evaluation service all run in Amazon Web Services, <b>US East (Ohio)</b>, for both deployments. The desktop sends no structures, but its sign-in and license traffic still terminates there. Confirm current arrangements if you have a data-residency requirement.</div>
       </div>
     </div>
 
@@ -574,7 +574,7 @@
       <div class="eyebrow" style="margin-bottom:2.4mm;">The only things that leave the machine</div>
       <div class="bul dense" style="gap:1.6mm;">
         <div class="li" style="color:#C7CDD2;">Authentication traffic between the browser, the accounts service and the backend</div>
-        <div class="li" style="color:#C7CDD2;">A licence check at start-up and a usage record per evaluation: account and product identifiers, modules, item count, version, platform</div>
+        <div class="li" style="color:#C7CDD2;">A license check at start-up and a usage record per evaluation: account and product identifiers, modules, item count, version, platform</div>
         <div class="li" style="color:#C7CDD2;">Update checks, carrying version information only</div>
         <div class="li" style="color:#C7CDD2;">A PubChem lookup, either DataKurator's, which asks first, or Add Compound's Auto Fill, which does not</div>
       </div>

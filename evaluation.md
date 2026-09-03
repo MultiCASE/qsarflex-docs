@@ -1,6 +1,6 @@
 # Evaluation
 
-🔬 Evaluation runs the prediction modules your licence covers against everything in your Library — compounds and reactions — in a single run, and writes the outcomes onto each card.
+🔬 Evaluation runs the prediction modules your license covers against everything in your Library — compounds and reactions — in a single run, and writes the outcomes onto each card.
 
 The chemistry is unchanged in 4.0. What is new is how you start a run, what the app tells you while it is running, and what it tells you afterwards when a run did not cover everything you sent.
 
@@ -14,10 +14,10 @@ With at least one item in the Library, there are two ways to start:
 - Open the command bar with **⌘K** (macOS) / **Ctrl+K** (Windows) and choose **Evaluate**.
 
 {% hint style="warning" %}
-In 3.x, ⌘K / Ctrl+K opened the evaluate dialog. In 4.0 it opens the **command bar** — the Search control in the middle of the navbar. **Evaluate** is one of the commands listed there. See [The QSAR Flex Window](interface.md) for the full command list.
+**If you used the QSAR Flex web app before 4.0**, ⌘K / Ctrl+K opened the evaluate dialog there. It now opens the **command bar** — the Search control in the middle of the navbar — and **Evaluate** is one of the commands listed in it. The 3.x Windows desktop had no such shortcut, so there is nothing to unlearn if that is where you are coming from. See [The QSAR Flex Window](interface.md) for the full command list.
 {% endhint %}
 
-The toolbar only exists once the Library has something in it; on an empty Library the empty-state card takes its place. The command bar still lists **Evaluate** on an empty Library, but greys it out and gives the reason on the row: *"Nothing in the library"*. The **Evaluate** button is also disabled while the Library is still loading and while a run is already in progress.
+The toolbar only exists once the Library has something in it; on an empty Library the empty-state card takes its place. The command bar still lists **Evaluate** on an empty Library, but grays it out and gives the reason on the row: *"Nothing in the library"*. The **Evaluate** button is also disabled while the Library is still loading and while a run is already in progress.
 
 ---
 
@@ -30,28 +30,28 @@ Either route opens the **Select Modules to Evaluate** dialog.
   <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
 </picture></figure>
 
-Modules are laid out in two columns and grouped under their licence bundle — **Nitrosamine**, **Ecotoxicity**, **Physicochemical** and **ADME**. Modules your account is not licensed for are listed but greyed out and cannot be ticked, so you can always see what exists beyond your current licence.
+Modules are laid out in two columns and grouped under their license bundle — **Nitrosamine**, **Ecotoxicity**, **Physicochemical** and **ADME**. Modules your account is not licensed for are listed but grayed out and cannot be ticked, so you can always see what exists beyond your current license.
 
 Tick one or more modules and click **Evaluate**. Submitting with nothing ticked shows *"Select at least one module"*. **Cancel** closes the dialog without starting anything.
 
 Two things decide what appears in this list:
 
 - **Coverage.** The dialog shows modules whose coverage is *All* or *Web*. A module marked *Desktop* coverage does not appear.
-- **Your licence.** The dialog asks the licence server which modules your active licence covers, and only those are selectable.
+- **Your license.** The dialog asks the license server which modules your active license covers, and only those are selectable.
 
 {% hint style="info" %}
-Need a module or a whole bundle added to your licence? Raise it at [support.multicase.com](https://support.multicase.com) — new licences, added modules and enterprise rollouts all go through the portal.
+Need a module or a whole bundle added to your license? Raise it at [support.multicase.com](https://support.multicase.com) — new licenses, added modules and enterprise rollouts all go through the portal.
 {% endhint %}
 
 ### When the Dialog Cannot Offer You Anything
 
-Three different things can stop the dialog working, and 4.0 tells them apart instead of showing an empty greyed-out list for all three. In every case the **Evaluate** button is disabled and the reason is shown at the top of the dialog.
+Three different things can stop the dialog working, and 4.0 tells them apart instead of showing an empty grayed-out list for all three. In every case the **Evaluate** button is disabled and the reason is shown at the top of the dialog.
 
 | What the dialog says | What it means | What to do |
 |---|---|---|
-| *"The module catalogue could not be loaded, so there is nothing to evaluate against. Check your connection and reopen this dialog."* | The list of modules itself never arrived, so there is nothing to draw. | Check your connection, close the dialog and open it again. |
-| *"Your licensed modules could not be checked right now, so no module can be selected. This is not a licence problem — try again shortly."* | The catalogue loaded, but the licence service did not answer when asked what you are entitled to. | Wait a moment and try again. Nothing is wrong with your licence. |
-| *"No license found / License not activated"* | The licence service answered, and the answer is that this account has no active licence for QSAR Flex. | Activate a licence on the **Account → License** tab, or request one at [support.multicase.com](https://support.multicase.com). See [Access & Licensing](fundamentals/access-and-licensing.md). |
+| *"The module catalog could not be loaded, so there is nothing to evaluate against. Check your connection and reopen this dialog."* | The list of modules itself never arrived, so there is nothing to draw. | Check your connection, close the dialog and open it again. |
+| *"Your licensed modules could not be checked right now, so no module can be selected. This is not a license problem — try again shortly."* | The catalog loaded, but the license service did not answer when asked what you are entitled to. | Wait a moment and try again. Nothing is wrong with your license. |
+| *"No license found / License not activated"* | The license service answered, and the answer is that this account has no active license for QSAR Flex. | Activate a license on the **Account → License** tab, or request one at [support.multicase.com](https://support.multicase.com). See [Access & Licensing](fundamentals/access-and-licensing.md). |
 
 ---
 
@@ -68,10 +68,10 @@ A full-screen overlay covers the page for the length of the run. It shows:
   See [Where Evaluation Runs](#where-evaluation-runs) below.
 - A **Cancel** button. **Esc** does the same thing, and focus is held inside the overlay while it is open.
 
-Cancelling stops the app waiting for the answer; it does not reach into the engine and stop work that has already begun. The app says so: *"Evaluation cancelled. Your library is unchanged; tests already started may still be billed."*
+Canceling stops the app waiting for the answer; it does not reach into the engine and stop work that has already begun. The app says so: *"Evaluation canceled. Your library is unchanged; tests already started may still be billed."*
 
 {% hint style="info" %}
-A run is metered against your licence. Whether it finishes, fails or is cancelled, the licence figures in the navbar are re-read afterwards. On a pay-per-test licence that is the remaining-tests count; on an on-demand subscription it is the pending-billing count.
+A run is metered against your license. Whether it finishes, fails or is canceled, the license figures in the navbar are re-read afterwards. On a pay-per-test license that is the remaining-tests count; on an on-demand subscription it is the pending-billing count.
 {% endhint %}
 
 ---
@@ -151,16 +151,16 @@ Some reports link to further detail — a distribution graph, a compound's prope
 
 What a report contains depends on the module:
 
-- **Statistical models** (regression and logistic) — the module name and version, the outcome, and a **Descriptor Contributions** table of every model term with its weight and its value in your molecule. A **Fragment** row draws your molecule with the matching atoms highlighted in red; an **Expert Alert** row names the alert in words instead of drawing it. An outcome that fell outside the applicability domain is marked *(out of domain)*, and a value taken from experimental data is labelled as such instead of being presented as a prediction.
-- **CPCA Prediction** — the N-Nitrosamine Carcinogenic Potency Evaluation: the highlighted nitrosamine centre, the CPCA decision flow-chart with the scores at each step, the potency category and acceptable intake, the activating and deactivating features found, and tables of experimental surrogates.
+- **Statistical models** (regression and logistic) — the module name and version, the outcome, and a **Descriptor Contributions** table of every model term with its weight and its value in your molecule. A **Fragment** row draws your molecule with the matching atoms highlighted in red; an **Expert Alert** row names the alert in words instead of drawing it. An outcome that fell outside the applicability domain is marked *(out of domain)*, and a value taken from experimental data is labeled as such instead of being presented as a prediction.
+- **CPCA Prediction** — the N-Nitrosamine Carcinogenic Potency Evaluation: the highlighted nitrosamine center, the CPCA decision flow-chart with the scores at each step, the potency category and acceptable intake, the activating and deactivating features found, and tables of experimental surrogates.
 - **N-Nitrosation** — the predicted nitrosamine products and their formation likelihood. For a reaction, the report covers the whole route: the scheme, the products formed at each step, and the literature references found for it.
 - **Oral Bioavailability** — the four-method assessment reported side by side, with the supplementary metabolic-stability, transporter and formulation-sensitivity sections. A **Show Structural Influence** button opens a table that splits the alert hits into features boosting and features lowering that endpoint, each fragment listed with its relative contribution and a proposed mechanism.
 
 {% hint style="warning" %}
-Not every module type has a report generator. If clicking an outcome does nothing, that module produces the value only. A module missing from the catalogue, or a card you have since deleted, is reported as a message rather than an empty panel.
+Not every module type has a report generator. If clicking an outcome does nothing, that module produces the value only. A module missing from the catalog, or a card you have since deleted, is reported as a message rather than an empty panel.
 {% endhint %}
 
-If your licence is a **trial**, reports generated by MultiCASE's servers come back stamped with a diagonal **TRIAL LICENSE / NOT FOR REGULATORY USE** watermark, and the watermark prints.
+If your license is a **trial**, reports generated by MultiCASE's servers come back stamped with a diagonal **TRIAL LICENSE / NOT FOR REGULATORY USE** watermark, and the watermark prints.
 
 ---
 
@@ -175,7 +175,7 @@ If your licence is a **trial**, reports generated by MultiCASE's servers come ba
 The desktop app runs the prediction models on your workstation, so the structures you evaluate are never sent to MultiCASE to be evaluated. That is not the same as running offline — see below.
 {% endhint %}
 
-Both deployments need a network connection: sign-in, the licence check and the usage metering all happen against MultiCASE's services. The web app validates your licence on the server before every run. The desktop app fetches your licence once at launch — it will not open without one — and reports each run's usage afterwards. See [Security](security.md) for the full data-handling picture.
+Both deployments need a network connection: sign-in, the license check and the usage metering all happen against MultiCASE's services. The web app validates your license on the server before every run. The desktop app fetches your license once at launch — it will not open without one — and reports each run's usage afterwards. See [Security](security.md) for the full data-handling picture.
 
 ---
 
@@ -183,7 +183,7 @@ Both deployments need a network connection: sign-in, the licence check and the u
 
 - **Run everything you need in one go.** A new run replaces the last one's results.
 - **Deleting a card deletes its results**, and **Clear all** wipes the library and every result with it.
-- **The licence server decides what you can tick.** The Select Modules dialog asks the licence service which modules your licence covers, and only those can be selected. In the web app that decision is enforced again on the server: the app sends module ids, the licence service returns the modules it will allow, and those are what the engine is given.
+- **The license server decides what you can tick.** The Select Modules dialog asks the license service which modules your license covers, and only those can be selected. In the web app that decision is enforced again on the server: the app sends module ids, the license service returns the modules it will allow, and those are what the engine is given.
 - **Large runs take time.** The engine works through the library one molecule at a time, so the wait grows with the number of compounds multiplied by the number of modules.
 
-See the [Model Catalog](fundamentals/model-catalog.md) for what each module predicts, and [Access & Licensing](fundamentals/access-and-licensing.md) for how runs are counted against your licence.
+See the [Model Catalog](fundamentals/model-catalog.md) for what each module predicts, and [Access & Licensing](fundamentals/access-and-licensing.md) for how runs are counted against your license.

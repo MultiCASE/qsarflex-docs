@@ -1,6 +1,6 @@
 # Model Catalog
 
-The QSAR Flex model catalog lists all available prediction endpoints organized by license bundle. The module catalogue and its bundles are unchanged in 4.0 — 4.0 changed the interface, not the science. Modules are grouped into the bundles below. A licence grants either every QSAR Flex module or a named list of modules — the **License** tab on your Account page shows which. Ask at the support portal, [support.multicase.com](https://support.multicase.com), to add bundles to your account.
+The QSAR Flex model catalog lists all available prediction endpoints organized by license bundle. The module catalog and its bundles are unchanged in 4.0 — 4.0 changed the interface, not the science. Modules are grouped into the bundles below. A license grants either every QSAR Flex module or a named list of modules — the **License** tab on your Account page shows which. Ask at the support portal, [support.multicase.com](https://support.multicase.com), to add bundles to your account.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/evaluate-dialog-dark.png">
@@ -8,7 +8,7 @@ The QSAR Flex model catalog lists all available prediction endpoints organized b
 </picture></figure>
 
 {% hint style="info" %}
-Where another page summarises a bundle in a single line, the tables here carry the detail. What you can actually run is set by your licence — the **Select Modules to Evaluate** dialog and the **License** tab on your Account page are the final word.
+Where another page summarises a bundle in a single line, the tables here carry the detail. What you can actually run is set by your license — the **Select Modules to Evaluate** dialog and the **License** tab on your Account page are the final word.
 {% endhint %}
 
 ---
@@ -19,7 +19,7 @@ For N-nitrosamine impurity assessment (NDSRIs and related compounds). Covers ICH
 
 | Module | Records | Platform | Description |
 |---|---|---|---|
-| **CPCA Prediction** | — | Web + Desktop | Carcinogenic Potency Categorization Approach (CPCA) for N-nitrosamines. Finds every N-nitrosamine centre in your structure and assigns each one a potency category from its α-hydrogen count and its activating and deactivating structural features, following ICH M7 and EMA guidance. The most potent centre sets the reported acceptable intake: 18 or 26.5, 100, 400 or 1500 ng/day. A structure with no N-nitrosamine centre returns N/A. The rules run on your structure, so there is no reference set to count. |
+| **CPCA Prediction** | — | Web + Desktop | Carcinogenic Potency Categorization Approach (CPCA) for N-nitrosamines. Finds every N-nitrosamine center in your structure and assigns each one a potency category from its α-hydrogen count and its activating and deactivating structural features, following ICH M7 and EMA guidance. The most potent center sets the reported acceptable intake: 18 or 26.5, 100, 400 or 1500 ng/day. A structure with no N-nitrosamine center returns N/A. The rules run on your structure, so there is no reference set to count. |
 | **Surrogate Search** | 209 | Desktop only | Analog-based read-across using nitrosamine local environment similarity measure. Finds N-nitrosamine surrogates with available animal carcinogenicity data for read-across and AI derivation. |
 | **N-Nitrosation** | — | Web + Desktop | Nitrosation assessment for both individual compounds and synthetic routes. The rules run on your structure, so there is no single reference set to count. Predicts whether a compound is susceptible to nitrosation — i.e., can form an N-nitrosamine impurity under relevant pharmaceutical manufacturing conditions. |
 | **Cross Similarity** | — | Desktop only | Generates a full N×N structural similarity matrix across your entire compound library using fingerprint-based comparison. Useful for grouping NDSRIs by structural class. |
@@ -67,10 +67,10 @@ Evaluate the extent to which a chemical is systemically available following oral
 
 ## 🔍 Checking Your Active Modules
 
-After signing in, open the avatar menu in the top right and choose **Profile** to reach the **Account** page, then select the **License** tab. Under **Validity & usage**, **Modules** reads `all` when your licence covers every module, or `specific` — in which case a **Selected modules** list names the ones you hold. The licence chip in the navbar takes you to the same tab in one click.
+After signing in, open the avatar menu in the top right and choose **Profile** to reach the **Account** page, then select the **License** tab. Under **Validity & usage**, **Modules** reads `all` when your license covers every module, or `specific` — in which case a **Selected modules** list names the ones you hold. The license chip in the navbar takes you to the same tab in one click.
 
-Modules you are not licensed for are greyed out and cannot be ticked in the **Select Modules to Evaluate** dialog, which opens from the green **Evaluate** button in the Library toolbar.
+Modules you are not licensed for are grayed out and cannot be ticked in the **Select Modules to Evaluate** dialog, which opens from the green **Evaluate** button in the Library toolbar.
 
-Modules marked **Desktop only** above are a separate case. They are not greyed out in the web app — they are not listed at all. Run the desktop app to see them in the dialog.
+Modules marked **Desktop only** above are a separate case. They are not grayed out in the web app — they are not listed at all. Run the desktop app to see them in the dialog.
 
 If you need to add a bundle, raise a request at the support portal, [support.multicase.com](https://support.multicase.com).

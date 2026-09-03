@@ -77,7 +77,7 @@ Everything about your account now lives in one place. Click your avatar in the t
 - **License** — your license details, validity, remaining tests, assigned users, and a **View activity** link to the full usage history
 - **Team** — your company's users, shown to company admins only; seat assignments are on the **License** tab
 
-The navigation bar also carries a **license status chip**, so you can see where your license stands without leaving the page you are on — tests remaining on a pay-per-test license, time left on a subscription, **Unlimited** on an on-demand one, or **No active licence** when there is none. Hover it for the license type and the rest of the detail; click it to open the License tab. See [Access & Licensing](fundamentals/access-and-licensing.md).
+The navigation bar also carries a **license status chip**, so you can see where your license stands without leaving the page you are on — tests remaining on a pay-per-test license, time left on a subscription, **Unlimited** on an on-demand one, or **No active license** when there is none. Hover it for the license type and the rest of the detail; click it to open the License tab. See [Access & Licensing](fundamentals/access-and-licensing.md).
 
 ---
 

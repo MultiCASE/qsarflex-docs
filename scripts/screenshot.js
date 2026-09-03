@@ -685,21 +685,21 @@ async function screenshotDataKurator(page, theme) {
   await page.waitForTimeout(900);
   await shot(page, `datakurator-file-selected-${theme}.png`);
 
-  // 4.0 loads straight into Curate and analyses on arrival, so "Run Analysis"
-  // usually never appears — the action bar comes up already in its analysed
+  // 4.0 loads straight into Curate and analyzes on arrival, so "Run Analysis"
+  // usually never appears — the action bar comes up already in its analyzed
   // state. Click it only if it is actually there; otherwise just wait for the
-  // analysed bar. Returning early here is what silently skipped every
+  // analyzed bar. Returning early here is what silently skipped every
   // DataKurator frame in the 3.x script.
   const runBtn = page.locator('button').filter({ hasText: /^Run Analysis$/ }).first();
   if (await runBtn.isEnabled({ timeout: 3000 }).catch(() => false)) {
     await runBtn.click();
   }
-  const analysed = await page.waitForSelector(
+  const analyzed = await page.waitForSelector(
     'button:has-text("One Step Cure"), button:has-text("Re-analyze")',
     { timeout: 60000 }
   ).catch(() => null);
-  if (!analysed) {
-    console.warn('  ⚠ Curate never reached its analysed state — skipping DataKurator');
+  if (!analyzed) {
+    console.warn('  ⚠ Curate never reached its analyzed state — skipping DataKurator');
     return;
   }
   await page.waitForTimeout(1500);

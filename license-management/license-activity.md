@@ -95,7 +95,7 @@ A few consequences worth knowing:
 
 - **One row per evaluation run.** The record is written when the run completes, with the whole library counted once.
 - **Opening a report costs nothing.** Report generation checks your license but writes no activity record and consumes no tests.
-- **Cancelling is not a refund.** Cancelling stops QSAR Flex listening for the result; it does not stop the backend. The app says so at the time — *"Evaluation cancelled. Your library is unchanged; tests already started may still be billed."*
+- **Canceling is not a refund.** Canceling stops QSAR Flex listening for the result; it does not stop the backend. The app says so at the time — *"Evaluation canceled. Your library is unchanged; tests already started may still be billed."*
 - **Desktop runs appear here too.** The Windows and macOS desktop app reports each evaluation to the same license. The record also stores the app version and which build ran it; those are kept for support and are not shown in the table.
 
 ---
@@ -115,7 +115,7 @@ So a table full of **Pending** rows is normal on an On-Demand license and means 
 Pending usage is surfaced in two other places, both counting the same thing — the total tests on rows that are still **Pending**:
 
 - **Account → License** shows a **Pending billing** figure in amber whenever it is above zero. If the count cannot be fetched the field says *"Couldn't be loaded"* rather than showing zero.
-- The **license chip** in the navbar shows the pending count beside your remaining tests (pay-per-test) or in place of **Unlimited** (On-Demand). It refreshes after every evaluation, including one you cancelled.
+- The **license chip** in the navbar shows the pending count beside your remaining tests (pay-per-test) or in place of **Unlimited** (On-Demand). It refreshes after every evaluation, including one you canceled.
 
 {% hint style="info" %}
 Activity belongs to the **license**, not to the person. Records point at the license they were run under, so moving a user between seats — or off the license entirely — leaves the earlier runs where they are. Usage from before a move stays billed to the license that ran it.

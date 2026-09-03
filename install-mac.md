@@ -7,7 +7,7 @@ This guide walks through installing the QSAR Flex desktop application on macOS �
 
 - **macOS 12 (Monterey) or later.**
 - **Apple Silicon (arm64).** The macOS build ships for Apple Silicon only — there is no Intel or universal build.
-- **An internet connection at every launch.** QSAR Flex signs you in and checks your licence each time it starts.
+- **An internet connection at every launch.** QSAR Flex signs you in and checks your license each time it starts.
 - **About 4 GB of free disk space** for the reference database.
 {% endhint %}
 
@@ -79,7 +79,7 @@ Your password is typed into MultiCASE Accounts in the browser, never into QSAR F
 {% endhint %}
 
 {% hint style="warning" %}
-**Don't have an account, or no licence yet?** QSAR Flex checks for an active licence right after sign-in and will not open without one. Raise a request at [support.multicase.com](https://support.multicase.com) — new accounts, licences and added modules all go through the portal.
+**Don't have an account, or no license yet?** QSAR Flex checks for an active license right after sign-in and will not open without one. Raise a request at [support.multicase.com](https://support.multicase.com) — new accounts, licenses and added modules all go through the portal.
 {% endhint %}
 
 ---
@@ -98,7 +98,7 @@ This is a one-time setup. The files are kept in `~/Library/Application Support/Q
 
 ## 6 — You're ready
 
-When setup finishes, the main QSAR Flex window opens on the **Library**. The navbar carries the **Library** and **DataKurator** tabs, the search box that opens the command bar with **⌘K**, your licence status, a **Documentation** button and your account menu.
+When setup finishes, the main QSAR Flex window opens on the **Library**. The navbar carries the **Library** and **DataKurator** tabs, the search box that opens the command bar with **⌘K**, your license status, a **Documentation** button and your account menu.
 
 <figure><img src=".gitbook/assets/install-mac-06-app-ready.png" alt="QSAR Flex ready to use"></figure>
 

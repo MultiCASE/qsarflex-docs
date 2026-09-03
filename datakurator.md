@@ -13,7 +13,7 @@ DataKurator is **Load → Curate**.
 Export is not a separate screen. Downloading curated files and loading compounds into your Library are both actions on the Curate screen, in the same action bar as everything else.
 
 {% hint style="info" %}
-**Changed in 4.0.** There is no third step and no **Proceed to Export** button. **PubChem Batch Correct** is no longer a button of its own either — verifying against PubChem is a checkbox inside the **One Step Cure** dialog. Curate now also has real **Undo** and **Redo**.
+**If you used the QSAR Flex web app before 4.0**, DataKurator had a third step: there is no **Proceed to Export** button now, and no **PubChem Batch Correct** button either — verifying against PubChem is a checkbox inside the **One Step Cure** dialog. Curate also has real **Undo** and **Redo**. Coming from the 3.x Windows desktop, treat the two-step flow above as new rather than as a change.
 {% endhint %}
 
 ---
@@ -54,7 +54,7 @@ There are three ways in, and all three go straight through to Curate:
 
 Supported extensions are `.smi`, `.smiles`, `.txt`, `.csv`, `.tsv`, `.tab`, `.dat`, `.sdf` and `.mol` — the hint under the button reads *SMILES, SDF, MOL, TXT or CSV — or paste SMILES with ⌘ V* (*Ctrl + V* on Windows).
 
-While it works, the card names the phase it is in — **Reading your file…**, then **Curating N compounds…** — with a **Cancel** button. Cancelling stops the run and reports *Loading cancelled — nothing was loaded.*
+While it works, the card names the phase it is in — **Reading your file…**, then **Curating N compounds…** — with a **Cancel** button. Canceling stops the run and reports *Loading canceled — nothing was loaded.*
 
 When the file has been read you get a count against the file it came from: *N compounds read from mydata.smi.* Check that number against what you expected — the parser returns the compounds it could read and does not report the rows it skipped, so the count is your only signal that a row was dropped.
 
@@ -77,7 +77,7 @@ The Curate screen is headed **DataKurator** / *Curate and validate your compound
 
 ### The summary card
 
-One line of counts, each with a coloured dot:
+One line of counts, each with a colored dot:
 
 - **N clean** — rows with no issue.
 - **N with issues** — rows carrying any issue.
@@ -253,7 +253,7 @@ The run happens in a fixed order — structural choices, then SMILES transforms,
 
 A progress panel covers the screen with the named steps of *this* run (**Applying corrections**, **Transforming SMILES**, **Looking up in PubChem**, **Re-analyzing**), ticking each off as it completes. There is no percentage bar, because there is no honest one to draw.
 
-**Cancel** — or **Escape** — stops the run: *One Step Cure cancelled — nothing was changed.* Nothing is written to the table until every step has finished, so a cancelled run really does leave your compounds as they were. The same is true of a refusal at the PubChem consent dialog.
+**Cancel** — or **Escape** — stops the run: *One Step Cure canceled — nothing was changed.* Nothing is written to the table until every step has finished, so a canceled run really does leave your compounds as they were. The same is true of a refusal at the PubChem consent dialog.
 
 #### The change summary
 
@@ -285,7 +285,7 @@ Both add *This data will leave your system.*, print the endpoint `https://pubche
   <img src=".gitbook/assets/datakurator-pubchem-warning-light.png" alt="">
 </picture></figure>
 
-The question is asked before anything is changed. Cancelling a batch consent aborts the whole One Step Cure run before it touches a compound.
+The question is asked before anything is changed. Canceling a batch consent aborts the whole One Step Cure run before it touches a compound.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-results-dark.png">
@@ -315,7 +315,7 @@ History covers the curation table. It does not reverse a download you already sa
 
 ### Download
 
-The **Download** dropdown writes the current table to a file. It offers two labelled sections:
+The **Download** dropdown writes the current table to a file. It offers two labeled sections:
 
 | Section | What it writes |
 |---|---|

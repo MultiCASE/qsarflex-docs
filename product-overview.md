@@ -17,7 +17,7 @@ QSAR Flex is available in two forms. Both share the same interface — the diffe
 | 🌐 **Web App** | Browser-based, hosted at [qsarflex.multicase.com](https://qsarflex.multicase.com). No installation required. Your structures go to the QSAR Flex service over HTTPS for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. |
 | 💻 **Desktop** | Windows and macOS app that evaluates on your machine. Your structures are not sent anywhere for evaluation. On first run it downloads its encrypted model files and a reference database (~4.0 GB). |
 
-The desktop app ships for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). **Neither deployment works offline.** Both need an internet connection at launch to sign in and check your licence, and again at every evaluation — the module picker fetches your licensed modules before you can select one.
+The desktop app ships for **Windows** (64-bit) and **macOS** (Apple Silicon, macOS 12 Monterey or later). **Neither deployment works offline.** Both need an internet connection at launch to sign in and check your license, and again at every evaluation — the module picker fetches your licensed modules before you can select one.
 
 > Both deployments require a valid license — either **individual** or **enterprise**. See [Access & Licensing](fundamentals/access-and-licensing.md) for details.
 
@@ -55,7 +55,7 @@ The one place that queries PubChem immediately is the Library's **Auto Fill** bu
 ### 🔬 Evaluation
 Run licensed prediction modules against your library in one click.
 - Select any combination of licensed modules — unlicensed modules are shown but disabled
-- Evaluate every compound and reaction in the library in a single run, cancellable while it runs — reactions are scored by the N-Nitrosation module only, and every other module reports `N/A` on a reaction row
+- Evaluate every compound and reaction in the library in a single run, cancelable while it runs — reactions are scored by the N-Nitrosation module only, and every other module reports `N/A` on a reaction row
 - Results appear in the Library — one card per compound, one row per module
 - One-click HTML report per compound per module, opened in a side panel with **Download HTML** and **Print / Save as PDF**
 
@@ -71,7 +71,7 @@ Load reaction files for structural analysis.
 
 ### 💻 Desktop
 
-Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). The desktop app still is not usable offline: sign-in and a licence check run at every launch, and every evaluation checks your entitlements before you can pick a module.
+Evaluation runs on your machine. No structure is sent anywhere to be evaluated. Auto Fill and DataKurator's PubChem verification still contact PubChem when you ask them to. On first run the app downloads its encrypted model files and reference database (~4.0 GB). The desktop app still is not usable offline: sign-in and a license check run at every launch, and every evaluation checks your entitlements before you can pick a module.
 
 - [Download for Windows (.exe)](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 - [Download for macOS (.dmg)](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)

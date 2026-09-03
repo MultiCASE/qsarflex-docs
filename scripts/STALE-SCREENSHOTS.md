@@ -61,7 +61,7 @@ Consequences to be aware of, and to fix when stable exists:
   `CHANNEL=beta`.
 - **The frames use a real MultiCASE account**, not the demo fixtures the web pass uses
   (`scripts/.env.local` → `QSARFLEX_EMAIL` / `QSARFLEX_PASS`). Its avatar photo and its
-  licence chip — `∞ 4720 pending billing` — are visible in `install-mac-06-app-ready`
+  license chip — `∞ 4720 pending billing` — are visible in `install-mac-06-app-ready`
   and `install-win-08-app-ready`. If that should not be public, re-shoot those two with
   a demo account.
 
@@ -88,8 +88,8 @@ re-downloads its ~4.0 GB reference database. Budget the time and the bandwidth.
 
 | Where | Problem | Fix |
 |---|---|---|
-| `seed.sql` | `Modules` had no `OwnerCompanyId`; `VisibleModulesQuery` threw `42703`, so every licensed-module lookup 500d and the navbar read *Licence unavailable* | Column added |
-| `screenshot.js` | Gated DataKurator on a `Run Analysis` button 4.0 no longer shows — it analyses on load. The script warned once and returned, silently skipping all 16 DataKurator frames | Waits for the analysed action bar; clicks `Run Analysis` only if present |
+| `seed.sql` | `Modules` had no `OwnerCompanyId`; `VisibleModulesQuery` threw `42703`, so every licensed-module lookup 500d and the navbar read *License unavailable* | Column added |
+| `screenshot.js` | Gated DataKurator on a `Run Analysis` button 4.0 no longer shows — it analyzes on load. The script warned once and returned, silently skipping all 16 DataKurator frames | Waits for the analyzed action bar; clicks `Run Analysis` only if present |
 | `screenshot.js` | Waited on `PubChem Batch Correct`, a button that no longer exists | PubChem captured where it lives now: the checkbox inside One Step Cure, then the *Send data to PubChem?* consent dialog |
 | `screenshot.js` | Clicked `/proceed\|next\|export/i` to reach a third Export screen that was removed | Captures the `Download` menu on the Curate screen |
 | `screenshot.js` | Library-empty callouts pointed at a toolbar that is hidden while the library is empty | Empty-state card is shot directly |
@@ -108,5 +108,5 @@ on five Lisinopril `.RXN` files under `~/Downloads` that are not vendored into t
 
 `whats-new-4-0.md`, `interface.md` and `license-management/license-activity.md` were
 written without figures. Worth shooting when convenient: the navbar full-width, the
-command bar open, the licence chip in each state, the Account tab rail, the licence
+command bar open, the license chip in each state, the Account tab rail, the license
 activity table, and the library drop overlay mid-drag.

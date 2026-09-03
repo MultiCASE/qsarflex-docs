@@ -14,8 +14,8 @@ The bar is divided into three columns, read left to right:
 |---|---|---|
 | Left | **Product mark** | Click the QSAR Flex logo to return to the Library |
 | Left | **Library / DataKurator** | A segmented control — the two places the software goes |
-| Centre | **Search** | The command bar, opened with ⌘ K / Ctrl + K |
-| Right | **Licence status chip** | Your current licence, at a glance |
+| Center | **Search** | The command bar, opened with ⌘ K / Ctrl + K |
+| Right | **License status chip** | Your current license, at a glance |
 | Right | **Documentation** | Opens this documentation space |
 | Right | **Theme toggle** | Light, dark, or follow your system |
 | Right | **Avatar** | Your account menu |
@@ -35,13 +35,13 @@ The two primary destinations sit in a segmented control immediately to the right
 - **Library** — the list of compounds and reactions you are working on. This is the default destination: anything that is not DataKurator and not an account page shows Library as current.
 - **DataKurator** — structure curation. Hovering it shows the tooltip *"Curate and validate compound libraries"*.
 
-The current destination is drawn as a raised tab with its own border and a green icon; the other is flat. On the account pages (**Account** and the licence activity pages) **neither** tab is lit — you are not in the Library or in DataKurator, and the bar says so rather than guessing. On those pages the licence chip and the avatar are outlined in green instead.
+The current destination is drawn as a raised tab with its own border and a green icon; the other is flat. On the account pages (**Account** and the license activity pages) **neither** tab is lit — you are not in the Library or in DataKurator, and the bar says so rather than guessing. On those pages the license chip and the avatar are outlined in green instead.
 
 ---
 
 ## ⌨️ The Command Bar
 
-The centre of the navbar is a search-shaped button labelled **Search** with a key cap on its right edge. The cap reads **⌘ K** on macOS and **Ctrl + K** on Windows. Its tooltip is *"Find any action by name"*.
+The center of the navbar is a search-shaped button labeled **Search** with a key cap on its right edge. The cap reads **⌘ K** on macOS and **Ctrl + K** on Windows. Its tooltip is *"Find any action by name"*.
 
 There are two ways to open it:
 
@@ -53,7 +53,7 @@ The shortcut deliberately does nothing while you are typing in a text box — �
 On a narrow window the control shrinks to the magnifying-glass icon alone rather than disappearing, so it stays reachable on a phone or a half-width window where there is no keyboard to press ⌘ K on.
 
 {% hint style="warning" %}
-In QSAR Flex 3.x, ⌘ K / Ctrl + K opened the evaluate dialog. In 4.0 it opens the command bar. To evaluate, open the command bar and choose **Evaluate**, or use the green **Evaluate** button in the Library toolbar.
+**If you used the QSAR Flex web app before 4.0**, ⌘ K / Ctrl + K opened the evaluate dialog there; it now opens the command bar. To evaluate, open the command bar and choose **Evaluate**, or use the green **Evaluate** button in the Library toolbar. The 3.x Windows desktop had no keyboard shortcut for evaluation, so this changes nothing for anyone coming from it.
 {% endhint %}
 
 ### Searching
@@ -94,7 +94,7 @@ Thirteen commands are listed, in four groups. Every one of them is offered on ev
 |---|---|
 | **Library** | The Library page |
 | **DataKurator** | The DataKurator page |
-| **Account and licence** | Your Account page |
+| **Account and license** | Your Account page |
 
 **QSAR Flex**
 
@@ -113,7 +113,7 @@ The queued command is armed for that one navigation only. It expires after about
 
 ### Commands that cannot run
 
-A command that is unavailable right now is still listed. It is greyed out, and the reason is printed on the row in place of the location:
+A command that is unavailable right now is still listed. It is grayed out, and the reason is printed on the row in place of the location:
 
 | Reason shown | When |
 |---|---|
@@ -131,32 +131,32 @@ The hint is there so the command bar teaches you the interface rather than repla
 
 ---
 
-## 🔑 The Licence Status Chip
+## 🔑 The License Status Chip
 
-The first control in the right-hand cluster is a chip showing your active licence. It is present on every page. While the licence is being fetched a grey placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
+The first control in the right-hand cluster is a chip showing your active license. It is present on every page. While the license is being fetched a gray placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
 
-What the chip says depends on the licence:
+What the chip says depends on the license:
 
 | Chip reads | Meaning |
 |---|---|
-| **`142/500` tests** | A pay-per-test licence: tests remaining out of tests bought |
+| **`142/500` tests** | A pay-per-test license: tests remaining out of tests bought |
 | **Unlimited** | An on-demand subscription, which never expires |
 | **`3` pending billing** | An on-demand subscription with test runs not yet invoiced |
 | **`8 mo left`** | A dated subscription with more than 60 days to run, shown in whole months |
 | **`23d left`** | A dated subscription with 60 days or fewer to run |
 | **Active** | A subscription with no end date |
 | **Expired** | A dated subscription whose end date has passed |
-| **No active licence** | The account has no active licence. Evaluation will not run |
-| **Licence unavailable** | The licence service could not be reached |
+| **No active license** | The account has no active license. Evaluation will not run |
+| **License unavailable** | The license service could not be reached |
 
 A pay-per-test chip turns amber once fewer than **10** tests remain, and its tooltip adds *"⚠ Low tests remaining. Consider purchasing more."* If some of your runs are awaiting billing, the count appears after the tests as *(N pending)*.
 
-Hovering the chip gives you the detail behind it — licence type (Subscription, On demand or Pay-per-test), status, tests remaining where they apply, the subscription end date where there is one, and the line *"Click to view details"*.
+Hovering the chip gives you the detail behind it — license type (Subscription, On demand or Pay-per-test), status, tests remaining where they apply, the subscription end date where there is one, and the line *"Click to view details"*.
 
-**Clicking the chip opens the License tab of your Account page**, in every state including the two failure states. From there you can see the full licence, its validity and usage, its assigned users, and its activity history.
+**Clicking the chip opens the License tab of your Account page**, in every state including the two failure states. From there you can see the full license, its validity and usage, its assigned users, and its activity history.
 
 {% hint style="info" %}
-**No active licence** and **Licence unavailable** are different problems. The first means the account does not have a licence yet — raise it at [support.multicase.com](https://support.multicase.com). The second means the licence service did not respond; evaluation will not run until it does, and it is usually worth reloading before reporting it.
+**No active license** and **License unavailable** are different problems. The first means the account does not have a license yet — raise it at [support.multicase.com](https://support.multicase.com). The second means the license service did not respond; evaluation will not run until it does, and it is usually worth reloading before reporting it.
 {% endhint %}
 
 ---
@@ -202,5 +202,5 @@ Your Account page is where the Profile, Security, License and Team tabs live. Th
 
 - [Evaluation](evaluation.md) — running modules against your Library
 - [DataKurator](datakurator.md) — structure curation
-- [Access & Licensing](fundamentals/access-and-licensing.md) — what your licence covers
+- [Access & Licensing](fundamentals/access-and-licensing.md) — what your license covers
 - [Getting Support](support.md) — reaching MultiCASE through the support portal
