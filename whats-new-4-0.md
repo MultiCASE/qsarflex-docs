@@ -4,10 +4,6 @@ QSAR Flex 4.0 replaces the interface. The models, the endpoints and the numbers 
 
 Most readers are coming from the **QSAR Flex 3.x desktop for Windows**, a WinForms program with menus, toolbars and an interface of its own that never ran the web interface. 4.0 does not rearrange that interface; it replaces it. The application you install now wraps the interface QSAR Flex runs in the browser, in a native window for Windows and, for the first time, macOS. Nothing carries over visually, so read the sections below as a description of a new application rather than a list of things that moved.
 
-{% hint style="info" %}
-**Coming from the QSAR Flex web app instead?** The interface will already be familiar. A short list of the things that changed for you is at the end, under [If you were using the web app before 4.0](#if-you-were-using-the-web-app-before-4-0).
-{% endhint %}
-
 | | |
 |---|---|
 | **Interface** | Entirely new. One navbar, a command bar, light and dark themes. |
@@ -153,19 +149,3 @@ If structures may not leave your network, stay on the desktop. See [Product Over
 - **The scientific results.** Predictions, reports and their supporting evidence are produced by the same engine. 4.0 changed the interface around it, not the chemistry.
 - **The license types.** Coverage is still Individual or Enterprise; the types are still Subscription, On-Demand Subscription and Pay-Per-Test, with module and bundle entitlements and enterprise seats managed by a company admin. What changed is where you see them.
 - **Sign-in and data.** Still your MultiCASE account, still the same account across QSAR Flex and the support portal. There is no data migration and no license re-issue.
-
----
-
-## If you were using the web app before 4.0
-
-Everything above applies to you too, but the interface will already be familiar. These are the specific things that changed:
-
-**⌘K no longer opens Evaluate.** It was the shortcut for the Evaluate dialog; it now opens the command bar. To evaluate from the keyboard, press **⌘K**, type `evaluate`, and press Enter — the **Evaluate** command runs from any page, navigating to the Library first if you are not there. The green **Evaluate** button in the Library toolbar is unchanged.
-
-**The Library toolbar is hidden while the Library is empty.** The **+ Compounds**, **+ Reaction**, **Evaluate** and **Clear all** controls appear once there is at least one item. Until then, use the buttons on the empty-state card.
-
-**"PubChem Batch Correct" is gone as a button.** It is a checkbox inside the One Step Cure dialog.
-
-**"Proceed to Export" is gone.** DataKurator was Upload → Curate → Export and is now Upload → Curate. Export is on the Curate screen, and sessions saved on the old export step reopen on Curate.
-
-**Profile is now the Account page.** The single Profile page became a tabbed Account page carrying Profile, Security, License and Team.

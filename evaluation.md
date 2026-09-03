@@ -13,10 +13,6 @@ With at least one item in the Library, there are two ways to start:
 - Click the green **Evaluate** button in the Library toolbar (atom icon, tooltip *"Run evaluation"*).
 - Open the command bar with **⌘K** (macOS) / **Ctrl+K** (Windows) and choose **Evaluate**.
 
-{% hint style="warning" %}
-**If you used the QSAR Flex web app before 4.0**, ⌘K / Ctrl+K opened the evaluate dialog there. It now opens the **command bar** — the Search control in the middle of the navbar — and **Evaluate** is one of the commands listed in it. The 3.x Windows desktop had no such shortcut, so there is nothing to unlearn if that is where you are coming from. See [The QSAR Flex Window](interface.md) for the full command list.
-{% endhint %}
-
 The toolbar only exists once the Library has something in it; on an empty Library the empty-state card takes its place. The command bar still lists **Evaluate** on an empty Library, but grays it out and gives the reason on the row: *"Nothing in the library"*. The **Evaluate** button is also disabled while the Library is still loading and while a run is already in progress.
 
 ---

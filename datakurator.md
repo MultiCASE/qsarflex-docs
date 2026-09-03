@@ -12,10 +12,6 @@ DataKurator is **Load → Curate**.
 
 Export is not a separate screen. Downloading curated files and loading compounds into your Library are both actions on the Curate screen, in the same action bar as everything else.
 
-{% hint style="info" %}
-**If you used the QSAR Flex web app before 4.0**, DataKurator had a third step: there is no **Proceed to Export** button now, and no **PubChem Batch Correct** button either — verifying against PubChem is a checkbox inside the **One Step Cure** dialog. Curate also has real **Undo** and **Redo**. Coming from the 3.x Windows desktop, treat the two-step flow above as new rather than as a change.
-{% endhint %}
-
 ---
 
 ## Where curation runs
@@ -230,7 +226,6 @@ Then **More curation steps**, a set of checkboxes:
 - **Remove chiral tags from SMILES** — on by default.
 - **Neutralize negative charges (O- to OH, S- to SH etc.)**
 - **Neutralize positive charge on nitrogen (ammonium and pyridinium)**
-
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-pubchem-option-dark.png">

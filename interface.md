@@ -52,10 +52,6 @@ The shortcut deliberately does nothing while you are typing in a text box — �
 
 On a narrow window the control shrinks to the magnifying-glass icon alone rather than disappearing, so it stays reachable on a phone or a half-width window where there is no keyboard to press ⌘ K on.
 
-{% hint style="warning" %}
-**If you used the QSAR Flex web app before 4.0**, ⌘ K / Ctrl + K opened the evaluate dialog there; it now opens the command bar. To evaluate, open the command bar and choose **Evaluate**, or use the green **Evaluate** button in the Library toolbar. The 3.x Windows desktop had no keyboard shortcut for evaluation, so this changes nothing for anyone coming from it.
-{% endhint %}
-
 ### Searching
 
 The search box is prompted with *"Search for anything — try 'evaluate' or 'curate'"*.
