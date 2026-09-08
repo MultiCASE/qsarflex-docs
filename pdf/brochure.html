@@ -107,7 +107,7 @@
 }
 .bundles .b .bc {
   font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 6.5pt; letter-spacing: .05em; white-space: nowrap; text-transform: uppercase; color: #6EE7A8;
+  font-size: 8.4pt; letter-spacing: .06em; white-space: nowrap; text-transform: uppercase; color: #6EE7A8;
 }
 .bundles .b .bd { font-size: 7.4pt; line-height: 1.42; color: #A8B0B6; }
 .cover .foot {
@@ -249,8 +249,8 @@
 
     <div class="sub">
       Build a library, curate it, and evaluate it against MultiCASE models for nitrosamine potency,
-      ecotoxicity, physicochemical properties and ADME. Predictions open a report that shows the evidence
-      behind them.
+      ecotoxicity, physicochemical properties and ADME. Each prediction is backed by a report with
+      supporting evidence.
     </div>
 
     </div>
@@ -271,22 +271,22 @@
     <div class="bundles">
       <div class="b">
         <div class="bc">01 / Nitrosamine</div>
-        <div class="bn">CPCA &amp; nitrosation</div>
-        <div class="bd">Potency categorisation, surrogate search, route-level nitrosation risk.</div>
+        <div class="bn">CPCA &amp; Nitrosation</div>
+        <div class="bd">Potency categorization, surrogate search, route-level nitrosation risk.</div>
       </div>
       <div class="b">
         <div class="bc">02 / Ecotoxicity</div>
-        <div class="bn">Aquatic &amp; fate</div>
+        <div class="bn">Aquatic Toxicity &amp; Fate</div>
         <div class="bd">Fish, daphnia, algae and ciliate toxicity; BCF, biodegradability, soil adsorption.</div>
       </div>
       <div class="b">
         <div class="bc">03 / Physicochemical</div>
-        <div class="bn">LogP &amp; friends</div>
+        <div class="bn">Physical Properties</div>
         <div class="bd">LogP, water solubility, vapor pressure and boiling point.</div>
       </div>
       <div class="b">
         <div class="bc">04 / ADME</div>
-        <div class="bn">Oral exposure</div>
+        <div class="bn">Oral Exposure</div>
         <div class="bd">Bioavailability four ways at once, microsomal stability, CYP and P-gp liabilities.</div>
       </div>
     </div>
@@ -310,14 +310,13 @@
       <div class="ttl h-sec">From a list of structures to a defensible answer</div>
     </div>
 
-    <p class="lead" style="max-width:150mm; margin-bottom:7mm;">
-      QSAR Flex is a workbench, not a single calculator. Assemble a library, clean it, choose the models
-      to run against it, and read the results as a table you can drill into,
-      whether you are screening one
-      impurity or a few thousand.
+    <p class="lead" style="max-width:165mm; margin-bottom:5mm;">
+      QSAR Flex is a workbench, not a single calculator. Assemble a library of molecules, curate them,
+      choose models to support your investigation, and review your predictions. Whether you are screening
+      one impurity or a few thousand, your results are presented in a way that is thorough and informative.
     </p>
 
-    <div class="flow" style="margin-bottom:6.5mm;">
+    <div class="flow" style="margin-bottom:5mm;">
       <div class="f">
         <div class="fn">STEP 01</div>
         <div class="ft">Load</div>
@@ -349,29 +348,38 @@
       <div class="card">
         <div class="eyebrow green" style="margin-bottom:2.4mm;">Prediction methods</div>
         <div class="h-sub" style="margin-bottom:2.6mm;">Nine ways to answer a question</div>
-        <p class="body" style="margin-bottom:3mm;">
-          A module is not always a regression. The engine carries ordinary least-squares and logistic
-          regression, naive Bayes, random forests, Bayesian networks, expert structural alerts expressed as
-          SMARTS, fragment descriptors, and read-across over a fingerprint reference set, including read-across localised to the environment around a specific alert. The catalog's <b>Basis</b>
-          column says which kind each shipping module uses.
+        <p class="body" style="margin-bottom:2.6mm;">
+          A module is not always a regression. The engine carries:
         </p>
+        <div class="bul dense" style="margin-bottom:3mm; display:grid; grid-template-columns:1fr 1fr; gap:1.1mm 4mm;">
+          <div class="li">Linear regression</div>
+          <div class="li">Logistic regression</div>
+          <div class="li">Naive Bayes</div>
+          <div class="li">Random forests</div>
+          <div class="li">Bayesian networks</div>
+          <div class="li">SMARTS expert alerts</div>
+          <div class="li">Fragment descriptors</div>
+          <div class="li">Fingerprint read-across</div>
+          <div class="li">Alert-local read-across</div>
+        </div>
         <p class="small">
-          The method is chosen when the model is built, so a nitrosamine potency call and a boiling point
-          arrive in the same results table.
+          The <b>Basis</b> column of the model catalog (<a href="#catalog" style="color:inherit;">page 04</a>)
+          says which kind each module uses. The method is chosen when the model is built, so a nitrosamine
+          potency call and a boiling point arrive in the same results table.
         </p>
       </div>
       <div class="card">
         <div class="eyebrow green" style="margin-bottom:2.6mm;">Applicability domain</div>
         <div class="h-sub" style="margin-bottom:2.6mm;">A prediction that says when to distrust it</div>
         <p class="body" style="margin-bottom:3mm;">
-          Domain is checked explicitly, by similarity to the nearest training-set neighbours or by
+          Domain is checked explicitly, by similarity to the nearest training-set neighbors or by
           looking for fragments of your query that the training set never covered. An outcome outside
           the domain is labeled <span class="path">(out of domain)</span> in the report rather than
           quietly returned as a number.
         </p>
         <p class="small">
-          Where the check is fragment-based, the un-modelled part of the molecule is identified, so you
-          can see <em>which</em> corner of the structure the model has never met.
+          When the domain is assessed by fragments, the unmodeled part of the molecule is identified, so
+          you can see <em>which</em> part of the structure the model has never seen.
         </p>
       </div>
     </div>
@@ -420,8 +428,9 @@
       <div class="note" style="margin-top:4.5mm;">
         <span class="dot" style="margin-top:1.2mm;"></span>
         <p class="nt">
-          <b>One file, nothing to unpack.</b> A report is a single self-contained HTML document with the
-          structures drawn inline as vector graphics, and print styling built in, so a browser print turns it into a paginated PDF fit for a dossier, and records the software, its version, and the run date.
+          <b>One file, nothing to unpack.</b> A report is a single self-contained HTML file. Structures are
+          drawn inline as vector graphics, and the software, its version and the run date are recorded.
+          Print it from the browser and it becomes a paginated PDF fit for a dossier.
         </p>
       </div>
     </div>
@@ -443,7 +452,7 @@
     </div>
 
     <p class="lead" style="max-width:150mm; margin-bottom:6mm;">
-      4.0 is a rebuild of everything you touch. The models, the endpoints and the numbers they return are unchanged. This release is about how quickly you can get a library in, get it clean, and get
+      4.0 rebuilds the entire user interface. The models, the endpoints and the numbers they return are unchanged. This release is about how quickly you can get a library in, get it clean, and get
       the answer out.
     </p>
 
@@ -481,9 +490,9 @@
         <div class="nh"><span class="idx">04</span><span class="tick"></span></div>
         <div class="nt">DataKurator, rebuilt around one screen</div>
         <div class="nb">
-          Curation and export now live together instead of behind a third step. Undo and redo cover
-          every change and name it, One Step Cure is a single dialog with counts against every choice,
-          and long runs report named phases and can be canceled without losing work.
+          Curation and export now share one screen. Every change can be undone and redone by name.
+          One Step Cure shows how many rows each choice affects before you commit. Long runs report
+          their progress and can be canceled without losing work.
         </div>
       </div>
       <div class="newitem">
@@ -532,9 +541,9 @@
       <span class="dot" style="margin-top:1.2mm;"></span>
       <p class="nt">
         <b>Unchanged in 4.0.</b> Every model, every endpoint, every record count and every number a
-        model returns. License types are unchanged too: subscription, on-demand subscription and
-        pay-per-test, individual or enterprise. If you have validated a QSAR Flex result, 4.0 does not
-        move it.
+        model returns. License types are unchanged too: subscription and pay-per-test,
+        individual or enterprise. A prediction you validated in 3.x returns the
+        same answer in 4.0.
       </p>
     </div>
   </div>
@@ -608,8 +617,8 @@
           <div class="eyebrow green" style="margin-bottom:2.6mm;">Consent before any lookup</div>
           <p class="body">
             DataKurator never contacts PubChem during the initial analysis. Any lookup it makes, whether a single row or the whole set, first raises a dialog naming exactly what would be sent, and waits for
-            you to agree. Elsewhere, the Auto Fill button in Add Compound is
-            itself the instruction to look a compound up.
+            you to agree. Elsewhere, the Auto Fill button in Add Compound looks
+            a compound up only when you press it.
           </p>
         </div>
       </div>
@@ -653,7 +662,7 @@
 </section>
 
 <!-- ═══════════════════ 06 · CATALOG ═══════════════════ -->
-<section class="page">
+<section class="page" id="catalog">
   <div class="sheet">
     <div class="pg-head">
       <div class="hd-top"><span class="sn">Section 04</span><span class="tag">Unchanged in 4.0</span></div>
@@ -682,7 +691,7 @@
         <tr><td class="mn">Algae 72h EC50</td><td class="basis">Statistical QSAR</td><td class="rec">1,377</td><td class="plat">Web · Desktop</td><td>72-hour algal growth inhibition, required for EU environmental classification.</td></tr>
         <tr><td class="mn">Bio Concentration Factor</td><td class="basis">Statistical QSAR</td><td class="rec">563</td><td class="plat">Web · Desktop</td><td>How readily a compound accumulates in aquatic organisms relative to ambient water.</td></tr>
         <tr><td class="mn">Ready Biodegradability</td><td class="basis">Statistical QSAR</td><td class="rec">1,443</td><td class="plat">Web · Desktop</td><td>Aerobic biodegradation within 28 days, per OECD Test&nbsp;301.</td></tr>
-        <tr><td class="mn">Soil Adsorption</td><td class="basis">Statistical QSAR</td><td class="rec">651</td><td class="plat">Web · Desktop</td><td>Organic carbon-normalised soil adsorption coefficient&nbsp;(K<sub>oc</sub>).</td></tr>
+        <tr><td class="mn">Soil Adsorption</td><td class="basis">Statistical QSAR</td><td class="rec">651</td><td class="plat">Web · Desktop</td><td>Organic carbon-normalized soil adsorption coefficient&nbsp;(K<sub>oc</sub>).</td></tr>
         <tr class="bhead"><td colspan="5">Physicochemical bundle <span>· formulation, bioavailability and environmental fate</span></td></tr>
         <tr><td class="mn">LogP</td><td class="basis">Experimental → QSAR</td><td class="rec">12,645</td><td class="plat">Web · Desktop</td><td>Octanol–water partition coefficient.</td></tr>
         <tr><td class="mn">Water Solubility</td><td class="basis">Experimental → QSAR</td><td class="rec">3,800</td><td class="plat">Web · Desktop</td><td>Water solubility at 25 °C.</td></tr>
@@ -722,8 +731,9 @@
 
     <p class="body" style="max-width:152mm; margin-bottom:5mm;">
       The interface is identical in both. What differs is where the models run and where the reference
-      data they consult lives, and therefore whether your structures ever leave the machine. The
-      <b>desktop</b> build evaluates without sending your structures to MultiCASE.
+      data they consult lives. On the <b>web</b>, structures are transmitted securely for the length of an
+      evaluation and are not retained or viewed by anyone at MultiCASE. The <b>desktop</b> build evaluates
+      entirely on your own machine, so your structures never leave it.
     </p>
 
     <table class="dep" style="margin-bottom:7mm;">
@@ -734,10 +744,10 @@
         <tr><td class="k">Runs on</td><td>Any modern browser</td><td>Windows x64 · macOS 12+ (Apple&nbsp;Silicon)</td></tr>
         <tr><td class="k">Where the models run</td><td>MultiCASE cloud</td><td class="yes">Your machine</td></tr>
         <tr><td class="k">Reference database</td><td>Hosted by MultiCASE</td><td class="yes">On your machine</td></tr>
-        <tr><td class="k">Do structures leave the machine?</td><td>Yes, sent for evaluation</td><td class="yes">Not for evaluation</td></tr>
+        <tr><td class="k">Do structures leave the machine?</td><td>Only for the length of an evaluation</td><td class="yes">No</td></tr>
         <tr><td class="k">First-launch download</td><td>None</td><td>≈4 GB, models and reference database</td></tr>
         <tr><td class="k">Desktop-only modules</td><td>Not available</td><td class="yes">Available</td></tr>
-        <tr><td class="k">Works offline</td><td colspan="2">No, in both. Even on the desktop the module picker checks your entitlement before every run.</td></tr>
+        <tr><td class="k">Works offline</td><td>No</td><td>No</td></tr>
         <tr><td class="k">Kept current</td><td>Automatically</td><td>In-app updates, no admin rights</td></tr>
       </tbody>
     </table>
@@ -745,8 +755,7 @@
     <table class="dep" style="margin-bottom:5mm;">
       <thead><tr><th style="width:22%">Licensing</th><th>What you are choosing between</th></tr></thead>
       <tbody>
-        <tr><td class="k">Subscription</td><td>One price for a fixed term. Run as much as the work needs across the bundles on the license, without counting.</td></tr>
-        <tr><td class="k">On-demand subscription</td><td>The same subscription with no expiry and no ceiling. Work is never blocked mid-assessment; usage is gathered and invoiced afterwards.</td></tr>
+        <tr><td class="k">Subscription</td><td>One price for a fixed term. Unlimited testing during that time.</td></tr>
         <tr><td class="k">Pay-per-test</td><td>A pool of tests drawn down as you go. A run costs your library size times the number of bundles selected; the balance shows in the navigation bar.</td></tr>
       </tbody>
     </table>
@@ -754,10 +763,10 @@
     <div class="note" style="margin-bottom:5mm;">
       <span class="dot" style="margin-top:1.2mm;"></span>
       <p class="nt">
-        <b>Enterprise licenses carry seats your own administrators manage</b>, assigning them, creating
-        users and activating the license without involving MultiCASE. Every evaluation is recorded against
-        the license with the user, the modules and whether it has been billed, and administrators read that
-        history in the product.
+        <b>Enterprise licenses can be managed internally by your own team</b>: assigning seats, creating
+        users and activating the license, without involving MultiCASE. Every evaluation is recorded against
+        the license with the user and the modules, and administrators read that history in the product.
+        The structures themselves are never part of that record.
       </p>
     </div>
 
@@ -765,9 +774,10 @@
       <div>
         <div class="ct">Ready to see it on your own compounds?</div>
         <div class="cb">
-          <b>Request access, or ask for a demonstration.</b> Not ready to deploy? Send us a structure list
-          or a synthesis scheme and we will return the same reports the product generates, with no installation and no license. Your IT team's questions are answered in the companion <b>IT Requirements &amp;
-          Deployment Guide</b> on resources.multicase.com.
+          <b>Request access, or ask for a demonstration.</b> Not ready to deploy? MultiCASE also offers
+          evaluation as a service: send us a structure list or a synthesis scheme and we return the same
+          reports the product generates, with no installation and no license. Your IT team's questions are
+          answered in the companion <b>IT Requirements &amp; Deployment Guide</b> on resources.multicase.com.
         </div>
       </div>
       <div class="cm">
