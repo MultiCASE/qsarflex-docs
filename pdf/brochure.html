@@ -491,8 +491,9 @@
         <div class="nt">DataKurator, rebuilt around one screen</div>
         <div class="nb">
           Curation and export now share one screen. Every change can be undone and redone by name.
-          One Step Cure shows how many rows each choice affects before you commit. Long runs report
-          their progress and can be canceled without losing work.
+          One Step Cure shows how many rows each choice affects before you commit, and any row can be
+          swapped for one of its tautomers. Long runs report their progress and can be canceled
+          without losing work.
         </div>
       </div>
       <div class="newitem">
@@ -593,6 +594,7 @@
             <div class="li">Edit a name or a SMILES in place; the table asks you to re-analyze afterwards</div>
             <div class="li">Expand a mixture, tick the components you want, and split it into its own rows</div>
             <div class="li">Look a single compound up in PubChem to fill a missing name or CAS</div>
+            <div class="li">Generate a row's tautomers, compare each with the parent, and adopt one</div>
             <div class="li">Delete a row, or rename it, from the row menu</div>
           </div>
         </div>
@@ -604,9 +606,9 @@
           <div class="h-sub" style="margin-bottom:2.6mm;">Bulk correction, with the counts up front</div>
           <p class="body" style="margin-bottom:3mm;">
             One dialog, four decisions, each showing how many rows it applies to. Mixtures and salts can
-            be removed, separated, or reduced to the largest part. Duplicates can be removed or collapsed
-            by highest, lowest or averaged activity. Atom-type and other errors can be removed or left
-            for manual repair.
+            be removed, separated into their components, or reduced to the largest part by atom count.
+            Duplicates can be removed outright or collapsed to one row per group. Atom-type and other
+            errors can be removed or left for manual repair.
           </p>
           <p class="body">
             A further section adds optional passes: strip chiral tags, neutralize negative charges,
@@ -632,7 +634,7 @@
         </div>
         <div style="padding:4mm 4mm; border-right:0.5pt solid var(--rule);">
           <div class="eyebrow" style="margin-bottom:2mm;">Change summaries</div>
-          <p class="small">A bulk run finishes in a summary you can filter down to just the rows that still need attention.</p>
+          <p class="small">A bulk run finishes in a summary you can filter down to the rows that need attention, ending with the balance: errors and duplicate groups, before and after.</p>
         </div>
         <div style="padding:4mm 4mm; border-right:0.5pt solid var(--rule);">
           <div class="eyebrow" style="margin-bottom:2mm;">Export</div>
