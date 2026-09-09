@@ -37,7 +37,7 @@ Load compounds from any source and manage them as cards before evaluation.
 
 ### ✅ DataKurator
 Curate and validate your dataset before evaluation, in two steps: load, then curate. Compounds are checked as soon as they load — there is no separate run step, and no separate export step.
-- Detects mixtures, duplicates, invalid atom types and aromaticity problems on load, with the same structural check and the same verdicts as the 3.8 desktop
+- Detects mixtures, duplicates, invalid atom types and aromaticity problems on load, with one structural check whose answer is the badge
 - Flags CAS and name mismatches once you run the optional PubChem verification
 - Inline editing per row — rename, edit SMILES, delete
 - **Pick components** on a mixture row to split it into one row per component

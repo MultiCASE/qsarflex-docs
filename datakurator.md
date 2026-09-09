@@ -113,8 +113,8 @@ Every row is given one status badge, plus a badge for each additional finding.
 | **CasMismatch** | The SMILES does not match the structure PubChem returns for the row's CAS number. |
 | **NameMismatch** | The SMILES does not match the structure PubChem returns for the row's name. |
 
-{% hint style="success" %}
-**The verdicts are the QSAR Flex 3.8 desktop's.** Every structure is loaded exactly as written and put through the same structural check the 3.8 DataKurator ran, and its answer is the badge — nothing is added on top. A set that was clean in 3.8 is clean here, and a set that had twelve mixtures there has twelve here. Duplicates are grouped the way 3.8 grouped them, on the checked structure with stereo ignored.
+{% hint style="info" %}
+**One check, one answer.** Every structure is loaded exactly as written and put through a single structural check, and that check's answer is the badge — nothing is layered on top of it. Duplicates are grouped on the checked structure, with stereo ignored, so how a SMILES was spelled never decides whether two rows match.
 {% endhint %}
 
 {% hint style="info" %}
@@ -209,7 +209,7 @@ An edited SMILES is not re-checked until you re-analyze. Its badge until then sa
 
 ### 🔁 Tautomers
 
-Many structures can be written in more than one tautomeric form — the keto and enol forms of a β-diketone, the lactam and lactim forms of a pyridone, the several forms of guanine — and a model sees only the form you gave it. **Tautomers** in the row menu shows you the alternatives the chemistry engine can derive from the row's structure and lets you swap the row over to one of them, exactly as the **Generate tautomers** button did in the QSAR Flex 3.8 desktop.
+Many structures can be written in more than one tautomeric form — the keto and enol forms of a β-diketone, the lactam and lactim forms of a pyridone, the several forms of guanine — and a model sees only the form you gave it. **Tautomers** in the row menu shows you the alternatives the chemistry engine can derive from the row's structure and lets you swap the row over to one of them.
 
 Use it when a compound came in as the form that was convenient to draw rather than the form you want evaluated, or when you want to see whether a tautomer exists at all before you decide.
 
@@ -275,7 +275,7 @@ Then **More curation steps**, a set of checkboxes:
 </picture></figure>
 **Cancel** closes the dialog; **Proceed** runs it.
 
-What each choice does — and each is what the same choice did in the QSAR Flex 3.8 desktop, because the run is that code:
+What each choice does:
 
 - **Remove** drops the matching rows from the set.
 - **Keep the largest part** keeps the component of a mixture with the most heavy atoms, deletes the others together with their hydrogens, and re-checks what is left. It works on the molecule, not on the text, so a short fragment with more atoms wins over a longer-spelled one.
@@ -289,7 +289,7 @@ What each choice does — and each is what the same choice did in the QSAR Flex 
 The passes run in a fixed order: mixtures, duplicates, atom type errors, other errors, chiral tags, negative charges, positive nitrogen — and then duplicates once more, so two rows that became identical when their charges were neutralized are collapsed too. A PubChem lookup, if you asked for one, goes first and covers only the rows with a structural error; a clean row is not sent.
 
 {% hint style="warning" %}
-After a cure, every surviving row carries the SMILES the engine writes for its checked structure, not the text it came in with — again as 3.8 exported them. That form has no stereo marks, so `C[C@H](N)C(=O)O` comes out as `CC(N)C(=O)O` whether or not you ticked **Remove chiral tags**. If you need the stereo, curate by hand instead.
+After a cure, every surviving row carries the SMILES the engine writes for its checked structure, not the text it came in with. That form has no stereo marks, so `C[C@H](N)C(=O)O` comes out as `CC(N)C(=O)O` whether or not you ticked **Remove chiral tags**. If you need the stereo, curate by hand instead.
 {% endhint %}
 
 #### While it runs
