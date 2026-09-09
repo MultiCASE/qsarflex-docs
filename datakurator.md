@@ -18,7 +18,7 @@ Export is not a separate screen. Downloading curated files and loading compounds
 
 | Where you are running QSAR Flex | What happens to your structures |
 |---|---|
-| **Web app** (qsarflex.multicase.com) | Your structures go to the QSAR Flex service at `qsarflex-be.multicase.com`. Each curation action is an authenticated HTTPS request to it: `POST /curate/analyze` to classify, `/curate/smiles-transform` for SMILES transforms, `/curate/correct` for PubChem verification, `/curate/export` to build a download. Reading your files uses `/compound/batch` — or `/compound/batch/multi` when you drop more than one — and structure pictures use `/compound/render`. |
+| **Web app** (qsarflex.multicase.com) | Your structures go to the QSAR Flex service at `qsarflex-be.multicase.com`. Each curation action is an authenticated HTTPS request to it: `POST /curate/analyze` to classify, `/curate/one-step-cure` to run One Step Cure, `/curate/tautomers` to generate a row's tautomers, `/curate/correct` for PubChem verification, `/curate/export` to build a download. Reading your files uses `/compound/batch` — or `/compound/batch/multi` when you drop more than one — and structure pictures use `/compound/render`. |
 | **Desktop** (Windows and macOS) | The app answers those same calls inside itself. The desktop shell intercepts them and runs the curation engine in-process, so curation happens on your machine. |
 
 On the server, a curation request is handled in memory: the structures are written to a temporary file only so the engine can load them, that file is deleted as the request finishes, and nothing is written to a database.
@@ -104,14 +104,18 @@ Every row is given one status badge, plus a badge for each additional finding.
 | Badge | What it means |
 |---|---|
 | **Clean** | No structural problem found. |
-| **Mixture** | The SMILES holds more than one disconnected component — *Molecule contains multiple disconnected components.* |
-| **Duplicate** | The same canonical structure appeared earlier in the set — *Duplicate of compound ID N.* Only structurally valid rows are compared, so a broken SMILES is never called a duplicate. |
-| **AtomType** | *Unsupported atom type detected.* |
-| **Aromaticity** | *Aromaticity perception error* — the ring system could not be perceived as drawn. |
-| **Fatal** | The structure could not be read — *Structural error (code N).* |
-| **Misc** | Other structural error — *Structural error (ring/atom count).* |
+| **Mixture** | The structure has more than one disconnected part — *It is a salt/mixture.* A salt counts: the counter-ion is a second part. |
+| **Duplicate** | The same structure appeared earlier in the set — *Duplicate of compound ID N.* Rows are compared on the structure the check produced, not on the text you typed, so `c1ccccc1` and `C1=CC=CC=C1` are duplicates, and so are two stereoisomers. Every row takes part except one whose SMILES could not be read at all. |
+| **AtomType** | An atom with a valence or charge the engine does not accept — *Unrecognized atom type.* |
+| **Aromaticity** | The ring system could not be de-aromatized as drawn — *Aromaticity detection problems.* |
+| **Fatal** | The row has no readable structure — *SMILES string error* for a SMILES that does not parse, *Error in text file format* for an empty one. |
+| **Misc** | *Less than two heavy atoms* or *Ring detection problems.* |
 | **CasMismatch** | The SMILES does not match the structure PubChem returns for the row's CAS number. |
 | **NameMismatch** | The SMILES does not match the structure PubChem returns for the row's name. |
+
+{% hint style="success" %}
+**The verdicts are the QSAR Flex 3.8 desktop's.** Every structure is loaded exactly as written and put through the same structural check the 3.8 DataKurator ran, and its answer is the badge — nothing is added on top. A set that was clean in 3.8 is clean here, and a set that had twelve mixtures there has twelve here. Duplicates are grouped the way 3.8 grouped them, on the checked structure with stereo ignored.
+{% endhint %}
 
 {% hint style="info" %}
 **CasMismatch** and **NameMismatch** can only come from a PubChem check, and analysis never runs one — every analysis request the app makes asks for the PubChem step to be skipped, so nothing goes to PubChem unasked. Neither badge therefore appears in QSAR Flex 4.0: the PubChem option in One Step Cure and the single-row **PubChem lookup** correct the SMILES to the structure PubChem returns and re-badge the row **Clean** rather than flagging a mismatch.
@@ -155,6 +159,7 @@ Every row has an actions button on the far right.
 | **Pick components (N)** / **Hide components** | Opens or closes the component picker. Mixture rows only. |
 | **Re-pick components** | Collapses a split back into its original mixture and reopens the picker. Shown on rows that came from a split. |
 | **PubChem lookup** | Looks this one compound up in PubChem, after the consent dialog. |
+| **Tautomers** | Generates the row's tautomers and opens the viewer. See [Tautomers](#tautomers) below. Disabled on a Fatal row, which has no structure to work from. |
 | **Rename** | Edits the name in place. |
 | **Edit SMILES** | Edits the SMILES in place. |
 | **Delete** | Removes the row. |
@@ -202,6 +207,43 @@ An edited SMILES is not re-checked until you re-analyze. Its badge until then sa
 
 ---
 
+### 🔁 Tautomers
+
+Many structures can be written in more than one tautomeric form — the keto and enol forms of a β-diketone, the lactam and lactim forms of a pyridone, the several forms of guanine — and a model sees only the form you gave it. **Tautomers** in the row menu shows you the alternatives the chemistry engine can derive from the row's structure and lets you swap the row over to one of them, exactly as the **Generate tautomers** button did in the QSAR Flex 3.8 desktop.
+
+Use it when a compound came in as the form that was convenient to draw rather than the form you want evaluated, or when you want to see whether a tautomer exists at all before you decide.
+
+Choose **Tautomers** on a row and the engine enumerates up to 200 tautomers of that structure. The parent is the structure as the curation check read it, so the list is derived from what the row was judged on, not from the raw text.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-tautomers-dialog-dark.png">
+  <img src=".gitbook/assets/datakurator-tautomers-dialog-light.png" alt="">
+</picture></figure>
+
+The dialog is titled **Tautomers — &lt;name&gt;** and says how many it found: *4 tautomers generated. Select one to compare it with the parent, then use it to replace the structure.* Down the left, **Parent** comes first and the tautomers follow as **Tautomer #1**, **#2** and so on, each with a small structure and its SMILES. The selected entry is drawn large on the right, with its SMILES and a copy button under it. The parent is selected when the dialog opens, so **Use tautomer** starts disabled — using the parent would change nothing.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-tautomer-selected-dark.png">
+  <img src=".gitbook/assets/datakurator-tautomer-selected-light.png" alt="">
+</picture></figure>
+
+Click a tautomer to compare it with the parent. Acetylacetone, for instance, arrives as the diketone `CC(=O)CC(C)=O` and offers its enol forms; selecting **Tautomer #1** draws `CC(=O)CC(=C)O` beside it.
+
+**Use tautomer** replaces the row's SMILES with the selection. That is an edit like any other: the row is marked *Edited — re-analyze to validate*, the amber *SMILES have been modified* strip appears in the summary card, and a toast confirms *Tautomer applied. Re-analyze to validate.* **Cancel** closes the dialog with nothing changed.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/datakurator-tautomer-applied-dark.png">
+  <img src=".gitbook/assets/datakurator-tautomer-applied-light.png" alt="">
+</picture></figure>
+
+Adopting a tautomer is one step in the history, named *Use tautomer — &lt;name&gt;*, so **Undo** puts the original structure back. A structure with no tautomers opens the dialog with *No tautomers were found for this structure.*
+
+{% hint style="info" %}
+Tautomers are generated from the structure, on the same engine that curates it — in the web app on the QSAR Flex service, on the desktop inside the app. Nothing goes to PubChem or anywhere else.
+{% endhint %}
+
+---
+
 ### ⚡ One Step Cure
 
 **One Step Cure** corrects the whole set in one run. The dialog counts what it is about to act on, so you can see the size of each decision before you make it.
@@ -216,7 +258,7 @@ Four counted choices:
 | Group | Options |
 |---|---|
 | **Mixtures/Salts — N** | Remove · Separate parts, assign equal activity · Keep the largest part · Leave as it is |
-| **Duplicates — N** | Remove · Keep one with highest activity · Keep one with lowest activity · Keep first but average the activity · Leave as it is |
+| **Duplicates — N** | Remove all copies · Keep one with highest activity · Keep one with lowest activity · Keep first but average the activity · Leave as it is |
 | **Atom type errors — N** | Fix manually · Remove |
 | **Other errors — N** | Fix manually · Remove — *Aromaticity, fatal and miscellaneous* |
 
@@ -233,20 +275,26 @@ Then **More curation steps**, a set of checkboxes:
 </picture></figure>
 **Cancel** closes the dialog; **Proceed** runs it.
 
-What each choice does:
+What each choice does — and each is what the same choice did in the QSAR Flex 3.8 desktop, because the run is that code:
 
 - **Remove** drops the matching rows from the set.
-- **Keep the largest part** replaces a mixture with its single longest component.
-- **Separate parts, assign equal activity** turns each component into its own row, named *Part 1…N*, exactly as the manual picker would.
+- **Keep the largest part** keeps the component of a mixture with the most heavy atoms, deletes the others together with their hydrogens, and re-checks what is left. It works on the molecule, not on the text, so a short fragment with more atoms wins over a longer-spelled one.
+- **Separate parts, assign equal activity** makes one new row per distinct component, named *&lt;name&gt;_&lt;ID&gt;_mixture_comp_1*, *_2* and so on, each checked as it is created; a component that appears twice in the same mixture becomes one row, and the original mixture row is removed.
+- **Remove all copies** deletes every row in a duplicate group, the first one included. The three **Keep** options keep the first row of each group and delete the rest — activity is not tracked here, so they behave alike.
 - **Fix manually** leaves those rows alone, and the summary reminds you how many are waiting for you.
-- Any Duplicates option other than **Leave as it is** removes the duplicate rows.
-- The three SMILES transforms are applied to every row, not only the flagged ones.
+- **Remove chiral tags from SMILES** strips `@`, `@@`, `/` and `\` from each row's SMILES text. A row whose SMILES could not be read is read again afterwards, since the tags may have been the problem.
+- **Neutralize negative charges** sets a negative charge to zero and adds the hydrogen that balances it, leaving alone an atom whose neighbor carries a positive charge (an internal salt is not a mistake). **Neutralize positive charge on nitrogen** removes one hydrogen from a positive nitrogen that has one; a quaternary nitrogen has none to give and is left as it is.
+- The transforms are applied to every row, not only the flagged ones.
 
-The run happens in a fixed order — structural choices, then SMILES transforms, then the PubChem lookup if you asked for one, then a re-analysis of the result — so badges are up to date when it finishes.
+The passes run in a fixed order: mixtures, duplicates, atom type errors, other errors, chiral tags, negative charges, positive nitrogen — and then duplicates once more, so two rows that became identical when their charges were neutralized are collapsed too. A PubChem lookup, if you asked for one, goes first and covers only the rows with a structural error; a clean row is not sent.
+
+{% hint style="warning" %}
+After a cure, every surviving row carries the SMILES the engine writes for its checked structure, not the text it came in with — again as 3.8 exported them. That form has no stereo marks, so `C[C@H](N)C(=O)O` comes out as `CC(N)C(=O)O` whether or not you ticked **Remove chiral tags**. If you need the stereo, curate by hand instead.
+{% endhint %}
 
 #### While it runs
 
-A progress panel covers the screen with the named steps of *this* run (**Applying corrections**, **Transforming SMILES**, **Looking up in PubChem**, **Re-analyzing**), ticking each off as it completes. There is no percentage bar, because there is no honest one to draw.
+A progress panel covers the screen with the named steps of *this* run — **Looking up in PubChem** when you asked for it, then **Curing** — ticking each off as it completes. There is no percentage bar, because there is no honest one to draw.
 
 **Cancel** — or **Escape** — stops the run: *One Step Cure canceled — nothing was changed.* Nothing is written to the table until every step has finished, so a canceled run really does leave your compounds as they were. The same is true of a refusal at the PubChem consent dialog.
 
@@ -261,7 +309,7 @@ A One Step Cure run with anything to report finishes in a summary dialog — **O
 
 - A count line at the top: *N changed · N need attention*, or *Nothing changed.*
 - Filter tabs **All** / **Changed** / **Needs attention**, shown when the run produced both kinds. The dialog opens on **Needs attention** so the rows you have to act on are not buried under the ones that went fine.
-- Lines are grouped by what produced them — curation decisions under one heading, a PubChem lookup under another — and each carries an icon for its kind: applied, removed, transformed, or needs attention.
+- Lines are grouped by what produced them — curation decisions under one heading, a PubChem lookup under another — and each carries an icon for its kind: applied, removed, transformed, or needs attention. Curation lines read *Removed 3 mixtures*, *Separated 2 mixtures into 5 parts*, *Kept the largest part of 4 mixtures*, *Removed 6 duplicates*, *Chiral tags removed from 2 compounds*, *Negative charges neutralized on 1 compound*, and so on; the last line is the balance — *Errors 12 → 3, duplicate groups 4 → 0*.
 - **Done** closes it.
 
 ---
@@ -297,11 +345,11 @@ PubChem is a third-party service run by the NCBI. MultiCASE does not store or lo
 
 ### Undo and redo
 
-Curate keeps a real history, up to 50 steps, and each step is named after the action that made it — *Run analysis*, *Re-analyze*, *One Step Cure*, *Delete &lt;name&gt;*, *Edit SMILES — &lt;name&gt;*, *Rename to "…"*, *Split into 3 components*, *Re-pick components — &lt;name&gt;*, *PubChem lookup — &lt;name&gt;*.
+Curate keeps a real history, up to 50 steps, and each step is named after the action that made it — *Run analysis*, *Re-analyze*, *One Step Cure*, *Delete &lt;name&gt;*, *Edit SMILES — &lt;name&gt;*, *Rename to "…"*, *Split into 3 components*, *Re-pick components — &lt;name&gt;*, *PubChem lookup — &lt;name&gt;*, *Use tautomer — &lt;name&gt;*.
 
 - The buttons name what they will reverse: hover **Undo** and the tooltip reads *Undo One Step Cure*. With nothing to reverse it reads *Nothing to undo*.
 - Undoing confirms what came back: *Undid: One Step Cure.*
-- A whole One Step Cure run — corrections, transforms, lookup and re-analysis — is a single step. One undo takes all of it back.
+- A whole One Step Cure run — lookup, corrections and transforms — is a single step. One undo takes all of it back.
 - Committing an edit or a rename without changing the text is not recorded, so it leaves no undo step that appears to do nothing. Other actions always record a step, even a run that changed no rows.
 
 History covers the curation table. It does not reverse a download you already saved, or compounds already added to your Library.
@@ -362,6 +410,7 @@ DataKurator remembers the loaded compounds and their results in your browser, so
 - **One Step Cure first, by hand afterwards.** Let it clear the bulk, then work the rows it left under **Fix manually**.
 - **Check the count when you load.** *N compounds read from …* is your only warning that a row in the file did not parse.
 - **Splitting raises the compound count.** A mixture split into two components leaves two rows where there was one, so the total can exceed the number of compounds in your file.
+- **Check the tautomer when a result surprises you.** A model sees the form you loaded. **Tautomers** on the row shows the alternatives and lets you evaluate the one you meant.
 - **Curate before importing.** If the Library flags issues while you are adding compounds, take **Fix in DataKurator** rather than **Add Anyway** — the compounds arrive here already analyzed.
 
 ---

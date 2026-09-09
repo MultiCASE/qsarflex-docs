@@ -37,10 +37,11 @@ Load compounds from any source and manage them as cards before evaluation.
 
 ### ✅ DataKurator
 Curate and validate your dataset before evaluation, in two steps: load, then curate. Compounds are checked as soon as they load — there is no separate run step, and no separate export step.
-- Detects mixtures, duplicates, invalid atom types and aromaticity problems on load
+- Detects mixtures, duplicates, invalid atom types and aromaticity problems on load, with the same structural check and the same verdicts as the 3.8 desktop
 - Flags CAS and name mismatches once you run the optional PubChem verification
 - Inline editing per row — rename, edit SMILES, delete
 - **Pick components** on a mixture row to split it into one row per component
+- **Tautomers** on any row — generate up to 200 tautomers, compare them with the parent, and adopt one
 - **One Step Cure** — a single dialog that applies your choices for mixtures/salts, duplicates, atom type errors and other errors in one pass, with optional extras: verify structures against PubChem, remove chiral tags, neutralize negative charges, neutralize positive charge on nitrogen
 - **Undo and redo** every change, with each step named ("Undo One Step Cure")
 - Export straight from the Curate screen: **Clean only** or **Everything**, as SMILES (`.smi`) or SDF (`.sdf`)

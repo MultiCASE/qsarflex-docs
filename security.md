@@ -32,7 +32,7 @@ Structures reach a chemistry engine whenever you parse a file, render a structur
 
 **Web app**
 
-Every one of those operations is an HTTPS call to the QSAR Flex API — `/compound/batch`, `/compound/render`, `/curate/analyze`, `/curate/correct`, `/curate/smiles-transform`, `/curate/export`, `/evaluate`, `/generate-report`. Your structures are transmitted for the duration of the request and the result is returned to your session. The API accepts browser requests only from `multicase.com` origins.
+Every one of those operations is an HTTPS call to the QSAR Flex API — `/compound/batch`, `/compound/render`, `/curate/analyze`, `/curate/one-step-cure`, `/curate/tautomers`, `/curate/correct`, `/curate/smiles-transform`, `/curate/export`, `/evaluate`, `/generate-report`. Your structures are transmitted for the duration of the request and the result is returned to your session. The API accepts browser requests only from `multicase.com` origins.
 
 **Desktop**
 
@@ -48,7 +48,7 @@ If your requirement is that your structures never reach MultiCASE, install the *
 
 DataKurator is not a purely local tool, and the difference matters:
 
-- **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; a PubChem lookup goes to `/curate/correct`; the neutralize and chirality steps go to `/curate/smiles-transform`; **Download** goes to `/curate/export`.
+- **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; **One Step Cure** POSTs the rows and your choices to `/curate/one-step-cure`; **Tautomers** on a row goes to `/curate/tautomers`; a PubChem lookup goes to `/curate/correct`; **Download** goes to `/curate/export`.
 - **On the desktop app**, the same four calls are intercepted by the shell and executed in-process. Curation happens on the machine.
 
 Automatic analysis never contacts PubChem. Every analysis the app runs for you — on load, on Re-analyze, after a One Step Cure — is sent with PubChem explicitly disabled.

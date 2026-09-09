@@ -89,7 +89,11 @@ DataKurator is where you clean a set before it reaches the Library.
 
 **Real undo and redo.** Curate keeps a 50-step history, and every step is named. The buttons' tooltips say what will come back — *Undo One Step Cure*, *Undo Split into 3 components*, *Undo Edit SMILES — <name>* — and undoing confirms with *Undid: <label>.* Deletes, renames, SMILES edits, splits, PubChem lookups, re-analysis and One Step Cure are all reversible.
 
-**One Step Cure is a single dialog.** Bulk correction is one dialog with four counted decisions — **Mixtures/Salts**, **Duplicates**, **Atom type errors** and **Other errors** — plus a **More curation steps** section of checkboxes: verify structures against PubChem, remove chiral tags, neutralize negative charges, neutralize positive charge on nitrogen. PubChem verification is an option inside this dialog, off by default.
+**The same verdicts as 3.8.** The structural check, the curation classes and the duplicate grouping are the ones the 3.8 desktop used, and One Step Cure is the same run in the same order — mixtures split on the molecule, the largest part chosen by atom count, charges neutralized by the same rules. A set that curated one way in 3.8 curates the same way here, on the web and on the desktop.
+
+**Tautomers, per row.** The 3.8 **Generate tautomers** button is back as **Tautomers** in the row menu: up to 200 tautomers of the row's structure, listed beside the parent with their structures, one click to compare, and **Use tautomer** to adopt one.
+
+**One Step Cure is a single dialog.** Bulk correction is one dialog with four counted decisions — **Mixtures/Salts**, **Duplicates** (with *Remove all copies*, as in 3.8), **Atom type errors** and **Other errors** — plus a **More curation steps** section of checkboxes: verify structures against PubChem, remove chiral tags, neutralize negative charges, neutralize positive charge on nitrogen. PubChem verification is an option inside this dialog, off by default.
 
 **PubChem is opt-in and explicit.** It is skipped on the initial curation pass, and any lookup — batch or single row — asks first, in a dialog titled *Send data to PubChem?* that names exactly what will leave your machine and the endpoint it goes to.
 

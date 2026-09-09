@@ -61,8 +61,12 @@ const PRECOMPUTED_RESULTS = [
 // VM, they live in this same flat directory, and this line used to delete all 17
 // of them on every web run — leaving both published install guides pointing at
 // missing images.
+// ONLY=datakurator (or library, reactions, evaluation, licenses, profile) re-shoots one
+// section and leaves every other frame in place, for a fix that touched one screen.
+const ONLY = process.env.ONLY || '';
+const want = (section) => !ONLY || ONLY === section;
 const KEEP = /^install-(win|mac)-/
-if (fs.existsSync(OUT)) {
+if (fs.existsSync(OUT) && !ONLY) {
   fs.readdirSync(OUT)
     .filter(f => f.endsWith('.png') && !KEEP.test(f))
     .forEach(f => fs.unlinkSync(path.join(OUT, f)));
@@ -757,6 +761,45 @@ async function screenshotDataKurator(page, theme) {
     }
   } catch {}
 
+  // Tautomers: the 3.8 "Generate tautomers" button, now a row-menu item that
+  // opens a viewer. Acetylacetone is in the demo file for exactly this — its
+  // enol forms make a visible difference, unlike a benzene that offers none.
+  try {
+    const row = page.locator('tbody tr').filter({ hasText: 'Acetylacetone' }).first();
+    await row.locator('button[title="Actions"]').click({ timeout: 3000 });
+    await page.waitForTimeout(300);
+    const tautItem = page.locator('[role="menuitem"]').filter({ hasText: /^Tautomers$/ }).first();
+    if (await tautItem.isVisible({ timeout: 1500 }).catch(() => false)) {
+      await tautItem.click();
+      await page.waitForSelector('[role="dialog"]:has-text("Tautomers —")', { timeout: 60000 });
+      await page.waitForTimeout(1500);
+      await shot(page, `datakurator-tautomers-dialog-${theme}.png`);
+      const opts = page.locator('[role="dialog"] [role="option"]');
+      if (await opts.count() > 1) {
+        await opts.nth(1).click();
+        await page.waitForTimeout(1200);
+        await shot(page, `datakurator-tautomer-selected-${theme}.png`);
+        await page.locator('[role="dialog"] button').filter({ hasText: /^Use tautomer$/ }).first().click({ timeout: 3000 });
+        await page.waitForTimeout(800);
+        await shot(page, `datakurator-tautomer-applied-${theme}.png`);
+        // Put the row back so the frames that follow show the file as loaded.
+        const reanalyze = page.locator('button:not([disabled])').filter({ hasText: /^Re-analyze$/ }).first();
+        if (await reanalyze.isVisible({ timeout: 2000 }).catch(() => false)) {
+          await reanalyze.click();
+          await page.waitForTimeout(2500);
+        }
+      } else {
+        await page.keyboard.press('Escape');
+      }
+    } else {
+      await page.keyboard.press('Escape');
+    }
+  } catch (e) {
+    console.warn('  ⚠ Tautomers:', e.message?.split('\n')[0]);
+    await page.keyboard.press('Escape').catch(() => {});
+    await page.waitForTimeout(400);
+  }
+
   try {
     let pickerCaptured = false;
     const rows = page.locator('tbody tr');
@@ -935,12 +978,12 @@ async function screenshotDataKurator(page, theme) {
     await navigateTo(page1, '/');
     await setTheme(page1, theme);
 
-    await screenshotLibrary(page1, theme);
-    await screenshotReactions(page1, theme);
-    await screenshotEvaluation(page1, theme);
-    await screenshotDataKurator(page1, theme);
-    await screenshotLicenseTypes(page1, theme, false);
-    await screenshotLicenseActivation(page1, theme);
+    if (want('library')) await screenshotLibrary(page1, theme);
+    if (want('reactions')) await screenshotReactions(page1, theme);
+    if (want('evaluation')) await screenshotEvaluation(page1, theme);
+    if (want('datakurator')) await screenshotDataKurator(page1, theme);
+    if (want('licenses')) await screenshotLicenseTypes(page1, theme, false);
+    if (want('licenses')) await screenshotLicenseActivation(page1, theme);
   }
 
   await ctx1.close();
@@ -959,8 +1002,8 @@ async function screenshotDataKurator(page, theme) {
 
   for (const theme of ['light', 'dark']) {
     await setTheme(page2, theme);
-    await screenshotLicenseTypes(page2, theme, true);
-    await screenshotProfile(page2, theme);
+    if (want('licenses')) await screenshotLicenseTypes(page2, theme, true);
+    if (want('profile')) await screenshotProfile(page2, theme);
   }
 
   await ctx2.close();
