@@ -282,7 +282,9 @@ The app runs the prediction models on your workstation, and the reference databa
 The web application sends your structures to the QSAR Flex service at `qsarflex-be.multicase.com` — for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. If your structures must stay on your own hardware, the **desktop application** is the one that keeps them there.
 {% endhint %}
 
-The Windows app installs per user, into your own account rather than machine-wide. The app checks for application and reference-data updates when it starts and every 15 minutes after that, and offers the update in a dialog when one is available.
+The Windows app installs per user, into your own account rather than machine-wide. The app checks for application and reference-data updates when it starts and every 15 minutes after that, and offers the update in a dialog when one is available. The same dialog lets you install an earlier version of the application or of the data files and stay on it; see [Installing on Windows](../install-win.md#staying-up-to-date) and [Installing on macOS](../install-mac.md#keeping-qsar-flex-up-to-date).
+
+Modules that belong to one company alone are served only to users whose license includes them. On the desktop, their data is downloaded through a licence check on every request, held separately from the shared reference data, and removed from the machine when the module leaves the license.
 
 Usage from the desktop app is recorded against the same license and appears in the same activity history as usage from the web app.
 

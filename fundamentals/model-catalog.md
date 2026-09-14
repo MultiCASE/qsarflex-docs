@@ -73,4 +73,6 @@ Modules you are not licensed for are grayed out and cannot be ticked in the **Se
 
 Modules marked **Desktop only** above are a separate case. They are not grayed out in the web app — they are not listed at all. Run the desktop app to see them in the dialog.
 
+Some modules are built for one company and belong to that company alone. They are listed in the catalog and the module picker only for users whose license includes them, and nobody else can see or run them. In the desktop app, the data behind such a module downloads separately from the shared reference data, appears as its own row in **Help → Check for Updates**, and is removed from the machine at the next sign-in if the module leaves the license.
+
 If you need to add a bundle, raise a request at the support portal, [support.multicase.com](https://support.multicase.com).

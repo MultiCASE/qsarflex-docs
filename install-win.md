@@ -127,6 +127,33 @@ Next, head to [Getting Started](getting-started.md) to run your first evaluation
 
 QSAR Flex checks for application and data updates when it starts and every 15 minutes after that, and only interrupts you when something is actually available. You can also check on demand from **Help → Check for Updates**. Updates install the same way the app did — for your user, with no administrator rights.
 
+### The Check for Updates window
+
+The window shows two status rows — **Application** and **Data Files** — each reading **Up to date ✓** or naming what is available. If your license includes modules that belong to your company alone, one more row appears for each of them, labelled with the company and module name; other users never see those rows. The card below the rows carries the release notes for whatever is available, and **Update Now** installs everything at once: data files first, then company module data, then the application, which restarts when its update is applied.
+
+<!-- screenshot: install-win-09-check-updates.png — Check for Updates window with Application "Up to date ✓" and Data Files "Update available ↑" -->
+
+### Choosing a different version
+
+Under the release notes, **Choose a different version…** opens a dropdown for the application, one for the data files, and one for each company module package. Every list is sorted newest first, the top entry carries the label **· latest** and the entry you are running carries **· installed**. Pick anything other than the latest and the window shows the warning *Older versions may not open files saved by newer ones.* and the button reads **Install selected**.
+
+Use this when a result changes between versions and you need to reproduce the earlier one, or when MultiCASE support asks you to test a specific build. For everyday use, leave everything on latest.
+
+<!-- screenshot: install-win-10-choose-version.png — the expanded section with the Application dropdown open, "v3.9.2 · latest" at the top and "v3.9.0 · installed" selected -->
+<!-- screenshot: install-win-11-install-selected.png — an older version chosen: amber warning line visible, button reading "Install selected" -->
+
+### Staying on an older version
+
+After you install an older version, QSAR Flex stays on it. The background checks stop offering the newer version, and the window reports **Pinned to vX · newer vY available** in place of the usual status. **Return to latest** clears the pin and installs the newest version. The same applies to the data files and to each company module package, each pinned on its own.
+
+<!-- screenshot: install-win-12-pinned.png — window showing "Pinned to v3.9.0 · newer v3.9.2 available" with the Return to latest button -->
+
+### How data versions are numbered
+
+Data files carry the version of the application they were published with, so data **3.9.0** was published alongside application 3.9.0. When the data is republished between application releases, a fourth number counts the republish — **3.9.0.2** is the second data release for application 3.9.0. Application and data versions do not have to match: the status row is what tells you whether your data is current.
+
+Company module data follows the same numbering and is offered only while your license includes the module. If the module leaves your license, its data is removed from the machine at the next sign-in.
+
 ---
 
 ## Getting help
