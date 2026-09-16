@@ -12,7 +12,8 @@
 * [The QSAR Flex Window](interface.md)
 * [Loading Compounds](product-guide/loading-compounds.md)
 * [Loading Reactions](loading-reactions.md)
-* [DataKurator](datakurator.md)
+* [Drawing Structures](structure-editor.md)
+* [Curating Compounds](curation.md)
 * [Evaluation](evaluation.md)
 
 ## Fundamentals

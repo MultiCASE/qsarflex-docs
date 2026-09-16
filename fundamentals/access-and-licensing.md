@@ -88,7 +88,7 @@ A subscription with no fixed end date. It is active as soon as it is issued and 
 The license has a fixed total test count and no expiry date. It is active as soon as it is issued. Each evaluation consumes tests, and the remaining count is shown both on the License tab and on the navbar chip. When it reaches zero the web app blocks further evaluation until more tests are purchased. The desktop app does not check the remaining count before a run — the usage is still recorded against the license.
 
 {% hint style="info" %}
-**How a test is counted.** One test is one item in your library against one **bundle** — not one module. Tests = library items × the number of distinct bundles among the modules you selected. Evaluating 10 compounds against three modules that all belong to the Ecotoxicity bundle consumes 10 tests. Evaluating the same 10 compounds against one Ecotoxicity module and one Physicochemical module consumes 20.
+**How a test is counted.** One test is one evaluated item against one **bundle** — not one module. Tests = evaluated items × the number of distinct bundles among the modules you selected. A compound Evaluate skips for a structural error is not counted. Evaluating 10 compounds against three modules that all belong to the Ecotoxicity bundle consumes 10 tests. Evaluating the same 10 compounds against one Ecotoxicity module and one Physicochemical module consumes 20.
 {% endhint %}
 
 ---
@@ -263,9 +263,9 @@ The **Select Modules to Evaluate** dialog is explicit about which of three thing
 | "Your licensed modules could not be checked right now… This is not a license problem — try again shortly." | Your entitlements could not be read. Your license is fine. |
 | "No license found / License not activated" | The account genuinely holds no active license. |
 
-Canceling a run mid-flight reports "Evaluation canceled. Your library is unchanged; tests already started may still be billed." Tests already in progress are not refunded by canceling.
+Canceling a run mid-flight reports "Evaluation canceled. The workspace is unchanged; tests already started may still be billed." Tests already in progress are not refunded by canceling.
 
-Curation is not metered. DataKurator does not consume tests and does not need an active license — only evaluation and report generation do.
+Curation is not metered. Checking, curing, tautomers and the structure editor do not consume tests and do not need an active license — only evaluation and report generation do.
 
 ---
 
@@ -279,7 +279,7 @@ The app runs the prediction models on your workstation, and the reference databa
 - [⬇️ Download QSAR Flex for macOS](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)
 
 {% hint style="info" %}
-The web application sends your structures to the QSAR Flex service at `qsarflex-be.multicase.com` — for evaluation, report generation, structure depiction and DataKurator curation. They are not persisted after the request. If your structures must stay on your own hardware, the **desktop application** is the one that keeps them there.
+The web application sends your structures to the QSAR Flex service at `qsarflex-be.multicase.com` — for evaluation, report generation, structure depiction, curation and the structure editor's session. They are not persisted after the request. If your structures must stay on your own hardware, the **desktop application** is the one that keeps them there.
 {% endhint %}
 
 The Windows app installs per user, into your own account rather than machine-wide. The app checks for application and reference-data updates when it starts and every 15 minutes after that, and offers the update in a dialog when one is available. The same dialog lets you install an earlier version of the application or of the data files and stay on it; see [Installing on Windows](../install-win.md#staying-up-to-date) and [Installing on macOS](../install-mac.md#keeping-qsar-flex-up-to-date).

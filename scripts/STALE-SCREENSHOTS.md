@@ -2,6 +2,24 @@
 
 **Not published.** Deliberately absent from `SUMMARY.md`, so GitBook does not render it.
 
+## 2026-09-16 — re-shot for the single workspace and ChemiGraphy
+
+The Library and DataKurator frames are gone with the screens they showed. `screenshot.js` now has one
+`screenshotWorkspace` scene that walks the merged workspace end to end: empty state, the Add / Curate /
+Download menus and the command bar, Type a compound with Auto Fill, ChemiGraphy on an empty canvas and
+on an existing compound, the loaded table, the row panel, the structure viewer, Edit SMILES and the
+Not-checked state, tautomers, the mixture picker and the split, the PubChem consent and result, One Step
+Cure and its summary, reactions typed and from .rxn files, the module dialog, results, the panel's
+Evaluation section and a report. 62 workspace frames (31 pairs) plus the licence and profile sets.
+
+Two things the harness needed: the workspace persists in IndexedDB, so `clearLibrary` deletes the
+origin's databases; and the environment is started with `HOLD=1 ./scripts/start.sh` (added this day) so
+scenes can be re-run with `ONLY=workspace node screenshot.js` without rebuilding the containers.
+
+The user-manager container (arm64 publish) died with SIGILL once mid-run; every frame after that showed
+**License unavailable** in the chip. `docker start` brought it back. Check the chip on the first frame
+before trusting a run.
+
 ## 2026-09-02 — re-shot for the catalog correction
 
 All 92 web frames re-captured. The fixture had been seeding an **Ames Mutagencity** result and a
@@ -25,7 +43,7 @@ resolving the arm64 image already sitting on `mcr.microsoft.com/dotnet/aspnet:9.
 
 | Set | State |
 |---|---|
-| Web UI (92 files, 46 light/dark pairs) | **Re-captured 2026-09-02** against the 4.0 UI, after the catalog correction |
+| Web UI (workspace, licence, profile; light/dark pairs) | **Re-captured 2026-09-16** against the merged workspace with ChemiGraphy |
 | Install guides (17 files) | Captured 2026-09-01 from a pre-release build; re-shoot at 4.0 stable |
 | Support portal (23 files, `assets/support/`) | Current; shot 2026-06-03 against the 4.0-era portal |
 

@@ -576,7 +576,7 @@
         <div class="li" style="color:#C7CDD2;">Authentication traffic between the browser, the accounts service and the backend</div>
         <div class="li" style="color:#C7CDD2;">A license check at start-up and a usage record per evaluation: account and product identifiers, modules, item count, version, platform</div>
         <div class="li" style="color:#C7CDD2;">Update checks, carrying version information only</div>
-        <div class="li" style="color:#C7CDD2;">A PubChem lookup, either DataKurator's, which asks first, or Add Compound's Auto Fill, which does not</div>
+        <div class="li" style="color:#C7CDD2;">A PubChem lookup, either from curation, which asks first, or Type a compound's Auto Fill, which does not</div>
       </div>
     </div>
 
@@ -585,7 +585,7 @@
       <div class="h-sub" style="margin-bottom:2.2mm;">Structures are sent for evaluation, and not retained</div>
       <p class="body" style="margin-bottom:3mm;">
         Structures are transmitted to the QSAR Flex service over HTTPS so it can evaluate them, generate
-        reports, draw depictions and run DataKurator's curation checks, curation included: the analysis
+        reports, draw depictions, host the ChemiGraphy editor's session and run the curation checks, curation included: the analysis
         and correction steps run on the service, not in the browser. Results are returned to the browser,
         and structures are not persisted in a database after the request.
       </p>
@@ -714,7 +714,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
         <div class="checklist">
           <div class="ci"><span class="box"></span><span>Windows 10/11 64-bit with WebView2, or macOS 12+ on Apple Silicon; a writable user profile and ≥10 GB free per desktop workstation</span></div>
           <div class="ci"><span class="box"></span><span><b>Sign-in is required every launch</b>, by design, and signing in elsewhere ends the first session</span></div>
-          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company: DataKurator asks first, <b>Auto Fill does not</b></span></div>
+          <div class="ci"><span class="box"></span><span>A PubChem lookup sends structures outside the company: curation asks first, <b>Auto Fill does not</b></span></div>
           <div class="ci"><span class="box"></span><span>A usage record (user, time, modules, item count) is held by MultiCASE for licensing</span></div>
         </div>
       </div>

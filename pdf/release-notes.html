@@ -288,8 +288,9 @@
 
     <div class="newband">
       <span class="chip new">Rebuilt desktop application</span>
+      <span class="chip new">ChemiGraphy structure editor</span>
       <span class="chip">Now on macOS</span>
-      <span class="chip">New DataKurator</span>
+      <span class="chip">One workspace</span>
       <span class="chip">New support portal</span>
     </div>
   </div>
@@ -311,9 +312,9 @@
         <div class="bd">A native Apple Silicon build joins the Windows one for the first time.</div>
       </div>
       <div class="b">
-        <div class="bc">03 / DataKurator</div>
-        <div class="bn">Rebuilt</div>
-        <div class="bd">Two steps, named undo, and bulk correction in one dialog.</div>
+        <div class="bc">03 / ChemiGraphy</div>
+        <div class="bn">Built in</div>
+        <div class="bd">Draw a compound, or correct one, in MultiCASE's structure editor without leaving the workspace.</div>
       </div>
       <div class="b">
         <div class="bc">04 / Support</div>
@@ -362,17 +363,17 @@
         <div class="eyebrow green" style="margin-bottom:2.6mm;">01 · The navbar</div>
         <div class="h-sub" style="font-size:10.4pt; margin-bottom:2.4mm;">Everything is in one bar</div>
         <p class="small">
-          A single bar across the top carries <b>Library</b> and <b>DataKurator</b> on the left, a
-          <b>Search</b> box in the middle, and your license status, documentation and theme on the right.
+          A single bar across the top carries <b>Add</b> and <b>Curate</b> on the left, a
+          <b>Search</b> box in the middle, and <b>Evaluate</b>, your license status, documentation and theme on the right.
         </p>
       </div>
       <div class="card">
-        <div class="eyebrow green" style="margin-bottom:2.6mm;">02 · Two screens</div>
-        <div class="h-sub" style="font-size:10.4pt; margin-bottom:2.4mm;">Library, and DataKurator</div>
+        <div class="eyebrow green" style="margin-bottom:2.6mm;">02 · One workspace</div>
+        <div class="h-sub" style="font-size:10.4pt; margin-bottom:2.4mm;">Load, curate and evaluate on one table</div>
         <p class="small">
-          The <b>Library</b> holds the compounds and reactions you are working on and is where you
-          evaluate. <b>DataKurator</b> is where you clean a set before it gets there. You move between them
-          with the two tabs.
+          Every compound is checked as it arrives and wears its verdict on the row. A panel on the left
+          holds everything about one row, and <b>ChemiGraphy</b> opens from it to draw or correct a
+          structure. Nothing moves between screens.
         </p>
       </div>
       <div class="card">
@@ -386,15 +387,15 @@
       </div>
     </div>
 
-    <div class="sub-h" style="margin-bottom:2.6mm;">The Library, where you load your query chemicals and reactions</div>
+    <div class="sub-h" style="margin-bottom:2.6mm;">The workspace, where you load, check and evaluate your compounds</div>
     <div class="shot">
-      <img src="../.gitbook/assets/library-with-results-light.png" alt="The QSAR Flex 4.0 Library, showing the navbar, the Evaluate button and a results table">
+      <img src="../.gitbook/assets/workspace-table-light.png" alt="The QSAR Flex 4.0 workspace: the navbar with Add, Curate and Evaluate, and every compound a row with its curation verdict">
     </div>
     <p class="shot-cap">
-      Left to right along the bar: the <b>Library</b> and <b>DataKurator</b> tabs, the <b>Search</b> box that
-      the command bar opens behind, then your license status, the documentation button and the light/dark
-      toggle. Below it, <b>+ Compounds</b>, <b>+ Reaction</b> and <b>Evaluate</b>, and one card per compound
-      with its structure beside its outcomes. Clicking an outcome opens the report.
+      Left to right along the bar: <b>Add</b> and <b>Curate</b>, the <b>Search</b> box that the command bar
+      opens behind, then the count of what the workspace holds, <b>Evaluate</b>, your license status, the
+      documentation button and the light/dark toggle. Below it, one row per compound with its verdict,
+      name, CAS and SMILES. Click a row and its panel opens on the left.
     </p>
 
   </div>
@@ -425,28 +426,42 @@
       </div>
       <div class="sep"></div>
 
-      <div class="g">Library</div>
+      <div class="g">ChemiGraphy</div>
       <div class="e">
-        <div class="t">Drop a file anywhere, or paste structures</div>
+        <div class="t">MultiCASE's structure editor, built into QSAR Flex</div>
         <div class="d">
-          Drop files onto the page or paste SMILES directly, and the file extension decides which importer
-          to use, so compounds and reactions in the same drop are separated
-          for you. Structures are drawn in the current theme, so a depiction is legible on paper and on a
-          dark screen. Clicking a reaction opens a dialog sized for the scheme rather than for one molecule.
+          Draw a compound instead of typing its SMILES, or open a compound the check flagged and correct it
+          on the canvas: <b>Add → Draw in ChemiGraphy</b>, or <b>Edit structure</b> on any row. The whole
+          editor is there, with its element and bond palettes, ring library, lookup by name, wedges and
+          arrows. What you draw is read by the same engine that checks and evaluates your compounds, so the
+          structure that reaches the table is exactly the one QSAR Flex scores. ChemiGraphy also draws every
+          structure you see, on screen and in every report.
         </div>
       </div>
       <div class="sep"></div>
 
-      <div class="g">DataKurator</div>
+      <div class="g">Workspace</div>
+      <div class="e">
+        <div class="t">One table: drop a file anywhere, or paste structures</div>
+        <div class="d">
+          Drop files onto the page or paste SMILES directly, and the file extension decides which importer
+          to use, so compounds and reactions in the same drop are separated for you. Every compound is
+          checked as it arrives and wears its verdict on the row. Click a row and a panel opens beside the
+          table with the structure, the finding, the history and the results.
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <div class="g">Curation</div>
       <div class="e">
         <div class="t">Real undo, and bulk correction you can inspect</div>
         <div class="d">
-          Curation keeps a fifty-step history and every step is named, so a tooltip tells you what will
+          Curation keeps a fifty-step history and every step is named, so the menu tells you what will
           come back before you press it. <b>One Step Cure</b> is a single dialog with four counted
           decisions, plus optional passes for chiral tags, charge neutralization and PubChem verification.
           Its decisions act on the molecule: a mixture is split into its components or reduced to the part
           with the most atoms, and duplicates are removed outright or collapsed to one per group. Any row
-          can be swapped for one of its tautomers: the row menu generates up to 200, shows them beside the
+          can be swapped for one of its tautomers: the panel generates up to 200, shows them beside the
           parent, and adopts the one you pick. A bulk run finishes in a summary you can filter down to the
           rows that need attention.
         </div>

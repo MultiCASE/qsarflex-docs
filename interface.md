@@ -1,41 +1,93 @@
 # The QSAR Flex Window
 
-🧭 QSAR Flex 4.0 puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and the desktop app. The desktop app adds one native menu of its own — **Help → Check for Updates**, described under [Installing on Windows](install-win.md#staying-up-to-date) and [Installing on macOS](install-mac.md#keeping-qsar-flex-up-to-date) — and nothing else. This page describes each control on the bar.
+🧭 QSAR Flex puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and the desktop app. The desktop app adds one native menu of its own — **Help → Check for Updates**, described under [Installing on Windows](install-win.md#staying-up-to-date) and [Installing on macOS](install-mac.md#keeping-qsar-flex-up-to-date) — and nothing else. This page describes each control on the bar.
 
-Nothing on this page changes what QSAR Flex predicts. The chemistry, the models and the endpoints are the same as in 3.x — only the way you reach them is new.
+Nothing on this page changes what QSAR Flex predicts. The chemistry, the models and the endpoints are what they are — the bar is only how you reach them.
 
 ---
 
 ## 🗺️ The Navbar
 
-The bar is divided into three columns, read left to right:
+The bar has three clusters, read left to right:
 
 | Position | Control | What it is for |
 |---|---|---|
-| Left | **Product mark** | Click the QSAR Flex logo to return to the Library |
-| Left | **Library / DataKurator** | A segmented control — the two places the software goes |
+| Left | **Product mark** | Click the QSAR Flex logo to return to the workspace |
+| Left | **Add ▾** | Everything that brings compounds and reactions in |
+| Left | **Curate ▾** | Everything you do to the rows once they are in: One Step Cure, re-check, downloads, undo, clear |
 | Center | **Search** | The command bar, opened with ⌘ K / Ctrl + K |
+| Right | **Count** | What is loaded — *14 compounds · 2 reactions · 6 with issues* |
+| Right | **Evaluate** | The one filled button on the bar. Runs the modules against the workspace |
 | Right | **License status chip** | Your current license, at a glance |
 | Right | **Documentation** | Opens this documentation space |
 | Right | **Theme toggle** | Light, dark, or follow your system |
 | Right | **Avatar** | Your account menu |
 
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">
+  <img src=".gitbook/assets/workspace-table-light.png" alt="">
+</picture></figure>
+
+There is one place the software goes — the **workspace**, the table of compounds and reactions you are working on — so there is nothing to switch between. Curation is not a second screen: every row carries its curation verdict, and the curation tools act on the rows in place. See [Curating Compounds](curation.md).
+
+On the account pages (**Account** and the license activity pages) the two menus, the count and **Evaluate** step aside; the rest of the bar stays, and the logo brings you back.
+
 Below the bar the page content is centred and capped in width, so a line of text is the same length on every screen.
 
 {% hint style="info" %}
-Press **Tab** as soon as a page loads and a **Skip to content** link appears in the top-left corner. It jumps past every focusable control on the navbar — seven tab stops — straight to the page itself.
+Press **Tab** as soon as a page loads and a **Skip to content** link appears in the top-left corner. It jumps past every control on the navbar straight to the page itself.
 {% endhint %}
 
 ---
 
-## 📚 Library and DataKurator
+## ➕ The Add menu
 
-The two primary destinations sit in a segmented control immediately to the right of the logo.
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-add-menu-dark.png">
+  <img src=".gitbook/assets/workspace-add-menu-light.png" alt="">
+</picture></figure>
 
-- **Library** — the list of compounds and reactions you are working on. This is the default destination: anything that is not DataKurator and not an account page shows Library as current.
-- **DataKurator** — structure curation. Hovering it shows the tooltip *"Curate and validate compound libraries"*.
+| Item | What it does |
+|---|---|
+| **Compounds from file…** | Opens the file picker. SMI, SDF, MOL, TXT or CSV; several files at once |
+| **Reactions from file…** | Opens the file picker for `.rxn` files; several files become one multi-step reaction |
+| **Type a compound…** | The **Type a compound** dialog — one compound by SMILES, InChI, name or registry number, or a batch file |
+| **Type a reaction…** | The **Type a reaction** dialog — reaction SMILES, or `.rxn` files |
+| **Draw in ChemiGraphy…** | Opens the structure editor on an empty canvas. See [Drawing Structures](structure-editor.md) |
 
-The current destination is drawn as a raised tab with its own border and a green icon; the other is flat. On the account pages (**Account** and the license activity pages) **neither** tab is lit — you are not in the Library or in DataKurator, and the bar says so rather than guessing. On those pages the license chip and the avatar are outlined in green instead.
+The line at the bottom of the menu is a reminder: you can also **drop files anywhere on the page**, or **paste SMILES** with ⌘ V / Ctrl + V. Every route in ends the same way — the compounds are checked as they arrive and appear in the table with their verdict. See [Loading Compounds](product-guide/loading-compounds.md) and [Loading Reactions](loading-reactions.md).
+
+While a load or a check is running the items are disabled and say so — *busy* — rather than queueing a second run behind the first.
+
+---
+
+## 🧪 The Curate menu
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-curate-menu-dark.png">
+  <img src=".gitbook/assets/workspace-curate-menu-light.png" alt="">
+</picture></figure>
+
+The **Curate** button carries a red count of the rows with issues, so you can see from any page whether there is work to do.
+
+| Item | What it does |
+|---|---|
+| **One Step Cure…** | The bulk-correction dialog: mixtures, duplicates, atom-type errors, other errors, PubChem verification, chiral tags and charges, in one run |
+| **Re-check all** | Runs the structural check over every compound again |
+| **Download curated ▸** | **Clean only** or **Everything**, as SMILES (`.smi`) or SDF (`.sdf`) |
+| **History log** | Saves a text log of what was done to every row, including the rows you removed |
+| **Undo / Redo** | Step back and forward through named steps — *Undo Add 14 compounds from mydata.smi*. ⌘ Z and ⇧ ⌘ Z (Ctrl + Z, Ctrl + Shift + Z on Windows) do the same |
+| **Clear workspace…** | Empties the workspace and every evaluation result, after a confirmation. This is the one action undo cannot reverse |
+
+An item that cannot run right now stays in the menu, grayed, with the reason beside it: *nothing loaded*, *busy*, *no clean rows*, *nothing to undo*.
+
+---
+
+## ▶️ Count and Evaluate
+
+The count on the right of the bar is the workspace in one line — how many compounds, how many reactions, how many with issues. It appears once something is loaded, on windows wide enough to show it.
+
+**Evaluate** is the only filled button on the bar. Hover it and its tooltip says what will happen: *Evaluate 14 items*, or *Evaluate 11 items; 3 with structural errors will be skipped*, or why it is disabled — *Load compounds first*, *Wait for the current run to finish*, *Nothing here can be evaluated yet — fix the structures first*. See [Evaluation](evaluation.md).
 
 ---
 
@@ -48,48 +100,57 @@ There are two ways to open it:
 - Click the **Search** control.
 - Press **⌘ K** (macOS) or **Ctrl + K** (Windows) from anywhere in the app.
 
-The shortcut deliberately does nothing while you are typing in a text box — ⌘ K inside a SMILES field belongs to that field. The one exception is the command bar's own search box, where the shortcut is not suppressed — but the bar is already open there, so pressing it changes nothing.
+The shortcut deliberately does nothing while you are typing in a text box — ⌘ K inside a SMILES field belongs to that field.
 
-On a narrow window the control shrinks to the magnifying-glass icon alone rather than disappearing, so it stays reachable on a phone or a half-width window where there is no keyboard to press ⌘ K on.
+On a narrow window the control shrinks to the magnifying-glass icon alone rather than disappearing, so it stays reachable where there is no keyboard to press ⌘ K on.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-command-bar-dark.png">
+  <img src=".gitbook/assets/workspace-command-bar-light.png" alt="">
+</picture></figure>
 
 ### Searching
 
-The search box is prompted with *"Search for anything — try 'evaluate' or 'curate'"*.
+Typing filters the list on both the visible command name and a set of hidden synonyms, so you do not have to know our word for the job. `import`, `upload` and `sdf` all find **Add compounds from a file**; `clean`, `duplicates` and `mixtures` all find **One Step Cure**; `logout` finds **Sign out**.
 
-Typing filters the list on both the visible command name and a set of hidden synonyms, so you do not have to know our word for the job. `import`, `upload`, `sdf` and `paste` all find **Add compounds**; `clean`, `duplicates` and `mixtures` all find **DataKurator**; `logout` finds **Sign out**.
-
-Every word you type has to appear somewhere, but the order does not matter — `add reaction` and `reaction add` return the same row.
-
-If nothing matches, the list reads *Nothing matches "…"* with the text you typed.
-
-Press **Enter** to run the highlighted command, or **Esc** to close the bar without running anything.
+Every word you type has to appear somewhere, but the order does not matter. If nothing matches, the list reads *Nothing matches "…"* with the text you typed. Press **Enter** to run the highlighted command, or **Esc** to close the bar without running anything.
 
 ### The commands
 
-Thirteen commands are listed, in four groups. Every one of them is offered on every page.
+Every command is offered on every page.
 
-**Library**
+**Add**
 
 | Command | What it does |
 |---|---|
-| **Add compounds** | Opens the Compound Input dialog |
-| **Add a reaction** | Opens the Reaction Input dialog |
+| **Add compounds from a file** | Opens the file picker for compound files |
+| **Add reactions from a file** | Opens the file picker for `.rxn` files |
+| **Type a compound** | Opens the Type a compound dialog |
+| **Draw a structure in ChemiGraphy** | Opens the structure editor on an empty canvas |
+| **Type a reaction** | Opens the Type a reaction dialog |
+
+**Curate**
+
+| Command | What it does |
+|---|---|
+| **One Step Cure** | Opens the One Step Cure dialog |
+| **Re-check all compounds** | Runs the check again |
+| **Download curated structures** | Opens the Download curated menu |
+| **Open the history log** | Opens the history log |
+| **Undo** / **Redo** | Steps back or forward, naming the step |
+| **Clear the workspace** | Empties the workspace, after a confirmation |
+
+**Workspace**
+
+| Command | What it does |
+|---|---|
 | **Evaluate** | Opens the module selection dialog |
-| **Clear the library** | Empties the Library |
-
-**DataKurator**
-
-| Command | What it does |
-|---|---|
-| **Clear DataKurator** | Discards the structures DataKurator is holding |
-| **Export curated structures** | Opens DataKurator's **Download** menu |
 
 **Go to**
 
 | Command | Destination |
 |---|---|
-| **Library** | The Library page |
-| **DataKurator** | The DataKurator page |
+| **Workspace** | The workspace |
 | **Account and license** | Your Account page |
 
 **QSAR Flex**
@@ -98,14 +159,13 @@ Thirteen commands are listed, in four groups. Every one of them is offered on ev
 |---|---|
 | **Switch to dark mode** / **Switch to light mode** | Flips the theme. The label always names the theme you are not in |
 | **Match my system appearance** | Hands the theme back to your operating system |
+| **Keyboard shortcuts** | Opens the shortcut reference |
 | **User guide** | Opens this documentation space in a separate tab or window |
 | **Sign out** | Signs you out |
 
 ### Running a command from another page
 
-A command does not require you to be standing on the page that owns it. If you run **Evaluate** while DataKurator is on screen, QSAR Flex navigates to the Library and opens the module dialog on arrival.
-
-The queued command is armed for that one navigation only. It expires after about three seconds, and it is dropped the moment you navigate somewhere other than where it was headed — so a command you abandoned will never fire by itself when you come back later. If the destination was not ready in time you get a message saying so, and the suggestion to run it again from that screen.
+A command does not require you to be standing on the workspace. Run **Evaluate** from your Account page and QSAR Flex goes to the workspace and opens the module dialog there. A command that changes the rows waits while a load, a check or a run is in progress, and says so: *Wait for the current run to finish.*
 
 ### Commands that cannot run
 
@@ -113,23 +173,22 @@ A command that is unavailable right now is still listed. It is grayed out, and t
 
 | Reason shown | When |
 |---|---|
-| **Nothing in the library** | On **Evaluate** and **Clear the library**, while the Library is empty |
-| **Nothing loaded** | On **Clear DataKurator** and **Export curated structures**, while DataKurator holds no structures |
+| **Nothing in the workspace** | On **Evaluate** and **Clear the workspace**, while the workspace is empty |
+| **No compounds loaded** | On the Curate commands, while there are no compounds |
+| **Nothing to log yet** | On **Open the history log**, before any compound has been loaded or removed |
 | **Already following your system** | On **Match my system appearance**, when your theme is already set to System |
 
 This is on purpose. *"Where did Evaluate go?"* is a question worth answering even when there is nothing to evaluate.
 
 ### Where it lives
 
-Every row that can run carries the place in the interface where the same command is normally found: **Library**, **DataKurator**, **Top left**, **Top right** or **Account menu**.
-
-The hint is there so the command bar teaches you the interface rather than replacing it. Reach **Evaluate** through the bar four times and you have also read "Library" four times; the fifth time you can go straight to the button.
+Every row that can run carries the place in the interface where the same command is normally found: **Add menu**, **Curate menu**, **Menu bar**, **Logo**, **Top right** or **Account menu**. The hint is there so the command bar teaches you the interface rather than replacing it.
 
 ---
 
 ## 🔑 The License Status Chip
 
-The first control in the right-hand cluster is a chip showing your active license. It is present on every page. While the license is being fetched a gray placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
+The first control after **Evaluate** is a chip showing your active license. It is present on every page. While the license is being fetched a gray placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
 
 What the chip says depends on the license:
 
@@ -196,7 +255,8 @@ Your Account page is where the Profile, Security, License and Team tabs live. Th
 
 ## Related pages
 
-- [Evaluation](evaluation.md) — running modules against your Library
-- [DataKurator](datakurator.md) — structure curation
+- [Loading Compounds](product-guide/loading-compounds.md) — every way into the workspace
+- [Curating Compounds](curation.md) — the verdicts, the row panel and One Step Cure
+- [Evaluation](evaluation.md) — running modules against the workspace
 - [Access & Licensing](fundamentals/access-and-licensing.md) — what your license covers
 - [Getting Support](support.md) — reaching MultiCASE through the support portal

@@ -257,8 +257,8 @@
 
     <div class="newband">
       <span class="chip new">New in 4.0 · Rebuilt interface</span>
-      <span class="chip">New DataKurator</span>
-      <span class="chip">New library</span>
+      <span class="chip new">ChemiGraphy structure editor</span>
+      <span class="chip">One workspace</span>
       <span class="chip">Support portal</span>
     </div>
   </div>
@@ -325,7 +325,7 @@
       <div class="f">
         <div class="fn">STEP 02</div>
         <div class="ft">Curate</div>
-        <div class="fd">DataKurator finds mixtures, duplicates, bad atom types and aromaticity faults before they reach a model.</div>
+        <div class="fd">Every compound is checked as it arrives; mixtures, duplicates and bad atom types are flagged before they reach a model.</div>
       </div>
       <div class="f">
         <div class="fn">STEP 03</div>
@@ -428,9 +428,8 @@
       <div class="note" style="margin-top:4.5mm;">
         <span class="dot" style="margin-top:1.2mm;"></span>
         <p class="nt">
-          <b>One file, nothing to unpack.</b> A report is a single self-contained HTML file. Structures are
-          drawn inline as vector graphics, and the software, its version and the run date are recorded.
-          Print it from the browser and it becomes a paginated PDF fit for a dossier.
+          <b>One file, nothing to unpack.</b> A report is a single self-contained HTML file with its structures
+          drawn inline, and the software, version and run date recorded. Print it and it becomes a PDF fit for a dossier.
         </p>
       </div>
     </div>
@@ -462,7 +461,7 @@
         <div class="nt">One interface, three places to run it</div>
         <div class="nb">
           The web app, the Windows desktop app and the macOS desktop app now render the same interface.
-          A 48-pixel navigation bar carries the Library / DataKurator control, the command bar, your
+          A 48-pixel navigation bar carries Add, Curate and Evaluate, the command bar, your
           license status, and a light or dark theme that follows your system.
         </div>
       </div>
@@ -471,29 +470,28 @@
         <div class="nt">A command bar for every action</div>
         <div class="nb">
           <span class="path">⌘K</span>, or <span class="path">Ctrl K</span>, opens a search over every
-          action in the product. Commands work from any page: run one from DataKurator that belongs to
-          the Library and you are taken there and it fires on arrival. Actions that are not available
+          action in the product. Commands work from any page: run <b>Evaluate</b> from your Account page
+          and you are taken to the workspace and it fires on arrival. Actions that are not available
           are still listed, grayed, with the reason why.
         </div>
       </div>
       <div class="newitem">
         <div class="nh"><span class="idx">03</span><span class="tick"></span></div>
-        <div class="nt">A library you can drop things onto</div>
+        <div class="nt">ChemiGraphy, MultiCASE's structure editor, built in</div>
         <div class="nb">
-          Drag a file anywhere onto the page or paste SMILES from the clipboard. Compound files and
-          reaction files in the same drop are sorted automatically. Compounds and reactions render as
-          cards with their structure and their results side by side, and any structure zooms into a
-          dialog sized for it.
+          Draw a compound instead of typing it, or open a flagged compound and correct it on the canvas.
+          The same engine that checks and evaluates your compounds reads what you draw, and ChemiGraphy
+          draws every structure you see, on screen and in every report.
         </div>
       </div>
       <div class="newitem">
         <div class="nh"><span class="idx">04</span><span class="tick"></span></div>
-        <div class="nt">DataKurator, rebuilt around one screen</div>
+        <div class="nt">One workspace, checked as it loads</div>
         <div class="nb">
-          Curation and export now share one screen. Every change can be undone and redone by name.
-          One Step Cure shows how many rows each choice affects before you commit, and any row can be
-          swapped for one of its tautomers. Long runs report their progress and can be canceled
-          without losing work.
+          Drag a file anywhere onto the page or paste SMILES from the clipboard. Every compound is checked
+          as it arrives and wears its verdict on the row; a panel beside the table holds the structure, the
+          finding and the fix. Every change can be undone and redone by name, and One Step Cure shows how
+          many rows each choice affects before you commit.
         </div>
       </div>
       <div class="newitem">
@@ -560,11 +558,11 @@
   <div class="sheet">
     <div class="pg-head">
       <div class="hd-top"><span class="sn">Section 03</span><span class="tag"></span></div>
-      <div class="ttl h-sec">DataKurator: get the library right first</div>
+      <div class="ttl h-sec">Curation: get the workspace right first</div>
     </div>
 
     <p class="lead" style="max-width:152mm; margin-bottom:6mm;">
-      A model can only be as good as the structure you hand it. DataKurator checks a set the moment it
+      A model can only be as good as the structure you hand it. QSAR Flex checks a set the moment it
       loads, tells you exactly what is wrong with each row, and gives you bulk and single-row tools to fix it, with undo behind every change.
     </p>
 
@@ -591,11 +589,11 @@
         <div class="card">
           <div class="eyebrow green" style="margin-bottom:2.6mm;">Row by row</div>
           <div class="bul dense">
-            <div class="li">Edit a name or a SMILES in place; the table asks you to re-analyze afterwards</div>
+            <div class="li">Open a flagged structure in <b>ChemiGraphy</b> and draw the correction</div>
+            <div class="li">Edit a name or a SMILES in place; the row is re-checked afterwards</div>
             <div class="li">Expand a mixture, tick the components you want, and split it into its own rows</div>
             <div class="li">Look a single compound up in PubChem to fill a missing name or CAS</div>
             <div class="li">Generate a row's tautomers, compare each with the parent, and adopt one</div>
-            <div class="li">Delete a row, or rename it, from the row menu</div>
           </div>
         </div>
       </div>
@@ -618,8 +616,8 @@
         <div class="card">
           <div class="eyebrow green" style="margin-bottom:2.6mm;">Consent before any lookup</div>
           <p class="body">
-            DataKurator never contacts PubChem during the initial analysis. Any lookup it makes, whether a single row or the whole set, first raises a dialog naming exactly what would be sent, and waits for
-            you to agree. Elsewhere, the Auto Fill button in Add Compound looks
+            The check never contacts PubChem. Any lookup, whether a single row or the whole set, first raises a dialog naming exactly what would be sent, and waits for
+            you to agree. Elsewhere, the Auto Fill button in Type a compound looks
             a compound up only when you press it.
           </p>
         </div>
@@ -642,7 +640,7 @@
         </div>
         <div style="padding:4mm 4mm;">
           <div class="eyebrow" style="margin-bottom:2mm;">Hand-off</div>
-          <p class="small">Load the clean compounds straight into the evaluation library in one click.</p>
+          <p class="small">There is nothing to hand over: the rows you cleaned are the rows Evaluate runs on.</p>
         </div>
       </div>
     </div>
@@ -650,9 +648,9 @@
     <div class="note">
       <span class="dot" style="margin-top:1.2mm;"></span>
       <p class="nt">
-        <b>Curation is also built into loading.</b> Add compounds anywhere in QSAR Flex and the same
-        checks run. If something is wrong you are told how many rows and how many findings, and offered
-        the choice of adding them anyway or sending the set straight to DataKurator to fix.
+        <b>Curation is built into loading.</b> Add compounds anywhere in QSAR Flex and the same
+        check runs. Nothing is held back: a set with issues is added with its issues visible, the toast
+        says how many rows need looking at, and each row's panel tells you what to do about it.
       </p>
     </div>
   </div>

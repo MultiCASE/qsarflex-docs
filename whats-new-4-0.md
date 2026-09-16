@@ -8,8 +8,9 @@ Most readers are coming from the **QSAR Flex 3.x desktop for Windows**, a WinFor
 |---|---|
 | **Interface** | Entirely new. One navbar, a command bar, light and dark themes. |
 | **Platform** | Windows and macOS. The Apple Silicon build is new in 4.0. |
-| **Library** | Card-based, with drag-and-drop and paste. |
-| **DataKurator** | Rebuilt in two steps, with 50 levels of named undo and bulk correction in one dialog. |
+| **Workspace** | One table for loading, curating and evaluating. Drop files, paste SMILES, fix rows in place. |
+| **ChemiGraphy** | MultiCASE's structure editor, inside QSAR Flex: draw a compound, or correct one, without leaving the workspace. |
+| **Curation** | Every compound is checked as it arrives; One Step Cure, tautomers and PubChem verification act on the same rows, with named undo. |
 | **Licensing** | An Account page, and per-license activity you can read back. |
 | **Support** | A portal at support.multicase.com, replacing email. |
 | **Chemistry** | Unchanged. No data migration, no license re-issue. |
@@ -28,24 +29,25 @@ See [Installing on macOS](install-mac.md) and [Installing on Windows](install-wi
 
 ---
 
-## One bar, and two screens
+## One bar, one workspace
 
 **The navbar.** A single 48-pixel bar runs across the top of the window and carries everything. There are no menus above it and no toolbars below it. Page content starts immediately underneath.
 
-**Library and DataKurator.** On the left of the navbar, next to the logo, two tabs — **Library** and **DataKurator** — show which of the two workspaces you are in. The active tab is a raised surface against a recessed track, so it reads at a glance in both themes. Work is kept on both: moving between them does not discard what you have loaded.
+**Add, Curate, Evaluate.** On the left of the bar, next to the logo, **Add ▾** holds every way of bringing compounds and reactions in, and **Curate ▾** holds every way of fixing them. **Evaluate**, the one filled button, sits on the right beside the count of what the workspace holds. Nothing moves between screens: loading, curating and evaluating happen on the same table.
 
 **A command bar.** In the center of the navbar is a **Search** control with a **⌘K** / **Ctrl+K** key cap and the tooltip *Find any action by name*. Press the shortcut from anywhere in the app — except while you are typing in a text field — and it opens. It is the fastest way to reach a control you cannot see, and it is worth learning first if you are new to this interface.
 
-The command bar lists 13 commands in four groups:
+The command bar lists every action in five groups:
 
 | Group | Commands |
 |---|---|
-| **Library** | Add compounds · Add a reaction · Evaluate · Clear the library |
-| **DataKurator** | Clear DataKurator · Export curated structures |
-| **Go to** | Library · DataKurator · Account and license |
-| **QSAR Flex** | Switch to dark mode (or Switch to light mode) · Match my system appearance · User guide · Sign out |
+| **Add** | Add compounds from a file · Add reactions from a file · Type a compound · Draw a structure in ChemiGraphy · Type a reaction |
+| **Curate** | One Step Cure · Re-check all compounds · Download curated structures · Open the history log · Undo · Redo · Clear the workspace |
+| **Workspace** | Evaluate |
+| **Go to** | Workspace · Account and license |
+| **QSAR Flex** | Switch to dark mode (or light mode) · Match my system appearance · Keyboard shortcuts · User guide · Sign out |
 
-Every command is offered from every page. Run **Export curated structures** while you are standing in the Library and QSAR Flex takes you to DataKurator and opens the **Download** menu on arrival. Commands that cannot run right now are still listed — grayed, with the reason on the row (*Nothing in the library*, *Nothing loaded*, *Already following your system*) — so you never have to guess whether a command exists. Each row also names where the control lives, for example *Library*, *Top left*, *Top right* or *Account menu*.
+Every command is offered from every page. Commands that cannot run right now are still listed — grayed, with the reason on the row (*Nothing in the workspace*, *No compounds loaded*) — so you never have to guess whether a command exists. Each row also names where the control lives: *Add menu*, *Curate menu*, *Menu bar*, *Top right*.
 
 **A license status chip.** The right side of the navbar carries a persistent chip showing the state of your license: tests remaining for a pay-per-test license, **Unlimited** for an on-demand subscription, time left or **Expired** for a dated subscription. It turns amber when a pay-per-test license drops below 10 remaining tests. Clicking it takes you straight to your license. It also distinguishes **License unavailable** (the license service could not be reached) from **No active license** (there genuinely isn't one), so a transient outage does not look like a licensing problem.
 
@@ -57,55 +59,77 @@ See [The QSAR Flex Window](interface.md).
 
 ---
 
-## The Library
+## The workspace
 
-The Library holds the compounds and reactions you are working on, and it is where you evaluate.
+The workspace is the table on the main screen. It holds the compounds and reactions you are working on, it is where they are checked, and it is where you evaluate.
 
-**Drag and drop, or paste.** There is no dialog to open first. Drop files anywhere on the Library page, or paste SMILES from the clipboard with **⌘+V** / **Ctrl+V**. While you drag, a full-screen overlay confirms the target: *Drop to add to your library — SMILES, SDF, MOL, TXT, CSV or RXN — compounds and reactions are sorted automatically.*
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">
+  <img src=".gitbook/assets/workspace-table-light.png" alt="The workspace: every compound a row with its verdict, the Add and Curate menus on the left, Evaluate on the right">
+</picture></figure>
 
-**Compounds and reactions are routed for you.** The file extension decides which importer runs. `.rxn` files become reactions; `.smi`, `.smiles`, `.txt`, `.csv`, `.tsv`, `.tab`, `.dat`, `.sdf` and `.mol` become compounds. Drop a mixed selection and both are added in one go — you do not pick an importer first. Anything else raises an explicit message rather than failing quietly. Dropped and pasted structures go through the same parser and the same curation check as the **+ Compounds** dialog, so the *Curation issues detected* prompt — **Add Anyway** or **Fix in DataKurator** — still applies. Reactions are not curated, on this route or in the **+ Reaction** dialog.
+**Drag and drop, or paste.** There is no dialog to open first. Drop files anywhere on the page, or paste SMILES from the clipboard with **⌘+V** / **Ctrl+V**. While you drag, a full-screen overlay confirms the target: *Drop to add to the workspace*.
 
-**Empty states that tell you what to do.** An empty Library shows one card: *Start with a compound or a file*, with **Add Compounds** and **Add Reaction** buttons and the line *You can also drop files here, or paste SMILES with ⌘ V.* On Windows that line reads *Ctrl + V*. The heading and toolbar appear once there is something to act on.
+**Compounds and reactions are routed for you.** The file extension decides which importer runs. `.rxn` files become reactions; `.smi`, `.smiles`, `.txt`, `.csv`, `.tsv`, `.tab`, `.dat`, `.sdf` and `.mol` become compounds. Drop a mixed selection and both are added in one go. Anything else raises an explicit message rather than failing quietly.
 
-**One card per compound.** Each card carries its position number, name, CAS chip, copy-SMILES and delete controls, a structure thumbnail and a **Module** / **Outcome** results table. Before you evaluate, the results pane reads *Ready to evaluate — Run Evaluate to see outcomes* rather than sitting blank.
+**Every compound is checked as it arrives.** The check reads each structure and puts its verdict on the row as a badge — **Clean**, or **Mixture**, **Duplicate**, **Atom type**, **Fatal** — and the chips above the table filter to one verdict at a time. Nothing is held back: a set with issues is added with its issues visible, and the toast says how many rows need looking at.
 
-**A reaction dialog sized for the scheme.** Clicking a reaction's scheme opens it in a much larger dialog than a single molecule gets, and the scheme keeps its natural layout instead of being scaled down to fit a molecule-shaped box.
+**One panel for one row.** Click a row and it opens in a panel on the left: the structure drawn large, the check's finding and what to do about it, the SMILES, the row's history, and its evaluation results once it has any. The table stays live beside it; **↑** and **↓** move the panel to the next row, **Esc** closes it. Every action on a row — edit the structure or the SMILES, rename, tautomers, PubChem, pick the components of a mixture, delete — is in the panel, each with a single-key shortcut.
 
-**Structures follow the theme.** Depictions are drawn by the engine in the current text color, so structures are near-black on light and white on dark, and a depiction is legible on paper and on a dark screen.
+**Empty states that tell you what to do.** An empty workspace shows one card, *Start with a compound or a file*, with **Add from a file**, **Type a compound**, **Draw in ChemiGraphy** and **Add a reaction**, and the line *You can also drop files here, or paste SMILES with ⌘ V.* On Windows that line reads *Ctrl + V*.
 
-**Reports.** Click an outcome to generate the HTML report, which opens in a right-side panel with **Download HTML** and **Print / Save as PDF**. The report content comes from the same engine as 3.x.
+**Results stay on the rows.** After a run the table gains a **Results** column — *View results* opens the row's panel on its outcomes, one per module, and a module's row in the panel opens its report. Structures in the panel and in every report are drawn by ChemiGraphy, in the current theme.
 
 See [Loading Compounds](product-guide/loading-compounds.md), [Loading Reactions](loading-reactions.md) and [Evaluation](evaluation.md).
 
 ---
 
-## DataKurator
+## ChemiGraphy, inside QSAR Flex
 
-DataKurator is where you clean a set before it reaches the Library.
-
-**Two steps.** DataKurator is Upload, then Curate. Loading a file takes you straight into Curate — there is no separate run step and no separate export screen. Compounds are analyzed as soon as they load.
-
-**Export lives on the Curate screen.** The **Download** dropdown sits in the Curate action bar and offers two labeled sections — *Clean only* and *Everything* — each exporting SMILES (`.smi`) or SDF (`.sdf`), with the counts shown before you commit. The green primary action at the right-hand end of the same bar is **Load N into library**, which hands the clean compounds to the evaluation Library in one click.
-
-**Real undo and redo.** Curate keeps a 50-step history, and every step is named. The buttons' tooltips say what will come back — *Undo One Step Cure*, *Undo Split into 3 components*, *Undo Edit SMILES — <name>* — and undoing confirms with *Undid: <label>.* Deletes, renames, SMILES edits, splits, PubChem lookups, re-analysis and One Step Cure are all reversible.
-
-**One check, the same everywhere.** Every structure goes through a single structural check, and its answer is the badge. Duplicates are grouped on the checked structure with stereo ignored. One Step Cure works on the molecule, not the text: mixtures are split on the molecular graph, the largest part is the one with the most heavy atoms, and charges are neutralized by the chemistry engine. The web app and the desktop apps give the same result for the same set.
-
-**Tautomers, per row.** **Tautomers** in the row menu generates up to 200 tautomers of the row's structure, lists them beside the parent with their structures, compares any one of them with a click, and adopts it with **Use tautomer**.
-
-**One Step Cure is a single dialog.** Bulk correction is one dialog with four counted decisions — **Mixtures/Salts**, **Duplicates** (with *Remove all copies*), **Atom type errors** and **Other errors** — plus a **More curation steps** section of checkboxes: verify structures against PubChem, remove chiral tags, neutralize negative charges, neutralize positive charge on nitrogen. PubChem verification is an option inside this dialog, off by default.
-
-**PubChem is opt-in and explicit.** It is skipped on the initial curation pass, and any lookup — batch or single row — asks first, in a dialog titled *Send data to PubChem?* that names exactly what will leave your machine and the endpoint it goes to.
-
-**Change summaries.** Bulk runs do not just redraw the table. They finish in a summary dialog listing what changed and what needs attention, grouped by source, filterable by **All** / **Changed** / **Needs attention**, and opened on **Needs attention** when there is anything there.
-
-**Long runs are legible and cancelable.** One Step Cure and library evaluation run behind a progress overlay that names the phase it is in rather than showing a percentage. File loading names its phase on the dropzone card itself — *Reading your file…*, then *Curating N compounds…* — with a **Cancel** button under it. All three can be canceled, and canceling says what was left alone (*One Step Cure canceled — nothing was changed.*).
-
-{% hint style="info" %}
-**Where curation runs.** In the web app, DataKurator sends your structures to the QSAR Flex service for curation over HTTPS; they are not persisted after the request. The desktop app curates in the application process, so structures do not leave the machine during curation. See [Security](security.md).
+{% hint style="success" %}
+**New in 4.0.** ChemiGraphy, MultiCASE's chemical structure editor, is built into QSAR Flex. Draw a compound instead of typing its SMILES, or open a compound the check flagged and correct it on the canvas. What you draw is read by the same engine that checks and evaluates your compounds, so the structure that reaches the table is exactly the one QSAR Flex will score.
 {% endhint %}
 
-See [DataKurator](datakurator.md).
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/editor-edit-dark.png">
+  <img src=".gitbook/assets/editor-edit-light.png" alt="ChemiGraphy open on a compound from the workspace: element and bond palettes on the left, the canvas in the middle, the tools on the right">
+</picture></figure>
+
+**Two ways in.** **Add ▾ → Draw in ChemiGraphy…** opens an empty canvas, and **Use this structure** adds what you drew as a new compound, checked like any other. **Edit structure**, in a row's panel, opens the canvas on that compound *as QSAR Flex reads it*; **Use this structure** replaces its SMILES, and the row is checked again.
+
+**The whole editor.** The element and bond palettes, the ring library, the lookup by name, arrows, selection and lasso, erase, text, undo and redo, label size, bond width and zoom — the ChemiGraphy editor, with only its file menu and settings left out, because a structure drawn here is handed to the workspace and nowhere else.
+
+**Escape belongs to the editor.** It cancels the bond being drawn, drops the selection, closes a popover — it does not close the dialog, and nor does clicking outside it. The dialog closes on **Cancel**, the **✕**, or **Use this structure**, so a drag that ends past the edge never throws a drawing away.
+
+**One renderer, everywhere.** ChemiGraphy also draws every structure QSAR Flex shows — the panel, the tautomer viewer, the component picker, and every report. A molecule looks the same on screen, in the report and in the PDF you print from it.
+
+See [Drawing Structures](structure-editor.md).
+
+---
+
+## Curation, on the same rows
+
+**One check, the same everywhere.** Every structure goes through a single structural check, and its answer is the badge. Duplicates are grouped on the checked structure with stereo ignored. The web app and the desktop apps give the same result for the same set.
+
+**Fix a row where it is.** The panel edits the SMILES or the name, opens ChemiGraphy on the structure, splits a mixture into the components you keep, and looks a compound up in PubChem. An edited row becomes **Not checked** until the next check, and its old results are cleared, because they belonged to the old structure.
+
+**Tautomers, per row.** **Tautomers** generates up to 200 tautomers of the row's structure, lists them beside the parent with their structures, compares any one of them with a click, and adopts it with **Use tautomer**.
+
+**One Step Cure is a single dialog.** Bulk correction is one dialog with four counted decisions — **Mixtures/Salts**, **Duplicates**, **Atom type errors** and **Other errors** — plus a **More curation steps** section: verify structures against PubChem, remove chiral tags, neutralize negative charges, neutralize positive charge on nitrogen. One Step Cure works on the molecule, not the text: mixtures are split on the molecular graph, the largest part is the one with the most heavy atoms, and charges are neutralized by the chemistry engine.
+
+**PubChem is opt-in and explicit.** It is skipped by the check, and any lookup — batch or single row — asks first, in a dialog titled *Send data to PubChem?* that names exactly what will leave your machine and where it goes.
+
+**Real undo and redo.** Every step is named — *Undo One Step Cure*, *Undo Edit SMILES — Aspirin*, *Undo Evaluate 14 items* — and the Curate menu, ⌘ Z / Ctrl + Z and the command bar all step through the same history. Deletes, renames, SMILES edits, splits, PubChem lookups, re-checks, One Step Cure and evaluation runs are all reversible. **Clear workspace** is the one action that is not.
+
+**Change summaries.** A bulk run finishes in a summary listing what changed and what needs attention, filterable by **All** / **Changed** / **Needs attention**, and opened on **Needs attention** when there is anything there.
+
+**Long runs are legible and cancelable.** Loading, checking, One Step Cure and evaluation run behind a progress overlay that names the phase it is in. All can be canceled, and canceling says what was left alone.
+
+{% hint style="info" %}
+**Where curation runs.** In the web app, the check and the corrections run on the QSAR Flex service over HTTPS; structures are not persisted after the request. The desktop app curates in the application process, so structures do not leave the machine during curation. See [Security](security.md).
+{% endhint %}
+
+See [Curating Compounds](curation.md).
 
 ---
 

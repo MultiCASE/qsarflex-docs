@@ -1,19 +1,21 @@
 # Evaluation
 
-🔬 Evaluation runs the prediction modules your license covers against everything in your Library — compounds and reactions — in a single run, and writes the outcomes onto each card.
-
-The chemistry is unchanged in 4.0. What is new is how you start a run, what the app tells you while it is running, and what it tells you afterwards when a run did not cover everything you sent.
+🔬 Evaluation runs the prediction modules your license covers against the workspace — compounds and reactions — in a single run, and writes the outcomes onto the rows: a **Results** column on the table, and the outcome per module in each row's panel.
 
 ---
 
 ## Starting an Evaluation
 
-With at least one item in the Library, there are two ways to start:
+With at least one item in the workspace, there are two ways to start:
 
-- Click the green **Evaluate** button in the Library toolbar (atom icon, tooltip *"Run evaluation"*).
+- Click the green **Evaluate** button on the right of the navbar.
 - Open the command bar with **⌘K** (macOS) / **Ctrl+K** (Windows) and choose **Evaluate**.
 
-The toolbar only exists once the Library has something in it; on an empty Library the empty-state card takes its place. The command bar still lists **Evaluate** on an empty Library, but grays it out and gives the reason on the row: *"Nothing in the library"*. The **Evaluate** button is also disabled while the Library is still loading and while a run is already in progress.
+The button's tooltip says what will happen before you press it — *Evaluate 14 items*, or *Evaluate 11 items; 3 with structural errors will be skipped*. It is disabled, with the reason in the tooltip, while the workspace is empty, while it is still loading, and while a load, a check, a cure or a run is already in progress. The command bar lists **Evaluate** on an empty workspace too, grayed out, with *"Nothing in the workspace"* on the row.
+
+### What is sent
+
+Every reaction, and every compound the check could read. A compound the check rejected outright — **Fatal**, **Atom type**, **Aromaticity** or **Misc** — has no structure a model can score, so it is left out, and the workspace says so above the table: *3 compounds with a structural error will be skipped by Evaluate until fixed.* Mixtures and duplicates are sent as they are; the engine handles salts itself. Fix the rest from the row's panel or with One Step Cure — see [Curating Compounds](curation.md).
 
 ---
 
@@ -25,6 +27,8 @@ Either route opens the **Select Modules to Evaluate** dialog.
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
   <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
 </picture></figure>
+
+When the run will skip rows, the dialog names them — number and name — above the buttons, so nothing is left out silently.
 
 Modules are laid out in two columns and grouped under their license bundle — **Nitrosamine**, **Ecotoxicity**, **Physicochemical** and **ADME**. Modules your account is not licensed for are listed but grayed out and cannot be ticked, so you can always see what exists beyond your current license.
 
@@ -55,7 +59,7 @@ Three different things can stop the dialog working, and 4.0 tells them apart ins
 
 A full-screen overlay covers the page for the length of the run. It shows:
 
-- The title **Evaluating library** and the number of compounds being evaluated.
+- The title **Evaluating the workspace** and the number of compounds being evaluated.
 - A named step — **Running modules** — with a spinner. It is a checklist rather than a percentage bar on purpose: an evaluation is a single request that returns nothing until it has finished, so a percentage would be invented.
 - A note line under a rule, which names any reactions in the run (*"Also evaluating 2 reactions."*) and then says how your structures are handled:
   - On the **desktop** — *"Evaluating on-device — your compounds stay on this machine."*
@@ -64,7 +68,7 @@ A full-screen overlay covers the page for the length of the run. It shows:
   See [Where Evaluation Runs](#where-evaluation-runs) below.
 - A **Cancel** button. **Esc** does the same thing, and focus is held inside the overlay while it is open.
 
-Canceling stops the app waiting for the answer; it does not reach into the engine and stop work that has already begun. The app says so: *"Evaluation canceled. Your library is unchanged; tests already started may still be billed."*
+Canceling stops the app waiting for the answer; it does not reach into the engine and stop work that has already begun. The app says so: *"Evaluation canceled. The workspace is unchanged; tests already started may still be billed."*
 
 {% hint style="info" %}
 A run is metered against your license. Whether it finishes, fails or is canceled, the license figures in the navbar are re-read afterwards. On a pay-per-test license that is the remaining-tests count; on an on-demand subscription it is the pending-billing count.
@@ -76,7 +80,7 @@ A run is metered against your license. Whether it finishes, fails or is canceled
 
 **A complete run** raises a success toast: *"Evaluated 6 items against 3 modules."*
 
-**A short run** — fewer results came back than items were sent — raises a warning toast *and* leaves a persistent **Partial evaluation** banner at the top of the Library. The banner names the time of the run, how many of how many items came back, across how many modules, and ends: *"Items with no results below were not evaluated — re-run before relying on this set."* It stays until you dismiss it with the ✕, so it survives the toast disappearing.
+**A short run** — fewer results came back than items were sent — raises a warning toast *and* leaves a persistent **Partial evaluation** banner at the top of the workspace. The banner names the time of the run, how many of how many items came back, across how many modules, and ends: *"Items with no results below were not evaluated — re-run before relying on this set."* It stays until you dismiss it with the ✕, so it survives the toast disappearing.
 
 **An unreadable response** clears the results rather than leaving the previous run's outcomes on screen looking like this run's, and says so.
 
@@ -84,25 +88,27 @@ A run is metered against your license. Whether it finishes, fails or is canceled
 Each run **replaces** the results of the previous run — outcomes do not accumulate across runs. If you want a compound to carry results from two different modules, tick both modules in the same run.
 {% endhint %}
 
+A run is a step in the workspace's history — *Evaluate 14 items* — so **Undo** puts the previous results back, and undoing something you did before the run does not take the run's results with it. A result belongs to the structure it was made for: editing a row's SMILES, adopting a tautomer, a PubChem correction or a One Step Cure transform clears that row's results, while a re-check that changes nothing keeps them.
+
 Results are held on the device, in the browser (or the desktop app's own web storage), so they survive closing and reopening the app on that machine. They do not follow you to another browser or another computer.
 
 ---
 
 ## Reading the Results
 
-Each card in the Library shows the structure on the left and a results table on the right.
+Once a run has finished, the table gains a **Results** column. A row that was evaluated reads **View results**; a row the run skipped reads **Skipped**, with the reason in its tooltip; a row that was not part of the run shows a dash.
 
 <figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-results-dark.png">
-  <img src=".gitbook/assets/eval-results-light.png" alt="">
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-results-dark.png">
+  <img src=".gitbook/assets/workspace-results-light.png" alt="">
 </picture></figure>
 
-The table has two columns:
+**View results** opens the row's panel on its **Evaluation** section: one line per module, the outcome on the right, and a document icon — click the line to open that module's report. Before a row has been evaluated the panel reads *Not evaluated yet*; on a row the run skipped it reads *Evaluate skips this compound until the structure is fixed.* A `*` after a value marks an exact hit in the module's experimental database, and the panel says so under the list.
 
-- **Module** — the module that produced the row.
-- **Outcome** — what it produced. A real outcome is drawn as a green link with a document icon; clicking it opens the report.
-
-Before a card has been evaluated the right-hand pane reads **Ready to evaluate** / *"Run Evaluate to see outcomes"*.
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-panel-results-dark.png">
+  <img src=".gitbook/assets/workspace-panel-results-light.png" alt="">
+</picture></figure>
 
 Outcomes are text, and the form depends on the module:
 
@@ -125,7 +131,12 @@ Reactions are evaluated by the **N-Nitrosation** module only. Tick other modules
 
 ## 📄 Module Reports
 
-Click an outcome and QSAR Flex generates a full HTML report for that one item and that one module, then opens it in a panel that slides in from the right, titled **&lt;module&gt; — Report**.
+Click a module's line in the panel and QSAR Flex generates a full HTML report for that one item and that one module, then opens it in a panel that slides in from the right, titled **&lt;module&gt; — Report**. Every structure in it is drawn by ChemiGraphy, the same way it is drawn in the workspace.
+
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
+  <img src=".gitbook/assets/eval-report-light.png" alt="">
+</picture></figure>
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
@@ -153,7 +164,7 @@ What a report contains depends on the module:
 - **Oral Bioavailability** — the four-method assessment reported side by side, with the supplementary metabolic-stability, transporter and formulation-sensitivity sections. A **Show Structural Influence** button opens a table that splits the alert hits into features boosting and features lowering that endpoint, each fragment listed with its relative contribution and a proposed mechanism.
 
 {% hint style="warning" %}
-Not every module type has a report generator. If clicking an outcome does nothing, that module produces the value only. A module missing from the catalog, or a card you have since deleted, is reported as a message rather than an empty panel.
+Not every module type has a report generator. If clicking a module's line does nothing, that module produces the value only. A module missing from the catalog, or a row you have since deleted, is reported as a message rather than an empty panel.
 {% endhint %}
 
 If your license is a **trial**, reports generated by MultiCASE's servers come back stamped with a diagonal **TRIAL LICENSE / NOT FOR REGULATORY USE** watermark, and the watermark prints.
@@ -164,7 +175,7 @@ If your license is a **trial**, reports generated by MultiCASE's servers come ba
 
 | Deployment | Where the models run |
 |---|---|
-| 🌐 **Web app** | Your library is sent over HTTPS to the QSAR Flex service at `qsarflex-be.multicase.com`, which runs the models and returns the outcomes. The same service generates reports, draws structures and curates in DataKurator. Structures are not persisted after the request. |
+| 🌐 **Web app** | The workspace is sent over HTTPS to the QSAR Flex service at `qsarflex-be.multicase.com`, which runs the models and returns the outcomes. The same service generates reports, draws structures, curates and hosts the structure editor's session. Structures are not persisted after the request. |
 | 💻 **Desktop** | The engine runs inside the app on your machine, against the encrypted reference database the app downloads on first launch (~4 GB). Structures do not leave the workstation. |
 
 {% hint style="warning" %}
@@ -178,8 +189,8 @@ Both deployments need a network connection: sign-in, the license check and the u
 ## Notes
 
 - **Run everything you need in one go.** A new run replaces the last one's results.
-- **Deleting a card deletes its results**, and **Clear all** wipes the library and every result with it.
+- **Deleting a row deletes its results** (undo brings both back), and **Clear workspace** wipes the workspace and every result with it.
 - **The license server decides what you can tick.** The Select Modules dialog asks the license service which modules your license covers, and only those can be selected. In the web app that decision is enforced again on the server: the app sends module ids, the license service returns the modules it will allow, and those are what the engine is given.
-- **Large runs take time.** The engine works through the library one molecule at a time, so the wait grows with the number of compounds multiplied by the number of modules.
+- **Large runs take time.** The engine works through the workspace one molecule at a time, so the wait grows with the number of compounds multiplied by the number of modules.
 
 See the [Model Catalog](fundamentals/model-catalog.md) for what each module predicts, and [Access & Licensing](fundamentals/access-and-licensing.md) for how runs are counted against your license.

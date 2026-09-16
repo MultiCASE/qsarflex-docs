@@ -2,26 +2,23 @@
 
 This page describes how QSAR Flex handles your data — where each operation runs, what leaves your machine, which hosts the products contact, and what is kept afterwards.
 
-Nothing here changes the chemistry. What changed in 4.0 is DataKurator, and with it where curation runs and when PubChem is contacted.
+Nothing here changes the chemistry. This page is about where your structures go, where they are kept, and when PubChem is contacted.
 
 ---
 
-## Where your library lives
+## Where your workspace lives
 
-In the web app and in the desktop app, your library, your evaluation results and DataKurator's working set are held **in the browser**, in local storage:
+In the web app and in the desktop app, your workspace and your evaluation results are held **in the browser**, in local storage:
 
 | What | Storage key | Cleared when |
 |---|---|---|
-| Compounds and reactions | `library-storage` | You clear the library, or sign out |
-| Evaluation results | `evaluation-result-storage` | You clear the library, or sign out |
-| DataKurator working set | `qsarflex_dk_state` | You clear DataKurator, or DataKurator is next opened by a different user |
+| Compounds and reactions, with their curation verdicts and history | `library-storage` | You clear the workspace, or sign out |
+| Evaluation results | `evaluation-result-storage` | You clear the workspace, or sign out |
 
-There is no MultiCASE-side copy of your library. Signing out clears your library and your evaluation results locally, and also asks the license service to end the session.
-
-The DataKurator working set is cleared at the same time only if DataKurator is the page you signed out from. Sign out from anywhere else — the Library, Account, or any other screen — and it stays in the browser profile until DataKurator is opened again — where it is discarded if a different user has signed in, and restored if the same user has. Use **Clear** in DataKurator if you want it gone immediately.
+There is no MultiCASE-side copy of your workspace. Signing out clears the workspace and your evaluation results locally, and also asks the license service to end the session.
 
 {% hint style="info" %}
-Because the library lives in your browser profile, it does not follow you between browsers, machines or private windows. The desktop app keeps it in its own embedded browser profile.
+Because the workspace lives in your browser profile, it does not follow you between browsers, machines or private windows. The desktop app keeps it in its own embedded browser profile.
 {% endhint %}
 
 ---
@@ -44,11 +41,11 @@ If your requirement is that your structures never reach MultiCASE, install the *
 
 ---
 
-## DataKurator
+## Curation and the structure editor
 
-DataKurator is not a purely local tool, and the difference matters:
+Curation is not a purely local tool in the web app, and the difference matters:
 
-- **In the web app**, DataKurator sends your structures to the QSAR Flex backend over HTTPS. Loading a file or pressing **Re-analyze** POSTs them to `/curate/analyze`; **One Step Cure** POSTs the rows and your choices to `/curate/one-step-cure`; **Tautomers** on a row goes to `/curate/tautomers`; a PubChem lookup goes to `/curate/correct`; **Download** goes to `/curate/export`.
+- **In the web app**, curation sends your structures to the QSAR Flex backend over HTTPS. Loading compounds or pressing **Re-check** POSTs them to `/curate/analyze`; **One Step Cure** POSTs the rows and your choices to `/curate/one-step-cure`; **Tautomers** on a row goes to `/curate/tautomers`; a PubChem lookup goes to `/curate/correct`; **Download curated** goes to `/curate/export`. The structure editor keeps its drawing in a session on the same service: `/sketcher/start` sends the structure you open on, `/sketcher/message` relays each stroke, `/sketcher/smiles` reads the drawing back, `/sketcher/end` discards it; an abandoned session is discarded after 30 minutes.
 - **On the desktop app**, the same four calls are intercepted by the shell and executed in-process. Curation happens on the machine.
 
 Automatic analysis never contacts PubChem. Every analysis the app runs for you — on load, on Re-analyze, after a One Step Cure — is sent with PubChem explicitly disabled.
@@ -71,7 +68,7 @@ There is no **PubChem Batch Correct** *button* anywhere in 4.0. The bulk lookup 
 
 ### The consent dialog
 
-Both DataKurator routes stop at a dialog titled **Send data to PubChem?** before anything is transmitted. It names exactly what will leave — "compound names, CAS numbers, and SMILES for all compounds" for the bulk run, "the compound's name, CAS number, and SMILES" for a single row — states that "This data will leave your system.", prints the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and asks "Do you want to continue?" with **Cancel** and **Continue**.
+Both curation routes stop at a dialog titled **Send data to PubChem?** before anything is transmitted. It names exactly what will leave — "compound names, CAS numbers, and SMILES for all compounds" for the bulk run, "the compound's name, CAS number, and SMILES" for a single row — states that "This data will leave your system.", prints the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and asks "Do you want to continue?" with **Cancel** and **Continue**.
 
 The question is asked before any work starts. Canceling a One Step Cure at the dialog abandons the whole run — "One Step Cure canceled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, CAS numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
 
@@ -102,7 +99,7 @@ There is also no offline license cache, and neither deployment works offline —
 | Item | Location |
 |---|---|
 | Filter models, reference database, data manifest | `%LOCALAPPDATA%\QSARFlex\data` (Windows) · `~/Library/Application Support/QSARFlex/data` (macOS) |
-| Embedded browser profile (where the library lives) | `%APPDATA%\QSARFlex\WebView2Main` on Windows |
+| Embedded browser profile (where the workspace lives) | `%APPDATA%\QSARFlex\WebView2Main` on Windows |
 
 The published model files are AES-256 encrypted and the local reference database is SQLCipher-encrypted; both the archive and every extracted file are SHA-256 verified after download. The Windows application and installers are signed with Azure Trusted Signing; the macOS app is Developer ID signed, notarized and stapled.
 
@@ -119,7 +116,7 @@ These are the hosts the products contact:
 | QSAR Flex API (a `multicase.com` host) | Parsing, rendering, curation, evaluation, reports | Web app |
 | `user-manager-be.multicase.com` | Licenses, module entitlements, token refresh, usage counts | Both |
 | `downloads.multicase.com` | Installers, update feeds, encrypted model and database downloads | Desktop |
-| `pubchem.ncbi.nlm.nih.gov` | Auto Fill and DataKurator PubChem lookups | Desktop, on request only. In the web app the lookup is made server-side, so a workstation firewall rule does not affect it |
+| `pubchem.ncbi.nlm.nih.gov` | Auto Fill and curation's PubChem lookups | Desktop, on request only. In the web app the lookup is made server-side, so a workstation firewall rule does not affect it |
 | `resources.multicase.com` | This documentation, opened when you click **Documentation** | Both |
 | `d35fy2f4trk71w.cloudfront.net` | Static product assets — logos and profile images. Carries no chemical data | Both |
 
@@ -135,7 +132,7 @@ The QSAR Flex API has no user database. It holds nothing about you or your compo
 - Reports and evaluation results are generated per request and returned to your session.
 - The API's request log records the method, path, status code and elapsed time of each call — not the request body.
 
-MultiCASE does record **license usage**. Each evaluation reports the user and software id, the number of items in the library, the module ids used, the application version and the platform. No structures are included. You can see the resulting record yourself under **Account → License → View activity**.
+MultiCASE does record **license usage**. Each evaluation reports the user and software id, the number of items evaluated, the module ids used, the application version and the platform. No structures are included. You can see the resulting record yourself under **Account → License → View activity**.
 
 ---
 

@@ -6,8 +6,12 @@
 
 Available as a **web application** and as a **desktop application for Windows and macOS**. Both run the same interface and need an internet connection — **none of them works offline**, the desktop app included. Sign-in and a license check run at every launch, and every evaluation needs a live entitlement check before you can select a module.
 
+{% hint style="success" %}
+**New in 4.0: ChemiGraphy is built in.** Draw a compound instead of typing it, or open a flagged compound and correct it on the canvas — **Add ▾ → Draw in ChemiGraphy…**, or **Edit structure** on any row. The same engine that checks and evaluates your compounds reads what you draw, and ChemiGraphy draws every structure you see, on screen and in every report. See [Drawing Structures](structure-editor.md).
+{% endhint %}
+
 {% hint style="info" %}
-**New in 4.0.** The interface has been rebuilt end to end — a new navigation bar, a ⌘K command bar, a redesigned Library, a two-step DataKurator, and a full Account page for your license. The models and endpoints are unchanged. See [What's New in 4.0](whats-new-4-0.md).
+One workspace holds the compounds and reactions you are working on. Every compound is checked as it arrives and wears its curation verdict; you fix what the check flags in place, draw or correct structures in ChemiGraphy, and run the modules from the same table. A ⌘K command bar reaches any action from anywhere, and an Account page holds your license.
 {% endhint %}
 
 ---
@@ -15,8 +19,9 @@ Available as a **web application** and as a **desktop application for Windows an
 ## 🚀 What Can QSAR Flex Do?
 
 - **🔬 Predict toxicological endpoints** — N-nitrosamine CPCA and nitrosation risk, ecotoxicity, physicochemical properties and ADME
-- **📂 Load and curate compounds** — Enter SMILES, InChI, names, or registry numbers; upload batch files (SMILES, SDF, MOL, TXT, CSV); drop files onto the library or paste structures straight in
-- **✅ Curate your dataset** — Use [DataKurator](datakurator.md) to detect and fix structural issues before evaluation
+- **➕ Add compounds** — Type SMILES, InChI, names or registry numbers; add files (SMILES, SDF, MOL, TXT, CSV); drop files onto the workspace or paste structures straight in
+- **✏️ Draw in ChemiGraphy** — MultiCASE's structure editor, inside the workspace: draw a new compound, or correct one the check flagged
+- **✅ Curate your dataset** — Every compound is checked as it arrives; [fix what the check flags](curation.md) in place, one row at a time or the whole set with One Step Cure
 - **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
 - **📄 Generate reports** — Detailed HTML reports per compound per module, which you can download or print to PDF
 - **⌨️ Reach any action by name** — Press ⌘K (Ctrl+K on Windows) to open the command bar
@@ -31,7 +36,8 @@ Available as a **web application** and as a **desktop application for Windows an
 | **Get it** | [qsarflex.multicase.com](https://qsarflex.multicase.com) | [Installing on Windows](install-win.md) · [Installing on macOS](install-mac.md) |
 | **Compound loading** | ✓ | ✓ |
 | **Batch upload** | ✓ | ✓ |
-| **DataKurator** | ✓ | ✓ |
+| **Curation** | ✓ | ✓ |
+| **Structure editor (ChemiGraphy)** | ✓ | ✓ |
 | **Evaluation** | ✓ | ✓ |
 | **Reaction loading** | ✓ | ✓ |
 | **Where evaluation runs** | MultiCASE servers | On your machine |
@@ -41,9 +47,9 @@ Available as a **web application** and as a **desktop application for Windows an
 | **Surrogate Search** | — | ✓ |
 | **Cross Similarity** | — | ✓ |
 
-> **Web App** does the work on MultiCASE servers. The structures you load are sent to the QSAR Flex service for evaluation, DataKurator curation, report generation, and the structure drawings you see on screen. They are not retained after the request.
+> **Web App** does the work on MultiCASE servers. The structures you load are sent to the QSAR Flex service for evaluation, curation, report generation, the structure editor's session, and the structure drawings you see on screen. They are not retained after the request.
 
-> **Desktop** runs the models and DataKurator on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
+> **Desktop** runs the models, the curation engine and the structure editor on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
 
 {% hint style="info" %}
 The desktop app is the same application as the web app, wrapped in a native shell. If you are choosing between the two, the deciding question is whether your structures may leave the workstation. See [Installing on Windows](install-win.md) or [Installing on macOS](install-mac.md).
@@ -57,8 +63,8 @@ The desktop app is the same application as the web app, wrapped in a native shel
 2. 🔐 [Getting Started](getting-started.md) — log in and run your first evaluation
 3. 🖥️ [The QSAR Flex Window](interface.md) — the navigation bar, the command bar, and the license status chip
 4. 💾 [Installing on Windows](install-win.md) / [Installing on macOS](install-mac.md) — set up the desktop app
-5. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to your library
-6. ✅ [DataKurator](datakurator.md) — clean and validate your dataset before evaluation
+5. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to the workspace
+6. ✅ [Curating Compounds](curation.md) — the verdicts, the row panel and One Step Cure
 7. 🔬 [Evaluation](evaluation.md) — select modules and generate results
 8. ⚗️ [Loading Reactions](loading-reactions.md) — submit reaction SMILES and RXN files
 9. 📋 [Model Catalog](fundamentals/model-catalog.md) — all available endpoints by bundle

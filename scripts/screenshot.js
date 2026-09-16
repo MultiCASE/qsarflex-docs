@@ -61,7 +61,7 @@ const PRECOMPUTED_RESULTS = [
 // VM, they live in this same flat directory, and this line used to delete all 17
 // of them on every web run — leaving both published install guides pointing at
 // missing images.
-// ONLY=datakurator (or library, reactions, evaluation, licenses, profile) re-shoots one
+// ONLY=workspace (or licenses, profile) re-shoots one
 // section and leaves every other frame in place, for a fix that touched one screen.
 const ONLY = process.env.ONLY || '';
 const want = (section) => !ONLY || ONLY === section;
@@ -210,16 +210,16 @@ async function injectLibrary(page, compounds, results) {
 }
 
 async function clearLibrary(page) {
-  await page.evaluate(() => {
+  // The workspace and its results persist in IndexedDB (lib/idb.ts), not
+  // localStorage; drop every database the origin holds, then reload.
+  await page.evaluate(async () => {
     localStorage.removeItem('library-storage');
     localStorage.removeItem('evaluation-result-storage');
+    const dbs = (indexedDB.databases ? await indexedDB.databases() : []) || [];
+    await Promise.all(dbs.map(d => new Promise(res => { const r = indexedDB.deleteDatabase(d.name); r.onsuccess = r.onerror = r.onblocked = () => res(); })));
   });
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(400);
-}
-
-async function clearDkState(page) {
-  await page.evaluate(() => localStorage.removeItem('qsarflex_dk_state'));
 }
 
 async function navigateTo(page, url) {
@@ -280,263 +280,6 @@ async function screenshotSignIn(page) {
 }
 
 // ── Library & Compound screenshots ───────────────────────────────────────────
-
-async function screenshotLibrary(page, theme) {
-  console.log(`\n  📂 Library (${theme})`);
-
-  await clearLibrary(page);
-  await navigateTo(page, '/');
-  await setTheme(page, theme);
-  await clearLibrary(page);
-  await navigateTo(page, '/');
-  // No markers: the empty-state card already labels both buttons, and a badge
-  // under them lands on the drop/paste hint line.
-  await shot(page, `library-empty-${theme}.png`);
-
-  await navigateTo(page, '/');
-  await page.waitForTimeout(600);
-
-  // Add Compound dialog
-  const addBtn = page.locator('button').filter({ hasText: /^\+?\s*(Add )?Compounds$/ }).first();
-  if (await addBtn.isVisible({ timeout: 6000 }).catch(() => false)) {
-    await addBtn.click();
-    await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
-    await page.waitForTimeout(700);
-    await shot(page, `add-compound-${theme}.png`, {
-      markers: [
-        { selector: 'button:has-text("Auto Fill")', label: 'Fetch from PubChem', side: 'right' },
-      ],
-    });
-
-    try {
-      const nameInput = page.locator('[role="dialog"] input[placeholder*="compound name"]').first();
-      if (await nameInput.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await nameInput.fill('Caffeine');
-        const autofillBtn = page.locator('[role="dialog"] button').filter({ hasText: 'Auto Fill' }).first();
-        if (await autofillBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-          await autofillBtn.click();
-          await page.waitForTimeout(3500);
-          await shot(page, `add-compound-autofill-${theme}.png`, {
-            markers: [
-              { selector: 'button:has-text("Add to Library")', label: 'Add to Library', side: 'left' },
-            ],
-          });
-        }
-      }
-    } catch {}
-
-    try {
-      const batchTab = page.locator('[role="dialog"] [role="tab"]').filter({ hasText: 'Batch' }).first();
-      if (await batchTab.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await batchTab.click();
-        await page.waitForTimeout(400);
-        await shot(page, `batch-upload-${theme}.png`);
-
-        const fileInput = page.locator('[role="dialog"] input[type="file"]').first();
-        if (await fileInput.count() > 0) {
-          await fileInput.setInputFiles(DK_FILE);
-          await page.waitForTimeout(900);
-          await shot(page, `batch-upload-with-file-${theme}.png`, {
-            markers: [
-              { selector: 'button:has-text("Add to Library")', label: 'Import all', side: 'left' },
-            ],
-          });
-        }
-      }
-    } catch {}
-
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(400);
-  }
-
-  await injectLibrary(page, SAMPLE_COMPOUNDS, null);
-  await navigateTo(page, '/');
-  await shot(page, `library-compounds-${theme}.png`, {
-    markers: [
-      // Not "Run evaluation  ⌘K". ⌘K/Ctrl+K opens the command bar
-      // (usePaletteShortcut in components/CommandBar.tsx); the Evaluate
-      // button's own tooltip is just "Run evaluation".
-      { selector: 'button:has-text("Evaluate")', label: 'Run evaluation', side: 'bottom' },
-    ],
-  });
-
-  await injectLibrary(page, SAMPLE_COMPOUNDS, PRECOMPUTED_RESULTS);
-  await navigateTo(page, '/');
-  await shot(page, `library-with-results-${theme}.png`);
-}
-
-// ── Reaction screenshots ──────────────────────────────────────────────────────
-
-async function screenshotReactions(page, theme) {
-  console.log(`\n  ⚗️  Reactions (${theme})`);
-
-  // ── SMILES tab: start with an empty library so the result shows only the reaction ──
-  await clearLibrary(page);
-  await navigateTo(page, '/');
-
-  const reactionBtn = page.locator('button').filter({ hasText: /reaction/i }).first();
-  if (!await reactionBtn.isVisible({ timeout: 4000 }).catch(() => false)) {
-    console.warn('  ⚠ Reaction button not found');
-    return;
-  }
-  await reactionBtn.click();
-  await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
-  await page.waitForTimeout(500);
-  await shot(page, `reactions-smiles-tab-${theme}.png`);
-
-  try {
-    const smilesTextarea = page.locator('[role="dialog"] textarea').first();
-    if (await smilesTextarea.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await smilesTextarea.fill('CC(=O)Cl.OCC>>CC(=O)OCC.Cl');
-
-      // Click Visualise first — renders the diagram inline in the dialog
-      const visualiseBtn = page.locator('[role="dialog"] button').filter({ hasText: /visualis/i }).first();
-      if (await visualiseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await visualiseBtn.click();
-        await page.waitForTimeout(3000); // wait for backend to render
-        await shot(page, `reactions-smiles-result-${theme}.png`);
-      }
-
-      // Submit adds the visualised reaction to the library
-      const submitBtn = page.locator('[role="dialog"] button').filter({ hasText: /^submit$/i }).first();
-      if (await submitBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
-        await submitBtn.click();
-        await page.waitForSelector('[role="dialog"]', { state: 'hidden', timeout: 8000 }).catch(() => {});
-        await page.evaluate(() => {
-          document.querySelectorAll('[data-sonner-toast], [data-radix-toast-viewport], [role="alert"]').forEach(el => el.remove());
-        });
-        await page.waitForTimeout(2000);
-      }
-    }
-  } catch (e) {
-    console.warn('  ⚠ Reaction SMILES:', e.message?.split('\n')[0]);
-    await page.keyboard.press('Escape').catch(() => {});
-  }
-
-  // ── Files tab: one compound in library so final shot shows compound + reaction coexisting ──
-  await injectLibrary(page, [SAMPLE_COMPOUNDS[0]], null);
-  await navigateTo(page, '/');
-  const reactionBtn2 = page.locator('button').filter({ hasText: /reaction/i }).first();
-  await reactionBtn2.click();
-  await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
-  await page.waitForTimeout(400);
-
-  try {
-    const filesTab = page.locator('[role="dialog"] [role="tab"]').filter({ hasText: /file/i }).first();
-    if (await filesTab.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await filesTab.click();
-      await page.waitForTimeout(400);
-      await shot(page, `reactions-files-tab-${theme}.png`);
-
-      const fileInput = page.locator('[role="dialog"] input[type="file"]').first();
-      if (await fileInput.count() > 0) {
-        await fileInput.setInputFiles(RXN_FILES);
-        await page.waitForTimeout(1000);
-        await shot(page, `reactions-rxn-uploaded-${theme}.png`);
-
-        // Click Visualise — backend processes the 5 RXN files and renders the reaction in the dialog
-        const visualiseBtn = page.locator('[role="dialog"] button').filter({ hasText: /visualis/i }).first();
-        if (await visualiseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-          await visualiseBtn.click();
-          await page.waitForTimeout(5000); // 5 step RXN needs more time
-          await shot(page, `reactions-rxn-visualized-${theme}.png`);
-        }
-
-        // Submit adds the visualised reaction to the library
-        const submitBtn = page.locator('[role="dialog"] button').filter({ hasText: /^submit$/i }).first();
-        if (await submitBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
-          await submitBtn.click();
-          await page.waitForSelector('[role="dialog"]', { state: 'hidden', timeout: 10000 }).catch(() => {});
-          await page.evaluate(() => {
-            document.querySelectorAll('[data-sonner-toast], [data-radix-toast-viewport], [role="alert"]').forEach(el => el.remove());
-          });
-          await page.waitForTimeout(3000);
-          // Library shows 1 compound + multi-step reaction with rendered structure
-          await shot(page, `library-with-reaction-${theme}.png`);
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('  ⚠ Reaction files tab issue:', e.message?.split('\n')[0]);
-  }
-
-  await page.keyboard.press('Escape').catch(() => {});
-  await page.waitForTimeout(400);
-}
-
-// ── Evaluation screenshots ────────────────────────────────────────────────────
-
-async function screenshotEvaluation(page, theme) {
-  console.log(`\n  🔬 Evaluation (${theme})`);
-
-  await injectLibrary(page, SAMPLE_COMPOUNDS, null);
-  await navigateTo(page, '/');
-
-  // Open dialog and screenshot it, then close without running evaluation
-  const evalBtn = page.locator('button').filter({ hasText: /^evaluate$/i }).first();
-  if (await evalBtn.isEnabled({ timeout: 5000 }).catch(() => false)) {
-    await evalBtn.click();
-    await page.waitForSelector('[role="dialog"]', { timeout: 10000 });
-    await page.waitForFunction(
-      () => !document.querySelector('[role="dialog"]')?.textContent?.includes('Loading'),
-      { timeout: 15000 }
-    ).catch(() => {});
-    await page.waitForTimeout(900);
-    await shot(page, `evaluate-dialog-${theme}.png`, {
-      markers: [
-        { selector: '[role="dialog"] [role="checkbox"]', label: 'Select modules', side: 'right' },
-      ],
-    });
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(500);
-  }
-
-  // Use precomputed results for reliable eval-results and eval-report screenshots
-  await injectLibrary(page, SAMPLE_COMPOUNDS, PRECOMPUTED_RESULTS);
-  await navigateTo(page, '/');
-
-  await shot(page, `eval-results-${theme}.png`, {
-    markers: [
-      { selector: 'button.cursor-pointer', label: 'Click to view report', side: 'right' },
-    ],
-  });
-
-  try {
-    const reportBtn = page.locator('button.cursor-pointer').filter({ has: page.locator('svg') }).first();
-    if (await reportBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-      const consoleErrors = [];
-      const onConsole = msg => { if (msg.type() === 'error') consoleErrors.push(msg.text()); };
-      const responseErrors = [];
-      const onResponse = async res => {
-        if (res.url().includes('generate-report') && !res.ok()) {
-          try { responseErrors.push(await res.text()); } catch {}
-        }
-      };
-      page.on('console', onConsole);
-      page.on('response', onResponse);
-
-      await reportBtn.click();
-      // Wait for the Sheet iframe which only appears when the report HTML is loaded
-      await page.waitForSelector('[data-state="open"] iframe, [role="dialog"] iframe', { timeout: 25000 }).catch(() => {});
-      await page.waitForTimeout(1500);
-
-      page.off('console', onConsole);
-      page.off('response', onResponse);
-
-      const sheetOpen = await page.locator('[data-state="open"]').count() > 0;
-      if (sheetOpen) {
-        await shot(page, `eval-report-${theme}.png`);
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(500);
-      } else {
-        const detail = responseErrors[0] || consoleErrors.slice(0, 3).join(' | ') || 'no errors captured';
-        console.warn(`  ⚠ Report sheet did not open (${theme}): ${detail}`);
-      }
-    }
-  } catch (e) {
-    console.warn('  ⚠ Report error:', e.message?.split('\n')[0]);
-  }
-}
 
 // ── License-type screenshots ──────────────────────────────────────────────────
 
@@ -615,7 +358,9 @@ async function screenshotProfile(page, theme) {
 
   try {
     const updateBtn = page.locator('button').filter({ hasText: /update users/i }).first();
-    if (await updateBtn.isVisible({ timeout: 4000 }).catch(() => false)) {
+    await updateBtn.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
+    await updateBtn.scrollIntoViewIfNeeded().catch(() => {});
+    if (await updateBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
       await updateBtn.click();
       await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
       await page.waitForTimeout(700);
@@ -631,7 +376,9 @@ async function screenshotProfile(page, theme) {
 
   try {
     const inviteBtn = page.locator('button').filter({ hasText: /invite user/i }).first();
-    if (await inviteBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+    await inviteBtn.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
+    await inviteBtn.scrollIntoViewIfNeeded().catch(() => {});
+    if (await inviteBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
       await shot(page, `profile-invite-user-${theme}.png`, {
         markers: [
           { selector: 'button:has-text("Invite user")', label: 'Invite new user', side: 'bottom' },
@@ -664,297 +411,277 @@ async function screenshotProfile(page, theme) {
   });
 }
 
-// ── DataKurator screenshots ───────────────────────────────────────────────────
+// ── Workspace screenshots ─────────────────────────────────────────────────────
+// One workspace: the table, the row panel on the left, the Add and Curate
+// menus, Evaluate. Files go in through the hidden file inputs the page keeps
+// for its menu items (compounds first, reactions second), so the same import
+// path runs as for a user's file.
 
-async function screenshotDataKurator(page, theme) {
-  console.log(`\n  🧪 DataKurator (${theme})`);
+const REACTION_SMILES = 'CC(=O)Cl.OCC>>CC(=O)OCC';
 
-  await clearDkState(page);
-  await navigateTo(page, '/');
-  await page.waitForTimeout(400);
-  await navigateTo(page, '/datakurator');
-  await page.waitForTimeout(800);
-  const isOnUpload = await page.locator('input[type="file"]').first().isVisible({ timeout: 3000 }).catch(() => false);
-  if (!isOnUpload) {
-    await clearDkState(page);
-    await navigateTo(page, '/');
-    await page.waitForTimeout(400);
-    await navigateTo(page, '/datakurator');
-    await page.waitForTimeout(1000);
-  }
-  await shot(page, `datakurator-upload-${theme}.png`);
+async function waitIdle(page, ms = 800) {
+  // The check and the loads show an overlay while they run; wait for it to go.
+  await page.waitForFunction(() => !document.body.innerText.match(/Reading the files|Checking the structures|Curating \d+ compounds|Running modules/), null, { timeout: 120000 }).catch(() => {});
+  await page.waitForTimeout(ms);
+}
 
-  const fileInput = page.locator('input[type="file"]').first();
-  await fileInput.setInputFiles(DK_FILE, { timeout: 10000 });
+async function rowByName(page, name) {
+  return page.locator('tbody tr[data-row-id]').filter({ hasText: name }).first();
+}
+
+async function openRow(page, name) {
+  const row = await rowByName(page, name);
+  await row.scrollIntoViewIfNeeded();
+  await row.click();
   await page.waitForTimeout(900);
-  await shot(page, `datakurator-file-selected-${theme}.png`);
+  return row;
+}
 
-  // 4.0 loads straight into Curate and analyzes on arrival, so "Run Analysis"
-  // usually never appears — the action bar comes up already in its analyzed
-  // state. Click it only if it is actually there; otherwise just wait for the
-  // analyzed bar. Returning early here is what silently skipped every
-  // DataKurator frame in the 3.x script.
-  const runBtn = page.locator('button').filter({ hasText: /^Run Analysis$/ }).first();
-  if (await runBtn.isEnabled({ timeout: 3000 }).catch(() => false)) {
-    await runBtn.click();
-  }
-  const analyzed = await page.waitForSelector(
-    'button:has-text("One Step Cure"), button:has-text("Re-analyze")',
-    { timeout: 60000 }
-  ).catch(() => null);
-  if (!analyzed) {
-    console.warn('  ⚠ Curate never reached its analyzed state — skipping DataKurator');
-    return;
-  }
-  await page.waitForTimeout(1500);
-  await shot(page, `datakurator-results-${theme}.png`, {
-    markers: [
-      { selector: 'button:has-text("One Step Cure")', label: 'Fix issues in bulk',       side: 'right' },
-      { selector: 'button:has-text("Download")',      label: 'Export without leaving',   side: 'bottom' },
-      { selector: 'button:has-text("into library")',  label: 'Hand the clean set over',  side: 'left' },
-    ],
-  });
+async function closePanel(page) {
+  const close = page.locator('button[aria-label="Close (Esc)"]').first();
+  if (await close.isVisible({ timeout: 800 }).catch(() => false)) await close.click();
+  await page.waitForTimeout(400);
+}
 
-  try {
-    const rows = page.locator('tbody tr');
-    const rowCount = await rows.count();
-    let viewerCaptured = false;
-    for (let i = 0; i < Math.min(rowCount, 6) && !viewerCaptured; i++) {
-      const row = rows.nth(i);
-      await row.hover();
-      await page.waitForTimeout(400);
-      const viewBtn = page.locator('button[title="View structure"]').first();
-      if (await viewBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await shot(page, `datakurator-structure-hover-${theme}.png`, {
-          markers: [
-            { selector: 'button[title="View structure"]', label: 'View 2D structure', side: 'left' },
-            { selector: 'button[title="Actions"]',        label: 'Row actions',       side: 'right' },
-          ],
-        });
-        await viewBtn.click();
-        await page.waitForTimeout(900);
-        await shot(page, `datakurator-structure-viewer-${theme}.png`);
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(400);
-        viewerCaptured = true;
-      }
-    }
-  } catch {}
+async function openMenu(page, label) {
+  await page.locator('button').filter({ hasText: new RegExp(`^${label}`) }).first().click();
+  await page.waitForSelector('[role="menu"], [role="menuitem"]', { timeout: 5000 });
+  await page.waitForTimeout(400);
+}
 
-  try {
-    let menuCaptured = false;
-    const rows = page.locator('tbody tr');
-    const rowCount = await rows.count();
-    for (let i = 0; i < Math.min(rowCount, 8) && !menuCaptured; i++) {
-      const row = rows.nth(i);
-      const menuBtn = row.locator('button[title="Actions"]');
-      if (await menuBtn.isVisible({ timeout: 500 }).catch(() => false)) {
-        await menuBtn.click({ timeout: 3000 });
-        await page.waitForTimeout(400);
-        if (await page.locator('[role="menuitem"]').count() > 0) {
-          await shot(page, `datakurator-row-menu-${theme}.png`);
-          await page.keyboard.press('Escape');
-          await page.waitForTimeout(300);
-          menuCaptured = true;
-        }
-      }
-    }
-  } catch {}
+async function menuItem(page, text) {
+  const item = page.locator('[role="menuitem"]').filter({ hasText: text }).first();
+  await item.click();
+  await page.waitForTimeout(500);
+}
 
-  // Tautomers: the 3.8 "Generate tautomers" button, now a row-menu item that
-  // opens a viewer. Acetylacetone is in the demo file for exactly this — its
-  // enol forms make a visible difference, unlike a benzene that offers none.
-  try {
-    const row = page.locator('tbody tr').filter({ hasText: 'Acetylacetone' }).first();
-    await row.locator('button[title="Actions"]').click({ timeout: 3000 });
-    await page.waitForTimeout(300);
-    const tautItem = page.locator('[role="menuitem"]').filter({ hasText: /^Tautomers$/ }).first();
-    if (await tautItem.isVisible({ timeout: 1500 }).catch(() => false)) {
-      await tautItem.click();
-      await page.waitForSelector('[role="dialog"]:has-text("Tautomers —")', { timeout: 60000 });
-      await page.waitForTimeout(1500);
-      await shot(page, `datakurator-tautomers-dialog-${theme}.png`);
-      const opts = page.locator('[role="dialog"] [role="option"]');
-      if (await opts.count() > 1) {
-        await opts.nth(1).click();
-        await page.waitForTimeout(1200);
-        await shot(page, `datakurator-tautomer-selected-${theme}.png`);
-        await page.locator('[role="dialog"] button').filter({ hasText: /^Use tautomer$/ }).first().click({ timeout: 3000 });
-        await page.waitForTimeout(800);
-        await shot(page, `datakurator-tautomer-applied-${theme}.png`);
-        // Put the row back so the frames that follow show the file as loaded.
-        const reanalyze = page.locator('button:not([disabled])').filter({ hasText: /^Re-analyze$/ }).first();
-        if (await reanalyze.isVisible({ timeout: 2000 }).catch(() => false)) {
-          await reanalyze.click();
-          await page.waitForTimeout(2500);
-        }
-      } else {
-        await page.keyboard.press('Escape');
-      }
-    } else {
-      await page.keyboard.press('Escape');
-    }
-  } catch (e) {
-    console.warn('  ⚠ Tautomers:', e.message?.split('\n')[0]);
-    await page.keyboard.press('Escape').catch(() => {});
-    await page.waitForTimeout(400);
-  }
+async function pressEscape(page, times = 1) {
+  for (let i = 0; i < times; i++) { await page.keyboard.press('Escape'); await page.waitForTimeout(300); }
+}
 
-  try {
-    let pickerCaptured = false;
-    const rows = page.locator('tbody tr');
-    const rowCount = await rows.count();
-    for (let i = 0; i < rowCount && !pickerCaptured; i++) {
-      const row = rows.nth(i);
-      const menuBtn = row.locator('button[title="Actions"]');
-      if (!await menuBtn.isVisible({ timeout: 400 }).catch(() => false)) continue;
-      await menuBtn.click({ timeout: 3000 });
-      await page.waitForTimeout(400);
-      const pickItem = page.locator('[role="menuitem"]').filter({ hasText: /pick component/i }).first();
-      if (!await pickItem.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(200);
-        continue;
-      }
-      await pickItem.click();
-      await page.waitForTimeout(700);
-      await shot(page, `datakurator-fragment-picker-${theme}.png`);
-
-      const selectAll = page.locator('button').filter({ hasText: 'Select all' }).first();
-      if (await selectAll.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await selectAll.click();
-        await page.waitForTimeout(400);
-        await shot(page, `datakurator-fragments-selected-${theme}.png`);
-      }
-
-      const splitBtn = page.locator('button').filter({ hasText: /split into/i }).first();
-      if (await splitBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await splitBtn.click();
-        await page.waitForTimeout(900);
-        await shot(page, `datakurator-after-split-${theme}.png`);
-      }
-      pickerCaptured = true;
-    }
-    if (!pickerCaptured) console.warn('  ⚠ No Mixture row found for fragment picker');
-  } catch (e) {
-    console.warn('  ⚠ Mixture picker:', e.message?.split('\n')[0]);
-  }
-
-  try {
-    let editCaptured = false;
-    const rows = page.locator('tbody tr');
-    const rowCount = await rows.count();
-    for (let i = 0; i < Math.min(rowCount, 12) && !editCaptured; i++) {
-      const row = rows.nth(i);
-      const menuBtn = row.locator('button[title="Actions"]');
-      if (!await menuBtn.isVisible({ timeout: 400 }).catch(() => false)) continue;
-      await menuBtn.click({ timeout: 3000 });
-      await page.waitForTimeout(300);
-      const editItem = page.locator('[role="menuitem"]').filter({ hasText: /edit smiles/i }).first();
-      if (await editItem.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await editItem.click();
-        await page.waitForTimeout(600);
-        const smilesInput = page.locator('input.h-7').first();
-        if (await smilesInput.isVisible({ timeout: 2000 }).catch(() => false)) {
-          await shot(page, `datakurator-edit-smiles-${theme}.png`);
-          await page.keyboard.press('Escape');
-          await page.waitForTimeout(300);
-          editCaptured = true;
-        }
-      } else {
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(200);
-      }
-    }
-  } catch {}
-
-  await page.keyboard.press('Escape');
+async function screenshotWorkspace(page, theme) {
+  console.log(`\n  🧭 Workspace (${theme})`);
+  await clearLibrary(page);
+  await navigateTo(page, '/');
   await page.waitForTimeout(600);
 
+  // ── empty workspace ────────────────────────────────────────────────────────
+  await shot(page, `workspace-empty-${theme}.png`);
+
+  // ── Add ▾ → Type a compound… ───────────────────────────────────────────────
   try {
-    await page.waitForSelector('button:not([disabled]):has-text("One Step Cure")', { timeout: 8000 });
-    const oscBtn = page.locator('button:not([disabled])').filter({ hasText: 'One Step Cure' }).first();
-    await oscBtn.click({ timeout: 5000 });
-    await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
-    await page.waitForTimeout(700);
-    await shot(page, `datakurator-osc-dialog-${theme}.png`);
-
-    const runOscBtn = page.locator('[role="dialog"] button').filter({ hasText: /proceed|cure|apply|confirm/i }).last();
-    if (await runOscBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await runOscBtn.click({ timeout: 5000 });
-      await page.waitForSelector('[role="dialog"]:has-text("Summary")', { timeout: 15000 }).catch(() => {});
-      await page.waitForTimeout(1500);
-      await shot(page, `datakurator-osc-summary-${theme}.png`);
-      await page.keyboard.press('Escape');
-      await page.waitForTimeout(400);
-    } else {
-      await page.keyboard.press('Escape');
-    }
-  } catch (e) {
-    console.warn('  ⚠ OSC:', e.message?.split('\n')[0]);
-    await page.screenshot({ path: path.join(OUT, `debug-osc-${theme}.png`) }).catch(() => {});
-    await page.keyboard.press('Escape').catch(() => {});
-    await page.waitForTimeout(500);
-  }
-
-  // PubChem has no button of its own in 4.0: it is a checkbox inside One Step
-  // Cure, and Proceed raises the consent dialog. Shoot it where it now lives.
-  try {
-    await page.waitForSelector('button:not([disabled]):has-text("One Step Cure")', { timeout: 8000 });
-    await page.locator('button:not([disabled])').filter({ hasText: 'One Step Cure' }).first().click({ timeout: 5000 });
-    await page.waitForSelector('[role="dialog"]', { timeout: 6000 });
-    await page.waitForTimeout(500);
-
-    const verify = page.locator('#web');
-    if (await verify.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await verify.click();
-      await page.waitForTimeout(300);
-      await shot(page, `datakurator-pubchem-option-${theme}.png`, {
-        markers: [
-          { selector: '#web', label: 'Off by default; asks before sending', side: 'right' },
-        ],
-      });
-
-      await page.locator('[role="dialog"] button').filter({ hasText: /^Proceed$/ }).first().click({ timeout: 5000 });
-      await page.waitForSelector('[role="alertdialog"]', { timeout: 8000 });
+    await openMenu(page, 'Add');
+    await menuItem(page, 'Type a compound');
+    await page.waitForSelector('[role="dialog"]:has-text("Type a compound")', { timeout: 6000 });
+    const smilesInput = page.locator('[role="dialog"] input').first();
+    await smilesInput.fill('CC(=O)Oc1ccccc1C(=O)O');
+    await page.waitForTimeout(600);
+    await shot(page, `add-compound-${theme}.png`);
+    const autofill = page.locator('[role="dialog"] button').filter({ hasText: /auto ?fill/i }).first();
+    if (await autofill.isVisible({ timeout: 1500 }).catch(() => false)) {
+      await autofill.click();
+      await page.waitForFunction(() => {
+        const inputs = Array.from(document.querySelectorAll('[role="dialog"] input'));
+        return inputs.some(i => /aspirin/i.test(i.value)) || document.body.innerText.includes('50-78-2');
+      }, null, { timeout: 30000 }).catch(() => {});
       await page.waitForTimeout(600);
-      await shot(page, `datakurator-pubchem-warning-${theme}.png`);
-
-      const cont = page.locator('[role="alertdialog"] button').filter({ hasText: /continue/i }).first();
-      if (await cont.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await cont.click({ timeout: 5000 });
-        await page.waitForSelector('[role="dialog"]:has-text("Summary")', { timeout: 60000 }).catch(() => {});
-        await page.waitForTimeout(1200);
-        await shot(page, `datakurator-pubchem-results-${theme}.png`);
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(400);
-      } else {
-        await page.keyboard.press('Escape');
-      }
-    } else {
-      await page.keyboard.press('Escape');
+      await shot(page, `add-compound-autofill-${theme}.png`);
     }
-  } catch (e) {
-    console.warn('  ⚠ PubChem via One Step Cure:', e.message?.split('\n')[0]);
-    await page.keyboard.press('Escape').catch(() => {});
+    await pressEscape(page);
+  } catch (e) { console.warn('  ⚠ Type a compound:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── Add ▾ → Draw in ChemiGraphy… ──────────────────────────────────────────
+  try {
+    await openMenu(page, 'Add');
+    await menuItem(page, 'Draw in ChemiGraphy');
+    await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
+    await page.waitForFunction(() => !document.body.innerText.includes('Starting the editor'), null, { timeout: 60000 }).catch(() => {});
+    await page.mouse.move(820, 460); await page.waitForTimeout(2500);
+    await shot(page, `editor-new-${theme}.png`);
+    await page.locator('[role="dialog"] button').filter({ hasText: /^Cancel$/ }).first().click({ timeout: 3000 }).catch(() => {});
+    await page.waitForTimeout(500);
+  } catch (e) { console.warn('  ⚠ Editor (new):', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── load the demo file: the table, and the count ──────────────────────────
+  await page.locator('input[type="file"]').first().setInputFiles(DK_FILE);
+  await waitIdle(page, 1500);
+  await page.waitForSelector('tbody tr[data-row-id]', { timeout: 60000 });
+  await page.waitForTimeout(1200);
+  await shot(page, `workspace-table-${theme}.png`);
+
+  // ── the three menus ───────────────────────────────────────────────────────
+  try { await openMenu(page, 'Add'); await shot(page, `workspace-add-menu-${theme}.png`); await pressEscape(page); } catch {}
+  try { await openMenu(page, 'Curate'); await shot(page, `workspace-curate-menu-${theme}.png`); await pressEscape(page); } catch {}
+  try {
+    await openMenu(page, 'Curate');
+    const sub = page.locator('[role="menuitem"]').filter({ hasText: /Download curated/ }).first();
+    await sub.hover(); await page.waitForTimeout(700);
+    await shot(page, `workspace-download-menu-${theme}.png`);
+    await pressEscape(page, 2);
+  } catch { await pressEscape(page, 2); }
+  try {
+    await page.keyboard.press(process.platform === 'darwin' ? 'Meta+k' : 'Control+k');
+    await page.waitForSelector('[role="dialog"], [cmdk-root]', { timeout: 5000 });
+    await page.waitForTimeout(600);
+    await shot(page, `workspace-command-bar-${theme}.png`);
+    await pressEscape(page);
+  } catch { await pressEscape(page); }
+
+  // ── the row panel, the structure viewer, Edit SMILES ──────────────────────
+  try {
+    await openRow(page, 'Aspirin');
+    await shot(page, `workspace-panel-${theme}.png`);
+    // The panel's structure is the viewer's trigger: click the drawing.
+    const view = page.locator('.cursor-zoom-in').first();
+    if (await view.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await view.click(); await page.waitForTimeout(1500);
+      await shot(page, `workspace-structure-viewer-${theme}.png`);
+      await pressEscape(page);
+    }
+    // Edit SMILES: the row's own key, with the row focused
+    const row = await rowByName(page, 'Aspirin'); await row.click(); await page.waitForTimeout(300);
+    await page.keyboard.press('s');
+    await page.waitForSelector('[role="dialog"]:has-text("SMILES")', { timeout: 5000 });
+    const field = page.locator('[role="dialog"] input, [role="dialog"] textarea').first();
+    await field.fill('CC(=O)Oc1ccccc1C(=O)OC');
     await page.waitForTimeout(400);
-  }
+    await shot(page, `workspace-edit-smiles-${theme}.png`);
+    await page.locator('[role="dialog"] button').filter({ hasText: /^Save$/ }).first().click();
+    await page.waitForTimeout(1200);
+    await shot(page, `workspace-not-checked-${theme}.png`);
+    // and back, so the rest of the set is as the file loaded it
+    await openMenu(page, 'Curate'); await menuItem(page, /^Undo/); await waitIdle(page, 1200);
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ Panel/edit:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
 
-  // There is no third Export screen in 4.0 — export is a menu on this screen.
+  // ── tautomers ─────────────────────────────────────────────────────────────
   try {
-    const dl = page.locator('button:not([disabled])').filter({ hasText: 'Download' }).first();
-    if (await dl.isVisible({ timeout: 4000 }).catch(() => false)) {
-      await dl.click({ timeout: 4000 });
-      await page.waitForTimeout(600);
-      await shot(page, `datakurator-export-${theme}.png`);
-      await page.keyboard.press('Escape');
-      await page.waitForTimeout(300);
-    }
-  } catch (e) {
-    console.warn('  ⚠ Download menu:', e.message?.split('\n')[0]);
-  }
+    await openRow(page, 'Acetylacetone');
+    await page.keyboard.press('t');
+    await page.waitForSelector('[role="dialog"]:has-text("Tautomers")', { timeout: 60000 });
+    await page.waitForTimeout(1500);
+    await shot(page, `workspace-tautomers-dialog-${theme}.png`);
+    const first = page.locator('[role="dialog"]').getByText(/^Tautomer #1$/).first();
+    if (await first.isVisible({ timeout: 2000 }).catch(() => false)) { await first.click(); await page.waitForTimeout(1500); await shot(page, `workspace-tautomer-selected-${theme}.png`); }
+    await pressEscape(page);
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ Tautomers:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
 
+  // ── a mixture: pick components, split ─────────────────────────────────────
+  try {
+    await openRow(page, 'Ethanol-Benzene-Mixture');
+    const pick = page.locator('button').filter({ hasText: /^Pick components$/ }).first();
+    await pick.click(); await page.waitForTimeout(1200);
+    await shot(page, `workspace-panel-picker-${theme}.png`);
+    const boxes = page.locator('aside [role="checkbox"], [data-slot="sheet-content"] [role="checkbox"], [role="dialog"] [role="checkbox"]');
+    const n = await boxes.count();
+    for (let i = 0; i < n; i++) { const b = boxes.nth(i); if ((await b.getAttribute('aria-checked')) !== 'true') await b.click(); }
+    await page.waitForTimeout(400);
+    const split = page.locator('button').filter({ hasText: /^(Keep \d+ of \d+|Split into)/ }).first();
+    if (await split.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await split.click(); await waitIdle(page, 1500);
+      await shot(page, `workspace-after-split-${theme}.png`);
+    }
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ Mixture:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── PubChem: the consent, then the result ─────────────────────────────────
+  try {
+    await openRow(page, 'Propanol-WrongCAS');
+    await page.keyboard.press('p');
+    await page.waitForSelector('[role="alertdialog"]:has-text("Send data to PubChem?")', { timeout: 6000 });
+    await page.waitForTimeout(500);
+    await shot(page, `workspace-pubchem-warning-${theme}.png`);
+    await page.locator('[role="alertdialog"] button').filter({ hasText: /^Continue$/ }).first().click();
+    await waitIdle(page, 2500);
+    await shot(page, `workspace-pubchem-results-${theme}.png`);
+    await page.locator('[role="dialog"] button').filter({ hasText: /^Done$/ }).first().click({ timeout: 3000 }).catch(() => {});
+    await page.waitForTimeout(400);
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ PubChem:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── One Step Cure: the dialog, its PubChem option, the summary ────────────
+  try {
+    await openMenu(page, 'Curate'); await menuItem(page, 'One Step Cure');
+    await page.waitForSelector('[role="dialog"]:has-text("One Step Cure")', { timeout: 6000 });
+    await page.waitForTimeout(700);
+    await shot(page, `workspace-osc-dialog-${theme}.png`);
+    const more = page.locator('[role="dialog"]').getByText(/PubChem/).first();
+    if (await more.isVisible({ timeout: 1500 }).catch(() => false)) {
+      await more.scrollIntoViewIfNeeded(); await page.waitForTimeout(400);
+      await shot(page, `workspace-pubchem-option-${theme}.png`);
+    }
+    await page.locator('[role="dialog"] button').filter({ hasText: /^Proceed$/ }).first().click();
+    await page.waitForSelector('[role="dialog"]:has-text("attention"), [role="dialog"]:has-text("Changed")', { timeout: 120000 }).catch(() => {});
+    await page.waitForTimeout(1200);
+    await shot(page, `workspace-osc-summary-${theme}.png`);
+    await pressEscape(page);
+  } catch (e) { console.warn('  ⚠ One Step Cure:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── reactions: typed, and from .rxn files ─────────────────────────────────
+  try {
+    await openMenu(page, 'Add'); await menuItem(page, 'Type a reaction');
+    await page.waitForSelector('[role="dialog"]:has-text("Type a reaction")', { timeout: 6000 });
+    const box = page.locator('[role="dialog"] textarea, [role="dialog"] input[placeholder*="Reaction SMILES"]').first();
+    await box.fill(REACTION_SMILES); await page.waitForTimeout(500);
+    await shot(page, `reactions-dialog-${theme}.png`);
+    await page.locator('[role="dialog"] button[type="submit"], [role="dialog"] button:has-text("Add")').last().click();
+    await waitIdle(page, 1500);
+    await shot(page, `reactions-smiles-result-${theme}.png`);
+    const existing = RXN_FILES.filter(f => fs.existsSync(f));
+    if (existing.length) {
+      await page.locator('input[type="file"]').nth(1).setInputFiles(existing);
+      await waitIdle(page, 2000);
+      await shot(page, `reactions-rxn-uploaded-${theme}.png`);
+      const rrow = page.locator('tbody tr[data-row-id]').filter({ hasText: /Reaction/ }).last();
+      await rrow.click(); await page.waitForTimeout(1800);
+      await shot(page, `reactions-rxn-visualized-${theme}.png`);
+      await closePanel(page);
+    }
+  } catch (e) { console.warn('  ⚠ Reactions:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+
+  // ── evaluate: the dialog, the run, the results, a report ──────────────────
+  try {
+    await page.locator('button').filter({ hasText: /^Evaluate$/ }).first().click();
+    await page.waitForSelector('[role="dialog"]:has-text("Select Modules to Evaluate")', { timeout: 8000 });
+    await page.waitForTimeout(1200);
+    await shot(page, `evaluate-dialog-${theme}.png`);
+    for (const m of ['Water Solubility', 'LogP', 'Boiling Point']) {
+      const lab = page.locator('[role="dialog"] label').filter({ hasText: new RegExp(`^${m}$`) }).first();
+      if (await lab.isVisible({ timeout: 1500 }).catch(() => false)) await lab.click();
+    }
+    await page.waitForTimeout(300);
+    // The button reads "Evaluate 13"; hasText is a substring match, and Cancel is the only other button.
+    await page.locator('[role="dialog"] button').filter({ hasText: /Evaluate/ }).last().click();
+    await page.waitForFunction(() => !document.body.innerText.includes('Evaluating the workspace'), null, { timeout: 600000 });
+    await page.waitForTimeout(1500);
+    await shot(page, `workspace-results-${theme}.png`);
+    await openRow(page, 'Caffeine');
+    await shot(page, `workspace-panel-results-${theme}.png`);
+    // The report opens from a module row in the panel's Evaluation section.
+    const outcome = page.locator('button').filter({ hasText: /^LogP/ }).first();
+    await outcome.click();
+    await page.waitForSelector('[data-slot="sheet-content"]:has-text("Report"), [role="dialog"]:has-text("Report"), [data-state="open"]:has-text("LogP — Report")', { timeout: 180000 });
+    await page.waitForTimeout(4000);
+    await shot(page, `eval-report-${theme}.png`);
+    await pressEscape(page);
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ Evaluate:', e.message?.split('\n').slice(0,3).join(' | ')); await pressEscape(page, 2); }
+
+  // ── the editor on an existing compound ────────────────────────────────────
+  try {
+    await openRow(page, 'Caffeine');
+    await page.locator('button').filter({ hasText: /^Edit structure$/ }).first().click();
+    await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
+    await page.waitForFunction(() => !document.body.innerText.includes('Starting the editor'), null, { timeout: 60000 }).catch(() => {});
+    await page.mouse.move(820, 460); await page.waitForTimeout(2500);
+    await shot(page, `editor-edit-${theme}.png`);
+    await page.locator('[role="dialog"] button').filter({ hasText: /^Cancel$/ }).first().click({ timeout: 3000 }).catch(() => {});
+    await page.waitForTimeout(400);
+    await closePanel(page);
+  } catch (e) { console.warn('  ⚠ Editor (edit):', e.message?.split('\n')[0]); await pressEscape(page, 2); }
 }
+
 
 // ── main ──────────────────────────────────────────────────────────────────────
 
@@ -978,10 +705,7 @@ async function screenshotDataKurator(page, theme) {
     await navigateTo(page1, '/');
     await setTheme(page1, theme);
 
-    if (want('library')) await screenshotLibrary(page1, theme);
-    if (want('reactions')) await screenshotReactions(page1, theme);
-    if (want('evaluation')) await screenshotEvaluation(page1, theme);
-    if (want('datakurator')) await screenshotDataKurator(page1, theme);
+    if (want('workspace')) await screenshotWorkspace(page1, theme);
     if (want('licenses')) await screenshotLicenseTypes(page1, theme, false);
     if (want('licenses')) await screenshotLicenseActivation(page1, theme);
   }
