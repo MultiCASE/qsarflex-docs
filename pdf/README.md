@@ -202,7 +202,7 @@ Every one of these was stated confidently in an earlier draft and disproved by r
 product. Re-check them, do not re-assert them:
 
 - **The desktop is not "structures never leave"** — Add Compound's Auto Fill sends a SMILES
-  to PubChem, un-gated. Only DataKurator's lookups ask first. Say "not for evaluation",
+  to PubChem, un-gated. Only One Step Cure's PubChem lookup asks first. Say "not for evaluation",
   never "never".
 - **Blocking `pubchem.ncbi.nlm.nih.gov` does nothing for the web app** — the browser calls the
   QSAR Flex backend, which makes the PubChem call server-side.

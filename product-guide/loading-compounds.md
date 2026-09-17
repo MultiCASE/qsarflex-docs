@@ -15,11 +15,6 @@ While the workspace is empty, the page is a single card with the same routes as 
   <img src="../.gitbook/assets/workspace-empty-light.png" alt="">
 </picture></figure>
 
-<figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/workspace-empty-dark.png">
-  <img src="../.gitbook/assets/workspace-empty-light.png" alt="">
-</picture></figure>
-
 ---
 
 ## 📂 From a file

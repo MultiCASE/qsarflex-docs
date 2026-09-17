@@ -2,6 +2,15 @@
 
 **Not published.** Deliberately absent from `SUMMARY.md`, so GitBook does not render it.
 
+## 2026-09-17 — install guides: the "app ready" frames are the web frame now
+
+`install-mac-06-app-ready.png` and `install-win-08-app-ready.png` were deleted. Both install guides
+end on the `workspace-empty-light/dark.png` pair instead, which is the same interface (the desktop
+hosts the same front end) without the native title bar. That removes the last two published frames
+that carried a pre-release version string and a real account's avatar and licence chip. The other
+15 install frames are installer chrome and browser sign-in pages and are unchanged.
+`capture-mac-install.sh` still writes `06-app-ready`; nothing publishes it.
+
 ## 2026-09-16 — re-shot for the single workspace and ChemiGraphy
 
 The Library and DataKurator frames are gone with the screens they showed. `screenshot.js` now has one
@@ -44,7 +53,7 @@ resolving the arm64 image already sitting on `mcr.microsoft.com/dotnet/aspnet:9.
 | Set | State |
 |---|---|
 | Web UI (workspace, licence, profile; light/dark pairs) | **Re-captured 2026-09-16** against the merged workspace with ChemiGraphy |
-| Install guides (17 files) | Captured 2026-09-01 from a pre-release build; re-shoot at 4.0 stable |
+| Install guides (15 files) | Captured 2026-09-01; installer and sign-in screens only, no version strings. The two "app ready" frames were replaced by the web `workspace-empty` pair on 2026-09-17 |
 | Support portal (23 files, `assets/support/`) | Current; shot 2026-06-03 against the 4.0-era portal |
 
 ## The beta channel is closed — never name it in customer-facing text
@@ -55,35 +64,16 @@ PDFs and every published page now contain zero references. When editing, check t
 capture scripts here still take `CHANNEL=beta` and that is fine, because `scripts/` is absent from
 `SUMMARY.md` and never publishes.
 
-Two published frames do still show a pre-release version string in the window title bar, which Shri
-has accepted for now rather than lose the screenshots:
+No published frame shows a version string any more. The two that did (`install-*-app-ready`) were
+replaced on 2026-09-17 by the web `workspace-empty` pair. The remaining 15 install frames are installer
+chrome or browser sign-in pages.
 
-| Frame | Shows |
-|---|---|
-| `install-mac-06-app-ready.png` | `QSARFlex v3.9.0-beta.19` |
-| `install-win-08-app-ready.png` | `QSAR Flex v3.9.0-beta.32` |
-
-Both clear when these are re-shot from a stable build. The other 15 frames are installer chrome or
-browser sign-in pages and carry no version string.
-
-## Re-doing the install captures at 4.0 stable
+## Re-doing the install captures
 
 Captured 2026-09-01 with `CHANNEL=beta` on both platforms, because the branded **stable**
-installer URLs still return HTTP 403 — the 4.0 tag has not run `build-release.yml` yet.
-
-Consequences to be aware of, and to fix when stable exists:
-
-- **Title bars read a beta version**, and the two platforms are not even on the same
-  build: macOS shot `v3.9.0-beta.19`, Windows shot `v3.9.0-beta.32`. Both will read
-  `4.0` once the stable installers are published and these are re-run without
-  `CHANNEL=beta`.
-- **The frames use a real MultiCASE account**, not the demo fixtures the web pass uses
-  (`scripts/.env.local` → `QSARFLEX_EMAIL` / `QSARFLEX_PASS`). Its avatar photo and its
-  license chip — `∞ 4720 pending billing` — are visible in `install-mac-06-app-ready`
-  and `install-win-08-app-ready`. If that should not be public, re-shoot those two with
-  a demo account.
-
-Re-run with:
+installer URLs still returned HTTP 403 at the time. The installer and sign-in frames carry no
+version string and no account details, so there is no pressing reason to re-shoot them. If the
+installers themselves change, re-run with:
 
     ./scripts/capture-mac-install.sh          # stable, once the DMG is live
     ./scripts/capture-win.sh                  # stable, once the EXE is live

@@ -33,7 +33,7 @@ that machine as an encrypted database, which QSAR Flex downloads once, on first 
 evaluate stay on it. Nothing is uploaded to MultiCASE to be evaluated for you.
 
 Two features reach out to PubChem. **Auto Fill** in Add Compound sends the name, CAS number or SMILES
-you typed, as soon as you press it. DataKurator can verify structures against PubChem — that option
+you typed, as soon as you press it. One Step Cure can verify structures against PubChem — that option
 is off by default and asks you to confirm before anything is sent.
 {% endhint %}
 
@@ -117,7 +117,10 @@ Every downloaded file is verified against a SHA-256 checksum before it is used. 
 
 When setup finishes, the QSAR Flex workspace opens. You can now add compounds and reactions and run evaluations.
 
-<figure><img src=".gitbook/assets/install-win-08-app-ready.png" alt="QSAR Flex ready to use"></figure>
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-empty-dark.png">
+  <img src=".gitbook/assets/workspace-empty-light.png" alt="QSAR Flex ready to use">
+</picture></figure>
 
 Next, head to [Getting Started](getting-started.md) to run your first evaluation.
 

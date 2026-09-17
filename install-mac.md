@@ -27,8 +27,8 @@ Your compounds are never uploaded to MultiCASE to be evaluated for you, and noth
 structure leaves your Mac during an evaluation.
 
 PubChem is separate, and it is contacted only when you ask for it — **Auto Fill** in the compound
-dialog, or a **PubChem lookup** in DataKurator. Both send the compound's name, CAS number and SMILES
-to PubChem. DataKurator asks you to confirm before it sends anything; **Auto Fill** goes as soon as
+dialog, or the **PubChem** option in One Step Cure. Both send the compound's name, CAS number and SMILES
+to PubChem. One Step Cure asks you to confirm before it sends anything; **Auto Fill** goes as soon as
 you click it.
 {% endhint %}
 
@@ -98,9 +98,12 @@ This is a one-time setup. The files are kept in `~/Library/Application Support/Q
 
 ## 6 — You're ready
 
-When setup finishes, the main QSAR Flex window opens on the **Library**. The navbar carries the **Library** and **DataKurator** tabs, the search box that opens the command bar with **⌘K**, your license status, a **Documentation** button and your account menu.
+When setup finishes, the QSAR Flex workspace opens. You can now add compounds and reactions and run evaluations.
 
-<figure><img src=".gitbook/assets/install-mac-06-app-ready.png" alt="QSAR Flex ready to use"></figure>
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-empty-dark.png">
+  <img src=".gitbook/assets/workspace-empty-light.png" alt="QSAR Flex ready to use">
+</picture></figure>
 
 Next, head to [Getting Started](getting-started.md) to run your first evaluation.
 
