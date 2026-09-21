@@ -51,68 +51,78 @@ Page furniture — running foot, page number, section number — is drawn per pa
 markup, not by CSS paged media. Renumbering after inserting or moving a page is manual;
 `check.mjs` will not catch a wrong number, so re-read the proofs.
 
-**Any change to `.pg-head` changes every page's budget.** Moving the section number from a
-baseline-aligned column to an eyebrow above the title added ~5mm of head height, which was
-enough to clip two IT-guide pages that had previously fit. After touching shared vertical
-metrics in `system.css`, re-run `check.mjs` over BOTH documents, not just the one you were
-working on.
+**Any change to `.head`, `.sec` or the block spacing changes every page's budget.** An earlier
+edition added ~5mm to the section head and clipped two IT-guide pages that had previously fit.
+After touching shared vertical metrics in `system.css`, re-run `check.mjs` over ALL THREE
+documents, not just the one you were working on.
 
-## The design system
+## The design system: the MultiCASE document standard
 
-`system.css` holds it. It is deliberately **not** the Seqtara look — that pack is a
-dark-navy poster system with a green ribbon, and the client asked explicitly that these
-not copy its design or its language. This one is a "bench sheet": warm paper, graphite
-ink, the product's own green, and data set in mono.
+`system.css` holds it. It exists because the previous edition looked like every other
+AI-assisted document of 2026: Geist, tracked uppercase eyebrows, pill chips, numbered circles,
+rounded cards on a tinted ground. Shri saw the same look on conference booths and asked for
+something that could only be ours. Three decisions do that work, and every future MultiCASE
+document should keep them:
+
+1. **A typeface nobody defaults to.** Body, headings, tables and running heads are all
+   **Literata** (variable, roman and italic, optical sizes on). Anything typed into a machine
+   (paths, hostnames, commands, key caps) is **Fragment Mono**. Nothing else. Both are embedded
+   as base64 in `fonts.css` so the render never touches the network; `tools/embed-fonts.py`
+   regenerates it. Google's Literata subset carries no small caps or old-style figures, so
+   labels are *italic*, never small caps or tracked capitals.
+2. **The molecule is the only ornament.** Every drawing in `assets/art/` is ChemiGraphy's own,
+   produced by `tools/molart` (below): a large structure on each cover, a small one in the margin
+   of a section, alert atoms marked in the product's green exactly as a report marks them. No
+   icons, no illustrations, no stock imagery.
+3. **A publisher's page, not a web page printed out.** White paper; a 112mm text column with a
+   54mm margin column for notes, figures and the section number; running head in italic with a
+   hairline; tables ruled like a journal (rule above, rule under the header, rule below, hairlines
+   between rows, no fills); lists with an en dash or a green numeral; notes as marginalia with a
+   bold run-in. No chips, pills, cards, tinted boxes, eyebrows, icon grids, dark bands, rounded
+   corners or gradients. Emphasis is italic or bold; grouping is a rule or white space.
 
 ```
---paper  #F6F6F3   warm off-white ground      --green    #00AE5A  chateau green 600
---sheet  #FFFFFF   cards sit ON the ground    --green-d  #0A5D37  deep, for headings on tint
---ink    #14171A   graphite, never navy       --green-l  #EEFFF6  tinted card fill
---ink-2  #3B4248   body text                  --amber    #B4700A  warnings only
---ink-3  #6B747C   secondary — the FLOOR for type
---ink-4  #98A0A7   hairlines and the checkbox stroke ONLY, never type (2.45:1 on paper)
+--ink     #141414   text and rules            --green    #00AE5A  marked atoms only
+--ink-3   #5C5C5C   the floor for type        --green-d  #04914E  section numbers, list numerals
+--hair    #C8C8C8   hairlines between rows
 ```
 
-Type is **Geist** and **Geist Mono** — the product's own typefaces, embedded as base64 so
-the render never touches the network. Mono carries every number, path, hostname, key cap
-and eyebrow label; the sans carries prose. Do not mix that up: the mono is what makes the
-documents read as instrumentation rather than marketing.
+Green appears in exactly three places: marked atoms in a drawing, the section number, and the
+numeral of an ordered list. Do not add a fourth.
 
-Useful classes: `.page` / `.sheet` / `.pg-head` / `.pg-foot` for structure; `.card`
-(`.tint`, `.ink`, `.flush`) for panels; `.eyebrow`, `.h-sec`, `.h-sub`, `.body`, `.small`
-for type; `.note` (`.warn`) for callouts; `.bul`, `.checklist`, `.steps` for lists;
-`.pathblock` for file paths; `.chip`, `.plat` for labels.
+**Structure.** A page is `.head` (running head), `.sheet` and `.foot`. Inside the sheet, content is
+a stack of `.blk` rows, each with a `.main` (the text column) and a `.side` (the margin column);
+`.blk.full` spans both. `.blk.sec` opens a section: title in the column, `Section N` in the margin.
+`.blk.push` pins a closing block to the foot. A margin figure is `.fig` with an `<img>` and a `.cap`.
+Covers are `.page.cover`: `.head`, `.art` (the drawing and its caption), `.titling` (pushed to the
+bottom: product line, document title, strap, lede, and whatever the document opens with), `.imprint`.
 
-Two rules learned the hard way:
+## The drawings: `tools/molart`
 
-- **Bullets and checklist rows are `display: block` with an absolutely positioned marker.**
-  They used to be flex containers, which turned every inline `<b>` and `<code>` inside a
-  bullet into its own flex item and shredded the line into vertical word-columns.
-- **`.pathblock` must not `word-break: break-all`.** It split paths mid-token
-  (`reference d` / `ata`). It is `overflow-wrap: anywhere` now, and long paths get short
-  lines with the annotation on its own line instead.
-
-Callout arrows/badges are **off** by design in the screenshots (`DRAW_MARKERS` in
-`scripts/screenshot.js`) and there is no equivalent here — the prose names every control.
-
-## Regenerating the embedded assets
-
-Only needed if the typeface or a logo changes:
+A small .NET console that draws SMILES through **ChemiGraphy.Embedded**, the same renderer the
+product uses, so the documents carry the product's own drawing and nothing else. `art.json` lists
+every figure: name, SMILES, the box it is fitted to, and optional `marks`, each a SMARTS and a
+colour, matched by Indigo against the same molecule and handed to ChemiGraphy by atom index.
 
 ```bash
-python3 pdf/tools/embed-fonts.py     # rewrites fonts.css  (needs network)
-python3 pdf/tools/embed-images.py    # rewrites images.css (needs Pillow)
+cd pdf/tools/molart
+dotnet run -c Release -- art.json ../../assets/art "#141414"
+# with a checkout of the ChemiGraphy repository to hand, build against it instead:
+dotnet run -c Release -p:ChemiGraphyRepo=~/RiderProjects/ChemiGraphy -- art.json ../../assets/art "#141414"
 ```
 
-`assets/qsarflex-logo.svg` is fetched verbatim from the public assets CDN —
-`https://d35fy2f4trk71w.cloudfront.net/QSAR%20flex%20Logo.svg`, the same file the product
-serves — so the documents and the product cannot drift apart. Keep it **vector**: it is set
-at 21mm on the cover and as a 172mm watermark, where the old PNG showed its edges, and the
-switch also took `images.css` from 592 KB to 217 KB.
+The package comes from the MultiCASE GitHub Packages feed (`nuget.config` beside the project;
+`PRIVATE_NUGET_GITHUB_TOKEN` in the environment). Two things the tool does to ChemiGraphy's output:
+it rewrites the SVG's own `width`/`height` to the drawing's viewBox, so an `<img>` given a width
+keeps the molecule's aspect ratio rather than the box's; and it replaces `#000000` with the ink
+colour, leaving marks alone. Rings are Kekulé (`dearomatize`) so they read as a chemist draws them.
 
-`assets/multicase-hex.png` is the MultiCASE hexagon with its white wordmark cropped off so
-it can sit on any ground; `assets/multicase-logo.png` is the full lockup used in the
-brochure foot.
+**The box sets the stroke.** ChemiGraphy thickens a bond only when the requested box would squeeze
+it under about a pixel. Cover art is generated in a 1100×640 box and keeps the editor's own weight;
+margin art is generated in a 130×80 box so the strokes are heavy enough to survive 15 to 30mm on
+paper. If a small figure prints pale, the box was too large. Sizes in the HTML are set per drawing
+(`style="width:…mm"`) so a strip of four molecules shares one bond length; read the viewBoxes and
+scale by a common factor rather than fitting each to the same height.
 
 ## Updating for a new release
 
@@ -143,8 +153,8 @@ brochure foot.
 
 ## Three documents, one system
 
-`release-notes.html` shares the brochure's cover CSS by copying its `<style>` block, so a change to
-the cover treatment has to be made in both.
+All three covers use the shared `.cover` rules in `system.css`; only what each document opens with
+(bundles, an at-a-glance grid, the applies-to row and contents) is local to the file.
 
 **Know who the reader is before writing a word of it.** The 3.x desktop was a WinForms application
 that never ran the web interface, and almost no customer has used the web application. So for
@@ -164,9 +174,9 @@ source for facts, not for structure.
 
 ## House style
 
-Two rules the client set, both easy to breach by accident:
+Rules the client set, all easy to breach by accident:
 
-- **No em dashes in prose.** They read as machine-written. Use a comma, a colon, a semicolon, a full
+- **No em dashes in prose.** They read as machine-written. The same goes for arrows in prose. Use a comma, a colon, a semicolon, a full
   stop or brackets, whichever the sentence actually wants. The only em dashes left in either
   document are the standalone `—` glyphs that mean "not applicable" in a table cell
   (`<td class="n">—</td>` and the catalog's Records column). Check with

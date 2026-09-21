@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Regenerate pdf/fonts.css — Geist + Geist Mono, base64-embedded.
+"""Regenerate pdf/fonts.css — Literata (variable, roman + italic) and Fragment Mono, base64-embedded.
 
     python3 pdf/tools/embed-fonts.py
 
 Why embed at all: the renderer loads the HTML from file://, and a webfont that
 is still arriving when page.pdf() fires silently falls back to Helvetica. The
-whole document is typeset on Geist's metrics, so that reflows every page.
+whole document is typeset on Literata's metrics, so that reflows every page.
 Embedding removes the network from the render entirely.
 
 Only the `latin` subset is taken — the documents are English, and pulling every
@@ -19,8 +19,8 @@ import urllib.request
 
 CSS_API = (
     "https://fonts.googleapis.com/css2"
-    "?family=Geist:wght@300;400;500;600;700"
-    "&family=Geist+Mono:wght@400;500;600"
+    "?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900"
+    "&family=Fragment+Mono:ital@0;1"
     "&display=swap"
 )
 # Google serves woff2 only to a browser-ish UA; anything else gets ttf.

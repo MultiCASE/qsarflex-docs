@@ -1,0 +1,110 @@
+[
+ {
+  "name": "cover-nitroso-propranolol",
+  "smiles": "O=NN(CC(O)COc1cccc2ccccc12)C(C)C",
+  "w": 1100,
+  "h": 640,
+  "marks": [
+   {
+    "smarts": "[NX3](N=O)",
+    "color": "#00AE5A"
+   },
+   {
+    "smarts": "N=O",
+    "color": "#00AE5A"
+   }
+  ]
+ },
+ {
+  "name": "cover-lisinopril",
+  "smiles": "NCCCC[C@H](N[C@@H](CCc1ccccc1)C(=O)O)C(=O)N1CCC[C@H]1C(=O)O",
+  "w": 1100,
+  "h": 640
+ },
+ {
+  "name": "cover-atorvastatin",
+  "smiles": "CC(C)c1c(C(=O)Nc2ccccc2)c(-c2ccccc2)c(-c2ccc(F)cc2)n1CC[C@@H](O)C[C@@H](O)CC(=O)O",
+  "w": 1100,
+  "h": 640
+ },
+ {
+  "name": "side-aminobiphenyl",
+  "smiles": "Nc1ccc(-c2ccccc2)cc1",
+  "w": 130,
+  "h": 80,
+  "marks": [
+   {
+    "smarts": "[NH2]c",
+    "color": "#00AE5A"
+   }
+  ]
+ },
+ {
+  "name": "side-nitroso-sertraline",
+  "smiles": "CN(N=O)[C@H]1CC[C@@H](c2ccc(Cl)c(Cl)c2)c2ccccc21",
+  "w": 130,
+  "h": 80,
+  "marks": [
+   {
+    "smarts": "[NX3](N=O)",
+    "color": "#00AE5A"
+   },
+   {
+    "smarts": "N=O",
+    "color": "#00AE5A"
+   }
+  ]
+ },
+ {
+  "name": "side-ibuprofen-salt",
+  "smiles": "CC(C)Cc1ccc(C(C)C(=O)[O-])cc1.[Na+]",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "name": "side-ndea",
+  "smiles": "CCN(CC)N=O",
+  "w": 130,
+  "h": 80,
+  "marks": [
+   {
+    "smarts": "[NX3](N=O)",
+    "color": "#00AE5A"
+   },
+   {
+    "smarts": "N=O",
+    "color": "#00AE5A"
+   }
+  ]
+ },
+ {
+  "name": "side-atrazine",
+  "smiles": "CCNc1nc(Cl)nc(NC(C)C)n1",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "name": "side-ibuprofen",
+  "smiles": "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "name": "side-diazepam",
+  "smiles": "CN1C(=O)CN=C(c2ccccc2)c2cc(Cl)ccc21",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "name": "side-propranolol",
+  "smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "name": "side-ranitidine",
+  "smiles": "CNC(=C[N+](=O)[O-])NCCSCc1ccc(CN(C)C)o1",
+  "w": 130,
+  "h": 80
+ }
+]
