@@ -16,9 +16,9 @@ after the PubChem correction (a SMILES edit is checked at once, so it no longer 
 the edited row's frame is the new `workspace-after-edit-*`; `editor-periodic-table-*` is new. The results
 frame scrolls to the top first so the heading and the Clear pack are in it. 66 workspace frames (33 pairs).
 
-Known blemish, not a docs problem: at the 1440 px viewport the table is 64 px wider than its container
-once the Results column appears (column sizes sum to 1294 px), so `workspace-results-*` shows a sliver
-of table past the sticky chip row. Re-shoot that pair when the column widths change.
+Later the same day the FE made SMILES the elastic column (the table had grown 64 px past a 1440 px
+window once Results appeared); the whole set was re-shot against that build, so every frame has the
+table ending at the page edge.
 
 ## 2026-09-17 — install guides: the "app ready" frames are the web frame now
 
