@@ -50,7 +50,7 @@ Curate and validate your dataset before evaluation, in two steps: load, then cur
 {% hint style="info" %}
 PubChem is never contacted silently during curation. Any lookup — single row or batch — first raises a **Send data to PubChem?** dialog naming exactly what will leave your system. Import and curation on load never touch PubChem at all.
 
-The one place that queries PubChem immediately is the Type a compound dialog's **Auto Fill** button. It sends whatever you have typed as soon as you press it.
+The one place that queries PubChem immediately is the Enter a compound dialog's **Auto Fill** button. It sends whatever you have typed as soon as you press it.
 {% endhint %}
 
 ### 🔬 Evaluation
@@ -58,7 +58,7 @@ Run licensed prediction modules against the workspace in one click.
 - Select any combination of licensed modules — unlicensed modules are shown but disabled
 - Evaluate every compound and reaction in the workspace in a single run, cancelable while it runs — reactions are scored by the N-Nitrosation module only, and every other module reports `N/A` on a reaction row
 - Results appear on the table as a **Results** column, and in full in the row's panel, one line per module, each opening its report
-- One-click HTML report per compound per module, opened in a side panel with **Download HTML** and **Print / Save as PDF**
+- One-click report per compound per module, from the Results column or the row's panel, opened in a side panel with **Save as PDF**
 
 ### ⚗️ Reaction Analysis
 Load reaction files for structural analysis.

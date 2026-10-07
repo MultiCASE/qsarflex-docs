@@ -7,7 +7,7 @@ This guide walks through installing the QSAR Flex desktop application on macOS �
 
 - **macOS 12 (Monterey) or later.**
 - **Apple Silicon (arm64).** The macOS build ships for Apple Silicon only — there is no Intel or universal build.
-- **An internet connection at every launch.** QSAR Flex signs you in and checks your license each time it starts.
+- **An internet connection at every launch.** QSAR Flex checks your license each time it starts; your sign-in is kept between launches.
 - **About 4 GB of free disk space** for the reference database.
 {% endhint %}
 
@@ -140,6 +140,6 @@ Data files carry the version of the application they were published with, so dat
 
 Company module data follows the same numbering and is offered only while your license includes the module. If the module leaves your license, its data is removed from the Mac at the next sign-in.
 
-Sign-in happens on every launch, so QSAR Flex needs a connection each time you open it.
+The license check happens on every launch, so QSAR Flex needs a connection each time you open it. You sign in once; the app opens straight into the workspace after that, and asks for the browser again only when the session has ended — after a sign-out, a sign-in elsewhere with the same account, or thirty days.
 
 If an update, a sign-in or the data download fails, open a ticket at [support.multicase.com](https://support.multicase.com).

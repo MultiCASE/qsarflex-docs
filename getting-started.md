@@ -15,7 +15,7 @@ QSAR Flex is available as a **web application** and as a **desktop application**
 
 The same MultiCASE account signs you in to QSAR Flex, to the desktop app and to the support portal.
 
-**Desktop:** Install the app and launch it. Sign-in opens in your default browser and hands you back to the app when it finishes, so the desktop app needs a network connection at every launch.
+**Desktop:** Install the app and launch it. The first sign-in opens in your default browser and hands you back to the app when it finishes. After that the app keeps you signed in: it opens straight into the workspace at the next launch, and asks for the browser again only when the session has ended — you signed out, you signed in to QSAR Flex elsewhere with the same account, or thirty days passed. The license check still runs at every launch, so the desktop app needs a network connection each time it starts.
 
 - 💻 Windows — see [Installing on Windows](install-win.md) for the installer
 - 🍎 macOS (Apple Silicon) — see [Installing on macOS](install-mac.md) for the installer
@@ -32,23 +32,23 @@ Don't have an account yet, or need a license? See [Access & Licensing](fundament
 
 ---
 
-## 2. ➕ Add Compounds
+## 2. ➕ Load Compounds
 
-A brand-new account opens on an empty workspace: a single card headed **Start with a compound or a file**, with four buttons — **Add from a file**, **Type a compound**, **Draw in ChemiGraphy** and **Add a reaction**. Under them is the line *You can also drop files here, or paste SMILES with ⌘ V.* — on Windows the same line reads *Ctrl + V*.
+A brand-new account opens on an empty workspace: a single card headed **Load compound(s)**, with the line *Compounds are checked as they are loaded. You should fix the identified issues, then run Evaluate to see the results.* and four buttons — **Load from a file**, **Enter a compound**, **Draw** and **Load a reaction**. Under them: *You can also drop files here, or paste SMILES with ⌘ V.* — on Windows the same line reads *Ctrl + V*.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-empty-dark.png">
   <img src=".gitbook/assets/workspace-empty-light.png" alt="">
 </picture></figure>
 
-The same routes are always in the navbar's **Add ▾** menu, and **Evaluate** is the green button on the bar's right.
+Once the workspace holds something, the same routes are in the navbar's **Load ▾** menu, **Curate ▾** appears beside it, and **Evaluate** is the green button after them. On an empty workspace the bar shows none of the three: the card is the one place to load from.
 
 <figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-add-menu-dark.png">
-  <img src=".gitbook/assets/workspace-add-menu-light.png" alt="">
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-load-menu-dark.png">
+  <img src=".gitbook/assets/workspace-load-menu-light.png" alt="">
 </picture></figure>
 
-**Type a compound** — the dialog has three fields: *SMILES or InChI*, *Name* and *Registry Number*. Fill in whichever you know and click **Auto Fill** to look up the rest from PubChem, then **Add to workspace**.
+**Enter a compound** — the dialog has three fields: *SMILES or InChI*, *Name* and *Registry Number*. Fill in whichever you know and click **Auto Fill** to look up the rest from PubChem, then **Add to workspace**.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/add-compound-dark.png">
@@ -59,18 +59,18 @@ The same routes are always in the navbar's **Add ▾** menu, and **Evaluate** is
   <img src=".gitbook/assets/add-compound-autofill-light.png" alt="">
 </picture></figure>
 
-**Draw it instead** — **Draw in ChemiGraphy** opens MultiCASE's structure editor on an empty canvas. Pick elements and bonds from the palettes, or type a name into **Compound Corner** and press **Go** to place a known compound; **Use this structure** adds the drawing to the workspace as a compound. See [Drawing Structures](structure-editor.md).
+**Draw it instead** — **Draw** opens MultiCASE's structure editor, ChemiGraphy, on an empty canvas. Pick elements and bonds from the palettes — any element from the periodic table — or type a name into **Compound Corner** and press **Look up** to place a known compound; **Use this structure** adds the drawing to the workspace as a compound. See [Drawing Structures](structure-editor.md).
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/editor-new-dark.png">
   <img src=".gitbook/assets/editor-new-light.png" alt="">
 </picture></figure>
 
-**Add from a file** — pick one file or several. Supported extensions are `.smi`, `.smiles`, `.txt`, `.csv`, `.tsv`, `.tab`, `.dat`, `.sdf` and `.mol`. A `.smi` file takes one compound per line, formatted `SMILES ↹ Name(optional) ↹ Reg No(optional)`.
+**Load from a file** — pick one file or several. Supported extensions are `.smi`, `.smiles`, `.txt`, `.csv`, `.tsv`, `.tab`, `.dat`, `.sdf` and `.mol`. A `.smi` file takes one compound per line, formatted `SMILES ↹ Name(optional) ↹ Reg No(optional)`.
 
 **Drop or paste instead** — you do not have to open a dialog at all. Drop files anywhere on the page, or paste SMILES from the clipboard. Files are sorted by extension, so compound files and `.rxn` reaction files can be dropped together and each goes to the right importer; anything unsupported is called out in a message.
 
-Compounds appear as rows in the workspace table, each with its curation badge — **Clean**, or what the check found — beside its name, CAS and SMILES. Click a row to see its structure and everything about it in the panel on the left. Add as many as you need before evaluating.
+Compounds appear as rows in the workspace table, each with its curation badge — **Clean**, or what the check found — beside its name, CAS and SMILES. Click a row to see its structure and everything about it in the panel on the left; click anywhere on the page outside it to close it again. Load as many as you need before evaluating.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">
@@ -78,21 +78,21 @@ Compounds appear as rows in the workspace table, each with its curation badge �
 </picture></figure>
 
 {% hint style="info" %}
-If the check finds something — a mixture, a duplicate, an unreadable SMILES — the toast says how many rows have issues and the row wears the verdict. Fix it from the row's panel, or run **Curate ▾ → One Step Cure** on the whole set; see [Curating Compounds](curation.md).
+If the check finds something — a mixture, a duplicate, an unreadable SMILES — the toast says how many rows have issues and the row wears the verdict. Fix it from the row's panel, or run **Curate ▾ → One Step Cure…** on the whole set; see [Curating Compounds](curation.md).
 {% endhint %}
 
 ---
 
 ## 3. 🔬 Evaluate
 
-Click the green **Evaluate** button on the right of the navbar. The **Select Modules to Evaluate** dialog opens, listing modules grouped by bundle. Only modules your license covers can be selected, and you must select at least one. If the check could not read some structures, the dialog names them: they will be skipped.
+Click the green **Evaluate** button on the navbar. The **Select Modules to Evaluate** dialog opens with a line on what it will run over — *In the workspace: 14 compounds · 6 with issues* — and the modules grouped by bundle. Only modules your license covers can be selected, and you must select at least one. If the check could not read some structures, the dialog names them: they will be skipped.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
   <img src=".gitbook/assets/evaluate-dialog-light.png" alt="">
 </picture></figure>
 
-Tick the modules you want and click **Evaluate**. A progress overlay covers the page while the run proceeds, and you can cancel it. When it finishes, the table gains a **Results** column: **View results** on a row opens its panel on the outcomes, one per module.
+Tick the modules you want and click **Evaluate**. A progress overlay covers the page while the run proceeds, and you can cancel it. When it finishes, the table gains a **Results** column listing the modules that ran on each row, one under the other. Click a module name to open its report; click the row to see the outcomes themselves in the panel, under **Evaluation results**.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-results-dark.png">
@@ -103,7 +103,7 @@ Tick the modules you want and click **Evaluate**. A progress overlay covers the 
   <img src=".gitbook/assets/workspace-panel-results-light.png" alt="">
 </picture></figure>
 
-Click a module's row in the panel to generate the full report for that compound and module. It opens in a panel on the right titled *&lt;module&gt; — Report*, with two icon buttons in its toolbar — a download icon (**Download HTML**) and a printer icon (**Print / Save as PDF**).
+A module name in the Results column, or a module's line in the panel, opens the full report for that compound and module in a panel on the right. One button sits in its header: **Save as PDF**, which opens your system print dialog on the report.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
@@ -111,7 +111,7 @@ Click a module's row in the panel to generate the full report for that compound 
 </picture></figure>
 
 {% hint style="info" %}
-Reports are HTML. **Download HTML** saves the report as a single self-contained file; there is no direct PDF export — use **Print / Save as PDF** and choose *Save as PDF* in your browser's print dialog.
+**Save as PDF** prints the report through your system print dialog; choose *Save as PDF* there. The report is laid out for US Letter, on the web and in both desktop apps alike, so the same report paginates the same way wherever it is saved.
 {% endhint %}
 
 ---
@@ -119,6 +119,7 @@ Reports are HTML. **Download HTML** saves the report as a single self-contained 
 ## Two things worth knowing early
 
 - **⌘K / Ctrl+K opens the command bar**, not the Evaluate dialog. It finds any action by name — *Load compounds from a file*, *Evaluate*, *One Step Cure*, *Clear the workspace*, *Sign out* — from any page, and tells you where each one lives.
+- **Clear sits with undo and redo**, top right of the workspace: a quiet red **Clear** button under the two arrows empties the workspace after a confirmation. It is also in the Load menu.
 - **The Documentation button** in the top right of the navbar opens these docs in a new tab.
 
 ---

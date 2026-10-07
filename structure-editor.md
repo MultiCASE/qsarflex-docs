@@ -4,8 +4,8 @@
 
 There are two ways in:
 
-- **Add ▾ → Draw in ChemiGraphy…** (or **Draw in ChemiGraphy** on the empty workspace) opens an empty canvas. **Use this structure** adds what you drew as a new compound.
-- **Edit structure** — in a row's ⋮ menu, or in the panel — opens the canvas on that compound. **Use this structure** replaces its SMILES.
+- **Load ▾ → Draw…** (or **Draw** on the empty workspace, or **D** with the table focused) opens an empty canvas under the title **Draw a structure**. **Use this structure** adds what you drew as a new compound.
+- **Edit structure** — in the panel, or **E** on the row — opens the canvas on that compound under the title **Edit the structure — &lt;name&gt;**. **Use this structure** replaces its SMILES.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/editor-new-dark.png">
@@ -16,7 +16,18 @@ There are two ways in:
 
 ## The dialog
 
-The editor fills the dialog: the element and bond palettes on the left, the canvas in the middle, the tools on the right — select, lasso, erase, text, undo and redo, label size, bond width, zoom, clear, and the canvas theme. It is the ChemiGraphy editor, with its file menu and settings left out: a structure drawn here is handed to the workspace and nowhere else.
+The editor fills the dialog: the palettes on the left, the canvas in the middle, the tools on the right — select, lasso, erase, text, undo and redo, label size, bond width, zoom, clear, and the canvas theme. It is the ChemiGraphy editor, with its file menu and settings left out: a structure drawn here is handed to the workspace and nowhere else.
+
+Down the left, from the top:
+
+- **Element Vault** — nine quick elements (C, H, N, O, S, P, Cl, F, Br) and a **Periodic table…** button. The button opens the whole table beside the panel, coloured by category and with atomic numbers; the element the next click will place is outlined. One click arms an element and closes the table. An element chosen there has no button of its own, so the **Periodic table…** button wears it as a badge — *Si* — until you pick another.
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/editor-periodic-table-dark.png">
+  <img src=".gitbook/assets/editor-periodic-table-light.png" alt="">
+</picture></figure>
+
+- **Compound Corner** — type a name, press **Look up**, and the compound is placed on the canvas from PubChem. This is the one lookup the editor makes; see [Where the editor runs](#where-the-editor-runs).
+- **The Bond Bench** and **Carbon Wheels** — bond orders and wedges, and ring templates.
 
 Two things are worth knowing before you start:
 
@@ -43,7 +54,7 @@ What happens when you press **Use this structure**:
 | The drawing is | What happens |
 |---|---|
 | The same molecule you opened | Nothing. *The structure is unchanged.* The verdict and the evaluation results stand. |
-| A different molecule | The row's SMILES is replaced; it becomes **Not checked** — *Edited — re-check to validate* — and its evaluation results, which belonged to the old structure, are cleared. The step is named *Edit structure — &lt;name&gt;* and can be undone. |
+| A different molecule | The row's SMILES is replaced and the check runs again at once, over the whole set, so the row comes back wearing its new verdict rather than waiting for a Re-check. Its evaluation results, which belonged to the old structure, are cleared. The step is named *Edit structure — &lt;name&gt;* and can be undone. |
 | Empty | *Nothing has been drawn yet.* The dialog stays open. |
 
 A compound whose SMILES the engine cannot read — a row the check calls **Fatal** — opens on an empty canvas with a note: *QSAR Flex could not read this compound's SMILES, so the canvas starts empty. Draw the structure and use it to replace the SMILES.*
@@ -56,7 +67,7 @@ Stereochemistry travels through the editor only as it is drawn. A compound that 
 
 ## Drawing a new compound
 
-**Use this structure** on a new drawing adds it to the workspace as a compound with no name, checked like any other — the toast reads *1 compound added from ChemiGraphy.* Name it from the panel with **Rename**, and fill in a CAS number the same way. The structure editor never contacts PubChem: a name pasted onto the canvas is not looked up.
+**Use this structure** on a new drawing adds it to the workspace as a row with no name, checked like any other — the toast reads *1 compound added from a drawing.* The row is added without opening its panel; click it when you want it. A row without a name offers **Add a name** under its title in the panel, and the name itself is the rename control from then on; a CAS number can be added the same way. The canvas does not look up what you draw: the only lookup the editor makes is **Compound Corner**, and only when you press **Look up**.
 
 ---
 

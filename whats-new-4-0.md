@@ -23,7 +23,7 @@ Until 4.0 the desktop was Windows only. There is now a native **Apple Silicon** 
 
 It is the same application as the Windows one — the same interface, the same modules, the same reports — and it is covered by the license you already hold. Windows remains 64-bit.
 
-Both builds evaluate on your own machine, as 3.x did. On first run the application downloads its encrypted model files and a reference database, about 4.0 GB. Neither the desktop nor the web app works offline: each needs an internet connection at launch to sign in and check your license, and again at every evaluation.
+Both builds evaluate on your own machine. On first run the application downloads its encrypted model files and a reference database, about 4.0 GB. The desktop app keeps you signed in between launches, so it opens straight into the workspace; the browser sign-in is asked for only when the session has ended. Neither the desktop nor the web app works offline: each needs an internet connection at launch to check your license, and again at every evaluation.
 
 See [Installing on macOS](install-mac.md) and [Installing on Windows](install-win.md).
 
@@ -33,7 +33,7 @@ See [Installing on macOS](install-mac.md) and [Installing on Windows](install-wi
 
 **The navbar.** A single 48-pixel bar runs across the top of the window and carries everything. There are no menus above it and no toolbars below it. Page content starts immediately underneath.
 
-**Add, Curate, Evaluate.** On the left of the bar, next to the logo, **Add ▾** holds every way of bringing compounds and reactions in, and **Curate ▾** holds every way of fixing them. **Evaluate**, the one filled button, sits on the right beside the count of what the workspace holds. Nothing moves between screens: loading, curating and evaluating happen on the same table.
+**Load, Curate, Evaluate.** On the left of the bar, next to the logo, **Load ▾** holds every way of bringing compounds and reactions in, **Curate ▾** holds every way of fixing them, and **Evaluate**, the one filled button, runs the modules. All three appear once the workspace holds something; an empty workspace shows its card alone. Nothing moves between screens: loading, curating and evaluating happen on the same table.
 
 **A command bar.** In the center of the navbar is a **Search** control with a **⌘K** / **Ctrl+K** key cap and the tooltip *Find any action by name*. Press the shortcut from anywhere in the app — except while you are typing in a text field — and it opens. It is the fastest way to reach a control you cannot see, and it is worth learning first if you are new to this interface.
 
@@ -41,13 +41,13 @@ The command bar lists every action in five groups:
 
 | Group | Commands |
 |---|---|
-| **Add** | Add compounds from a file · Add reactions from a file · Type a compound · Draw a structure in ChemiGraphy · Type a reaction |
+| **Load** | Load compounds from a file · Load reactions from a file · Enter a compound · Draw a structure · Load a reaction |
 | **Curate** | One Step Cure · Re-check all compounds · Download curated structures · Open the history log · Undo · Redo · Clear the workspace |
 | **Workspace** | Evaluate |
 | **Go to** | Workspace · Account and license |
 | **QSAR Flex** | Switch to dark mode (or light mode) · Match my system appearance · Keyboard shortcuts · User guide · Sign out |
 
-Every command is offered from every page. Commands that cannot run right now are still listed — grayed, with the reason on the row (*Nothing in the workspace*, *No compounds loaded*) — so you never have to guess whether a command exists. Each row also names where the control lives: *Add menu*, *Curate menu*, *Menu bar*, *Top right*.
+Every command is offered from every page. Commands that cannot run right now are still listed — grayed, with the reason on the row (*Nothing in the workspace*, *No compounds loaded*) — so you never have to guess whether a command exists. Each row also names where the control lives: *Load menu*, *Curate menu*, *Menu bar*, *Top right*.
 
 **A license status chip.** The right side of the navbar carries a persistent chip showing the state of your license: tests remaining for a pay-per-test license, **Unlimited** for an on-demand subscription, time left or **Expired** for a dated subscription. It turns amber when a pay-per-test license drops below 10 remaining tests. Clicking it takes you straight to your license. It also distinguishes **License unavailable** (the license service could not be reached) from **No active license** (there genuinely isn't one), so a transient outage does not look like a licensing problem.
 
@@ -65,7 +65,7 @@ The workspace is the table on the main screen. It holds the compounds and reacti
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">
-  <img src=".gitbook/assets/workspace-table-light.png" alt="The workspace: every compound a row with its verdict, the Add and Curate menus on the left, Evaluate on the right">
+  <img src=".gitbook/assets/workspace-table-light.png" alt="The workspace: every compound a row with its verdict, the Load and Curate menus and Evaluate on the left">
 </picture></figure>
 
 **Drag and drop, or paste.** There is no dialog to open first. Drop files anywhere on the page, or paste SMILES from the clipboard with **⌘+V** / **Ctrl+V**. While you drag, a full-screen overlay confirms the target: *Drop to add to the workspace*.
@@ -74,11 +74,11 @@ The workspace is the table on the main screen. It holds the compounds and reacti
 
 **Every compound is checked as it arrives.** The check reads each structure and puts its verdict on the row as a badge — **Clean**, or **Mixture**, **Duplicate**, **Atom type**, **Fatal** — and the chips above the table filter to one verdict at a time. Nothing is held back: a set with issues is added with its issues visible, and the toast says how many rows need looking at.
 
-**One panel for one row.** Click a row and it opens in a panel on the left: the structure drawn large, the check's finding and what to do about it, the SMILES, the row's history, and its evaluation results once it has any. The table stays live beside it; **↑** and **↓** move the panel to the next row, **Esc** closes it. Every action on a row — edit the structure or the SMILES, rename, tautomers, PubChem, pick the components of a mixture, delete — is in the panel, each with a single-key shortcut.
+**One panel for one row.** Click a row and it opens in a panel on the left: the structure drawn large, the check's finding and what to do about it, the SMILES, its evaluation results once it has any, and the row's history. The table stays live beside it; **↑** and **↓** move the panel to the next row, **Esc** or a click anywhere else closes it. Every action on a row — edit the structure or the SMILES, rename, tautomers, PubChem, pick the components of a mixture, delete — is in the panel, each with a single-key shortcut.
 
-**Empty states that tell you what to do.** An empty workspace shows one card, *Start with a compound or a file*, with **Add from a file**, **Type a compound**, **Draw in ChemiGraphy** and **Add a reaction**, and the line *You can also drop files here, or paste SMILES with ⌘ V.* On Windows that line reads *Ctrl + V*.
+**Empty states that tell you what to do.** An empty workspace shows one card, **Load compound(s)**, with **Load from a file**, **Enter a compound**, **Draw** and **Load a reaction**, and the line *You can also drop files here, or paste SMILES with ⌘ V.* On Windows that line reads *Ctrl + V*.
 
-**Results stay on the rows.** After a run the table gains a **Results** column — *View results* opens the row's panel on its outcomes, one per module, and a module's row in the panel opens its report. Structures in the panel and in every report are drawn by ChemiGraphy, in the current theme.
+**Results stay on the rows.** After a run the table gains a **Results** column listing each row's modules, and a module name is one click from its report. The row's panel carries the outcomes themselves under **Evaluation results**. Structures in the panel and in every report are drawn by ChemiGraphy, in the current theme.
 
 See [Loading Compounds](product-guide/loading-compounds.md), [Loading Reactions](loading-reactions.md) and [Evaluation](evaluation.md).
 
@@ -95,13 +95,13 @@ See [Loading Compounds](product-guide/loading-compounds.md), [Loading Reactions]
   <img src=".gitbook/assets/editor-edit-light.png" alt="ChemiGraphy open on a compound from the workspace: element and bond palettes on the left, the canvas in the middle, the tools on the right">
 </picture></figure>
 
-**Two ways in.** **Add ▾ → Draw in ChemiGraphy…** opens an empty canvas, and **Use this structure** adds what you drew as a new compound, checked like any other. **Edit structure**, in a row's panel, opens the canvas on that compound *as QSAR Flex reads it*; **Use this structure** replaces its SMILES, and the row is checked again.
+**Two ways in.** **Load ▾ → Draw…** opens an empty canvas, and **Use this structure** adds what you drew as a new compound, checked like any other. **Edit structure**, in a row's panel, opens the canvas on that compound *as QSAR Flex reads it*; **Use this structure** replaces its SMILES, and the check runs again at once.
 
-**The whole editor.** The element and bond palettes, the ring library, the lookup by name, arrows, selection and lasso, erase, text, undo and redo, label size, bond width and zoom — the ChemiGraphy editor, with only its file menu and settings left out, because a structure drawn here is handed to the workspace and nowhere else.
+**The whole editor.** The Element Vault with a **Periodic table…** that opens every element at a click, the bond bench, the ring library, the lookup by name, arrows, selection and lasso, erase, text, undo and redo, label size, bond width and zoom — the ChemiGraphy editor, with only its file menu and settings left out, because a structure drawn here is handed to the workspace and nowhere else.
 
 **Escape belongs to the editor.** It cancels the bond being drawn, drops the selection, closes a popover — it does not close the dialog, and nor does clicking outside it. The dialog closes on **Cancel**, the **✕**, or **Use this structure**, so a drag that ends past the edge never throws a drawing away.
 
-**One renderer, everywhere.** ChemiGraphy also draws every structure QSAR Flex shows — the panel, the tautomer viewer, the component picker, and every report. A molecule looks the same on screen, in the report and in the PDF you print from it.
+**One renderer, everywhere.** ChemiGraphy also draws every structure QSAR Flex shows — the panel, the tautomer viewer, the component picker, and every report, where each picture is sized to its place on the page. A molecule looks the same on screen, in the report and in the PDF you save from it, and a report saved from the Mac, from Windows or from the browser paginates the same way.
 
 See [Drawing Structures](structure-editor.md).
 
@@ -111,7 +111,7 @@ See [Drawing Structures](structure-editor.md).
 
 **One check, the same everywhere.** Every structure goes through a single structural check, and its answer is the badge. Duplicates are grouped on the checked structure with stereo ignored. The web app and the desktop apps give the same result for the same set.
 
-**Fix a row where it is.** The panel edits the SMILES or the name, opens ChemiGraphy on the structure, splits a mixture into the components you keep, and looks a compound up in PubChem. An edited row becomes **Not checked** until the next check, and its old results are cleared, because they belonged to the old structure.
+**Fix a row where it is.** The panel edits the SMILES or the name, opens ChemiGraphy on the structure, splits a mixture into the components you keep, and looks a compound up in PubChem. An edited structure is checked again the moment it is saved, and its old results are cleared, because they belonged to the old structure.
 
 **Tautomers, per row.** **Tautomers** generates up to 200 tautomers of the row's structure, lists them beside the parent with their structures, compares any one of them with a click, and adopts it with **Use tautomer**.
 
@@ -119,7 +119,7 @@ See [Drawing Structures](structure-editor.md).
 
 **PubChem is opt-in and explicit.** It is skipped by the check, and any lookup — batch or single row — asks first, in a dialog titled *Send data to PubChem?* that names exactly what will leave your machine and where it goes.
 
-**Real undo and redo.** Every step is named — *Undo One Step Cure*, *Undo Edit SMILES — Aspirin*, *Undo Evaluate 14 items* — and the Curate menu, ⌘ Z / Ctrl + Z and the command bar all step through the same history. Deletes, renames, SMILES edits, splits, PubChem lookups, re-checks, One Step Cure and evaluation runs are all reversible. **Clear workspace** is the one action that is not.
+**Real undo and redo.** Every step is named — *Undo One Step Cure*, *Undo Edit SMILES — Aspirin*, *Undo Evaluate 14 items* — and the two arrows at the top right of the workspace, the Curate menu, ⌘ Z / Ctrl + Z and the command bar all step through the same history. Deletes, renames, SMILES edits, splits, PubChem lookups, re-checks, One Step Cure and evaluation runs are all reversible. **Clear**, the red button under the arrows, is the one action that is not.
 
 **Change summaries.** A bulk run finishes in a summary listing what changed and what needs attention, filterable by **All** / **Changed** / **Needs attention**, and opened on **Needs attention** when there is anything there.
 

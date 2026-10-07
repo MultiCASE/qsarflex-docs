@@ -4,10 +4,10 @@
 
 **QSAR Flex** is a computational platform by [MultiCASE](https://multicase.com) for chemical safety assessment and toxicological prediction. It provides high-quality (Q)SAR models, read-across modules, and analysis tools — built for regulatory, pharmaceutical, and environmental science workflows.
 
-Available as a **web application** and as a **desktop application for Windows and macOS**. Both run the same interface and need an internet connection — **none of them works offline**, the desktop app included. Sign-in and a license check run at every launch, and every evaluation needs a live entitlement check before you can select a module.
+Available as a **web application** and as a **desktop application for Windows and macOS**. Both run the same interface and need an internet connection — **none of them works offline**, the desktop app included. A license check runs at every launch, and every evaluation needs a live entitlement check before you can select a module. The desktop app keeps you signed in between launches; the browser sign-in is asked for only when the session has ended.
 
 {% hint style="success" %}
-**New in 4.0: ChemiGraphy is built in.** Draw a compound instead of typing it, or open a flagged compound and correct it on the canvas — **Add ▾ → Draw in ChemiGraphy…**, or **Edit structure** on any row. The same engine that checks and evaluates your compounds reads what you draw, and ChemiGraphy draws every structure you see, on screen and in every report. See [Drawing Structures](structure-editor.md).
+**New in 4.0: ChemiGraphy is built in.** Draw a compound instead of typing it, or open a flagged compound and correct it on the canvas — **Load ▾ → Draw…**, or **Edit structure** on any row. The same engine that checks and evaluates your compounds reads what you draw, and ChemiGraphy draws every structure you see, on screen and in every report. See [Drawing Structures](structure-editor.md).
 {% endhint %}
 
 {% hint style="info" %}
@@ -19,11 +19,11 @@ One workspace holds the compounds and reactions you are working on. Every compou
 ## 🚀 What Can QSAR Flex Do?
 
 - **🔬 Predict toxicological endpoints** — N-nitrosamine CPCA and nitrosation risk, ecotoxicity, physicochemical properties and ADME
-- **➕ Add compounds** — Type SMILES, InChI, names or registry numbers; add files (SMILES, SDF, MOL, TXT, CSV); drop files onto the workspace or paste structures straight in
-- **✏️ Draw in ChemiGraphy** — MultiCASE's structure editor, inside the workspace: draw a new compound, or correct one the check flagged
+- **➕ Load compounds** — Enter SMILES, InChI, names or registry numbers; load files (SMILES, SDF, MOL, TXT, CSV); drop files onto the workspace or paste structures straight in
+- **✏️ Draw structures** — ChemiGraphy, MultiCASE's structure editor, inside the workspace: draw a new compound, or correct one the check flagged
 - **✅ Curate your dataset** — Every compound is checked as it arrives; [fix what the check flags](curation.md) in place, one row at a time or the whole set with One Step Cure
 - **⚗️ Evaluate reactions** — Submit reaction SMILES or RXN files for structural analysis
-- **📄 Generate reports** — Detailed HTML reports per compound per module, which you can download or print to PDF
+- **📄 Generate reports** — Detailed reports per compound per module, one click from the Results column, saved as PDF from the report itself
 - **⌨️ Reach any action by name** — Press ⌘K (Ctrl+K on Windows) to open the command bar
 
 ---
@@ -49,7 +49,7 @@ One workspace holds the compounds and reactions you are working on. Every compou
 
 > **Web App** does the work on MultiCASE servers. The structures you load are sent to the QSAR Flex service for evaluation, curation, report generation, the structure editor's session, and the structure drawings you see on screen. They are not retained after the request.
 
-> **Desktop** runs the models, the curation engine and the structure editor on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. You sign in and have your license checked every time the app starts.
+> **Desktop** runs the models, the curation engine and the structure editor on your machine against a local encrypted copy of the reference database — compound structures are never sent to MultiCASE servers for evaluation. The first launch downloads that database (about 4 GB), and it is downloaded again whenever MultiCASE publishes new reference data. Your license is checked every time the app starts; your sign-in is kept between launches.
 
 {% hint style="info" %}
 The desktop app is the same application as the web app, wrapped in a native shell. If you are choosing between the two, the deciding question is whether your structures may leave the workstation. See [Installing on Windows](install-win.md) or [Installing on macOS](install-mac.md).
@@ -61,7 +61,7 @@ The desktop app is the same application as the web app, wrapped in a native shel
 
 1. 🆕 [What's New in 4.0](whats-new-4-0.md) — what changed in this release
 2. 🔐 [Getting Started](getting-started.md) — log in and run your first evaluation
-3. 🖥️ [The QSAR Flex Window](interface.md) — the navigation bar, the command bar, and the license status chip
+3. 🖥️ [The QSAR Flex Window](interface.md) — the navigation bar, the Load and Curate menus, the command bar, and the license status chip
 4. 💾 [Installing on Windows](install-win.md) / [Installing on macOS](install-mac.md) — set up the desktop app
 5. ➕ [Loading Compounds](product-guide/loading-compounds.md) — all ways to add compounds to the workspace
 6. ✅ [Curating Compounds](curation.md) — the verdicts, the row panel and One Step Cure

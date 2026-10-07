@@ -13,11 +13,10 @@ The bar has three clusters, read left to right:
 | Position | Control | What it is for |
 |---|---|---|
 | Left | **Product mark** | Click the QSAR Flex logo to return to the workspace |
-| Left | **Add ▾** | Everything that brings compounds and reactions in |
-| Left | **Curate ▾** | Everything you do to the rows once they are in: One Step Cure, re-check, downloads, undo, clear |
+| Left | **Load ▾** | Everything that brings compounds and reactions in, and clearing them out again |
+| Left | **Curate ▾** | Everything you do to the rows once they are in: One Step Cure, re-check, downloads, the history log, undo and redo |
+| Left | **Evaluate** | The one filled button on the bar. Runs the modules against the workspace |
 | Center | **Search** | The command bar, opened with ⌘ K / Ctrl + K |
-| Right | **Count** | What is loaded — *14 compounds · 2 reactions · 6 with issues* |
-| Right | **Evaluate** | The one filled button on the bar. Runs the modules against the workspace |
 | Right | **License status chip** | Your current license, at a glance |
 | Right | **Documentation** | Opens this documentation space |
 | Right | **Theme toggle** | Light, dark, or follow your system |
@@ -30,7 +29,11 @@ The bar has three clusters, read left to right:
 
 There is one place the software goes — the **workspace**, the table of compounds and reactions you are working on — so there is nothing to switch between. Curation is not a second screen: every row carries its curation verdict, and the curation tools act on the rows in place. See [Curating Compounds](curation.md).
 
-On the account pages (**Account** and the license activity pages) the two menus, the count and **Evaluate** step aside; the rest of the bar stays, and the logo brings you back.
+The three verbs appear once there is something to act on. An empty workspace shows none of them: its card, **Load compound(s)**, is the one place to load from, so there is never a second surface asking the same question. The moment a row arrives, **Load**, **Curate** and **Evaluate** take their places on the bar.
+
+On the account pages (**Account** and the license activity pages) the menus and **Evaluate** step aside; the rest of the bar stays, and the logo brings you back.
+
+Below the bar the workspace page is headed **Workspace**, with the line *Every compound is checked as it is loaded. You should fix the identified issues, then run Evaluate to see the results.* On its right sit **Undo** and **Redo** and, under them once rows exist, a quiet red **Clear** button that empties the workspace after a confirmation.
 
 Below the bar the page content is centred and capped in width, so a line of text is the same length on every screen.
 
@@ -40,20 +43,20 @@ Press **Tab** as soon as a page loads and a **Skip to content** link appears in 
 
 ---
 
-## ➕ The Add menu
+## ➕ The Load menu
 
 <figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-add-menu-dark.png">
-  <img src=".gitbook/assets/workspace-add-menu-light.png" alt="">
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-load-menu-dark.png">
+  <img src=".gitbook/assets/workspace-load-menu-light.png" alt="">
 </picture></figure>
 
 | Item | What it does |
 |---|---|
 | **Compounds from file…** | Opens the file picker. SMI, SDF, MOL, TXT or CSV; several files at once |
-| **Reactions from file…** | Opens the file picker for `.rxn` files; several files become one multi-step reaction |
-| **Type a compound…** | The **Type a compound** dialog — one compound by SMILES, InChI, name or registry number, or a batch file |
-| **Type a reaction…** | The **Type a reaction** dialog — reaction SMILES, or `.rxn` files |
-| **Draw in ChemiGraphy…** | Opens the structure editor on an empty canvas. See [Drawing Structures](structure-editor.md) |
+| **Enter a compound…** | The **Enter a compound** dialog — one compound by SMILES, InChI, name or registry number |
+| **Draw…** | Opens ChemiGraphy on an empty canvas. See [Drawing Structures](structure-editor.md) |
+| **Load a reaction…** | The **Load a reaction** dialog — reaction SMILES, or `.rxn` files through its *load .rxn file(s)* link; several files become one multi-step reaction |
+| **Clear workspace…** | Empties the workspace and every evaluation result, after a confirmation. This is the one action undo cannot reverse |
 
 The line at the bottom of the menu is a reminder: you can also **drop files anywhere on the page**, or **paste SMILES** with ⌘ V / Ctrl + V. Every route in ends the same way — the compounds are checked as they arrive and appear in the table with their verdict. See [Loading Compounds](product-guide/loading-compounds.md) and [Loading Reactions](loading-reactions.md).
 
@@ -76,18 +79,15 @@ The **Curate** button carries a red count of the rows with issues, so you can se
 | **Re-check all** | Runs the structural check over every compound again |
 | **Download curated ▸** | **Clean only** or **Everything**, as SMILES (`.smi`) or SDF (`.sdf`) |
 | **History log** | Saves a text log of what was done to every row, including the rows you removed |
-| **Undo / Redo** | Step back and forward through named steps — *Undo Add 14 compounds from mydata.smi*. ⌘ Z and ⇧ ⌘ Z (Ctrl + Z, Ctrl + Shift + Z on Windows) do the same |
-| **Clear workspace…** | Empties the workspace and every evaluation result, after a confirmation. This is the one action undo cannot reverse |
+| **Undo / Redo** | Step back and forward through named steps — *Undo Load 14 compounds from mydata.smi*. ⌘ Z and ⇧ ⌘ Z (Ctrl + Z, Ctrl + Shift + Z on Windows) do the same, and so do the two arrow buttons at the top right of the workspace |
 
 An item that cannot run right now stays in the menu, grayed, with the reason beside it: *nothing loaded*, *busy*, *no clean rows*, *nothing to undo*.
 
 ---
 
-## ▶️ Count and Evaluate
+## ▶️ Evaluate
 
-The count on the right of the bar is the workspace in one line — how many compounds, how many reactions, how many with issues. It appears once something is loaded, on windows wide enough to show it.
-
-**Evaluate** is the only filled button on the bar. Hover it and its tooltip says what will happen: *Evaluate 14 items*, or *Evaluate 11 items; 3 with structural errors will be skipped*, or why it is disabled — *Load compounds first*, *Wait for the current run to finish*, *Nothing here can be evaluated yet — fix the structures first*. See [Evaluation](evaluation.md).
+**Evaluate** is the only filled button on the bar. The count of what it will run over is in the dialog it opens — *In the workspace: 14 compounds · 2 reactions · 6 with issues* — rather than on the bar. Hover it and its tooltip says what will happen: *Evaluate 14 items*, or *Evaluate 11 items; 3 with structural errors will be skipped*, or why it is disabled — *Load compounds first*, *Wait for the current run to finish*, *Nothing here can be evaluated yet — fix the structures first*. See [Evaluation](evaluation.md).
 
 ---
 
@@ -111,7 +111,7 @@ On a narrow window the control shrinks to the magnifying-glass icon alone rather
 
 ### Searching
 
-Typing filters the list on both the visible command name and a set of hidden synonyms, so you do not have to know our word for the job. `import`, `upload` and `sdf` all find **Add compounds from a file**; `clean`, `duplicates` and `mixtures` all find **One Step Cure**; `logout` finds **Sign out**.
+Typing filters the list on both the visible command name and a set of hidden synonyms, so you do not have to know our word for the job. `import`, `upload` and `sdf` all find **Load compounds from a file**; `clean`, `duplicates` and `mixtures` all find **One Step Cure**; `logout` finds **Sign out**.
 
 Every word you type has to appear somewhere, but the order does not matter. If nothing matches, the list reads *Nothing matches "…"* with the text you typed. Press **Enter** to run the highlighted command, or **Esc** to close the bar without running anything.
 
@@ -119,15 +119,15 @@ Every word you type has to appear somewhere, but the order does not matter. If n
 
 Every command is offered on every page.
 
-**Add**
+**Load**
 
 | Command | What it does |
 |---|---|
-| **Add compounds from a file** | Opens the file picker for compound files |
-| **Add reactions from a file** | Opens the file picker for `.rxn` files |
-| **Type a compound** | Opens the Type a compound dialog |
-| **Draw a structure in ChemiGraphy** | Opens the structure editor on an empty canvas |
-| **Type a reaction** | Opens the Type a reaction dialog |
+| **Load compounds from a file** | Opens the file picker for compound files |
+| **Load reactions from a file** | Opens the file picker for `.rxn` files |
+| **Enter a compound** | Opens the Enter a compound dialog |
+| **Draw a structure** | Opens ChemiGraphy on an empty canvas |
+| **Load a reaction** | Opens the Load a reaction dialog |
 
 **Curate**
 
@@ -182,13 +182,13 @@ This is on purpose. *"Where did Evaluate go?"* is a question worth answering eve
 
 ### Where it lives
 
-Every row that can run carries the place in the interface where the same command is normally found: **Add menu**, **Curate menu**, **Menu bar**, **Logo**, **Top right** or **Account menu**. The hint is there so the command bar teaches you the interface rather than replacing it.
+Every row that can run carries the place in the interface where the same command is normally found: **Load menu**, **Curate menu**, **Menu bar**, **Logo**, **Top right** or **Account menu**. The hint is there so the command bar teaches you the interface rather than replacing it.
 
 ---
 
 ## 🔑 The License Status Chip
 
-The first control after **Evaluate** is a chip showing your active license. It is present on every page. While the license is being fetched a gray placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
+On the right of the bar is a chip showing your active license. It is present on every page. While the license is being fetched a gray placeholder holds the space, so nothing beside it jumps sideways when the answer arrives.
 
 What the chip says depends on the license:
 

@@ -2,15 +2,15 @@
 
 ⚗️ QSAR Flex can load and visualize chemical reactions alongside compounds in the workspace. There are three ways in:
 
-- **Add ▾ → Reactions from file…** — the file picker, for `.rxn` files.
-- **Add ▾ → Type a reaction…** — the **Type a reaction** dialog, for reaction SMILES. On an empty workspace, **Add a reaction** on the card opens the same dialog, and so does **Type a reaction** in the command bar (⌘K / Ctrl+K).
+- **Load ▾ → Load a reaction…** — the **Load a reaction** dialog, for reaction SMILES, with a *load .rxn file(s)* link for files. On an empty workspace, **Load a reaction** on the card opens the same dialog, and so does **Load a reaction** in the command bar (⌘K / Ctrl+K).
+- **Load reactions from a file** in the command bar, or ⌘ ⇧ O / Ctrl + Shift + O — the file picker for `.rxn` files straight away.
 - **Drag and drop** — drop `.rxn` files anywhere on the page.
 
 ---
 
-## ✏️ Typing a reaction
+## ✏️ Loading a reaction
 
-**Add ▾ → Type a reaction…** opens the **Type a reaction** dialog, a single text box for reaction SMILES.
+**Load ▾ → Load a reaction…** opens the **Load a reaction** dialog, a text box for reaction SMILES with the file route under it.
 
 **Reaction SMILES format:** `reactants>>products` — use `.` to separate multiple reactants or products. You can also give agents in a middle segment, `reactants>agents>products`, separated by `.` in the same way. Recognised agents are drawn as short labels on the arrow rather than as structures. Each non-blank line is one step, so a multi-step route is entered as one reaction SMILES per line.
 
@@ -38,7 +38,7 @@ CC(=O)Cl.OCC>>CC(=O)OCC.Cl
 
 ## 📄 From .rxn files
 
-**Add ▾ → Reactions from file…** opens the file picker for `.rxn` files — the MDL RXN format used by ChemDraw, Marvin and other chemistry tools. Pick **several files at once** for a multi-step synthesis: the files are combined into a single multi-step reaction, named after its step count.
+The *load .rxn file(s)* link in the **Load a reaction** dialog — or **Load reactions from a file** in the command bar — opens the file picker for `.rxn` files, the MDL RXN format used by ChemDraw, Marvin and other chemistry tools. Pick **several files at once** for a multi-step synthesis: the files are combined into a single multi-step reaction, named after its step count.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/reactions-rxn-uploaded-dark.png">
@@ -71,7 +71,7 @@ Once submitted, the reaction appears in the table alongside your compounds as it
 - The row wears a **Reaction** badge in place of a curation verdict — reactions are not curated — and shows its step count in place of a SMILES. Reactions carry no CAS.
 - Click the row to open it in the panel: the reaction scheme, drawn large enough to read, with every step listed under it as reaction SMILES. Multi-step routes keep each step at its natural size.
 - The **Reactions** chip above the table shows only the reactions.
-- After an evaluation, the panel lists the reaction's outcomes, each a link to its report. Reactions are evaluated by the **N-Nitrosation** module only — any other module ticked in the same run comes back as **N/A** on the reaction row, while the compounds in that run are unaffected.
+- After an evaluation, the **Results** column lists the module and the panel lists the reaction's outcomes, each a link to its report. Reactions are evaluated by the **N-Nitrosation** module only — any other module ticked in the same run comes back as **N/A** on the reaction row, while the compounds in that run are unaffected.
 
 You can freely mix compounds and reactions in the same workspace. **One Step Cure** and the other curation tools leave reactions where they are.
 
