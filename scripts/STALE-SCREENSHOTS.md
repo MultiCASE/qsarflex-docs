@@ -2,6 +2,24 @@
 
 **Not published.** Deliberately absent from `SUMMARY.md`, so GitBook does not render it.
 
+## 2026-10-07 — re-shot for the two review rounds (9/28 and 10/6)
+
+The workspace scene follows the interface as it ships in the current beta: the empty card's
+**Load from a file / Enter a compound / Draw / Load a reaction**, the **Load ▾** menu (was Add) with
+**Clear workspace…** at its foot, the page heading with the undo / redo / **Clear** pack, the Element
+Vault's **Periodic table…** popover in the editor (new frame `editor-periodic-table-*`), the **Results**
+column listing each row's modules as report links, the panel's green **Evaluation results** block with
+its "Click 📄 to view detailed reports" hint, and the report sheet with **Save as PDF** only.
+
+Frame changes: `workspace-add-menu-*` → `workspace-load-menu-*`; `workspace-not-checked-*` is now taken
+after the PubChem correction (a SMILES edit is checked at once, so it no longer produces that state) and
+the edited row's frame is the new `workspace-after-edit-*`; `editor-periodic-table-*` is new. The results
+frame scrolls to the top first so the heading and the Clear pack are in it. 66 workspace frames (33 pairs).
+
+Known blemish, not a docs problem: at the 1440 px viewport the table is 64 px wider than its container
+once the Results column appears (column sizes sum to 1294 px), so `workspace-results-*` shows a sliver
+of table past the sticky chip row. Re-shoot that pair when the column widths change.
+
 ## 2026-09-17 — install guides: the "app ready" frames are the web frame now
 
 `install-mac-06-app-ready.png` and `install-win-08-app-ready.png` were deleted. Both install guides
@@ -52,7 +70,7 @@ resolving the arm64 image already sitting on `mcr.microsoft.com/dotnet/aspnet:9.
 
 | Set | State |
 |---|---|
-| Web UI (workspace, licence, profile; light/dark pairs) | **Re-captured 2026-09-16** against the merged workspace with ChemiGraphy |
+| Web UI (workspace, licence, profile; light/dark pairs) | Workspace set **re-captured 2026-10-07** for the review rounds; licence and profile sets from 2026-09-16 |
 | Install guides (15 files) | Captured 2026-09-01; installer and sign-in screens only, no version strings. The two "app ready" frames were replaced by the web `workspace-empty` pair on 2026-09-17 |
 | Support portal (23 files, `assets/support/`) | Current; shot 2026-06-03 against the 4.0-era portal |
 

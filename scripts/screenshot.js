@@ -468,11 +468,11 @@ async function screenshotWorkspace(page, theme) {
   // ── empty workspace ────────────────────────────────────────────────────────
   await shot(page, `workspace-empty-${theme}.png`);
 
-  // ── Add ▾ → Type a compound… ───────────────────────────────────────────────
+  // ── the empty card → Enter a compound ─────────────────────────────────────
+  // The Load menu is not on the bar while the workspace is empty; the card is.
   try {
-    await openMenu(page, 'Add');
-    await menuItem(page, 'Type a compound');
-    await page.waitForSelector('[role="dialog"]:has-text("Type a compound")', { timeout: 6000 });
+    await page.locator('button').filter({ hasText: /^Enter a compound$/ }).first().click();
+    await page.waitForSelector('[role="dialog"]:has-text("Enter a compound")', { timeout: 6000 });
     const smilesInput = page.locator('[role="dialog"] input').first();
     await smilesInput.fill('CC(=O)Oc1ccccc1C(=O)O');
     await page.waitForTimeout(600);
@@ -488,16 +488,30 @@ async function screenshotWorkspace(page, theme) {
       await shot(page, `add-compound-autofill-${theme}.png`);
     }
     await pressEscape(page);
-  } catch (e) { console.warn('  ⚠ Type a compound:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
+  } catch (e) { console.warn('  ⚠ Enter a compound:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
 
-  // ── Add ▾ → Draw in ChemiGraphy… ──────────────────────────────────────────
+  // ── the empty card → Draw ─────────────────────────────────────────────────
   try {
-    await openMenu(page, 'Add');
-    await menuItem(page, 'Draw in ChemiGraphy');
+    await page.locator('button').filter({ hasText: /^Draw$/ }).first().click();
     await page.waitForSelector('[role="dialog"]', { timeout: 8000 });
     await page.waitForFunction(() => !document.body.innerText.includes('Starting the editor'), null, { timeout: 60000 }).catch(() => {});
     await page.mouse.move(820, 460); await page.waitForTimeout(2500);
     await shot(page, `editor-new-${theme}.png`);
+    // The Element Vault's periodic table. The editor lives in a shadow root,
+    // so its button is found through the shadow tree.
+    const opened = await page.evaluate(() => {
+      const find = (root) => {
+        const hit = root.querySelector('#periodic-table-open'); if (hit) return hit;
+        for (const el of root.querySelectorAll('*')) { if (el.shadowRoot) { const f = find(el.shadowRoot); if (f) return f; } }
+        return null;
+      };
+      const b = find(document); if (!b) return false; b.click(); return true;
+    });
+    if (opened) {
+      await page.waitForTimeout(900);
+      await shot(page, `editor-periodic-table-${theme}.png`);
+      await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+    } else console.warn('  ⚠ periodic table button not found');
     await page.locator('[role="dialog"] button').filter({ hasText: /^Cancel$/ }).first().click({ timeout: 3000 }).catch(() => {});
     await page.waitForTimeout(500);
   } catch (e) { console.warn('  ⚠ Editor (new):', e.message?.split('\n')[0]); await pressEscape(page, 2); }
@@ -510,7 +524,7 @@ async function screenshotWorkspace(page, theme) {
   await shot(page, `workspace-table-${theme}.png`);
 
   // ── the three menus ───────────────────────────────────────────────────────
-  try { await openMenu(page, 'Add'); await shot(page, `workspace-add-menu-${theme}.png`); await pressEscape(page); } catch {}
+  try { await openMenu(page, 'Load'); await shot(page, `workspace-load-menu-${theme}.png`); await pressEscape(page); } catch {}
   try { await openMenu(page, 'Curate'); await shot(page, `workspace-curate-menu-${theme}.png`); await pressEscape(page); } catch {}
   try {
     await openMenu(page, 'Curate');
@@ -547,8 +561,9 @@ async function screenshotWorkspace(page, theme) {
     await page.waitForTimeout(400);
     await shot(page, `workspace-edit-smiles-${theme}.png`);
     await page.locator('[role="dialog"] button').filter({ hasText: /^Save$/ }).first().click();
-    await page.waitForTimeout(1200);
-    await shot(page, `workspace-not-checked-${theme}.png`);
+    // The edit is checked at once; the frame shows the re-checked row.
+    await waitIdle(page, 1200);
+    await shot(page, `workspace-after-edit-${theme}.png`);
     // and back, so the rest of the set is as the file loaded it
     await openMenu(page, 'Curate'); await menuItem(page, /^Undo/); await waitIdle(page, 1200);
     await closePanel(page);
@@ -598,6 +613,10 @@ async function screenshotWorkspace(page, theme) {
     await page.locator('[role="dialog"] button').filter({ hasText: /^Done$/ }).first().click({ timeout: 3000 }).catch(() => {});
     await page.waitForTimeout(400);
     await closePanel(page);
+    // A PubChem correction is the one change that is not checked at once: the
+    // row wears Not checked and the amber strip offers Re-check.
+    await page.waitForTimeout(600);
+    await shot(page, `workspace-not-checked-${theme}.png`);
   } catch (e) { console.warn('  ⚠ PubChem:', e.message?.split('\n')[0]); await pressEscape(page, 2); }
 
   // ── One Step Cure: the dialog, its PubChem option, the summary ────────────
@@ -620,8 +639,8 @@ async function screenshotWorkspace(page, theme) {
 
   // ── reactions: typed, and from .rxn files ─────────────────────────────────
   try {
-    await openMenu(page, 'Add'); await menuItem(page, 'Type a reaction');
-    await page.waitForSelector('[role="dialog"]:has-text("Type a reaction")', { timeout: 6000 });
+    await openMenu(page, 'Load'); await menuItem(page, 'Load a reaction');
+    await page.waitForSelector('[role="dialog"]:has-text("Load a reaction")', { timeout: 6000 });
     const box = page.locator('[role="dialog"] textarea, [role="dialog"] input[placeholder*="Reaction SMILES"]').first();
     await box.fill(REACTION_SMILES); await page.waitForTimeout(500);
     await shot(page, `reactions-dialog-${theme}.png`);
@@ -655,11 +674,16 @@ async function screenshotWorkspace(page, theme) {
     await page.locator('[role="dialog"] button').filter({ hasText: /Evaluate/ }).last().click();
     await page.waitForFunction(() => !document.body.innerText.includes('Evaluating the workspace'), null, { timeout: 600000 });
     await page.waitForTimeout(1500);
+    // From the top, so the heading, the undo/redo/Clear pack and the first rows' Results are all in frame.
+    await page.evaluate(() => { window.scrollTo(0, 0); for (const el of document.querySelectorAll('*')) { if (el.scrollTop > 0) el.scrollTop = 0; } });
+    await page.waitForTimeout(600);
     await shot(page, `workspace-results-${theme}.png`);
     await openRow(page, 'Caffeine');
     await shot(page, `workspace-panel-results-${theme}.png`);
-    // The report opens from a module row in the panel's Evaluation section.
-    const outcome = page.locator('button').filter({ hasText: /^LogP/ }).first();
+    await closePanel(page);
+    // The report opens from the module's name in the row's Results column.
+    const caffeine = await rowByName(page, 'Caffeine');
+    const outcome = caffeine.locator('button').filter({ hasText: /^LogP/ }).first();
     await outcome.click();
     await page.waitForSelector('[data-slot="sheet-content"]:has-text("Report"), [role="dialog"]:has-text("Report"), [data-state="open"]:has-text("LogP — Report")', { timeout: 180000 });
     await page.waitForTimeout(4000);

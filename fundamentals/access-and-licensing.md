@@ -273,7 +273,7 @@ Curation is not metered. Checking, curing, tautomers and the structure editor do
 
 The desktop application is available to all licensed users, on Windows and on macOS (Apple Silicon, macOS 12 or later). It checks for an active license at launch and will not start without one.
 
-The app runs the prediction models on your workstation, and the reference database lives on the machine: on first run the app downloads an encrypted copy of roughly 4 GB. The structures you evaluate never leave the workstation, but the app is **not** usable offline: an internet connection is needed for sign-in and the license check at every launch, and for the entitlement check that runs each time you open the module picker.
+The app runs the prediction models on your workstation, and the reference database lives on the machine: on first run the app downloads an encrypted copy of roughly 4 GB. The structures you evaluate never leave the workstation, but the app is **not** usable offline: an internet connection is needed for the license check at every launch (the sign-in itself is kept between launches), and for the entitlement check that runs each time you open the module picker.
 
 - [⬇️ Download QSAR Flex for Windows](https://downloads.multicase.com/qsarflex/local/QSARFlex-Local-Installer.exe)
 - [⬇️ Download QSAR Flex for macOS](https://downloads.multicase.com/qsarflex/mac/local/QSARFlex-Local-Installer.dmg)

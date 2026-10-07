@@ -15,7 +15,7 @@ This guide walks through installing the QSAR Flex desktop application on Windows
 | **64-bit Windows (x64)** | QSAR Flex is published as a 64-bit (x64) build only. There is no 32-bit or Arm build. |
 | **Microsoft Edge WebView2 Runtime** | QSAR Flex draws its interface in WebView2. The runtime is included with Windows 11; on earlier versions of Windows, install Microsoft's free WebView2 Runtime if it is not already present. |
 | **A MultiCASE account with an active license** | QSAR Flex checks for an active license every time it starts and will not open without one. See [Access & Licensing](fundamentals/access-and-licensing.md). |
-| **An internet connection** | The installer downloads the application, and sign-in plus the license check happen over the network at every launch. |
+| **An internet connection** | The installer downloads the application, and the license check happens over the network at every launch. You sign in once; the app keeps the session and asks for the browser again only when it has ended. |
 
 {% hint style="info" %}
 **Don't have an account yet?** Request one at [support.multicase.com](https://support.multicase.com). The same MultiCASE account signs you in to QSAR Flex and to the support portal.
@@ -96,7 +96,7 @@ The browser lands on a confirmation page and hands your session straight back to
 <figure><img src=".gitbook/assets/install-win-06-desktop-return.png" alt="You're signed in — the browser hands you back to QSAR Flex"></figure>
 
 {% hint style="info" %}
-QSAR Flex keeps no sign-in tokens on disk, so it asks you to sign in through the browser each time you start it. Straight after sign-in it fetches your license — if none is active, it reports a license error and closes. Open a ticket at [support.multicase.com](https://support.multicase.com) if that happens.
+You sign in once. QSAR Flex keeps the session on this machine, in a DPAPI-protected file only your Windows account can read, and the next launch opens straight into the workspace; the browser sign-in comes back only when you signed out, signed in elsewhere with the same account, or the session ended. Straight after sign-in it fetches your license — if none is active, it reports a license error and closes. Open a ticket at [support.multicase.com](https://support.multicase.com) if that happens.
 {% endhint %}
 
 ---

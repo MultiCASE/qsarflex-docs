@@ -23,7 +23,7 @@ Curation is not metered. It does not consume tests and does not need an active l
 
 ## The check
 
-Loading is checking. Whichever way compounds come in — a file, the Type a compound dialog, a drop, a paste, the structure editor — they are added to the table and the whole set is checked at once, so a duplicate is found whether its twin arrived in the same file or a week ago. The toast says what came of it: *14 compounds added from mydata.smi. 6 have issues to look at.*
+Loading is checking. Whichever way compounds come in — a file, the Enter a compound dialog, a drop, a paste, the structure editor — they are added to the table and the whole set is checked at once, so a duplicate is found whether its twin arrived in the same file or a week ago. The toast says what came of it: *14 compounds added from mydata.smi. 6 have issues to look at.*
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">
@@ -43,7 +43,7 @@ Every compound wears one status badge, plus a badge for each additional finding.
 | Badge | What it means |
 |---|---|
 | **Clean** | The check found nothing. |
-| **Not checked** | No check has looked at this structure since it last changed — it was just loaded and the check was canceled, it was edited, it was picked out of a mixture, or it came from an older saved set. It is not clean; **Re-check** to find out. |
+| **Not checked** | No check has looked at this structure since it last changed — it was just loaded and the check was canceled, it was picked out of a mixture, a tautomer or a PubChem correction replaced it, or it came from an older saved set. It is not clean; **Re-check** to find out. |
 | **Mixture** | The structure has more than one disconnected part — *It is a salt/mixture.* A salt counts: the counter-ion is a second part. |
 | **Duplicate** | The same structure appears elsewhere in the set — *Duplicate of "Ibuprofen".* Rows are compared on the structure the check produced, not on the text you typed, so `c1ccccc1` and `C1=CC=CC=C1` are duplicates, and so are two stereoisomers. |
 | **Atom type** | An atom with a valence or charge the engine does not accept — *Unrecognized atom type.* |
@@ -80,7 +80,7 @@ When any row is **Not checked**, an amber strip says how many and offers **Re-ch
 
 ## The table
 
-Columns are **#**, **Status**, **Name**, **CAS** and **SMILES**, then a trash button — and, once an evaluation has run, **Results**. See [Evaluation](evaluation.md).
+Columns are **#**, **Status**, **Name**, **CAS** and **SMILES**, then a trash button — and, once an evaluation has run, **Results**, which lists each row's modules as links to their reports. See [Evaluation](evaluation.md).
 
 - The number is assigned when the row is added and stays with it; rows are not renumbered when others are deleted.
 - The **Status** column carries the badge and, beside it, the check's detail: *copy of #4* on a duplicate, *copies: #5* on the row it duplicates.
@@ -109,7 +109,7 @@ Press **?** anywhere for the full shortcut reference.
 
 ## The panel
 
-Click a row — or press **Enter** on it — and it opens in a panel on the left. The table stays live beside it: click another row and the panel moves to it; **↑** and **↓** do the same from the keyboard; **Esc** closes it.
+Click a row — or press **Enter** on it — and it opens in a panel on the left. The table stays live beside it: click another row and the panel moves to it; **↑** and **↓** do the same from the keyboard; **Esc**, the **✕**, or a click anywhere else on the page closes it.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-panel-dark.png">
@@ -118,12 +118,13 @@ Click a row — or press **Enter** on it — and it opens in a panel on the left
 
 From top to bottom:
 
-- The row's number and name, with **Rename** beside it, then the badge and CAS; on the header's right, **Tautomers**, **Look up in PubChem**, the previous and next arrows and **✕**.
-- The check's message and the advice under it, with the button that acts on it — **Pick components** on a mixture, **Delete this copy** on a duplicate, **Draw the correction** on a structure the check could not read.
-- The structure, drawn large by ChemiGraphy. Atoms the check objected to are orange. The magnifier opens it full size.
+- The row's number and its name — the name is the rename control: click it, or press **F2**. A row that arrived without a name says **Add a name** under its title. Then the badge and CAS; on the header's right, **Tautomers**, **Look up in PubChem**, the previous and next arrows and **✕**.
+- The check's message and the advice under it, with the button that acts on it — **Pick components** on a mixture, **Delete this copy** on a duplicate, **Edit structure** on a structure the check could not read.
+- The structure, drawn large by ChemiGraphy. Atoms the check objected to are orange, their labels included, so a carbon with one bond too many reads as an orange **C**. The magnifier opens it full size.
 - **Edit structure** — opens ChemiGraphy on the compound — and **Edit SMILES**.
-- **SMILES**, with a copy button; **From mixture**, the original mixture SMILES on a row that came from a split; and **History** — what has been done to this row, one line per action.
-- **Evaluation** — the module outcomes for this row, each a row that opens its report; or *Not evaluated yet*; or, on a row with a structural error, *Evaluate skips this compound until the structure is fixed.*
+- **SMILES**, with a copy button, and **From mixture**, the original mixture SMILES on a row that came from a split.
+- **Evaluation results** — the module outcomes for this row, each a line that opens its report, with *Click 📄 to view detailed reports* under them; the heading turns green once there are results. Before a run it reads *Not evaluated yet*; on a row with a structural error, *Evaluate skips this compound until the structure is fixed.*
+- **Curation history** — what has been done to this row, one line per action.
 - **Delete**, with the same confirmation as the table's trash button, and **Keyboard shortcuts**.
 
 <figure><picture>
@@ -139,8 +140,12 @@ From top to bottom:
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-edit-smiles-dark.png">
   <img src=".gitbook/assets/workspace-edit-smiles-light.png" alt="">
 </picture></figure>
+<figure><picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-after-edit-dark.png">
+  <img src=".gitbook/assets/workspace-after-edit-light.png" alt="">
+</picture></figure>
 
-An edited SMILES makes the row **Not checked** — *Edited — re-check to validate* — and clears its evaluation results, which belonged to the old structure. A rename does the same only when the name was what the check objected to.
+An edited SMILES is checked at once: the whole set is run through the check again, so the row comes back wearing its new verdict and a duplicate is still found against the rest. Its evaluation results, which belonged to the old structure, are cleared. A rename marks the row **Not checked** only when the name was what the check objected to.
 
 The SMILES field takes a SMILES; an InChI is refused with *Enter a SMILES string, not an InChI.*
 
@@ -296,7 +301,7 @@ PubChem is a third-party service run by the NCBI. MultiCASE does not store or lo
 
 The workspace keeps a history of up to 50 steps, each named after the action that made it — *Add 14 compounds from mydata.smi*, *Re-check*, *One Step Cure*, *Delete &lt;name&gt;*, *Edit SMILES — &lt;name&gt;*, *Rename to "…"*, *Split into 2 components*, *Re-pick components — &lt;name&gt;*, *PubChem lookup — &lt;name&gt;*, *Use tautomer — &lt;name&gt;*, *Edit structure — &lt;name&gt;*, *Evaluate 14 items*.
 
-- **Curate ▾ → Undo** names what it will reverse: *Undo One Step Cure*. So do the two arrow buttons beside the view chips, and their tooltips. ⌘ Z and ⇧ ⌘ Z (Ctrl + Z and Ctrl + Shift + Z on Windows) do the same from anywhere on the page, except inside a text field or a dialog.
+- **Curate ▾ → Undo** names what it will reverse: *Undo One Step Cure*. So do the two arrow buttons at the top right of the workspace, and their tooltips. ⌘ Z and ⇧ ⌘ Z (Ctrl + Z and Ctrl + Shift + Z on Windows) do the same from anywhere on the page, except inside a text field or a dialog.
 - Undoing confirms what came back: *Undid: One Step Cure.*
 - A step is everything that action did: undoing a delete brings the row back with its evaluation results and takes it off the history log; undoing a load takes back the rows and their verdicts together.
 - An evaluation is a step of its own, so undoing something you did before a run does not take the run's results with it.
@@ -327,13 +332,13 @@ The SMILES file is one tab-separated line per compound: SMILES, name and CAS. Th
 
 **History log** saves `curation_log.txt`: one line per compound — its number, its name and what has been done to it — followed by the rows you removed, marked *Removed*.
 
-Both files can be loaded back into the workspace, from the Add menu or by dropping them on the page.
+Both files can be loaded back into the workspace, from the Load menu or by dropping them on the page.
 
 ---
 
 ## Clearing
 
-**Curate ▾ → Clear workspace…** asks first. The dialog names what goes — the compounds, the reactions and every evaluation result — with **Cancel** and a red **Clear workspace**. This is the one action undo cannot reverse, and re-evaluating consumes tests again.
+The red **Clear** button under **Undo** and **Redo** at the top right of the workspace, or **Load ▾ → Clear workspace…**, asks first. The dialog names what goes — the compounds, the reactions and every evaluation result — with **Cancel** and a red **Clear workspace**. This is the one action undo cannot reverse, and re-evaluating consumes tests again.
 
 ---
 
@@ -345,12 +350,12 @@ The workspace, its verdicts and its evaluation results are held in your browser 
 
 ## Tips
 
-- **Re-check after manual work.** Edits, splits and renames are not re-checked until you do — and Duplicate is recalculated from the whole set, so it can only be right after a fresh check. One Step Cure re-checks for you as its last step. The amber strip is the reminder.
+- **Re-check after manual work.** A structure edit is checked as it is saved, but splits, tautomers, PubChem corrections and renames are not re-checked until you do — and Duplicate is recalculated from the whole set, so it can only be right after a fresh check. One Step Cure re-checks for you as its last step. The amber strip is the reminder.
 - **One Step Cure first, by hand afterwards.** Let it clear the bulk, then work the rows it left under **Fix manually**, from the panel.
 - **Check the count when you load.** *N compounds added from …* is your only warning that a row in the file did not parse.
 - **Splitting raises the compound count.** A mixture split into two components leaves two rows where there was one.
 - **Check the tautomer when a result surprises you.** A model sees the form you loaded. **Tautomers** on the row shows the alternatives and lets you evaluate the one you meant.
-- **Draw what you cannot type.** A row the check calls **Fatal** opens in the structure editor with an empty canvas; draw it and **Use this structure** replaces the SMILES. See [Drawing Structures](structure-editor.md).
+- **Draw what you cannot type.** A row the check calls **Fatal** offers **Edit structure**, which opens ChemiGraphy with an empty canvas; draw it and **Use this structure** replaces the SMILES and checks the row again. See [Drawing Structures](structure-editor.md).
 
 ---
 

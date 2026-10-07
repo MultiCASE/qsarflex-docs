@@ -2,13 +2,13 @@
 
 Compounds live in the **workspace**, the table on the main screen. There are five ways in, and all of them end the same way: the compounds are added to the table and checked, and each row wears its curation verdict.
 
-- **Add ▾ → Compounds from file…** — the file picker. Several files at once.
-- **Add ▾ → Type a compound…** — the **Type a compound** dialog, for one compound by SMILES, InChI, name or registry number.
-- **Add ▾ → Draw in ChemiGraphy…** — the structure editor. See [Drawing Structures](../structure-editor.md).
+- **Load ▾ → Compounds from file…** — the file picker. Several files at once.
+- **Load ▾ → Enter a compound…** — the **Enter a compound** dialog, for one compound by SMILES, InChI, name or registry number.
+- **Load ▾ → Draw…** — ChemiGraphy, the structure editor. See [Drawing Structures](../structure-editor.md).
 - **Drag and drop** — drop files anywhere on the page.
 - **Paste** — press **⌘+V** (macOS) or **Ctrl+V** (Windows) with SMILES text or files on the clipboard.
 
-While the workspace is empty, the page is a single card with the same routes as buttons — **Add from a file**, **Type a compound**, **Draw in ChemiGraphy**, **Add a reaction** — and a reminder that you can also drop files or paste SMILES.
+While the workspace is empty, the page is a single card headed **Load compound(s)**, with the same routes as buttons — **Load from a file**, **Enter a compound**, **Draw**, **Load a reaction** — and a reminder that you can also drop files or paste SMILES. The **Load** menu itself appears on the bar once the first row is in.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/workspace-empty-dark.png">
@@ -19,11 +19,11 @@ While the workspace is empty, the page is a single card with the same routes as 
 
 ## 📂 From a file
 
-**Add ▾ → Compounds from file…** opens the file picker. Pick one file or several; they are read together and added in one step.
+**Load ▾ → Compounds from file…** opens the file picker. Pick one file or several; they are read together and added in one step.
 
 <figure><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/workspace-add-menu-dark.png">
-  <img src="../.gitbook/assets/workspace-add-menu-light.png" alt="">
+  <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/workspace-load-menu-dark.png">
+  <img src="../.gitbook/assets/workspace-load-menu-light.png" alt="">
 </picture></figure>
 
 **Supported file types:**
@@ -41,9 +41,9 @@ Loading into a workspace that already has compounds **appends**. The new rows ar
 
 ---
 
-## ➕ Typing a compound
+## ➕ Entering a compound
 
-**Add ▾ → Type a compound…** opens the **Type a compound** dialog. It has three fields:
+**Load ▾ → Enter a compound…** opens the **Enter a compound** dialog. It has three fields:
 
 - **SMILES or InChI**
 - **Name**
@@ -70,7 +70,7 @@ A structure in the **SMILES or InChI** field gains a copy button that puts the S
 **Auto Fill** is the one place that queries PubChem as soon as you press it: it sends what you typed to PubChem at NCBI. Its data is generally reliable, but review the result — you can edit any field before adding.
 {% endhint %}
 
-For many compounds at once, use **Add ▾ → Compounds from file…**, or drop the file onto the page.
+For many compounds at once, use **Load ▾ → Compounds from file…**, or drop the file onto the page.
 
 ---
 
@@ -111,13 +111,13 @@ Each compound is a row: its number, its badge with the check's detail beside it,
   <img src="../.gitbook/assets/workspace-table-light.png" alt="">
 </picture></figure>
 
-- Click a row to open it in the **panel** on the left: the structure large, every field, the row's history and its evaluation results. Everything you can do to a row — edit the structure in ChemiGraphy, edit the SMILES, rename, generate tautomers, look it up in PubChem, pick the components of a mixture, delete — is there, each with a single-key shortcut. Press **?** for the list.
+- Click a row to open it in the **panel** on the left: the structure large, every field, its evaluation results and the row's history. Everything you can do to a row — edit the structure in ChemiGraphy, edit the SMILES, rename, generate tautomers, look it up in PubChem, pick the components of a mixture, delete — is there, each with a single-key shortcut. Press **?** for the list. Click another row to move the panel to it, or anywhere else on the page to close it.
 - The **trash** button removes the row after a confirmation. Deleting is a step you can undo.
 - The chips above the table — **All**, **Clean**, **All errors**, **Duplicates**, **Mixtures** and so on — filter to one verdict; **Search the table** filters by any text; **Columns** hides and shows columns.
 
-Once an evaluation has run, a **Results** column joins the table; see [Evaluation](../evaluation.md).
+Once an evaluation has run, a **Results** column joins the table, listing each row's modules as links to their reports; see [Evaluation](../evaluation.md).
 
-**Curate ▾ → Clear workspace…** empties the whole workspace after a confirmation that names exactly what will be deleted. That is the one action undo cannot reverse, and re-evaluating consumes tests again.
+**Clear** — the red button under **Undo** and **Redo** at the top right, or **Load ▾ → Clear workspace…** — empties the whole workspace after a confirmation that names exactly what will be deleted. That is the one action undo cannot reverse, and re-evaluating consumes tests again.
 
 ---
 

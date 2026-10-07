@@ -58,7 +58,7 @@ PubChem is the only third-party service QSAR Flex contacts with your data. There
 
 | Where | What is sent | What triggers it |
 |---|---|---|
-| **Auto Fill** — Add compound, single-compound form | The name, CAS number or SMILES you typed | Clicking **Auto Fill**. The click is the confirmation; there is no separate dialog |
+| **Auto Fill** — Enter a compound dialog | The name, CAS number or SMILES you typed | Clicking **Auto Fill**. The click is the confirmation; there is no separate dialog |
 | **One Step Cure → Verify structures against PubChem** | Names, CAS numbers and SMILES for every compound in the set | Ticking the box (it is off by default), pressing **Proceed**, then confirming the consent dialog |
 | **PubChem lookup** — a row's ⋮ menu in Curate | That compound's name, CAS number and SMILES | Choosing **PubChem lookup**, then confirming the consent dialog |
 
@@ -84,10 +84,10 @@ The one place QSAR Flex handles a password itself is **Account → Security**. C
 
 **Web app.** The session is a NextAuth session in your browser. Cognito tokens expire after about six minutes and are refreshed every four. Only one session is live per user per product: signing in somewhere else ends the earlier one.
 
-**Desktop apps.** Sign-in opens the hosted page in your **default browser** — so password managers and SSO work as they normally do — and a one-time authorization code comes back to the app through its `qsarflex://` (Windows) or `qsarflexmac://` (macOS) URL scheme. No token travels over that scheme. The app posts the code to `user-manager-be.multicase.com` over HTTPS, which performs the Cognito exchange server-side and returns the ID token only — so no client secret ships in the application, and the desktop app never holds a refresh token.
+**Desktop apps.** Sign-in opens the hosted page in your **default browser** — so password managers and SSO work as they normally do — and a one-time authorization code comes back to the app through its `qsarflex://` (Windows) or `qsarflexmac://` (macOS) URL scheme. No token travels over that scheme. The app posts the code to `user-manager-be.multicase.com` over HTTPS, which performs the Cognito exchange server-side and returns the ID token only — so no client secret ships in the application, and the desktop app never holds a refresh token. The refresh token stays with the user-manager service, which keeps one live session per account and application.
 
 {% hint style="info" %}
-**Desktop tokens are never written to disk.** The ID token is held in memory for the lifetime of the process — there is no Keychain entry, no DPAPI blob, no token file. That is why the desktop app asks you to sign in at every launch, and why closing the app ends the session on that machine. A background timer refreshes the token every five minutes while the app is open.
+**What the desktop app keeps between launches.** The last ID token, with the account and application it belongs to, is stored in the macOS login Keychain or, on Windows, in a DPAPI-protected file under the user's local application data — readable by that user on that machine only. No refresh token, password or secret is stored. At the next launch the app asks the user-manager to refresh that token; if the server still honours the session the app opens without the browser, and if it does not — you signed out, you signed in elsewhere with the same account, or the thirty-day session ended — the stored token is discarded and the browser sign-in runs again. Sign-out deletes it. While the app is open a background timer refreshes the token every five minutes, and the stored copy follows each refresh.
 {% endhint %}
 
 There is also no offline license cache, and neither deployment works offline — the desktop app included. It fetches an active license at launch and will not open without one, and every evaluation, on either deployment, needs a live entitlement check: opening the module picker fetches the module catalog and your licensed modules from `user-manager-be.multicase.com`, and if that call fails no module can be selected. Holding the reference data locally removes the download, not the dependency.

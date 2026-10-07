@@ -1,6 +1,6 @@
 # Evaluation
 
-🔬 Evaluation runs the prediction modules your license covers against the workspace — compounds and reactions — in a single run, and writes the outcomes onto the rows: a **Results** column on the table, and the outcome per module in each row's panel.
+🔬 Evaluation runs the prediction modules your license covers against the workspace — compounds and reactions — in a single run, and writes the outcomes onto the rows: a **Results** column on the table, one link per module straight into its report, and the outcome per module in each row's panel.
 
 ---
 
@@ -8,7 +8,7 @@
 
 With at least one item in the workspace, there are two ways to start:
 
-- Click the green **Evaluate** button on the right of the navbar.
+- Click the green **Evaluate** button on the navbar.
 - Open the command bar with **⌘K** (macOS) / **Ctrl+K** (Windows) and choose **Evaluate**.
 
 The button's tooltip says what will happen before you press it — *Evaluate 14 items*, or *Evaluate 11 items; 3 with structural errors will be skipped*. It is disabled, with the reason in the tooltip, while the workspace is empty, while it is still loading, and while a load, a check, a cure or a run is already in progress. The command bar lists **Evaluate** on an empty workspace too, grayed out, with *"Nothing in the workspace"* on the row.
@@ -21,7 +21,7 @@ Every reaction, and every compound the check could read. A compound the check re
 
 ## Choosing Modules
 
-Either route opens the **Select Modules to Evaluate** dialog.
+Either route opens the **Select Modules to Evaluate** dialog. Its first line is what it will run over — *In the workspace: 14 compounds · 2 reactions · 6 with issues.*
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/evaluate-dialog-dark.png">
@@ -96,14 +96,14 @@ Results are held on the device, in the browser (or the desktop app's own web sto
 
 ## Reading the Results
 
-Once a run has finished, the table gains a **Results** column. A row that was evaluated reads **View results**; a row the run skipped reads **Skipped**, with the reason in its tooltip; a row that was not part of the run shows a dash.
+Once a run has finished, the table gains a **Results** column. A row that was evaluated lists the modules that ran on it, one under the other, each with a document icon: click a module name and its report opens, one click from the table. A row the run skipped reads **Skipped**, with the reason in its tooltip; a row that was not part of the run reads **Not evaluated**.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-results-dark.png">
   <img src=".gitbook/assets/workspace-results-light.png" alt="">
 </picture></figure>
 
-**View results** opens the row's panel on its **Evaluation** section: one line per module, the outcome on the right, and a document icon — click the line to open that module's report. Before a row has been evaluated the panel reads *Not evaluated yet*; on a row the run skipped it reads *Evaluate skips this compound until the structure is fixed.* A `*` after a value marks an exact hit in the module's experimental database, and the panel says so under the list.
+The outcomes themselves are in the row's panel: click the row and read **Evaluation results**, one line per module with the outcome on the right and a document icon — click the line to open that module's report, as the note under the list says: *Click 📄 to view detailed reports.* The heading is green once there are results. Before a row has been evaluated the panel reads *Not evaluated yet*; on a row the run skipped it reads *Evaluate skips this compound until the structure is fixed.* A `*` after a value marks an exact hit in the module's experimental database, and the panel says so under the list.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-panel-results-dark.png">
@@ -131,7 +131,7 @@ Reactions are evaluated by the **N-Nitrosation** module only. Tick other modules
 
 ## 📄 Module Reports
 
-Click a module's line in the panel and QSAR Flex generates a full HTML report for that one item and that one module, then opens it in a panel that slides in from the right, titled **&lt;module&gt; — Report**. Every structure in it is drawn by ChemiGraphy, the same way it is drawn in the workspace.
+Click a module name in the **Results** column, or a module's line in the panel, and QSAR Flex opens the full report for that one item and that one module in a panel that slides in from the right. Every structure in it is drawn by ChemiGraphy: the query compound sized to its heavy-atom count, each surrogate and product fitted to its column, terminal carbons written out as CH₃, the nitrosamine centre or the alert atoms in red.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
@@ -143,16 +143,7 @@ Click a module's line in the panel and QSAR Flex generates a full HTML report fo
   <img src=".gitbook/assets/eval-report-light.png" alt="">
 </picture></figure>
 
-Two icon buttons sit in the panel's header. Neither carries a label; hover either one for its name:
-
-| Button | What it does |
-|---|---|
-| **Download HTML** ⬇ | Saves the report as a single self-contained `.html` file. Structures are embedded as inline SVG, so the saved file needs nothing else to open. |
-| **Print / Save as PDF** 🖨 | Opens your system print dialog for the report. Choose *Save as PDF* there to get a PDF. The report carries print styling, with a dated header and a *MultiCASE Inc. - QSAR Flex* footer with page numbers. |
-
-{% hint style="info" %}
-There is no direct PDF export. HTML is the format the engine produces; a PDF comes from printing that HTML, which is why the report is styled for print.
-{% endhint %}
+One button sits in the panel's header: **Save as PDF**. It opens your system print dialog on the report; choose *Save as PDF* there. The report is laid out for US Letter on the web and in both desktop apps, so the same report paginates the same way wherever it is saved, and its footer names the product version and the time it was made.
 
 Some reports link to further detail — a distribution graph, a compound's property record. Those open as a second, nested **Detailed Report** panel on top of the first rather than in a new window, so the flow works the same in the browser and inside the desktop shells.
 

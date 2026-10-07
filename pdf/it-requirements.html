@@ -103,7 +103,7 @@ td.o { font-style: italic; color: var(--ink-3); }
             <tr><td class="k">Web rendering</td><td>Edge <b>WebView2</b>, pre-installed on Windows 11; may need deploying on Windows 10 (section 3).</td><td><b>WKWebView</b>, part of macOS. Nothing to install.</td></tr>
             <tr><td class="k">Memory</td><td colspan="2">4 GB minimum, 8 GB recommended.</td></tr>
             <tr><td class="k">Disk</td><td>≈285 MB application (measured on a clean install of the preceding 3.9 release, including Velopack's package cache) plus ≈4.0 GB reference data. Allow <b>10 GB</b> free.</td><td>≈275 MB bundle plus ≈4.0 GB reference data. Allow <b>10 GB</b> free.</td></tr>
-            <tr><td class="k">Internet</td><td colspan="2">Required at <b>every launch</b> for sign-in and licence verification, and for updates. Section 6 sets out what is transmitted.</td></tr>
+            <tr><td class="k">Internet</td><td colspan="2">Required at <b>every launch</b> for the session refresh (or sign-in) and licence verification, and for updates. Section 6 sets out what is transmitted.</td></tr>
           </tbody>
         </table>
       </div>
@@ -248,7 +248,7 @@ td.o { font-style: italic; color: var(--ink-3); }
           <tbody>
             <tr><td class="k" style="width:19%">Source and frequency</td><td><code>downloads.multicase.com</code>. Checked at launch and every 15 minutes while running, for application and reference data both.</td></tr>
             <tr><td class="k">User control</td><td>The user is notified and must start the download. <b>Nothing downloads without user action</b>, and no administrator rights are required.</td></tr>
-            <tr><td class="k">Applying an update</td><td><b>The application restarts itself as soon as the download finishes</b>, not at the next launch, and because sign-in runs at every launch, that ends the session. Reference-data updates work the same way and are checksum-verified first.</td></tr>
+            <tr><td class="k">Applying an update</td><td><b>The application restarts itself as soon as the download finishes</b>, not at the next launch; the remembered sign-in carries across the restart. Reference-data updates work the same way and are checksum-verified first.</td></tr>
             <tr><td class="k">Blocking updates</td><td>Denying outbound access to <code>downloads.multicase.com</code> blocks application <i>and</i> reference-data updates, and on a first install prevents the reference data arriving at all.</td></tr>
           </tbody>
         </table>
@@ -278,7 +278,7 @@ td.o { font-style: italic; color: var(--ink-3); }
         </p>
       </div>
       <div class="side">
-        <p><b>Neither deployment works offline, the desktop included.</b> Every launch needs sign-in and a licence check, and every evaluation needs a live entitlement check against <code>user-manager-be.multicase.com</code>; if that call fails, no module can be selected. Holding the reference data locally removes the download, not the dependency.</p>
+        <p><b>Neither deployment works offline, the desktop included.</b> Every launch needs a session and a licence check, and every evaluation needs a live entitlement check against <code>user-manager-be.multicase.com</code>; if that call fails, no module can be selected. Holding the reference data locally removes the download, not the dependency.</p>
       </div>
     </div>
 
@@ -287,7 +287,7 @@ td.o { font-style: italic; color: var(--ink-3); }
         <table>
           <tbody>
             <tr><td class="k" style="width:19%">Desktop sign-in</td><td>Opens <code>auth.multicase.com</code> in the <b>default browser</b>, not an embedded window. The authorisation code is exchanged for tokens <b>server-side</b>, so no client secret ships in the application, and the result returns through the registered URL scheme.</td></tr>
-            <tr><td class="k">Tokens at rest</td><td><b>None.</b> Tokens live in memory for the life of the process: nothing in the Windows Credential Manager, the registry, the macOS Keychain or any file. The user therefore signs in at <b>every launch</b>. Identity tokens are short-lived and refresh in the background while the app is open.</td></tr>
+            <tr><td class="k">Tokens at rest</td><td><b>One identity token,</b> in the macOS login Keychain or a DPAPI-protected file in the user's Windows profile, readable by that user on that machine only. No refresh token, password or secret. At launch the app refreshes it; if the session is no longer honoured, the browser sign-in runs again.</td></tr>
             <tr><td class="k">Sessions</td><td>One live session per product: signing in on another device ends the first. Signing out invalidates the session at the accounts service, not just locally. A network or server error does not sign the user out; only an explicit rejection does.</td></tr>
             <tr><td class="k">Identity and federation</td><td>An account is an email address belonging to one company; company administrators manage their own users. Password policy and reset sit entirely with MultiCASE Accounts. Raise SAML or OIDC federation with MultiCASE before planning the deployment.</td></tr>
             <tr><td class="k">What the browser holds</td><td>Web application only: a session cookie plus the working set in <b>browser local storage</b>: the workspace, its results and its curation state, structures included. It survives a browser restart; only signing out clears it. Nothing goes to a server-side account record.</td></tr>
@@ -434,7 +434,7 @@ td.o { font-style: italic; color: var(--ink-3); }
           <li>Authentication traffic between the browser, the accounts service and the backend.</li>
           <li>A licence check at start-up and a usage record per evaluation: account and product identifiers, modules, item count, version, platform.</li>
           <li>Update checks, carrying version information only.</li>
-          <li>A PubChem lookup, either from One Step Cure, which asks first, or Type a compound's Auto Fill, which does not.</li>
+          <li>A PubChem lookup, either from One Step Cure, which asks first, or Enter a compound's Auto Fill, which does not.</li>
         </ul>
         <div class="h-sub" style="margin-top:3.4mm;">Web application: structures are sent for evaluation, and not retained</div>
         <p class="body">
@@ -551,7 +551,7 @@ spctl -a -vv "/Applications/QSAR Flex.app"</span>
           <div class="h-sub">Provide, and tell your users</div>
           <ul class="check">
             <li>Windows 10 or 11 64-bit with WebView2, or macOS 12 or later on Apple Silicon; a writable user profile and at least 10 GB free per desktop workstation.</li>
-            <li><b>Sign-in is required every launch</b>, by design, and signing in elsewhere ends the first session.</li>
+            <li><b>Sign-in is kept between launches</b> on the machine (Keychain on macOS, DPAPI on Windows); signing in elsewhere ends the first session and that machine signs in again.</li>
             <li>A PubChem lookup sends structures outside the company: One Step Cure asks first, <b>Auto Fill does not</b>.</li>
             <li>A usage record (user, time, modules, item count) is held by MultiCASE for licensing.</li>
           </ul>
