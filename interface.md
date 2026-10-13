@@ -1,6 +1,6 @@
 # The QSAR Flex Window
 
-🧭 QSAR Flex puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and the desktop app. The desktop app adds one native menu of its own — **Help → Check for Updates**, described under [Installing on Windows](install-win.md#staying-up-to-date) and [Installing on macOS](install-mac.md#keeping-qsar-flex-up-to-date) — and nothing else. This page describes each control on the bar.
+🧭 QSAR Flex puts everything the product does behind a single 48-pixel bar at the top of the window. The bar never scrolls away, and it is identical in the web app and the desktop app. The desktop app adds no menu of its own: **Check for updates** and **About QSAR Flex** sit in the account menu under your avatar, described under [Installing on Windows](install-win.md#staying-up-to-date) and [Installing on macOS](install-mac.md#keeping-qsar-flex-up-to-date). This page describes each control on the bar.
 
 Nothing on this page changes what QSAR Flex predicts. The chemistry, the models and the endpoints are what they are — the bar is only how you reach them.
 
@@ -248,6 +248,8 @@ Opening it shows your name and the email address you signed in with, then two it
 
 - **Profile** — opens your Account page
 - **Sign out**
+
+In the desktop app the same menu also holds **Check for updates** and **About QSAR Flex**.
 
 Your Account page is where the Profile, Security, License and Team tabs live. The **Team** tab appears only if you are a company administrator.
 

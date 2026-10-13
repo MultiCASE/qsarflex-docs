@@ -111,7 +111,7 @@ Next, head to [Getting Started](getting-started.md) to run your first evaluation
 
 ## Keeping QSAR Flex up to date
 
-QSAR Flex updates itself. It checks for a new version of the app and of the reference data when it starts and every 15 minutes after that, and prompts you only when there is something to install. You can also check at any time from **Help → Check for Updates**. Your reference data is not re-downloaded when the app updates.
+QSAR Flex updates itself. It checks for a new version of the app and of the reference data when it starts and every 15 minutes after that, and prompts you only when there is something to install. You can also check at any time with **Check for updates** in the account menu — open it from your avatar at the top right. Your reference data is not re-downloaded when the app updates.
 
 ### The Check for Updates sheet
 
