@@ -128,7 +128,7 @@ Next, head to [Getting Started](getting-started.md) to run your first evaluation
 
 ## Staying up to date
 
-QSAR Flex checks for application and data updates when it starts and every 15 minutes after that, and only interrupts you when something is actually available. You can also check on demand from **Help → Check for Updates**. Updates install the same way the app did — for your user, with no administrator rights.
+QSAR Flex checks for application and data updates when it starts and every 15 minutes after that, and only interrupts you when something is actually available. You can also check on demand with **Check for updates** in the account menu — open it from your avatar at the top right. Updates install the same way the app did — for your user, with no administrator rights.
 
 ### The Check for Updates window
 
