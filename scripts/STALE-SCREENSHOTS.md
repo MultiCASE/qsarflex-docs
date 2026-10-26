@@ -2,6 +2,15 @@
 
 **Not published.** Deliberately absent from `SUMMARY.md`, so GitBook does not render it.
 
+## 2026-10-26 — re-shot for the 4.0 beta line (registry number, Save as PDF, Tautomers icon)
+
+Every frame re-shot against qsarflex-fe main after the day's merges: the table and panel say
+**Registry number** (never CAS), the One Step Cure note and the PubChem consent texts say *registry
+numbers*, the mismatch label is **Registry number mismatch**, the Tautomers button carries the
+hexagon-with-harpoons icon, and the report sheet's **Save as PDF** writes a file. Two harness waits
+added: the results frame waits for the "Preparing reports n of m" counter to clear, and the
+tautomers dialog waits for the undo toast to go. 94 frames.
+
 ## 2026-10-07 — re-shot for the two review rounds (9/28 and 10/6)
 
 The workspace scene follows the interface as it ships in the current beta: the empty card's

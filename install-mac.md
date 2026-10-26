@@ -27,7 +27,7 @@ Your compounds are never uploaded to MultiCASE to be evaluated for you, and noth
 structure leaves your Mac during an evaluation.
 
 PubChem is separate, and it is contacted only when you ask for it — **Auto Fill** in the compound
-dialog, or the **PubChem** option in One Step Cure. Both send the compound's name, CAS number and SMILES
+dialog, or the **PubChem** option in One Step Cure. Both send the compound's name, registry number and SMILES
 to PubChem. One Step Cure asks you to confirm before it sends anything; **Auto Fill** goes as soon as
 you click it.
 {% endhint %}

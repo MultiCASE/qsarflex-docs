@@ -50,7 +50,7 @@ Every compound wears one status badge, plus a badge for each additional finding.
 | **Aromaticity** | The ring system could not be de-aromatized as drawn — *Aromaticity detection problems.* |
 | **Fatal** | The row has no readable structure — *SMILES string error* for a SMILES that does not parse. |
 | **Misc** | *Less than two heavy atoms* or *Ring detection problems.* |
-| **CAS mismatch** | The SMILES does not match the structure PubChem returns for the row's CAS number. |
+| **Registry number mismatch** | The SMILES does not match the structure PubChem returns for the row's registry number. |
 | **Name mismatch** | The SMILES does not match the structure PubChem returns for the row's name. |
 
 Under the badge, the **Detail** column carries the check's message and, in italics, what to do about it — *This chemical is a salt/mixture. Cure it with One Step Cure, or pick its components.* Hover the cell, or tab to it, for the full text.
@@ -60,7 +60,7 @@ Under the badge, the **Detail** column carries the check's message and, in itali
 {% endhint %}
 
 {% hint style="info" %}
-**CAS mismatch** and **Name mismatch** can only come from a PubChem check, and the check that runs on load never makes one — every analysis request asks for the PubChem step to be skipped, so nothing goes to PubChem unasked. The PubChem option in One Step Cure and the row's **PubChem** lookup correct the SMILES to the structure PubChem returns and mark the row **Not checked** for the next check.
+**Registry number mismatch** and **Name mismatch** can only come from a PubChem check, and the check that runs on load never makes one — every analysis request asks for the PubChem step to be skipped, so nothing goes to PubChem unasked. The PubChem option in One Step Cure and the row's **PubChem** lookup correct the SMILES to the structure PubChem returns and mark the row **Not checked** for the next check.
 {% endhint %}
 
 ### Views
@@ -80,7 +80,7 @@ When any row is **Not checked**, an amber strip says how many and offers **Re-ch
 
 ## The table
 
-Columns are **#**, **Status**, **Name**, **CAS** and **SMILES**, then a trash button — and, once an evaluation has run, **Results**, which lists each row's modules as links to their reports. See [Evaluation](evaluation.md).
+Columns are **#**, **Status**, **Name**, **Registry number** and **SMILES**, then a trash button — and, once an evaluation has run, **Results**, which lists each row's modules as links to their reports. See [Evaluation](evaluation.md).
 
 - The number is assigned when the row is added and stays with it; rows are not renumbered when others are deleted.
 - The **Status** column carries the badge and, beside it, the check's detail: *copy of #4* on a duplicate, *copies: #5* on the row it duplicates.
@@ -118,7 +118,7 @@ Click a row — or press **Enter** on it — and it opens in a panel on the left
 
 From top to bottom:
 
-- The row's number and its name — the name is the rename control: click it, or press **F2**. A row that arrived without a name says **Add a name** under its title. Then the badge and CAS; on the header's right, **Tautomers**, **Look up in PubChem**, the previous and next arrows and **✕**.
+- The row's number and its name — the name is the rename control: click it, or press **F2**. A row that arrived without a name says **Add a name** under its title. Then the badge and registry number; on the header's right, **Tautomers**, **Look up in PubChem**, the previous and next arrows and **✕**.
 - The check's message and the advice under it, with the button that acts on it — **Pick components** on a mixture, **Delete this copy** on a duplicate, **Edit structure** on a structure the check could not read.
 - The structure, drawn large by ChemiGraphy. Atoms the check objected to are orange, their labels included, so a carbon with one bond too many reads as an orange **C**. The magnifier opens it full size.
 - **Edit structure** — opens ChemiGraphy on the compound — and **Edit SMILES**.
@@ -213,7 +213,7 @@ Four counted choices:
 
 Then **More curation steps**, a set of checkboxes:
 
-- **Verify structures against PubChem** — off by default, with the note *Sends names, CAS numbers and SMILES to PubChem. You will be asked to confirm.*
+- **Verify structures against PubChem** — off by default, with the note *Sends names, registry numbers and SMILES to PubChem. You will be asked to confirm.*
 - **Remove chiral tags from SMILES** — on by default.
 - **Neutralize negative charges (O- to OH, S- to SH etc.)**
 - **Neutralize positive charge on nitrogen (ammonium and pyridinium)**
@@ -272,8 +272,8 @@ A whole run — lookup, corrections and transforms — is one step in the histor
 
 PubChem is contacted only after you agree, every time. The dialog is titled **Send data to PubChem?** and names exactly what will leave your system:
 
-- From One Step Cure: *PubChem Batch Correct will send compound names, CAS numbers, and SMILES for all compounds with issues to the PubChem API to look up and verify structures.*
-- From a single row: *This will send the compound's name, CAS number, and SMILES to the PubChem API to look up and verify its structure.*
+- From One Step Cure: *PubChem Batch Correct will send compound names, registry numbers, and SMILES for all compounds with issues to the PubChem API to look up and verify structures.*
+- From a single row: *This will send the compound's name, registry number, and SMILES to the PubChem API to look up and verify its structure.*
 
 Both add *This data will leave your system.*, print the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and ask *Do you want to continue?* with **Cancel** and **Continue**.
 
@@ -289,7 +289,7 @@ The question is asked before anything is changed. Canceling a batch consent abor
   <img src=".gitbook/assets/workspace-pubchem-results-light.png" alt="">
 </picture></figure>
 
-A lookup can correct the SMILES to the structure PubChem returns, and fill in a missing CAS number or name. A row being looked up shows a **Looking up…** chip in its Status column. A single-row lookup reports in a summary dialog titled **PubChem — &lt;name&gt;**, with lines such as *SMILES corrected*, *CAS: 50-00-0 added*, or the warning *No match found in PubChem.* A corrected row is **Not checked** until the next check. A batch lookup that comes back with nothing reports *PubChem returned nothing — compounds left unchanged.*
+A lookup can correct the SMILES to the structure PubChem returns, and fill in a missing registry number or name. A row being looked up shows a **Looking up…** chip in its Status column. A single-row lookup reports in a summary dialog titled **PubChem — &lt;name&gt;**, with lines such as *SMILES corrected*, *structure fetched* for a row that had none, *registry number: 50-00-0 added*, or the warning *No match found in PubChem.* A corrected row is **Not checked** until the next check. A batch lookup that comes back with nothing reports *PubChem returned nothing — compounds left unchanged.*
 
 {% hint style="warning" %}
 PubChem is a third-party service run by the NCBI. MultiCASE does not store or log what you send to it. Review [PubChem's policies](https://www.ncbi.nlm.nih.gov/home/about/policies/) before sending compound data you consider confidential.
@@ -328,7 +328,7 @@ History covers the workspace. It does not reverse a download you already saved, 
 
 Each section offers **SMILES** (`.smi`) or **SDF** (`.sdf`), saved as `curated_clean.smi`, `curated_clean.sdf`, `curated_all.smi` or `curated_all.sdf`. A successful export confirms *Exported N compounds as SMILES.*; with nothing to write you get *Nothing to export.*
 
-The SMILES file is one tab-separated line per compound: SMILES, name and CAS. The SDF file carries each structure as a full atom-and-bond block with 2D coordinates, with `> <Name>` and `> <CAS>` data fields, so any structure tool can read it. A row with no readable structure has no block to write; the toast says how many were left out.
+The SMILES file is one tab-separated line per compound: SMILES, name and registry number. The SDF file carries each structure as a full atom-and-bond block with 2D coordinates, with `> <Name>` and `> <CAS>` data fields, so any structure tool can read it. A row with no readable structure has no block to write; the toast says how many were left out.
 
 **History log** saves `curation_log.txt`: one line per compound — its number, its name and what has been done to it — followed by the rows you removed, marked *Removed*.
 

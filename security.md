@@ -58,9 +58,9 @@ PubChem is the only third-party service QSAR Flex contacts with your data. There
 
 | Where | What is sent | What triggers it |
 |---|---|---|
-| **Auto Fill** — Enter a compound dialog | The name, CAS number or SMILES you typed | Clicking **Auto Fill**. The click is the confirmation; there is no separate dialog |
-| **One Step Cure → Verify structures against PubChem** | Names, CAS numbers and SMILES for every compound in the set | Ticking the box (it is off by default), pressing **Proceed**, then confirming the consent dialog |
-| **PubChem lookup** — a row's ⋮ menu in Curate | That compound's name, CAS number and SMILES | Choosing **PubChem lookup**, then confirming the consent dialog |
+| **Auto Fill** — Enter a compound dialog | The name, registry number or SMILES you typed | Clicking **Auto Fill**. The click is the confirmation; there is no separate dialog |
+| **One Step Cure → Verify structures against PubChem** | Names, registry numbers and SMILES for every compound in the set | Ticking the box (it is off by default), pressing **Proceed**, then confirming the consent dialog |
+| **PubChem lookup** — a row's ⋮ menu in Curate | That compound's name, registry number and SMILES | Choosing **PubChem lookup**, then confirming the consent dialog |
 
 {% hint style="info" %}
 There is no **PubChem Batch Correct** *button* anywhere in 4.0. The bulk lookup is the **Verify structures against PubChem** checkbox inside the One Step Cure dialog, under **More curation steps**. The confirmation dialog it opens still refers to the run by the old name, which is worth knowing if you are matching this page against what is on screen.
@@ -68,9 +68,9 @@ There is no **PubChem Batch Correct** *button* anywhere in 4.0. The bulk lookup 
 
 ### The consent dialog
 
-Both curation routes stop at a dialog titled **Send data to PubChem?** before anything is transmitted. It names exactly what will leave — "compound names, CAS numbers, and SMILES for all compounds" for the bulk run, "the compound's name, CAS number, and SMILES" for a single row — states that "This data will leave your system.", prints the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and asks "Do you want to continue?" with **Cancel** and **Continue**.
+Both curation routes stop at a dialog titled **Send data to PubChem?** before anything is transmitted. It names exactly what will leave — "compound names, registry numbers, and SMILES for all compounds" for the bulk run, "the compound's name, registry number, and SMILES" for a single row — states that "This data will leave your system.", prints the endpoint `https://pubchem.ncbi.nlm.nih.gov/rest/pug/`, and asks "Do you want to continue?" with **Cancel** and **Continue**.
 
-The question is asked before any work starts. Canceling a One Step Cure at the dialog abandons the whole run — "One Step Cure canceled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, CAS numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
+The question is asked before any work starts. Canceling a One Step Cure at the dialog abandons the whole run — "One Step Cure canceled — nothing was changed." — rather than leaving your compounds half-corrected. While the lookup runs, the progress overlay says what is in flight: "Names, registry numbers and SMILES are being sent to pubchem.ncbi.nlm.nih.gov."
 
 In the web app the lookup is made by the QSAR Flex backend on your behalf; on the desktop app the application calls PubChem directly. Either way the data reaches `pubchem.ncbi.nlm.nih.gov`. Review [PubChem's terms of use](https://www.ncbi.nlm.nih.gov/home/about/policies/) before using these features.
 

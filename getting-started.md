@@ -24,7 +24,7 @@ The **desktop app** runs the prediction models on your own machine, and the refe
 
 The **desktop app** keeps the structures you evaluate on your own machine. In the **web application**, structures go to the QSAR Flex service at `qsarflex-be.multicase.com` for evaluation, report generation, structure depiction, curation and the structure editor's session. They are not persisted after the request.
 
-Two steps reach a third party on either deployment, the desktop app included. **Auto Fill** sends the name, CAS number or SMILES you typed to PubChem at NCBI to look up the rest. One Step Cure's *Verify structures against PubChem* and a row's **PubChem** lookup send names, CAS numbers and SMILES there as well. You have to ask for both, and curation asks you to confirm before it runs. On the desktop these are the only steps that send your structures anywhere. Sign-in, the license check at launch, a usage record per evaluation and update checks still reach MultiCASE — none of them carries a structure.
+Two steps reach a third party on either deployment, the desktop app included. **Auto Fill** sends the name, registry number or SMILES you typed to PubChem at NCBI to look up the rest. One Step Cure's *Verify structures against PubChem* and a row's **PubChem** lookup send names, registry numbers and SMILES there as well. You have to ask for both, and curation asks you to confirm before it runs. On the desktop these are the only steps that send your structures anywhere. Sign-in, the license check at launch, a usage record per evaluation and update checks still reach MultiCASE — none of them carries a structure.
 
 {% hint style="info" %}
 Don't have an account yet, or need a license? See [Access & Licensing](fundamentals/access-and-licensing.md), or raise a request at [support.multicase.com](https://support.multicase.com).
@@ -70,7 +70,7 @@ Once the workspace holds something, the same routes are in the navbar's **Load �
 
 **Drop or paste instead** — you do not have to open a dialog at all. Drop files anywhere on the page, or paste SMILES from the clipboard. Files are sorted by extension, so compound files and `.rxn` reaction files can be dropped together and each goes to the right importer; anything unsupported is called out in a message.
 
-Compounds appear as rows in the workspace table, each with its curation badge — **Clean**, or what the check found — beside its name, CAS and SMILES. Click a row to see its structure and everything about it in the panel on the left; click anywhere on the page outside it to close it again. Load as many as you need before evaluating.
+Compounds appear as rows in the workspace table, each with its curation badge — **Clean**, or what the check found — beside its name, registry number and SMILES. Click a row to see its structure and everything about it in the panel on the left; click anywhere on the page outside it to close it again. Load as many as you need before evaluating.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/workspace-table-dark.png">

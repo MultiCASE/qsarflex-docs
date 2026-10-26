@@ -67,7 +67,7 @@ Stereochemistry travels through the editor only as it is drawn. A compound that 
 
 ## Drawing a new compound
 
-**Use this structure** on a new drawing adds it to the workspace as a row with no name, checked like any other — the toast reads *1 compound added from a drawing.* The row is added without opening its panel; click it when you want it. A row without a name offers **Add a name** under its title in the panel, and the name itself is the rename control from then on; a CAS number can be added the same way. The canvas does not look up what you draw: the only lookup the editor makes is **Compound Corner**, and only when you press **Look up**.
+**Use this structure** on a new drawing adds it to the workspace as a row with no name, checked like any other — the toast reads *1 compound added from a drawing.* The row is added without opening its panel; click it when you want it. A row without a name offers **Add a name** under its title in the panel, and the name itself is the rename control from then on; a registry number can be added the same way. The canvas does not look up what you draw: the only lookup the editor makes is **Compound Corner**, and only when you press **Look up**.
 
 ---
 

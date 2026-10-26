@@ -38,7 +38,7 @@ Add compounds from any source; every one is checked as it arrives and sits as a 
 ### ✅ Curation
 Curate and validate your dataset before evaluation, in two steps: load, then curate. Compounds are checked as soon as they load — there is no separate run step, and no separate export step.
 - Detects mixtures, duplicates, invalid atom types and aromaticity problems on load, with one structural check whose answer is the badge
-- Flags CAS and name mismatches once you run the optional PubChem verification
+- Flags registry-number and name mismatches once you run the optional PubChem verification
 - Inline editing per row — rename, edit SMILES, delete
 - **Pick components** on a mixture row to split it into one row per component
 - **Tautomers** on any row — generate up to 200 tautomers, compare them with the parent, and adopt one
