@@ -10,7 +10,7 @@ Two documents, both A4, both built from hand-written HTML rendered by headless C
 |---|---|---|
 | `brochure.html` | *QSAR Flex 4.0 Release Brochure.pdf* | 6pp. Sales-facing: what the product does, what is new, the model catalog, deployment and licensing. |
 | `it-requirements.html` | *QSAR Flex IT Requirements.pdf* | 9pp. For a customer's IT reviewer: requirements, installation, data paths, network rules, licensing, a checklist. |
-| `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 4pp. For customers on 3.x. Reuses the brochure's cover system. |
+| `release-notes.html` | *QSAR Flex 4.0 Release Notes.pdf* | 1 page. Plain text: what changed, what did not, how to get it. No figures, by request of the team (October 2026). |
 
 `release-notes.html` is the only one of the three that pulls a product screenshot: section 01 references
 `../.gitbook/assets/workspace-table-light.png` directly, not through `images.css`. The build renders
@@ -51,78 +51,116 @@ Page furniture — running foot, page number, section number — is drawn per pa
 markup, not by CSS paged media. Renumbering after inserting or moving a page is manual;
 `check.mjs` will not catch a wrong number, so re-read the proofs.
 
-**Any change to `.head`, `.sec` or the block spacing changes every page's budget.** An earlier
-edition added ~5mm to the section head and clipped two IT-guide pages that had previously fit.
-After touching shared vertical metrics in `system.css`, re-run `check.mjs` over ALL THREE
-documents, not just the one you were working on.
+**Any change to `.pg-head` changes every page's budget.** Moving the section number from a
+baseline-aligned column to an eyebrow above the title added ~5mm of head height, which was
+enough to clip two IT-guide pages that had previously fit. After touching shared vertical
+metrics in `system.css`, re-run `check.mjs` over BOTH documents, not just the one you were
+working on.
 
-## The design system: the MultiCASE document standard
+## The design system
 
-`system.css` holds it. It exists because the previous edition looked like every other
-AI-assisted document of 2026: Geist, tracked uppercase eyebrows, pill chips, numbered circles,
-rounded cards on a tinted ground. Shri saw the same look on conference booths and asked for
-something that could only be ours. Three decisions do that work, and every future MultiCASE
-document should keep them:
+Two stylesheets. `system.css` is the base (page geometry, the colour tokens, tables, lists,
+code); `vendor.css`, loaded after it by all three sources, is the look: the **vendor
+document**, the way a BIOVIA datasheet or a Simulations Plus release note is put together.
 
-1. **A typeface nobody defaults to.** Body, headings, tables and running heads are all
-   **Literata** (variable, roman and italic, optical sizes on). Anything typed into a machine
-   (paths, hostnames, commands, key caps) is **Fragment Mono**. Nothing else. Both are embedded
-   as base64 in `fonts.css` so the render never touches the network; `tools/embed-fonts.py`
-   regenerates it. Google's Literata subset carries no small caps or old-style figures, so
-   labels are *italic*, never small caps or tracked capitals.
-2. **The molecule is the only ornament.** Every drawing in `assets/art/` is ChemiGraphy's own,
-   produced by `tools/molart` (below): a large structure on each cover, a small one in the margin
-   of a section, alert atoms marked in the product's green exactly as a report marks them. No
-   icons, no illustrations, no stock imagery.
-3. **A publisher's page, not a web page printed out.** White paper; a 112mm text column with a
-   54mm margin column for notes, figures and the section number; running head in italic with a
-   hairline; tables ruled like a journal (rule above, rule under the header, rule below, hairlines
-   between rows, no fills); lists with an en dash or a green numeral; notes as marginalia with a
-   bold run-in. No chips, pills, cards, tinted boxes, eyebrows, icon grids, dark bands, rounded
-   corners or gradients. Emphasis is italic or bold; grouping is a rule or white space.
+- **Cover**: the MultiCASE logo large at top-left, a plain title (`QSAR Flex` with the version in
+  green), a "Document type · Month Year" line, one paragraph, one real screenshot with a caption,
+  the address at the foot. Nothing else: no tagline, no chips, no at-a-glance grid, no watermark.
+- **Interior**: a running head (small logo left, document name right), green `h2.sec` / `h3.top`
+  headings, black body text (`p.t`, `ul.t`). Two columns (`.two` / `.col`) where the prose is long.
+  Numbered figures (`figure.fig`, "Figure N:" in green) cropped out of the 1440×900 docs
+  screenshots with `.crop` (a viewport div and an oversized, offset `img`). Plain ruled tables
+  (`table.plain`). Callouts are a 1pt left rule, no fill (`p.callout`, amber for warnings).
+- **Footer**: "Product · document" and a plain page number. The IT guide carries a contents list
+  with page numbers on its cover.
 
 ```
---ink     #141414   text and rules            --green    #00AE5A  marked atoms only
---ink-3   #5C5C5C   the floor for type        --green-d  #04914E  section numbers, list numerals
---hair    #C8C8C8   hairlines between rows
+--text   #111417   body                      --head   #04914E  headings, figure numbers, the version
+--text-2 #3B4248   secondary / table cells   --amber  #B4700A  warning callouts only
+--text-3 #6B747C   labels, running head      --line   #D9DBD6  rules
 ```
 
-Green appears in exactly three places: marked atoms in a drawing, the section number, and the
-numeral of an ordered list. Do not add a fourth.
+Type is **Libre Franklin** for everything read and **Source Code Pro** only for things typed into a
+machine: URLs, paths, registry keys, commands. Both are embedded as base64 (`fonts.css`) so the
+render never touches the network. They were chosen because they are *not* the faces the models
+default to (Geist, Inter, IBM Plex); do not swap them for one of those.
 
-**Structure.** A page is `.head` (running head), `.sheet` and `.foot`. Inside the sheet, content is
-a stack of `.blk` rows, each with a `.main` (the text column) and a `.side` (the margin column);
-`.blk.full` spans both. `.blk.sec` opens a section: title in the column, `Section N` in the margin.
-`.blk.push` pins a closing block to the foot. A margin figure is `.fig` with an `<img>` and a `.cap`.
-Covers are `.page.cover`: `.head`, `.art` (the drawing and its caption), `.titling` (pushed to the
-bottom: product line, document title, strap, lede, and whatever the document opens with), `.imprint`.
+What is deliberately absent, because it reads as machine-made: tracked uppercase mono "eyebrow"
+labels, pill chips, rounded or tinted cards, dark hero bands, watermark logos, a brand colour used
+as a system colour, and decorative molecule art. The client rejected all of these in October 2026.
+Removing them alone gives "minimal", which was not wanted either; what carries the pages is the
+company logo and real product screenshots.
 
-## The drawings: `tools/molart`
+Two rules learned the hard way:
 
-A small .NET console that draws SMILES through **ChemiGraphy.Embedded**, the same renderer the
-product uses, so the documents carry the product's own drawing and nothing else. `art.json` lists
-every figure: name, SMILES, the box it is fitted to, and optional `marks`, each a SMARTS and a
-colour, matched by Indigo against the same molecule and handed to ChemiGraphy by atom index.
+- **Bullets and checklist rows are `display: block` with an absolutely positioned marker.**
+  Flex containers turned every inline `<b>` and `<code>` inside a bullet into its own flex item
+  and shredded the line into vertical word-columns.
+- **`.pathblock` must not `word-break: break-all`.** It split paths mid-token
+  (`reference d` / `ata`). It is `overflow-wrap: anywhere` now.
+
+Callout arrows/badges are **off** by design in the screenshots (`DRAW_MARKERS` in
+`scripts/screenshot.js`) and there is no equivalent here; the captions name every control.
+
+## The Word documents are the master
+
+Colleagues edit the `.docx`; translators work in it; the PDF that goes to customers is saved from
+it. The HTML sources remain the generator that produces a fresh Word file when the design or the
+English text changes wholesale, and `build.mjs` still renders them to the fixed-layout PDFs for
+proofing.
 
 ```bash
-cd pdf/tools/molart
-dotnet run -c Release -- art.json ../../assets/art "#141414"
-# with a checkout of the ChemiGraphy repository to hand, build against it instead:
-dotnet run -c Release -p:ChemiGraphyRepo=~/RiderProjects/ChemiGraphy -- art.json ../../assets/art "#141414"
+./pdf/build-docx.sh                 # HTML -> out/*.docx, styled to the design
+./pdf/render-docx.sh                # .docx -> PDF via LibreOffice -> page PNGs + contact sheets, for proofing
+./pdf/docx-to-pdf.sh out/X.docx     # the customer PDF from an edited Word file (Word's own Save As PDF works too)
 ```
 
-The package comes from the MultiCASE GitHub Packages feed (`nuget.config` beside the project;
-`PRIVATE_NUGET_GITHUB_TOKEN` in the environment). Two things the tool does to ChemiGraphy's output:
-it rewrites the SVG's own `width`/`height` to the drawing's viewBox, so an `<img>` given a width
-keeps the molecule's aspect ratio rather than the box's; and it replaces `#000000` with the ink
-colour, leaving marks alone. Rings are Kekulé (`dearomatize`) so they read as a chemist draws them.
+How the Word file is made: `tools/docx-pre.py` rewrites the HTML for pandoc (callouts to divs,
+column widths into a `<colgroup>`), `tools/docx-filter.lua` drops the page furniture, marks the
+two-column regions, turns figures into a cropped picture plus caption, and maps the steps,
+contents list and applies-to row to Word structure; `tools/docx-style.py` (python-docx) applies the
+look: Libre Franklin with every theme-font reference removed (otherwise Word falls back to Aptos),
+green headings, the title's version in green, ruled tables with explicit column proportions, real
+picture crops (`srcRect`) matching the HTML crops, the logo and document name in the header, page
+numbers in the footer, two-column sections, bundle rows in green.
 
-**The box sets the stroke.** ChemiGraphy thickens a bond only when the requested box would squeeze
-it under about a pixel. Cover art is generated in a 1100×640 box and keeps the editor's own weight;
-margin art is generated in a 130×80 box so the strokes are heavy enough to survive 15 to 30mm on
-paper. If a small figure prints pale, the box was too large. Sizes in the HTML are set per drawing
-(`style="width:…mm"`) so a strip of four molecules shares one bond length; read the viewBoxes and
-scale by a common factor rather than fitting each to the same height.
+Fonts: the eight TrueType files land in `out/fonts/` on each build; install them (double-click, or
+copy to `~/Library/Fonts`) before opening or exporting the Word files, or Word substitutes a
+different sans. LibreOffice on this Mac needs them in its own folder too:
+`/Applications/LibreOffice.app/Contents/Resources/fonts/truetype/`.
+
+Build flags in `build-docx.sh`: `--compact` for the one-page release notes (smaller logo and type so Word keeps it to one page); `--section-pages` (off) starts each H2 on a new page.
+
+Lessons from the LibreOffice proofs (they apply to Word too): a theme font reference on any run
+overrides the explicit face, so every `rFonts` loses its theme attributes; keep-with-next on the
+first paragraph of a table cell makes Writer keep the whole row with the next block, so pair cells
+never set it; keep-with-next on a repeating header row made Writer drop body rows at a page break;
+a one-cell "figure" table is what pandoc 3 writes for every figure unless the image paragraph holds
+another character. Fonts are embedded as obfuscated `.odttf` parts (tools/docx-embed-fonts.py) so a
+machine without Libre Franklin still shows it.
+
+Word reflows: page counts differ from the HTML PDFs and a figure may land in the other column.
+That is expected. What must hold: every heading, paragraph, table, figure and caption present once
+and in order; tables keep their rules and proportions; figures keep their crops.
+
+## Regenerating the embedded assets
+
+Only needed if the typeface or a logo changes:
+
+```bash
+python3 pdf/tools/embed-fonts.py     # rewrites fonts.css  (needs network)
+python3 pdf/tools/embed-images.py    # rewrites images.css (needs Pillow)
+```
+
+`assets/qsarflex-logo.svg` is fetched verbatim from the public assets CDN —
+`https://d35fy2f4trk71w.cloudfront.net/QSAR%20flex%20Logo.svg`, the same file the product
+serves — so the documents and the product cannot drift apart. Keep it **vector**: it is set
+at 21mm on the cover and as a 172mm watermark, where the old PNG showed its edges, and the
+switch also took `images.css` from 592 KB to 217 KB.
+
+`assets/multicase-hex.png` is the MultiCASE hexagon with its white wordmark cropped off so
+it can sit on any ground; `assets/multicase-logo.png` is the full lockup used in the
+brochure foot.
 
 ## Updating for a new release
 
@@ -153,8 +191,9 @@ scale by a common factor rather than fitting each to the same height.
 
 ## Three documents, one system
 
-All three covers use the shared `.cover` rules in `system.css`; only what each document opens with
-(bundles, an at-a-glance grid, the applies-to row and contents) is local to the file.
+All three sources load `vendor.css`, so a change to the cover or page treatment is made once. Each
+file keeps a short `<style>` block for what only it needs (the brochure's step row and catalog
+table, the IT guide's contents list and path blocks).
 
 **Know who the reader is before writing a word of it.** The 3.x desktop was a WinForms application
 that never ran the web interface, and almost no customer has used the web application. So for
@@ -174,9 +213,9 @@ source for facts, not for structure.
 
 ## House style
 
-Rules the client set, all easy to breach by accident:
+Two rules the client set, both easy to breach by accident:
 
-- **No em dashes in prose.** They read as machine-written. The same goes for arrows in prose. Use a comma, a colon, a semicolon, a full
+- **No em dashes in prose.** They read as machine-written. Use a comma, a colon, a semicolon, a full
   stop or brackets, whichever the sentence actually wants. The only em dashes left in either
   document are the standalone `—` glyphs that mean "not applicable" in a table cell
   (`<td class="n">—</td>` and the catalog's Records column). Check with

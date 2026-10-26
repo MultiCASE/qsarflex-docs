@@ -2,268 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>QSAR Flex 4.0 · Release Notes</title>
+<title>QSAR Flex 4.0 Release Notes</title>
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="images.css">
 <link rel="stylesheet" href="system.css">
+<link rel="stylesheet" href="vendor.css">
 <style>
-/* at a glance: six entries under a rule on the cover */
-.glance { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 6mm; row-gap: 3.4mm; border-top: 0.4pt solid var(--rule); padding-top: 3mm; margin-top: 6mm; }
-.glance .g .n { font-size: 7.6pt; font-style: italic; color: var(--ink-3); margin-bottom: 0.6mm; }
-.glance .g .t { font-size: 9.4pt; font-weight: 600; line-height: 1.2; margin-bottom: 0.8mm; }
-.glance .g .d { font-size: 7.6pt; line-height: 1.4; color: var(--ink-2); }
-
-/* the screenshot, full width, with a hairline frame */
-.shot img { display: block; width: 100%; height: auto; border: 0.3pt solid var(--hair); }
-.shot .cap { margin-top: 2mm; font-size: 7.6pt; line-height: 1.42; color: var(--ink-3); }
-.shot .cap b { font-weight: 600; color: var(--ink); }
-
-/* what is new: the topic in the margin, the entry in the column */
-.entry { margin-bottom: 3mm; }
-.entry .side { font-style: italic; color: var(--ink-3); padding-top: 0.6mm; font-size: 8.2pt; }
-.entry .main .t { font-size: 10pt; font-weight: 600; line-height: 1.25; margin-bottom: 1.2mm; }
-.entry .main .d { font-size: 8.5pt; line-height: 1.4; }
-.contact { font-size: 8.6pt; line-height: 1.7; }
+/* one page of plain text */
+.cover .titleblock { margin-top: 10mm; }
+.cover h1.title { font-size: 22pt; }
+.cover .lead-in { margin-top: 4mm; }
+h3.top { margin-top: 5mm; }
+ul.t li { margin-bottom: 1.2mm; }
+ul.t li b { font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════ COVER ═══════════════════ -->
 <section class="page cover">
-  <div class="head"><span>MultiCASE Inc. · Release notes</span><span>September 2026</span></div>
-
-  <div class="art">
-    <img src="assets/art/cover-lisinopril.svg" alt="Lisinopril, drawn by ChemiGraphy">
-    <div class="cap"><b>Lisinopril,</b> drawn by ChemiGraphy, the MultiCASE structure editor that is now part of QSAR Flex and draws every structure in it.</div>
-  </div>
-
-  <div class="titling">
-    <div class="product"><b>QSAR Flex</b> 4.0</div>
-    <div class="doctitle">Release notes</div>
-    <div class="strap">A new interface for the desktop application, <i>with the same predictive engine underneath it.</i></div>
-    <p class="lede">
-      For customers on QSAR Flex 3.x. Version 4.0 is a rebuilt desktop application with an entirely new
-      interface, on Windows and now on macOS. The models, the endpoints and the results are the same.
-    </p>
-    <div class="glance">
-      <div class="g"><div class="n">Interface</div><div class="t">Entirely new</div><div class="d">One navigation bar, a command bar, and light and dark themes.</div></div>
-      <div class="g"><div class="n">Platform</div><div class="t">Windows and macOS</div><div class="d">A native Apple Silicon build joins the Windows one for the first time.</div></div>
-      <div class="g"><div class="n">ChemiGraphy</div><div class="t">Built in</div><div class="d">Draw a compound, or correct one, in MultiCASE's structure editor without leaving the workspace.</div></div>
-      <div class="g"><div class="n">Support</div><div class="t">A new portal</div><div class="d">Tickets at support.multicase.com, with the account you already sign in with.</div></div>
-      <div class="g"><div class="n">Licensing</div><div class="t">An Account page</div><div class="d">Profile, Security, Licence and Team, with per-licence activity you can read back.</div></div>
-      <div class="g"><div class="n">Chemistry</div><div class="t">Unchanged</div><div class="d">Same models, same endpoints, same results. No data migration, no licence re-issue.</div></div>
-    </div>
-  </div>
-
-  <div class="imprint">
+  <div class="sheet">
     <div class="mclogo"></div>
-    <div style="text-align:right;">
-      <b>MultiCASE Inc.</b><br>
-      5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA<br>
-      qsarflex.multicase.com · support.multicase.com
+
+    <div class="titleblock">
+      <h1 class="title">QSAR Flex <span class="ver">4.0</span></h1>
+      <div class="doc-line"><b>Release Notes</b> &nbsp;·&nbsp; October 2026</div>
+      <p class="lead-in">QSAR Flex 4.0 has a new interface and runs on Windows, macOS and the web. The models and the results are the same as in 3.x. A result you validated on 3.x is the same result on 4.0.</p>
+    </div>
+
+    <h3 class="top">What changed</h3>
+    <ul class="t">
+      <li><b>New interface.</b> The desktop application now uses the same interface as the web application. Nothing moves between screens.</li>
+      <li><b>macOS.</b> QSAR Flex runs on macOS (Apple Silicon) for the first time. It is the same application as the Windows one.</li>
+      <li><b>One workspace.</b> You load, check and evaluate compounds in one table. Every compound is checked as it loads, and the finding is shown on its row.</li>
+      <li><b>Results on the row.</b> After an evaluation, each row lists its modules. Click a module to open its report.</li>
+      <li><b>Reports.</b> Reports open from the Results column or from the row's panel, and you save them as PDF from the report itself.</li>
+      <li><b>ChemiGraphy built in.</b> Draw a compound, or fix one the check flagged, without leaving QSAR Flex. ChemiGraphy also draws every structure on screen and in every report.</li>
+      <li><b>Curation.</b> One Step Cure fixes mixtures, duplicates and atom-type errors in one step and shows how many rows each choice affects before you confirm. Every change can be undone.</li>
+      <li><b>Search.</b> Press ⌘K (Mac) or Ctrl K (Windows) to find and run any action by name.</li>
+      <li><b>Sign-in.</b> The desktop applications keep you signed in between launches. The browser sign-in appears only the first time, after you sign out, or when the session has ended.</li>
+      <li><b>Account page.</b> Profile, Security, License and Team are in one place. Each license lists every evaluation run against it.</li>
+      <li><b>Progress.</b> Long runs show what they are doing and can be cancelled. If a run returns fewer results than it was given, it says so.</li>
+      <li><b>Support portal.</b> Raise and follow tickets at support.multicase.com with the account you already use.</li>
+    </ul>
+
+    <h3 class="top">What did not change</h3>
+    <ul class="t">
+      <li>The models, the endpoints and the results. Sixteen modules in four bundles, as before.</li>
+      <li>Your account and your license. There is no data migration and no license re-issue.</li>
+      <li>The desktop application still evaluates on your own machine. The web application sends structures to MultiCASE for the length of an evaluation and does not keep them.</li>
+    </ul>
+
+    <h3 class="top">Getting 4.0</h3>
+    <ul class="t">
+      <li>Download the Windows or macOS application from downloads.multicase.com, or sign in at qsarflex.multicase.com. On first run the desktop downloads about 4 GB of reference data.</li>
+      <li>Guides and the model catalog are at resources.multicase.com. For anything else, open a ticket at support.multicase.com.</li>
+    </ul>
+
+    <div class="addr">
+      <div><b>MultiCASE Inc.</b><br>5885 Landerbrook Dr. #210, Mayfield Heights, OH 44124, USA</div>
+      <div style="text-align:right">qsarflex.multicase.com<br>support.multicase.com</div>
     </div>
   </div>
-</section>
-
-<!-- ═══════════════════ 1 · A NEW INTERFACE ═══════════════════ -->
-<section class="page">
-  <div class="head"><span><b>QSAR Flex 4.0</b> · Release notes</span><span>MultiCASE Inc.</span></div>
-  <div class="sheet">
-
-    <div class="blk sec">
-      <div class="main"><div class="title">A new interface</div></div>
-      <div class="side"><div class="num"><small>Section</small>1</div></div>
-    </div>
-
-    <div class="blk">
-      <div class="main">
-        <p class="lead">
-          In 4.0 the desktop application's interface is replaced with the one QSAR Flex uses on the web,
-          wrapped in a native application for Windows and macOS. Nothing you have already done is
-          affected: your account, your licence and your validated results carry over as they are.
-        </p>
-      </div>
-      <div class="side">
-        <div class="fig">
-          <img src="assets/art/side-nitroso-sertraline.svg" alt="N-nitroso-sertraline with the nitrosamine centre marked">
-          <div class="cap"><b>N‑Nitroso‑sertraline,</b> with its nitrosamine centre marked. ChemiGraphy draws every structure in 4.0, on screen and in every report, in the theme you are using.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="blk">
-      <div class="main">
-        <p class="ri body"><b>Everything is in one bar.</b> A single bar across the top carries <i>Load</i> and <i>Curate</i> on the left, a <i>Search</i> box in the middle, and <i>Evaluate</i>, your licence status, documentation and the theme on the right. An empty workspace offers its loading choices on a card instead.</p>
-        <p class="ri body"><b>Load, curate and evaluate on one table.</b> Every compound is checked as it arrives and wears its verdict on the row. A panel on the left holds everything about one row, and ChemiGraphy opens from it to draw or correct a structure. Nothing moves between screens.</p>
-        <p class="ri body"><b>Search for the item you want.</b> Press <span class="mono">⌘K</span> or <span class="mono">Ctrl K</span> and type. The command bar searches every action in the product and runs it from wherever you are, naming where each control lives. It is the fastest way to find a feature you cannot see.</p>
-      </div>
-      <div class="side"></div>
-    </div>
-
-    <div class="blk full push last">
-      <div class="main shot">
-        <img src="../.gitbook/assets/workspace-table-light.png" alt="The QSAR Flex 4.0 workspace: the navigation bar with Load, Curate and Evaluate, and every compound a row with its curation verdict">
-        <div class="cap">
-          <b>The workspace.</b> Left to right along the bar: <i>Load</i> and <i>Curate</i>, the <i>Search</i> box that the command bar
-          opens behind, the count of what the workspace holds, <i>Evaluate</i>, your licence status, the documentation
-          button and the light or dark toggle. Under the heading, undo, redo and a <i>Clear</i> button; below, one row per compound with its verdict, name, CAS and SMILES.
-          Click a row and its panel opens on the left.
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="foot"><span>MultiCASE Inc.</span><span class="pn">1</span></div>
-</section>
-
-<!-- ═══════════════════ 2 · WHAT IS NEW ═══════════════════ -->
-<section class="page">
-  <div class="head"><span><b>QSAR Flex 4.0</b> · Release notes</span><span>MultiCASE Inc.</span></div>
-  <div class="sheet">
-
-    <div class="blk sec">
-      <div class="main"><div class="title">What is new</div></div>
-      <div class="side"><div class="num"><small>Section</small>2</div></div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">QSAR Flex now also runs on macOS</div>
-        <div class="d">A native Apple Silicon build, signed by Apple and notarised, installs by dragging it to Applications and needs no administrator rights. It is the same application as the Windows one: the same interface, the same modules, the same reports, and both now keep your sign-in between launches.</div>
-      </div>
-      <div class="side">Platform</div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">MultiCASE's structure editor, built into QSAR Flex</div>
-        <div class="d">Draw a compound instead of typing its SMILES, or open a compound the check flagged and correct it on the canvas: <i>Load, then Draw</i>, or <i>Edit structure</i> on any row. The whole editor is there, with its element and bond palettes, periodic table, ring library, lookup by name, wedges and arrows. What you draw is read by the same engine that checks and evaluates your compounds, so the structure that reaches the table is exactly the one QSAR Flex scores. ChemiGraphy also draws every structure you see, on screen and in every report.</div>
-      </div>
-      <div class="side">ChemiGraphy</div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">One table: drop a file anywhere, or paste structures</div>
-        <div class="d">Drop files onto the page or paste SMILES directly; the file extension picks the importer, so compounds and reactions in one drop are separated for you. Every compound is checked as it arrives and wears its verdict on the row. Click a row and a panel opens beside the table with the structure, the finding, the results and the history; a <i>Results</i> column links each module to its report.</div>
-      </div>
-      <div class="side">Workspace</div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">Real undo, and bulk correction you can inspect</div>
-        <div class="d">Curation keeps a fifty-step history and every step is named, so the menu tells you what will come back before you press it. <i>One Step Cure</i> is a single dialog with four counted decisions, plus optional passes for chiral tags, charge neutralisation and PubChem verification. A mixture is split into its components or reduced to the part with the most atoms; duplicates are removed outright or collapsed to one per group. Any row can be swapped for one of its tautomers: the panel generates up to 200, shows them beside the parent, and adopts the one you pick. A bulk run finishes in a summary you can filter down to the rows that need attention.</div>
-      </div>
-      <div class="side">Curation</div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">Long runs report what they are doing, and can be cancelled</div>
-        <div class="d">Evaluation, curation and file loading run behind a progress overlay that names the phase it is in rather than showing a percentage. All three can be cancelled, and cancelling says what was left alone. If a run returns fewer results than it was given, a banner says so and names the counts, so a short run is never quietly presented as a complete one.</div>
-      </div>
-      <div class="side">Progress</div>
-    </div>
-
-    <div class="blk entry">
-      <div class="main">
-        <div class="t">An Account page, and licence activity you can read back</div>
-        <div class="d"><i>Account</i> gathers Profile, Security, Licence and Team in one place. The chip in the navigation bar shows tests remaining, Unlimited, or that a licence has expired, and opens the same page in a click. Each licence has an activity page listing every evaluation with its user, modules, item count and billing state, which is what an invoice reconciles against. Enterprise administrators assign and remove seats and create users themselves, without involving MultiCASE.</div>
-      </div>
-      <div class="side">Licensing</div>
-    </div>
-
-    <div class="blk entry last">
-      <div class="main">
-        <div class="t">A support portal, which did not exist before</div>
-        <div class="d">Until now support meant an email thread. <span class="mono">support.multicase.com</span> is new in this release. It is a site of its own: open it in a browser and sign in with the MultiCASE account you use for QSAR Flex, with no separate registration. Raise a ticket for anything, access, licensing, seats, bugs or questions, attach whatever shows the problem, and follow it to resolution with its status visible. Replies come back in the thread. You can also email support@multicase.com, but the portal is the preferred route.</div>
-      </div>
-      <div class="side">Support</div>
-    </div>
-
-  </div>
-  <div class="foot"><span>MultiCASE Inc.</span><span class="pn">2</span></div>
-</section>
-
-<!-- ═══════════════════ 3 · UNCHANGED, AND THE WEB ═══════════════════ -->
-<section class="page">
-  <div class="head"><span><b>QSAR Flex 4.0</b> · Release notes</span><span>MultiCASE Inc.</span></div>
-  <div class="sheet">
-
-    <div class="blk sec">
-      <div class="main"><div class="title">What has not changed</div></div>
-      <div class="side"><div class="num"><small>Section</small>3</div></div>
-    </div>
-
-    <div class="blk">
-      <div class="main">
-        <p class="lead">
-          The interface is new. The chemistry underneath it is not. If you have validated a QSAR Flex
-          result, 4.0 does not change it.
-        </p>
-      </div>
-      <div class="side"></div>
-    </div>
-
-    <div class="blk full">
-      <div class="main">
-        <div class="defs">
-          <div class="d"><div class="k">The models</div><div class="v">The same statistical models, expert alerts, read-across and rule-based methods, with the same applicability-domain and uncertainty handling.</div></div>
-          <div class="d"><div class="k">The endpoints</div><div class="v">The same catalogue: sixteen modules in four bundles, Nitrosamine, Ecotoxicity, Physicochemical and ADME.</div></div>
-          <div class="d"><div class="k">The results</div><div class="v">Predictions, reports and their supporting evidence come from the same engine. Every record count and every number a model returns is the same.</div></div>
-          <div class="d"><div class="k">The licence types</div><div class="v">Individual or Enterprise coverage, and still Subscription, On-Demand Subscription and Pay-Per-Test, with the same module and bundle entitlements.</div></div>
-          <div class="d"><div class="k">Sign-in and data</div><div class="v">Still your MultiCASE account. There is no data migration and no licence re-issue, and the desktop application still evaluates on your own machine.</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="blk">
-      <div class="main">
-        <div class="h-sub">You also have a web application</div>
-        <p class="body">
-          The interface in 4.0 is the one QSAR Flex has been running in the browser, and your licence
-          covers it. Sign in at <span class="mono">qsarflex.multicase.com</span> with the same account:
-          nothing to install, nothing to download, and it stays current on its own. It suits people who
-          move between machines, or a colleague who needs occasional access without a deployment.
-        </p>
-        <p class="body">
-          Two differences are worth knowing. The web application <b>sends your structures to
-          MultiCASE</b> to be evaluated, where the desktop evaluates them on your own machine and sends
-          none. And <i>Surrogate Search</i> and <i>Cross Similarity</i> are desktop-only, because they
-          read across the whole reference database rather than fetching one record. If structures may not
-          leave your network, stay on the desktop.
-        </p>
-      </div>
-      <div class="side">
-        <div class="fig">
-          <img src="assets/art/side-propranolol.svg" alt="Propranolol">
-          <div class="cap"><b>Propranolol.</b> On the desktop a structure like this one is evaluated on your machine and goes nowhere. On the web it travels to MultiCASE for the length of the evaluation and is not kept.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="blk last">
-      <div class="main">
-        <div class="rule" style="margin-top:0;"></div>
-        <div class="h-sub" style="font-size:13pt; font-weight:400; margin-bottom:2.4mm;">Getting started on 4.0</div>
-        <p class="body">
-          The installation guides, a walkthrough of the new interface and the full model catalogue are
-          on resources.multicase.com. Anything else, open a ticket with the account you already use.
-        </p>
-      </div>
-      <div class="side">
-        <div class="rule" style="margin-top:0;"></div>
-        <div class="contact">
-          support.multicase.com<br>
-          resources.multicase.com<br>
-          qsarflex.multicase.com
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="foot"><span>MultiCASE Inc.</span><span class="pn">3</span></div>
 </section>
 
 </body>

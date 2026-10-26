@@ -103,7 +103,7 @@ Tick the modules you want and click **Evaluate**. A progress overlay covers the 
   <img src=".gitbook/assets/workspace-panel-results-light.png" alt="">
 </picture></figure>
 
-A module name in the Results column, or a module's line in the panel, opens the full report for that compound and module in a panel on the right. One button sits in its header: **Save as PDF**, which opens your system print dialog on the report.
+A module name in the Results column, or a module's line in the panel, opens the full report for that compound and module in a panel on the right. One button sits in its header: **Save as PDF**, which saves the report as a PDF file.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset=".gitbook/assets/eval-report-dark.png">
@@ -111,7 +111,7 @@ A module name in the Results column, or a module's line in the panel, opens the 
 </picture></figure>
 
 {% hint style="info" %}
-**Save as PDF** prints the report through your system print dialog; choose *Save as PDF* there. The report is laid out for US Letter, on the web and in both desktop apps alike, so the same report paginates the same way wherever it is saved.
+**Save as PDF** writes the report straight to a PDF file, no print dialog. On the web the browser downloads it, named after the report; in the desktop apps a save dialog asks where to put it. The report is laid out for US Letter, on the web and in both desktop apps alike, so the same report paginates the same way wherever it is saved.
 {% endhint %}
 
 ---
