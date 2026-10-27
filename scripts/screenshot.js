@@ -571,6 +571,8 @@ async function screenshotWorkspace(page, theme) {
 
   // ── tautomers ─────────────────────────────────────────────────────────────
   try {
+    // The undo above raises a toast; let it go before the dialog is framed.
+    await page.waitForFunction(() => !document.body.innerText.includes('Undid:'), null, { timeout: 15000 }).catch(() => {});
     await openRow(page, 'Acetylacetone');
     await page.keyboard.press('t');
     await page.waitForSelector('[role="dialog"]:has-text("Tautomers")', { timeout: 60000 });
@@ -673,6 +675,8 @@ async function screenshotWorkspace(page, theme) {
     // The button reads "Evaluate 13"; hasText is a substring match, and Cancel is the only other button.
     await page.locator('[role="dialog"] button').filter({ hasText: /Evaluate/ }).last().click();
     await page.waitForFunction(() => !document.body.innerText.includes('Evaluating the workspace'), null, { timeout: 600000 });
+    // The Results column fills while reports are prepared; the frame waits for the counter to go.
+    await page.waitForFunction(() => !document.body.innerText.includes('Preparing reports'), null, { timeout: 600000 });
     await page.waitForTimeout(1500);
     // From the top, so the heading, the undo/redo/Clear pack and the first rows' Results are all in frame.
     await page.evaluate(() => { window.scrollTo(0, 0); for (const el of document.querySelectorAll('*')) { if (el.scrollTop > 0) el.scrollTop = 0; } });

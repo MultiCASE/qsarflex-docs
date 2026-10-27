@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Regenerate pdf/fonts.css — Literata (variable, roman + italic) and Fragment Mono, base64-embedded.
+"""Regenerate pdf/fonts.css — Libre Franklin + Source Code Pro, base64-embedded.
 
     python3 pdf/tools/embed-fonts.py
 
 Why embed at all: the renderer loads the HTML from file://, and a webfont that
 is still arriving when page.pdf() fires silently falls back to Helvetica. The
-whole document is typeset on Literata's metrics, so that reflows every page.
+whole document is typeset on Libre Franklin's metrics, so that reflows every page.
 Embedding removes the network from the render entirely.
 
 Only the `latin` subset is taken — the documents are English, and pulling every
@@ -19,13 +19,15 @@ import urllib.request
 
 CSS_API = (
     "https://fonts.googleapis.com/css2"
-    "?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900"
-    "&family=Fragment+Mono:ital@0;1"
+    "?family=Libre+Franklin:wght@300;400;500;600;700"
+    "&family=Source+Code+Pro:wght@400;500;600"
     "&display=swap"
 )
-# Google serves woff2 only to a browser-ish UA; anything else gets ttf.
-UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+# A non-browser UA makes Google serve STATIC TrueType instances, one per
+# weight. A browser UA gets the variable woff2, which Chromium embeds in the
+# PDF as Type 3 outlines: text still copies, but Word, Acrobat and translation
+# tools handle it worse. Static TrueType embeds as a normal CID font.
+UA = "qsarflex-docs/embed-fonts"
 
 OUT = pathlib.Path(__file__).resolve().parent.parent / "fonts.css"
 
@@ -39,6 +41,9 @@ def fetch(url: str) -> bytes:
 def main() -> None:
     css = fetch(CSS_API).decode()
     blocks = re.findall(r"/\*\s*([\w\-\[\]]+)\s*\*/\s*(@font-face\s*\{.*?\})", css, re.S)
+    if not blocks:
+        # the static-TTF response has no subset comments: one block per weight
+        blocks = [("latin", b) for b in re.findall(r"@font-face\s*\{.*?\}", css, re.S)]
 
     out, cache = [], {}
     for subset, block in blocks:
@@ -47,8 +52,8 @@ def main() -> None:
         url = re.search(r"url\((https://[^)]+)\)", block).group(1)
         if url not in cache:
             cache[url] = base64.b64encode(fetch(url)).decode()
-        block = re.sub(r"url\(https://[^)]+\)",
-                       f"url(data:font/woff2;base64,{cache[url]})", block)
+        block = re.sub(r"url\(https://[^)]+\)\s*format\([^)]*\)",
+                       f"url(data:font/ttf;base64,{cache[url]}) format('truetype')", block)
         # the unicode-range only matters when several subsets coexist
         out.append(re.sub(r"unicode-range:[^;]+;", "", block))
 

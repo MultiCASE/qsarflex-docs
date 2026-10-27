@@ -15,7 +15,7 @@ Where another page summarises a bundle in a single line, the tables here carry t
 
 ## 🔴 Nitrosamine Bundle
 
-For N-nitrosamine impurity assessment (NDSRIs and related compounds). Covers ICH M7 / EMA CPCA workflows.
+For N-nitrosamine impurity assessment (NDSRIs and related compounds).
 
 | Module | Records | Platform | Description |
 |---|---|---|---|

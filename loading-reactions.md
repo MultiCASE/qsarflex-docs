@@ -68,7 +68,7 @@ Reactions added this way — and reactions added from the dialog — are auto-na
 
 Once submitted, the reaction appears in the table alongside your compounds as its own row.
 
-- The row wears a **Reaction** badge in place of a curation verdict — reactions are not curated — and shows its step count in place of a SMILES. Reactions carry no CAS.
+- The row wears a **Reaction** badge in place of a curation verdict — reactions are not curated — and shows its step count in place of a SMILES. Reactions carry no registry number.
 - Click the row to open it in the panel: the reaction scheme, drawn large enough to read, with every step listed under it as reaction SMILES. Multi-step routes keep each step at its natural size.
 - The **Reactions** chip above the table shows only the reactions.
 - After an evaluation, the **Results** column lists the module and the panel lists the reaction's outcomes, each a link to its report. Reactions are evaluated by the **N-Nitrosation** module only — any other module ticked in the same run comes back as **N/A** on the reaction row, while the compounds in that run are unaffected.

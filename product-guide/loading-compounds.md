@@ -104,7 +104,7 @@ In the web application the check runs on the QSAR Flex service, as do structure 
 
 ## 📋 The table
 
-Each compound is a row: its number, its badge with the check's detail beside it, its name, CAS and SMILES, and a trash button. The number is assigned when the compound is added and stays with it — rows are not renumbered when others are deleted.
+Each compound is a row: its number, its badge with the check's detail beside it, its name, registry number and SMILES, and a trash button. The number is assigned when the compound is added and stays with it — rows are not renumbered when others are deleted.
 
 <figure><picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.gitbook/assets/workspace-table-dark.png">
