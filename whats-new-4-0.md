@@ -133,6 +133,20 @@ See [Curating Compounds](curation.md).
 
 ---
 
+## Reports, updates and data
+
+**Save as PDF.** Every report carries a **Save as PDF** button. The web app downloads the file and the desktop apps ask where to save it; there is no print dialog in between.
+
+**Updates from the account menu.** **Check for updates** in the account menu looks for application and data updates, lists the earlier versions, and installs the one you choose, so a version you validated against can be put back.
+
+**Files without structures load.** A text file whose rows carry only a registry number or a name loads as it is, and PubChem fills in the missing structures once you say yes.
+
+**A regulator's listed intake where the CPCA does not apply.** When a structure is one the CPCA does not cover (a nitrosamide, nitrosourea, nitrosoguanidine or amidine, or a nitroso group on an aromatic ring nitrogen) but a regulator has assigned that exact compound an acceptable intake, the CPCA module reports the listed intake with the agency, for example `553 ng/day (EMA listed; CPCA not applicable)`, and the report says which rule excluded the structure. The nitrosamine master database behind it is at version 14.
+
+See [Evaluating Compounds](evaluation.md) and the [Model Catalog](fundamentals/model-catalog.md).
+
+---
+
 ## License and account
 
 **A full Account page.** It opens with the heading **Account** and a vertical tab rail: **Profile**, **Security**, **License**, and **Team** for company admins. The tab is in the URL, so you can link straight to a section.
