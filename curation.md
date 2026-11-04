@@ -65,7 +65,7 @@ Under the badge, the **Detail** column carries the check's message and, in itali
 
 ### Views
 
-Above the table, one chip per class present in the set — **All 14 · Clean 8 · Not checked 1 · All errors 5 · Duplicates 2 · Mixtures 1 · Atom type 1 …** — and **Reactions** when there are any. Click a chip to see only those rows. A row with two findings is counted under both; the **Duplicates** view shows both halves of each pair, so they can be compared. A view whose last member is fixed collapses back to **All**.
+Above the table, one chip per class present in the set — **All 14 · Clean 8 · Not checked 1 · All errors 5 · Duplicates 2 · Mixtures 1 · Atom type 1 …** — and **Reactions** when there are any. Click a chip to see only those rows. A row with two findings is counted under both; the **Duplicates** view lists the later copies only, so its count is the number of rows you would remove; a copy's panel reads *copy of #N*, and that link jumps to the original (the view widens to **All** so both are in sight). A view whose last member is fixed collapses back to **All**.
 
 The chip row stays at the top of the window as the table scrolls, and the table header parks under it.
 
