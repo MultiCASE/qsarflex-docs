@@ -120,6 +120,7 @@ Outcomes are text, and the form depends on the module:
 | `out of domain` | The query fell outside the model's applicability domain. No value is shown. |
 | `2 Potential Nitrosamines` | N-Nitrosation: the number of nitrosamine products predicted to form. |
 | `18 or 26.5 ng/day` | CPCA category 1, whose acceptable intake differs between the EMA (18) and the US FDA (26.5). |
+| `553 ng/day (EMA listed; CPCA not applicable)` | The CPCA does not cover this structure — a nitrosamide, nitrosourea, nitrosoguanidine or amidine, or a nitroso group on an aromatic ring nitrogen — but a regulator has assigned this exact compound an acceptable intake, so the listed value is shown with the agency. The report names the rule that excluded the structure and the listing. |
 | `Click to view report` | Oral Bioavailability, whose answer is the multi-method report rather than a single figure. |
 | `N/A` | Nothing to show: no database hit, or a module that does not apply to this item. `N/A` is not clickable. |
 
